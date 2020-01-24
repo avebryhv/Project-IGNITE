@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Controller2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    PlayerScriptFinder finder;
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timetoJumpApex = .4f;
@@ -92,13 +93,11 @@ public class PlayerMovement : MonoBehaviour
 
         wallSliding = false;
 
-        CheckCrouching();
-
         //Player cannot input movement if in an attack or crouching
         float targetVelocityX;
         targetVelocityX = directionalInput.x * moveSpeed;
 
-        if (crouching || inKnockback)
+        if (crouching || inKnockback || finder.guard.isGuarding)
         {
             targetVelocityX = 0;
         }
@@ -192,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         //Normal Jump
-        if ((controller.collisions.below || framesInAir <= 2))
+        if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding)
         {
             if (controller.collisions.slidingDownMaxSlope)
             {
@@ -245,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDashInput()
     {
-        if (!inDash && canDash)
+        if (!inDash && canDash && !finder.guard.isGuarding)
         {
             inDash = true;
             canDash = false;
@@ -379,19 +378,7 @@ public class PlayerMovement : MonoBehaviour
         {
             framesInAir++;
         }
-    }
-
-    void CheckCrouching()
-    {
-        if (controller.collisions.below && directionalInput.y == -1)
-        {
-            crouching = true;
-        }
-        else
-        {
-            crouching = false;
-        }
-    }
+    }    
 
     public void TakeKnockback(Vector2 dir)
     {
@@ -414,6 +401,11 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(diveKickCooldown);
         canDiveKick = true;
+    }
+
+    public void SetFinder(PlayerScriptFinder f)
+    {
+        finder = f;
     }
 
 

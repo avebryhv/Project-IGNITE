@@ -8,12 +8,15 @@ public class PlayerSprite : MonoBehaviour
     float lastDirection;
     bool canTurnSprite;
     public GameObject spriteHolder;
+    SpriteRenderer[] spriteRendererList;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         canTurnSprite = true;
         lastDirection = 1;
+        spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,48 @@ public class PlayerSprite : MonoBehaviour
     {
         //spriteRenderer.flipX = !spriteRenderer.flipX;
         spriteHolder.transform.localScale = new Vector3(spriteHolder.transform.localScale.x * -1, spriteHolder.transform.localScale.y, spriteHolder.transform.localScale.z);
+    }
+
+    public void ChangeSpriteColour(Color col)
+    {
+        foreach (SpriteRenderer spr in spriteRendererList)
+        {
+            spr.color = col;
+        }
+    }
+
+    public void SetAnimationTrigger(string name)
+    {
+        animator.Play(name);
+    }
+
+    public void OnStateChanged(PlayerState.State newState)
+    {
+        switch (newState)
+        {
+            case PlayerState.State.Idle:
+                SetAnimationTrigger("idle");
+                break;
+            case PlayerState.State.Walk:
+                SetAnimationTrigger("walk");
+                break;
+            case PlayerState.State.Run:
+                SetAnimationTrigger("run");
+                break;
+            case PlayerState.State.Jump:
+                SetAnimationTrigger("jump");
+                break;
+            case PlayerState.State.Block:
+                SetAnimationTrigger("block");
+                break;
+            case PlayerState.State.Evade:
+                SetAnimationTrigger("evade");
+                break;
+            case PlayerState.State.Knockback:
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetFinder(PlayerScriptFinder f)

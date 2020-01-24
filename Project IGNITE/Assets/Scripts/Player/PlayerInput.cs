@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
 {
     PlayerScriptFinder finder;
     public bool allowPlayerInput;
-
     
 
 
@@ -21,7 +20,7 @@ public class PlayerInput : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (allowPlayerInput)
         {
 
@@ -48,6 +47,21 @@ public class PlayerInput : MonoBehaviour
             {
                 finder.movement.OnLockOnUp();
             }
+
+            //Block / Evade Inputs
+            if (Gamepad.current.buttonEast.isPressed)
+            {
+                if (finder.movement.lockedOn && Gamepad.current.leftStick.ReadValue().x != 0)
+                {
+                    finder.movement.OnDashInput();
+                }
+                else
+                {
+                    //Guard
+                    finder.guard.OnGuardPress();
+                }
+            }
+            
 
 
 

@@ -1,0 +1,69 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerInput : MonoBehaviour
+{
+    PlayerScriptFinder finder;
+    public bool allowPlayerInput;
+
+    
+
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+       
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (allowPlayerInput)
+        {
+
+            ReadControlStick();
+
+            //Jump Inputs
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                finder.movement.OnJumpInputDown();
+            }
+
+            if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
+            {
+                finder.movement.OnJumpInputUp();
+            }
+
+            //Lock On Inputs
+            if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+            {
+                finder.movement.OnLockOnDown();
+            }
+
+            if (Gamepad.current.rightShoulder.wasReleasedThisFrame)
+            {
+                finder.movement.OnLockOnUp();
+            }
+
+
+
+
+
+        }
+    }
+
+    void ReadControlStick()
+    {
+        Vector2 input = Gamepad.current.leftStick.ReadValue();
+        finder.movement.SetDirectionalInput(input);
+    }
+
+    public void SetFinder(PlayerScriptFinder f)
+    {
+        finder = f;
+    }
+}

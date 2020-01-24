@@ -10,7 +10,6 @@ public class Controller2D : RaycastController
     public float maxSlopeAngle = 80;
 
     public bool ignoreDirectionChange;
-    public float lastDirection;
 
     
     public CollisionInfo collisions;
@@ -21,7 +20,6 @@ public class Controller2D : RaycastController
     public override void Start()
     {
         base.Start();
-        lastDirection = 1;
         collisions.faceDirection = 1;
     }
 

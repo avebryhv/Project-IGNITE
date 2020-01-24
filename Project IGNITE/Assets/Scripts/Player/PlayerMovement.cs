@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Controller2D))]
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     float minJumpVelocity;
     public Vector3 velocity;
     float velocityXSmoothing;
+
+    public float lastDirection;
 
     Controller2D controller;
     //public MeleeAttack meleeController;
@@ -67,6 +69,10 @@ public class Player : MonoBehaviour
     public float dashTime;
     public float dashCooldown;
 
+    //Lock On
+    public bool lockedOn = false;
+    public float lockOnSpeedModifier = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +81,7 @@ public class Player : MonoBehaviour
         gravity = -(2 * maxJumpHeight / Mathf.Pow(timetoJumpApex, 2));
         maxJumpVelocity = Mathf.Abs(gravity) * timetoJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        lastDirection = 1;
     }
 
     // Update is called once per frame
@@ -91,7 +98,7 @@ public class Player : MonoBehaviour
         float targetVelocityX;
         targetVelocityX = directionalInput.x * moveSpeed;
 
-        if (controller.collisions.below || crouching || inKnockback)
+        if (crouching || inKnockback)
         {
             targetVelocityX = 0;
         }
@@ -115,6 +122,11 @@ public class Player : MonoBehaviour
         if (!inKnockback)
         {
             HandleDiveKick();
+        }
+
+        if (!inKnockback && lockedOn && framesInAir <= 2)
+        {
+            velocity.x = velocity.x * lockOnSpeedModifier;
         }
 
         OnLanding();
@@ -142,7 +154,7 @@ public class Player : MonoBehaviour
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
-        if (input.x != 0)
+        if (input.x != 0 && !lockedOn)
         {
             ChangeDirection(Mathf.Sign(input.x));
         }
@@ -154,7 +166,7 @@ public class Player : MonoBehaviour
         //Check conditions that would disallow player from changing direction
         if (!inKnockback && !inDiveKick)
         {
-            controller.lastDirection = dir;
+            lastDirection = dir;
         }
     }
 
@@ -221,6 +233,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnLockOnDown()
+    {
+        lockedOn = true;
+    }
+
+    public void OnLockOnUp()
+    {
+        lockedOn = false;
+    }
+
     public void OnDashInput()
     {
         if (!inDash && canDash)
@@ -232,7 +254,7 @@ public class Player : MonoBehaviour
             //meleeController.canAttack = false;
             if (directionalInput.x == 0)
             {
-                dashDir = controller.lastDirection;
+                dashDir = lastDirection;
             }
             else
             {
@@ -272,7 +294,7 @@ public class Player : MonoBehaviour
             inDiveKick = true;            
             if (directionalInput.x == 0)
             {
-                diveDir = controller.lastDirection;
+                diveDir = lastDirection;
             }
             else
             {

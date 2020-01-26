@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public bool doubleJumpPressedThisFrame;
     public bool crouching;
     public float framesInAir; //Used to fix issue where player leaves the ground at the peak of a slope. Treating player as in air after 2 frames seems to work consistently
+    int airStallCount; //Counts the number of times the player has performed actions that stall them in midair
+    bool inAirStall;
 
     public bool inKnockback = false;
     bool hitThisFrame = false;
@@ -97,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         float targetVelocityX;
         targetVelocityX = directionalInput.x * moveSpeed;
 
-        if (crouching || inKnockback || finder.guard.isGuarding)
+        if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack))
         {
             targetVelocityX = 0;
         }
@@ -126,6 +128,18 @@ public class PlayerMovement : MonoBehaviour
         if (!inKnockback && lockedOn && framesInAir <= 2)
         {
             velocity.x = velocity.x * lockOnSpeedModifier;
+        }
+
+        if (inAirStall)
+        {
+            float tempV = velocity.y;
+            //float velocityMod = tempV * (((airStallCount - 3) * 0.1f));
+            //velocityMod = Mathf.Clamp(velocityMod, 0, 1);
+            //velocity.y = velocityMod;
+            int count = (airStallCount - 3);
+            count = Mathf.Clamp(count, 0, 10);
+            float velocityModifier = count * 0.1f;
+            velocity.y = velocity.y * velocityModifier;
         }
 
         OnLanding();
@@ -163,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
     void ChangeDirection(float dir)
     {
         //Check conditions that would disallow player from changing direction
-        if (!inKnockback && !inDiveKick)
+        if (!inKnockback && !inDiveKick && !finder.melee.inAttack)
         {
             lastDirection = dir;
         }
@@ -193,20 +207,46 @@ public class PlayerMovement : MonoBehaviour
         //Normal Jump
         if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding)
         {
-            if (controller.collisions.slidingDownMaxSlope)
+            if (finder.melee.inAttack)
             {
-                if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
+                if (finder.melee.currentState == MeleeAttacker.phase.Endlag)
                 {
-                    velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-                    velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-                    jumpPressedThisFrame = true;
+                    finder.melee.EndAttack();
+                    finder.melee.CancelBuffer();
+                    if (controller.collisions.slidingDownMaxSlope)
+                    {
+                        if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
+                        {
+                            velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+                            velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+                            jumpPressedThisFrame = true;
+                        }
+                    }
+                    else
+                    {
+                        velocity.y = maxJumpVelocity;
+                        jumpPressedThisFrame = true;
+                    }
                 }
             }
             else
             {
-                velocity.y = maxJumpVelocity;
-                jumpPressedThisFrame = true;
+                if (controller.collisions.slidingDownMaxSlope)
+                {
+                    if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
+                    {
+                        velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+                        velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+                        jumpPressedThisFrame = true;
+                    }
+                }
+                else
+                {
+                    velocity.y = maxJumpVelocity;
+                    jumpPressedThisFrame = true;
+                }
             }
+            
 
         }
         //Double Jump
@@ -363,6 +403,7 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = true;
             inDiveKick = false;
             canDiveKick = true;
+            airStallCount = 0;
             framesInAir = 0;
             if (inKnockback && !hitThisFrame)
             {
@@ -401,6 +442,17 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(diveKickCooldown);
         canDiveKick = true;
+    }
+
+    public void SetAirStall()
+    {
+        inAirStall = true;
+        airStallCount += 1;
+    }
+
+    public void EndAirStall()
+    {
+        inAirStall = false;
     }
 
     public void SetFinder(PlayerScriptFinder f)

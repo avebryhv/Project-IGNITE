@@ -25,6 +25,7 @@ public class PlayerInput : MonoBehaviour
         {
 
             ReadControlStick();
+            ReadRightStick();
 
             //Jump Inputs
             if (Gamepad.current.buttonSouth.wasPressedThisFrame)
@@ -61,6 +62,12 @@ public class PlayerInput : MonoBehaviour
                     finder.guard.OnGuardPress();
                 }
             }
+
+            //Light Attack Inputs
+            if (Gamepad.current.buttonWest.isPressed)
+            {
+                finder.melee.LightAttackPressed();
+            }
             
 
 
@@ -74,6 +81,12 @@ public class PlayerInput : MonoBehaviour
     {
         Vector2 input = Gamepad.current.leftStick.ReadValue();
         finder.movement.SetDirectionalInput(input);
+    }
+
+    void ReadRightStick()
+    {
+        Vector2 input = Gamepad.current.rightStick.ReadValue();
+        finder.grapple.CStickInput(input);
     }
 
     public void SetFinder(PlayerScriptFinder f)

@@ -10,6 +10,8 @@ public class PlayerScriptFinder : MonoBehaviour
     public PlayerSprite sprite;
     public PlayerState state;
     public PlayerGuard guard;
+    public GrappleGun grapple;
+    public MeleeAttacker melee;
 
     void Awake()
     {
@@ -41,6 +43,10 @@ public class PlayerScriptFinder : MonoBehaviour
         controller = GetComponent<Controller2D>();
         guard = FindObjectOfType<PlayerGuard>();
         guard.SetFinder(this);
+        grapple = FindObjectOfType<GrappleGun>();
+        grapple.SetFinder(this);
+        melee = FindObjectOfType<MeleeAttacker>();
+        melee.SetFinder(this);
     }
     
 }

@@ -48,8 +48,7 @@ public class EnemyBaseMovement : MonoBehaviour
 
         if (controller.collisions.below && inKnockback && !hitThisFrame)
         {
-            inKnockback = false; //Stops knockback phase once the floor is hit
-            StopAllCoroutines();
+            StopKnockback();
             //StartCoroutine("StartIFrames"); //Handles IFrames
             //StartCoroutine("FlashSpriteIFrames");
         }
@@ -85,10 +84,18 @@ public class EnemyBaseMovement : MonoBehaviour
             velocity.x = dir.x;
             velocity.y = dir.y;
             inHitStun = true;
+            gameObject.layer = 10;
             Invoke("EndHitStun", 0.1f);
 
         }
         //StartCoroutine("FlashSprite");
+    }
+
+    public void StopKnockback()
+    {
+        inKnockback = false; //Stops knockback phase once the floor is hit
+        gameObject.layer = 9;
+        StopAllCoroutines();
     }
 
     public void EndHitStun()

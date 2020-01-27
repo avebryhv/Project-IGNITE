@@ -19,7 +19,12 @@ public class ComboUI : MonoBehaviour
     {
         float fillPercent = comboBuildup / maxComboBuildup;
         comboBar.fillAmount = fillPercent;
-        comboBuildup -= Time.deltaTime;
+        if (comboBuildup > 0)
+        {
+            comboBuildup -= Time.deltaTime * 2;
+        }
+        comboBuildup = Mathf.Clamp(comboBuildup, 0, maxComboBuildup);
+        
     }
 
     public void AddComboScore(float amount)

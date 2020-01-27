@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   lingerTime: 0.2
-  knockbackDirection: {x: 3, y: 2}
+  knockbackDirection: {x: 4, y: 0}
   knockbackStrength: 5
   comboWeight: 5
 --- !u!50 &2649535055632106409

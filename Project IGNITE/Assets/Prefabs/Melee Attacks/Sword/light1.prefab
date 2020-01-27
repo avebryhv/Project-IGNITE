@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   lingerTime: 0.1
-  knockbackDirection: {x: 1, y: 1}
+  knockbackDirection: {x: 0.1, y: 0}
   knockbackStrength: 5
+  comboWeight: 3
 --- !u!50 &4074124326509093065
 Rigidbody2D:
   serializedVersion: 4

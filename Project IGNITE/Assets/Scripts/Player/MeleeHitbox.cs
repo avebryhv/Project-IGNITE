@@ -9,6 +9,8 @@ public class MeleeHitbox : MonoBehaviour
     float destroyTimer;
     public Vector2 knockbackDirection;
     public float knockbackStrength;
+    float direction;
+    public float comboWeight; //How much landing this move will contribute to the combo meter
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
 
     // Start is called before the first frame update
@@ -40,8 +42,16 @@ public class MeleeHitbox : MonoBehaviour
             {
                 Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
+                other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength);
+                FindObjectOfType<ComboUI>().AddComboScore(comboWeight);
             }
             
         }
+    }
+
+    public void SetDirection(float dir)
+    {
+        direction = dir;
+        knockbackDirection.x *= dir;
     }
 }

@@ -425,6 +425,10 @@ public class PlayerMovement : MonoBehaviour
                 //StartCoroutine("StartIFrames"); //Handles IFrames
                 //StartCoroutine("FlashSprite");
             }
+            if (finder.melee.inHelmSplitter)
+            {
+                finder.melee.EndHelmSplitter();
+            }
         }
         else
         {

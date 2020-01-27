@@ -11,6 +11,7 @@ public class MeleeAttacker : MonoBehaviour
     public int comboStage;
     public AttackObject currentAttack;
     public bool bufferedAttack;
+    public bool bufferedHeavy;
     public float comboCooldown; //Time until combo is cancelled - allows for short gaps in attacks
     float comboCooldownTimer;
     public bool comboTimerPaused;
@@ -19,11 +20,21 @@ public class MeleeAttacker : MonoBehaviour
 
     public float heavyChargeTime;
     public bool chargingHeavy;
+
+    //Stinger Variables
     public float stingerRange;
     public bool inStinger;
     public float stingerTime;
     float stingerCounter;
     public LayerMask testMask;
+
+    //Uppercut Variables
+    public float uppercutTime;
+    float uppercutCounter;
+    public bool inUpperCut;
+
+    //Helm Splitter Variables
+    public bool inHelmSplitter;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +52,12 @@ public class MeleeAttacker : MonoBehaviour
         {
             bufferedAttack = false;
             LightAttackPressed();
+        }
+
+        if (!inAttack && bufferedHeavy == true)
+        {
+            bufferedHeavy = false;
+            HeavyAttackPressed();
         }
 
         if (!comboTimerPaused)
@@ -73,6 +90,15 @@ public class MeleeAttacker : MonoBehaviour
                 StopStinger();
             }
         }
+
+        if (inUpperCut)
+        {
+            uppercutCounter += Time.deltaTime;
+            if (uppercutCounter >= uppercutTime)
+            {
+                StopUppercut();
+            }
+        }
         
     }
 
@@ -89,7 +115,7 @@ public class MeleeAttacker : MonoBehaviour
             }
             DecideLightAttack();
         }
-        else if (currentState == phase.Endlag)
+        else if (currentState == phase.Endlag || currentState == phase.Active)
         {
             bufferedAttack = true;
         }
@@ -100,24 +126,11 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (!inAttack)
         {
-            if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true)
-            {
-                if (finder.movement.lastDirection == finder.controller.playerInput.x)
-                {
-                    //Forward Heavy
-                    Debug.Log("Forward");
-                    StartStinger();
-                }
-                else
-                {
-                    //Back Heavy
-                    Debug.Log("Back");
-                }
-            }
-            else
-            {
-                //Charge Attack
-            }
+            DecideHeavyAttack();
+        }
+        else if (currentState == phase.Endlag || currentState == phase.Active)
+        {
+            bufferedHeavy = true;
         }
     }
 
@@ -140,7 +153,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         inAttack = true;
         Vector2 dir = new Vector2(finder.movement.lastDirection, 0);
-        finder.movement.SetSpecialAttackMovement(dir, 15, 999);
+        finder.movement.SetSpecialAttackMovement(dir, 25, 999);
         inStinger = true;
         stingerCounter = 0;
     }
@@ -148,8 +161,44 @@ public class MeleeAttacker : MonoBehaviour
     void StopStinger()
     {
         inStinger = false;
-        currentAttack = attackList.heavy;
+        currentAttack = attackList.stinger;
         finder.movement.StopSpecialAttackMovement();
+        AttackStartup();
+    }
+
+    void StartUppercut()
+    {
+        currentAttack = attackList.uppercut;
+        Vector2 dir = new Vector2(0, 1);
+        finder.movement.SetSpecialAttackMovement(dir, 20, 999);
+        inUpperCut = true;
+        uppercutCounter = 0;
+        AttackStartup();
+    }
+
+    void StopUppercut()
+    {
+        inUpperCut = false;
+        finder.movement.StopSpecialAttackMovement();
+    }
+
+    void StartHelmSplitter()
+    {
+        currentAttack = attackList.helmsplitter;
+        Vector2 dir = new Vector2(0, -1);
+        finder.movement.SetSpecialAttackMovement(dir, 40, 999);
+        inHelmSplitter = true;
+        AttackStartup();
+    }
+
+    public void EndHelmSplitter()
+    {
+        inHelmSplitter = false;
+        CancelInvoke();
+        inAttack = false;
+        finder.movement.StopSpecialAttackMovement();
+
+        currentAttack = attackList.helmSplitterGround;
         AttackStartup();
     }
 
@@ -195,6 +244,44 @@ public class MeleeAttacker : MonoBehaviour
         }
     }
 
+    void DecideHeavyAttack()
+    {
+        if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
+        {
+            if (finder.movement.lastDirection == finder.controller.playerInput.x)
+            {
+                //Forward Heavy
+                if (finder.controller.collisions.below) //Grounded
+                {
+                    StartStinger();
+                }
+                else //In Air
+                {
+
+                }
+                Debug.Log("Forward");
+            }
+            else
+            {
+                //Back Heavy
+                if (finder.controller.collisions.below) //Grounded
+                {
+                    StartUppercut();
+                }
+                else //In Air
+                {
+                    StartHelmSplitter();
+                }
+                Debug.Log("Back");
+
+            }
+        }
+        else
+        {
+            //Charge Attack
+        }
+    }
+
     void AttackStartup()
     {
         currentState = phase.Startup;
@@ -207,6 +294,7 @@ public class MeleeAttacker : MonoBehaviour
         currentState = phase.Active;
         GameObject newHitbox = Instantiate(currentAttack.hitboxObject, transform.position, transform.rotation, transform);
         newHitbox.transform.localScale = new Vector3(newHitbox.transform.localScale.x * finder.movement.lastDirection, newHitbox.transform.localScale.y, newHitbox.transform.localScale.z);
+        newHitbox.GetComponent<MeleeHitbox>().SetDirection(finder.movement.lastDirection);
         Invoke("StartEndLag", currentAttack.hitboxLingerTime);
     }
 

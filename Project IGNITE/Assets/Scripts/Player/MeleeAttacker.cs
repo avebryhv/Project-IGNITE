@@ -17,11 +17,21 @@ public class MeleeAttacker : MonoBehaviour
     public enum phase { None, Startup, Active, Endlag};
     public phase currentState;
 
+    public float heavyChargeTime;
+    public bool chargingHeavy;
+    public float stingerRange;
+    public bool inStinger;
+    public float stingerTime;
+    float stingerCounter;
+    public LayerMask testMask;
+
     // Start is called before the first frame update
     void Start()
     {
         inAttack = false;
         comboStage = 0;
+        chargingHeavy = false;
+        inStinger = false;
     }
 
     // Update is called once per frame
@@ -42,6 +52,27 @@ public class MeleeAttacker : MonoBehaviour
                 comboStage = 0;
             }
         }
+
+        if (inStinger)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(finder.movement.lastDirection, 0), 2.0f, testMask);
+            Debug.DrawRay(transform.position, new Vector2(finder.movement.lastDirection * 2, 0), Color.red);
+            if (hit.collider != null)
+            {
+                Debug.Log("Hit Object: " + hit.collider.gameObject.name);
+                if (hit.collider.tag == "EnemyHurtbox")
+                {
+                    Debug.Log("Stinger Hit");
+                    StopStinger();
+                }
+            }
+
+            stingerCounter += Time.deltaTime;
+            if (stingerCounter >= stingerTime)
+            {
+                StopStinger();
+            }
+        }
         
     }
 
@@ -56,7 +87,7 @@ public class MeleeAttacker : MonoBehaviour
             {
                 comboStage = 1;
             }
-            DecideAttack();
+            DecideLightAttack();
         }
         else if (currentState == phase.Endlag)
         {
@@ -65,7 +96,64 @@ public class MeleeAttacker : MonoBehaviour
         
     }
 
-    void DecideAttack()
+    public void HeavyAttackPressed()
+    {
+        if (!inAttack)
+        {
+            if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true)
+            {
+                if (finder.movement.lastDirection == finder.controller.playerInput.x)
+                {
+                    //Forward Heavy
+                    Debug.Log("Forward");
+                    StartStinger();
+                }
+                else
+                {
+                    //Back Heavy
+                    Debug.Log("Back");
+                }
+            }
+            else
+            {
+                //Charge Attack
+            }
+        }
+    }
+
+    public void HeavyAttackReleased()
+    {
+
+    }
+
+    void ChargeHeavy()
+    {
+        heavyChargeTime += Time.deltaTime;
+    }
+
+    void ReleaseHeavy()
+    {
+
+    }
+
+    void StartStinger()
+    {
+        inAttack = true;
+        Vector2 dir = new Vector2(finder.movement.lastDirection, 0);
+        finder.movement.SetSpecialAttackMovement(dir, 15, 999);
+        inStinger = true;
+        stingerCounter = 0;
+    }
+
+    void StopStinger()
+    {
+        inStinger = false;
+        currentAttack = attackList.heavy;
+        finder.movement.StopSpecialAttackMovement();
+        AttackStartup();
+    }
+
+    void DecideLightAttack()
     {
         if (finder.movement.framesInAir > 2) //Player is IN AIR
         {

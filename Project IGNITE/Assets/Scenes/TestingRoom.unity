@@ -380,6 +380,10 @@ MonoBehaviour:
   dashCooldown: 1
   lockedOn: 0
   lockOnSpeedModifier: 0.9
+  inAttackMovement: 0
+  attackMovementDirection: {x: 0, y: 0}
+  attackMovementSpeed: 0
+  attackMovementTime: 0
 --- !u!114 &100666867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,7 +505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119827781}
   - component: {fileID: 119827782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hurtbox
   m_TagString: EnemyHurtbox
   m_Icon: {fileID: 0}
@@ -694,6 +698,14 @@ MonoBehaviour:
   comboCooldown: 0.5
   comboTimerPaused: 0
   currentState: 0
+  heavyChargeTime: 0
+  chargingHeavy: 0
+  stingerRange: 0
+  inStinger: 0
+  stingerTime: 1
+  testMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &610835349
 GameObject:
   m_ObjectHideFlags: 3

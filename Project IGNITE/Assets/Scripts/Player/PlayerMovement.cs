@@ -76,6 +76,12 @@ public class PlayerMovement : MonoBehaviour
     public bool lockedOn = false;
     public float lockOnSpeedModifier = 0.5f;
 
+    //Attack Special Movement
+    public bool inAttackMovement;
+    public Vector2 attackMovementDirection;
+    public float attackMovementSpeed;
+    public float attackMovementTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -140,6 +146,11 @@ public class PlayerMovement : MonoBehaviour
             count = Mathf.Clamp(count, 0, 10);
             float velocityModifier = count * 0.1f;
             velocity.y = velocity.y * velocityModifier;
+        }
+
+        if (finder.melee.inAttack && inAttackMovement)
+        {
+            velocity = attackMovementDirection * attackMovementSpeed;
         }
 
         OnLanding();
@@ -453,6 +464,19 @@ public class PlayerMovement : MonoBehaviour
     public void EndAirStall()
     {
         inAirStall = false;
+    }
+
+    public void SetSpecialAttackMovement(Vector2 dir, float sp, float t)
+    {
+        inAttackMovement = true;
+        attackMovementDirection = dir;
+        attackMovementSpeed = sp;
+        attackMovementTime = t;
+    }
+
+    public void StopSpecialAttackMovement()
+    {
+        inAttackMovement = false;
     }
 
     public void SetFinder(PlayerScriptFinder f)

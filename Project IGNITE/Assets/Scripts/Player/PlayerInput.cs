@@ -82,6 +82,17 @@ public class PlayerInput : MonoBehaviour
         {
             finder.melee.LightAttackPressed();
         }
+
+        //Heavy Attack Inputs
+        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+        {
+            finder.melee.HeavyAttackPressed();
+        }
+
+        if (Gamepad.current.buttonNorth.wasReleasedThisFrame)
+        {
+            finder.melee.HeavyAttackReleased();
+        }
     }
 
     void ReadKeyboardInputs()

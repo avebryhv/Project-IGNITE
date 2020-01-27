@@ -248,7 +248,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
         {
-            if (finder.movement.lastDirection == finder.controller.playerInput.x)
+            if (finder.movement.lastDirection == Mathf.Round(finder.controller.playerInput.x))
             {
                 //Forward Heavy
                 if (finder.controller.collisions.below) //Grounded

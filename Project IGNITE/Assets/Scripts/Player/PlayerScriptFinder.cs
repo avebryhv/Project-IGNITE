@@ -12,6 +12,7 @@ public class PlayerScriptFinder : MonoBehaviour
     public PlayerGuard guard;
     public GrappleGun grapple;
     public MeleeAttacker melee;
+    public PlayerStats stats;
 
     void Awake()
     {
@@ -47,6 +48,8 @@ public class PlayerScriptFinder : MonoBehaviour
         grapple.SetFinder(this);
         melee = FindObjectOfType<MeleeAttacker>();
         melee.SetFinder(this);
+        stats = FindObjectOfType<PlayerStats>();
+        stats.SetFinder(this);
     }
     
 }

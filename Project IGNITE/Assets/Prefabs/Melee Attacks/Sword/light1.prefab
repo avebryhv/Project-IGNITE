@@ -50,6 +50,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0.1, y: 0}
   knockbackStrength: 5
   comboWeight: 3
+  name: l1
 --- !u!50 &4074124326509093065
 Rigidbody2D:
   serializedVersion: 4

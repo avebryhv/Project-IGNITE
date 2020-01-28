@@ -157,6 +157,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0.2, y: 0}
   knockbackStrength: 5
   comboWeight: 3
+  name: l2
 --- !u!50 &474412969887033153
 Rigidbody2D:
   serializedVersion: 4

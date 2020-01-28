@@ -157,6 +157,7 @@ MonoBehaviour:
   knockbackDirection: {x: 5, y: 1}
   knockbackStrength: 5
   comboWeight: 5
+  name: hs2
 --- !u!50 &8849873406600300355
 Rigidbody2D:
   serializedVersion: 4

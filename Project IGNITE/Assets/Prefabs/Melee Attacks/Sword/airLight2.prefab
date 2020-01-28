@@ -50,6 +50,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0.9, y: 1.7}
   knockbackStrength: 5
   comboWeight: 3
+  name: Air Light 2
 --- !u!50 &214149096395740185
 Rigidbody2D:
   serializedVersion: 4

@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeHitbox : MonoBehaviour
+public class BurstHitbox : MonoBehaviour
 {
     public int damage;
     public float lingerTime;
     float destroyTimer;
-    public Vector2 knockbackDirection;
-    public float knockbackStrength;
-    float direction;
     public float comboWeight; //How much landing this move will contribute to the combo meter
     public string name; //Name of attack
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
@@ -43,16 +40,11 @@ public class MeleeHitbox : MonoBehaviour
             {
                 Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
-                other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength);
+                other.GetComponentInParent<EnemyBaseMovement>().HitByCancel();
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
             }
-            
+
         }
     }
-
-    public void SetDirection(float dir)
-    {
-        direction = dir;
-        knockbackDirection.x *= dir;
-    }
+   
 }

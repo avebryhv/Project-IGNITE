@@ -17,6 +17,7 @@ public class MeleeAttacker : MonoBehaviour
     public bool comboTimerPaused;
     public enum phase { None, Startup, Active, Endlag};
     public phase currentState;
+    GameObject currentHitbox;
 
     public float heavyChargeTime;
     public bool chargingHeavy;
@@ -118,6 +119,7 @@ public class MeleeAttacker : MonoBehaviour
         else if (currentState == phase.Endlag || currentState == phase.Active)
         {
             bufferedAttack = true;
+            bufferedHeavy = false;
         }
         
     }
@@ -131,6 +133,7 @@ public class MeleeAttacker : MonoBehaviour
         else if (currentState == phase.Endlag || currentState == phase.Active)
         {
             bufferedHeavy = true;
+            bufferedAttack = false;
         }
     }
 
@@ -160,10 +163,21 @@ public class MeleeAttacker : MonoBehaviour
 
     void StopStinger()
     {
-        inStinger = false;
-        currentAttack = attackList.stinger;
-        finder.movement.StopSpecialAttackMovement();
-        AttackStartup();
+        if (finder.controller.collisions.below)
+        {
+            inStinger = false;
+            currentAttack = attackList.stinger;
+            finder.movement.StopSpecialAttackMovement();
+            AttackStartup();
+        }
+        else
+        {
+            inStinger = false;
+            currentAttack = attackList.stinger;
+            finder.movement.StopSpecialAttackMovement();
+            AirAttackStartup();
+        }
+        
     }
 
     void StartUppercut()
@@ -248,7 +262,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
         {
-            if (finder.movement.lastDirection == Mathf.Round(finder.controller.playerInput.x))
+            if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
             {
                 //Forward Heavy
                 if (finder.controller.collisions.below) //Grounded
@@ -257,7 +271,7 @@ public class MeleeAttacker : MonoBehaviour
                 }
                 else //In Air
                 {
-
+                    StartStinger();
                 }
                 Debug.Log("Forward");
             }
@@ -292,9 +306,9 @@ public class MeleeAttacker : MonoBehaviour
     void CreateHitbox()
     {
         currentState = phase.Active;
-        GameObject newHitbox = Instantiate(currentAttack.hitboxObject, transform.position, transform.rotation, transform);
-        newHitbox.transform.localScale = new Vector3(newHitbox.transform.localScale.x * finder.movement.lastDirection, newHitbox.transform.localScale.y, newHitbox.transform.localScale.z);
-        newHitbox.GetComponent<MeleeHitbox>().SetDirection(finder.movement.lastDirection);
+        currentHitbox = Instantiate(currentAttack.hitboxObject, transform.position, transform.rotation, transform);
+        currentHitbox.transform.localScale = new Vector3(currentHitbox.transform.localScale.x * finder.movement.lastDirection, currentHitbox.transform.localScale.y, currentHitbox.transform.localScale.z);
+        currentHitbox.GetComponent<MeleeHitbox>().SetDirection(finder.movement.lastDirection);
         Invoke("StartEndLag", currentAttack.hitboxLingerTime);
     }
 
@@ -319,9 +333,29 @@ public class MeleeAttacker : MonoBehaviour
 
     void AirAttackStartup()
     {
+        currentState = phase.Startup;
         inAttack = true;
         Invoke("CreateHitbox", currentAttack.startUpTime);
         finder.movement.SetAirStall();
+    }
+
+    public void CancelAttacks()
+    {
+        inAttack = false;
+        CancelInvoke();
+        currentState = phase.None;
+        finder.movement.EndAirStall();
+        comboTimerPaused = false;
+        if (currentHitbox != null)
+        {
+            currentHitbox.GetComponent<MeleeHitbox>().DestroyHitbox();
+        }        
+        inHelmSplitter = false;
+        inUpperCut = false;
+        inStinger = false;
+        stingerCounter = 0;
+        comboStage = 0;
+        finder.movement.StopSpecialAttackMovement();
     }
 
     public void SetFinder(PlayerScriptFinder f)

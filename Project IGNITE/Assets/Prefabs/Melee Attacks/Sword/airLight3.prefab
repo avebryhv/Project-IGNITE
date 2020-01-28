@@ -47,9 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   lingerTime: 0.2
-  knockbackDirection: {x: 4, y: 0}
+  knockbackDirection: {x: 4, y: 3}
   knockbackStrength: 5
   comboWeight: 5
+  name: Air Light 3
 --- !u!50 &2649535055632106409
 Rigidbody2D:
   serializedVersion: 4

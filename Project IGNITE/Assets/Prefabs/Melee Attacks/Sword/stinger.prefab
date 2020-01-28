@@ -157,6 +157,7 @@ MonoBehaviour:
   knockbackDirection: {x: 5, y: 1}
   knockbackStrength: 5
   comboWeight: 5
+  name: stinger
 --- !u!50 &1134081766880160006
 Rigidbody2D:
   serializedVersion: 4

@@ -21,6 +21,7 @@ public class EnemyBaseMovement : MonoBehaviour
     public bool canTakeKnockBack = true;
     bool hitThisFrame = false;
     bool inHitStun = false;
+    float knockbackTimeOnGround;
 
     Controller2D controller;
     SpriteRenderer sprite;
@@ -48,7 +49,12 @@ public class EnemyBaseMovement : MonoBehaviour
 
         if (controller.collisions.below && inKnockback && !hitThisFrame)
         {
-            StopKnockback();
+            knockbackTimeOnGround += Time.deltaTime;
+            if (knockbackTimeOnGround > 0.5f)
+            {
+                StopKnockback();
+            }
+            
             //StartCoroutine("StartIFrames"); //Handles IFrames
             //StartCoroutine("FlashSpriteIFrames");
         }
@@ -85,6 +91,8 @@ public class EnemyBaseMovement : MonoBehaviour
             velocity.y = dir.y;
             inHitStun = true;
             gameObject.layer = 10;
+            knockbackTimeOnGround = 0;
+            CancelInvoke("EndHitStun");
             Invoke("EndHitStun", 0.1f);
 
         }
@@ -96,6 +104,22 @@ public class EnemyBaseMovement : MonoBehaviour
         inKnockback = false; //Stops knockback phase once the floor is hit
         gameObject.layer = 9;
         StopAllCoroutines();
+    }
+
+    public void HitByCancel()
+    {
+        if (canTakeKnockBack)
+        {
+            hitThisFrame = true;
+            inKnockback = true;
+            velocity.x = 0;
+            velocity.y = 0;
+            inHitStun = true;
+            gameObject.layer = 10;
+            CancelInvoke("EndHitStun");
+            Invoke("EndHitStun", 0.5f);
+
+        }
     }
 
     public void EndHitStun()

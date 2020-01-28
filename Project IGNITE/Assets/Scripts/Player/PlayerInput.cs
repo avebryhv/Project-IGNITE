@@ -78,7 +78,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Light Attack Inputs
-        if (Gamepad.current.buttonWest.isPressed)
+        if (Gamepad.current.buttonWest.wasPressedThisFrame)
         {
             finder.melee.LightAttackPressed();
         }
@@ -92,6 +92,11 @@ public class PlayerInput : MonoBehaviour
         if (Gamepad.current.buttonNorth.wasReleasedThisFrame)
         {
             finder.melee.HeavyAttackReleased();
+        }
+
+        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
+        {
+            finder.stats.Burst();
         }
     }
 
@@ -197,4 +202,6 @@ public class PlayerInput : MonoBehaviour
     {
         finder = f;
     }
+
+    
 }

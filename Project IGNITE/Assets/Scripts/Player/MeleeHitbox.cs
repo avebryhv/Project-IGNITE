@@ -12,6 +12,8 @@ public class MeleeHitbox : MonoBehaviour
     float direction;
     public float comboWeight; //How much landing this move will contribute to the combo meter
     public string name; //Name of attack
+    public enum type { Light, Heavy, Special};
+    public type attackType;
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
 
     // Start is called before the first frame update
@@ -43,7 +45,7 @@ public class MeleeHitbox : MonoBehaviour
             {
                 Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
-                other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength);
+                other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
             }
             

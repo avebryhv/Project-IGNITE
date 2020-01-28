@@ -26,7 +26,7 @@ public class PlayerStatsUI : MonoBehaviour
         healthbar.fillAmount = current / max;
     }
 
-    public void SetDTValue(int current, int max)
+    public void SetDTValue(float current, float max)
     {
         dtBar.fillAmount = current / max;
     }

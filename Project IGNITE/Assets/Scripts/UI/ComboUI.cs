@@ -10,6 +10,7 @@ public class ComboUI : MonoBehaviour
     public float comboBuildup;
     public float maxComboBuildup;
     public List<string> previousAttackList;
+    PlayerStats stats;
 
     public EnemyBaseMovement testEnemyMovement;
     public TextMeshProUGUI knockbackText;
@@ -22,6 +23,7 @@ public class ComboUI : MonoBehaviour
     void Start()
     {
         comboBar.fillAmount = 0;
+        stats = FindObjectOfType<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class ComboUI : MonoBehaviour
     {        
         AddToList(name);
         comboBuildup += (amount / ReturnAmountInList(name));
+        stats.IncreaseDT(amount / ReturnAmountInList(name) / 3);
     }
 
     void AddToList(string toAdd)

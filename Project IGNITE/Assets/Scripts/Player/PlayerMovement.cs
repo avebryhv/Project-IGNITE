@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject currentTile;
 
     //Double Jump Variables
-    bool canDoubleJump;
+    public bool canDoubleJump;
     public GameObject airHike;
 
     //Divekick Variables
@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed;
     public float dashTime;
     public float dashCooldown;
+    float airEvadeCount;
 
     //Lock On
     public bool lockedOn = false;
@@ -105,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         float targetVelocityX;
         targetVelocityX = directionalInput.x * moveSpeed;
 
-        if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack))
+        if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack) || inAirStall)
         {
             targetVelocityX = 0;
         }
@@ -297,23 +298,40 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!inDash && canDash && !finder.guard.isGuarding)
         {
-            inDash = true;
-            canDash = false;
-            inDiveKick = false;
-            //playerHealth.canTakeDamage = false;
-            //meleeController.canAttack = false;
-            if (directionalInput.x == 0)
+            if (controller.collisions.below)
             {
-                dashDir = lastDirection;
+                Evade();
             }
             else
             {
-                dashDir = Mathf.Sign(directionalInput.x);
+                if (airEvadeCount < 1)
+                {
+                    airEvadeCount++;
+                    Evade();
+                }
             }
-
-            Invoke("CancelDash", dashTime);
-            Invoke("SetDashCooldown", dashCooldown);
+            
         }
+    }
+
+    void Evade()
+    {
+        inDash = true;
+        canDash = false;
+        inDiveKick = false;
+        //playerHealth.canTakeDamage = false;
+        //meleeController.canAttack = false;
+        if (directionalInput.x == 0)
+        {
+            dashDir = lastDirection;
+        }
+        else
+        {
+            dashDir = Mathf.Sign(directionalInput.x);
+        }
+
+        Invoke("CancelDash", dashTime);
+        Invoke("SetDashCooldown", dashCooldown);
     }
 
     void CancelDash()
@@ -416,6 +434,7 @@ public class PlayerMovement : MonoBehaviour
             canDiveKick = true;
             airStallCount = 0;
             framesInAir = 0;
+            airEvadeCount = 0;
             if (inKnockback && !hitThisFrame)
             {
                 inKnockback = false; //Stops knockback phase once the floor is hit

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class TrainingRoom : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class TrainingRoom : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetLevel();
+        }
+
+        if (Gamepad.current.selectButton.wasPressedThisFrame)
         {
             ResetLevel();
         }

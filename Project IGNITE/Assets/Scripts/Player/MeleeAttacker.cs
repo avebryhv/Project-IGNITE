@@ -28,6 +28,7 @@ public class MeleeAttacker : MonoBehaviour
     public float stingerTime;
     float stingerCounter;
     public LayerMask testMask;
+    int airStingerCount;
 
     //Uppercut Variables
     public float uppercutTime;
@@ -99,6 +100,11 @@ public class MeleeAttacker : MonoBehaviour
             {
                 StopUppercut();
             }
+        }
+
+        if (finder.controller.collisions.below)
+        {
+            airStingerCount = 0;
         }
         
     }
@@ -271,7 +277,12 @@ public class MeleeAttacker : MonoBehaviour
                 }
                 else //In Air
                 {
-                    StartStinger();
+                    if (airStingerCount < 1) //Can only air stinger once in air
+                    {
+                        airStingerCount++;
+                        StartStinger();
+                    }
+                    
                 }
                 Debug.Log("Forward");
             }

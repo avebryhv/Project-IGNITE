@@ -7,8 +7,11 @@ public class PlayerInput : MonoBehaviour
 {
     PlayerScriptFinder finder;
     public bool allowPlayerInput;
-    
-
+    public enum ControlStickState { Neutral, Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight};
+    ControlStickState leftStickState;
+    ControlStickState lastState;
+    public List<ControlStickState> leftStickInputList;
+    public InputCombo testInput;
 
 
 
@@ -87,6 +90,7 @@ public class PlayerInput : MonoBehaviour
         if (Gamepad.current.buttonNorth.wasPressedThisFrame)
         {
             finder.melee.HeavyAttackPressed();
+            
         }
 
         if (Gamepad.current.buttonNorth.wasReleasedThisFrame)
@@ -94,9 +98,14 @@ public class PlayerInput : MonoBehaviour
             finder.melee.HeavyAttackReleased();
         }
 
-        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
+        if (Gamepad.current.leftTrigger.wasPressedThisFrame)
         {
             finder.stats.Burst();
+        }
+
+        if (Gamepad.current.rightTrigger.wasPressedThisFrame)
+        {
+            finder.grapple.GrappleButtonPressed();
         }
     }
 
@@ -190,12 +199,90 @@ public class PlayerInput : MonoBehaviour
     {
         Vector2 input = Gamepad.current.leftStick.ReadValue();
         finder.movement.SetDirectionalInput(input);
+
+        if (input.x > 0.2) //Right Side of the control stick
+        {
+            if (input.y > 0.2)
+            {
+                leftStickState = ControlStickState.UpRight;
+            }
+            else if (input.y < -0.2)
+            {
+                leftStickState = ControlStickState.DownRight;
+            }
+            else
+            {
+                leftStickState = ControlStickState.Right;
+            }
+        }
+        else if (input.x < -0.2) //Left side of the control stick
+        {
+            if (input.y > 0.2)
+            {
+                leftStickState = ControlStickState.UpLeft;
+            }
+            else if (input.y < -0.2)
+            {
+                leftStickState = ControlStickState.DownLeft;
+            }
+            else
+            {
+                leftStickState = ControlStickState.Left;
+            }
+        }
+        else //Stick is not horizontally pressed
+        {
+            if (input.y > 0.2)
+            {
+                leftStickState = ControlStickState.Up;
+            }
+            else if (input.y < -0.2)
+            {
+                leftStickState = ControlStickState.Down;
+            }
+            else
+            {
+                leftStickState = ControlStickState.Neutral;
+            }
+        }
+
+        UpdateState(leftStickState);
     }
 
     void ReadRightStick()
     {
         Vector2 input = Gamepad.current.rightStick.ReadValue();
         finder.grapple.CStickInput(input);
+    }
+
+    void UpdateState(ControlStickState newState)
+    {
+        if (newState != lastState)
+        {
+            lastState = newState;
+            leftStickInputList.Add(lastState);
+            if (leftStickInputList.Count > 5)
+            {
+                leftStickInputList.RemoveAt(0);
+            }
+            
+        }
+    }
+
+    public bool CheckStickInputs(InputCombo toTest)
+    {
+        bool tempBool = true;
+        int listStartPoint = (5 - toTest.stickMovementList.Length);
+
+        for (int i = 0; i < toTest.stickMovementList.Length; i++)
+        {
+            if (toTest.stickMovementList[i] != leftStickInputList[i + listStartPoint])
+            {
+                tempBool = false;
+            }
+        }
+
+        return tempBool;
     }
 
     public void SetFinder(PlayerScriptFinder f)

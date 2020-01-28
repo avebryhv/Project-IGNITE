@@ -8,8 +8,8 @@ public class PlayerStats : MonoBehaviour
     public int health;
     public int maxHealth;
 
-    public int dtCharge;
-    public int dtMax;
+    public float dtCharge;
+    public float dtMax;
 
     PlayerStatsUI ui;
     //Burst Variables
@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
     {
         ui = FindObjectOfType<PlayerStatsUI>();
         health = maxHealth;
-        dtCharge = dtMax;
+        dtCharge = 90;
         ui.SetHealthValue(health, maxHealth);
         ui.SetDTValue(dtCharge, dtMax);
         canBurst = true;
@@ -48,16 +48,19 @@ public class PlayerStats : MonoBehaviour
 
     }
 
-    public void ChangeDT(int amount)
+    public void IncreaseDT(float amount)
     {
-
+        dtCharge += amount;
+        dtCharge = Mathf.Clamp(dtCharge, 0, dtMax);
+        ui.SetDTValue(dtCharge, dtMax);
     }
 
     public void Burst()
     {
-        if (canBurst)
+        if (canBurst && dtCharge >= 10)
         {
             GameObject burst = Instantiate(burstPrefab, transform.position, transform.rotation, transform);
+            IncreaseDT(-10);
             finder.melee.CancelAttacks();
             if (!finder.controller.collisions.below)
             {
@@ -65,6 +68,7 @@ public class PlayerStats : MonoBehaviour
             }
             finder.melee.inAttack = true;
             finder.melee.currentState = MeleeAttacker.phase.Endlag;
+            finder.movement.canDoubleJump = true;
             burstTimer = 0;
             canBurst = false;
             Invoke("EndAirStall", 0.4f);

@@ -23,6 +23,11 @@ public class EnemyBaseMovement : MonoBehaviour
     bool inHitStun = false;
     float knockbackTimeOnGround;
 
+    public int wallBounceCount;
+    bool canWallBounce;
+
+    bool inGrapple;
+
     Controller2D controller;
     SpriteRenderer sprite;
 
@@ -41,44 +46,52 @@ public class EnemyBaseMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if ((controller.collisions.above || controller.collisions.below) && !inKnockback && !jumpThisFrame)
+        if (!inGrapple)
         {
-            velocity.y = 0; //Sets y velocity to 0 if touching floor and no other effects in place
-        }
-
-        if (controller.collisions.below && inKnockback && !hitThisFrame)
-        {
-            knockbackTimeOnGround += Time.deltaTime;
-            if (knockbackTimeOnGround > 0.5f)
+            if ((controller.collisions.above || controller.collisions.below) && !inKnockback && !jumpThisFrame)
             {
-                StopKnockback();
+                velocity.y = 0; //Sets y velocity to 0 if touching floor and no other effects in place
             }
-            
-            //StartCoroutine("StartIFrames"); //Handles IFrames
-            //StartCoroutine("FlashSpriteIFrames");
-        }
+
+            if (inKnockback && canWallBounce && (controller.collisions.left || controller.collisions.right))
+            {
+                velocity.x = (-velocity.x * 0.5f);
+            }
+
+            if (controller.collisions.below && inKnockback && !hitThisFrame)
+            {
+                knockbackTimeOnGround += Time.deltaTime;
+                if (knockbackTimeOnGround > 0.5f)
+                {
+                    StopKnockback();
+                }
+
+                //StartCoroutine("StartIFrames"); //Handles IFrames
+                //StartCoroutine("FlashSpriteIFrames");
+            }
 
 
-        float targetVelocityX;
+            float targetVelocityX;
 
 
 
-        targetVelocityX = 0;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        if (!inHitStun)
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-        else
-        {
-            
+            targetVelocityX = 0;
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            if (!inHitStun)
+            {
+                velocity.y += gravity * Time.deltaTime;
+            }
+            else
+            {
+
+            }
+
+            controller.Move(velocity * Time.deltaTime, Vector2.zero);
+
+            hitThisFrame = false;
+            jumpThisFrame = false;
         }
         
-        controller.Move(velocity * Time.deltaTime, Vector2.zero);
-
-        hitThisFrame = false;
-        jumpThisFrame = false;
     }
 
     public void TakeKnockback(Vector2 dir)
@@ -99,10 +112,37 @@ public class EnemyBaseMovement : MonoBehaviour
         //StartCoroutine("FlashSprite");
     }
 
+    public void TakeKnockback(Vector2 dir, MeleeHitbox.type type)
+    {
+        if (canTakeKnockBack)
+        {
+            if (type == MeleeHitbox.type.Heavy)
+            {
+                canWallBounce = true;
+            }
+            else
+            {
+                canWallBounce = false;
+            }
+            hitThisFrame = true;
+            inKnockback = true;
+            velocity.x = dir.x;
+            velocity.y = dir.y;
+            inHitStun = true;
+            gameObject.layer = 10;
+            knockbackTimeOnGround = 0;
+            CancelInvoke("EndHitStun");
+            Invoke("EndHitStun", 0.1f);
+
+        }
+        //StartCoroutine("FlashSprite");
+    }
+
     public void StopKnockback()
     {
         inKnockback = false; //Stops knockback phase once the floor is hit
         gameObject.layer = 9;
+        wallBounceCount = 0;
         StopAllCoroutines();
     }
 
@@ -125,6 +165,16 @@ public class EnemyBaseMovement : MonoBehaviour
     public void EndHitStun()
     {
         inHitStun = false;
+    }
+
+    public void StartInGrapple()
+    {
+        inGrapple = true;
+    }
+
+    public void EndInGrapple()
+    {
+        inGrapple = false;
     }
 
     //IEnumerator StartIFrames()

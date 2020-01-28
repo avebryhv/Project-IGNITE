@@ -303,7 +303,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1552067255
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 750bc748ba7b50d459cc5c5cd4b51cba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -353,7 +353,7 @@ MonoBehaviour:
   maxJumpHeight: 4
   minJumpHeight: 1
   timetoJumpApex: 0.4
-  moveSpeed: 6
+  moveSpeed: 8
   wallSlideSpeedMax: 3
   wallJumpClimb: {x: 10, y: 10}
   wallJumpOff: {x: 10, y: 10}
@@ -379,7 +379,7 @@ MonoBehaviour:
   dashTime: 0.2
   dashCooldown: 1
   lockedOn: 0
-  lockOnSpeedModifier: 0.9
+  lockOnSpeedModifier: 0.95
   inAttackMovement: 0
   attackMovementDirection: {x: 0, y: 0}
   attackMovementSpeed: 0
@@ -484,6 +484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowPlayerInput: 1
+  leftStickInputList: 
+  testInput: {fileID: 11400000, guid: c2749288cba3d044792955314827b458, type: 2}
 --- !u!114 &100666872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1325,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 1380550622}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  hookToDistanceX: 2
+  inGrapple: 0
 --- !u!1 &762158164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,6 +1656,7 @@ MonoBehaviour:
   jumpThisFrame: 0
   inKnockback: 0
   canTakeKnockBack: 1
+  wallBounceCount: 0
 --- !u!1 &993824282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1829,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.75
+  m_fontSize: 33.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2108,12 +2116,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7104b90ade35b6749b5c6b982bd9bf91, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9e83f7f77c88a2469b457ba63fbaeed, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.201
+  m_FillAmount: 0.416
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2835,7 +2843,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 964250159
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 706fabd8da869564096c040e9b294e50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6994,7 +7002,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7104b90ade35b6749b5c6b982bd9bf91, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9e83f7f77c88a2469b457ba63fbaeed, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

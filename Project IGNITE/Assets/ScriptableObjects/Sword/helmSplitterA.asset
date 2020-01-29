@@ -17,4 +17,5 @@ MonoBehaviour:
   startUpTime: 0
   hitboxLingerTime: 0.5
   endingTime: 0.1
+  endsCombo: 0
   animationName: helmSplitter

@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     public float framesInAir; //Used to fix issue where player leaves the ground at the peak of a slope. Treating player as in air after 2 frames seems to work consistently
     int airStallCount; //Counts the number of times the player has performed actions that stall them in midair
     bool inAirStall;
+    public bool bufferedJump;
 
     public bool inKnockback = false;
     bool hitThisFrame = false;
@@ -120,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         //Sets y velocity: all moves that change y velocity come after this
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
 
         if (!inKnockback)
         {
@@ -158,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
         CheckKnockback();
         //Moves player: all moves that affect movement come before this
-        controller.Move(velocity * Time.deltaTime, directionalInput);
+        controller.Move(velocity * Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed(), directionalInput);
 
         if (controller.collisions.above || controller.collisions.below)
         {
@@ -196,35 +197,55 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnJumpInputDown()
-    {        
-        //Wall Jump
-        if (wallSliding)
+    {
+        if (CheckCanJump())
         {
-            if (wallDirX == directionalInput.x)
+            //Wall Jump
+            if (wallSliding)
             {
-                velocity.x = -wallDirX * wallJumpClimb.x;
-                velocity.y = wallJumpClimb.y;
-            }
-            else if (directionalInput.x == 0)
-            {
-                velocity.x = -wallDirX * wallJumpOff.x;
-                velocity.y = wallJumpOff.y;
-            }
-            else
-            {
-                velocity.x = -wallDirX * wallJumpLeap.x;
-                velocity.y = wallJumpLeap.y;
-            }
-        }
-        //Normal Jump
-        if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding)
-        {
-            if (finder.melee.inAttack)
-            {
-                if (finder.melee.currentState == MeleeAttacker.phase.Endlag)
+                if (wallDirX == directionalInput.x)
                 {
-                    finder.melee.EndAttack();
-                    finder.melee.CancelBuffer();
+                    velocity.x = -wallDirX * wallJumpClimb.x;
+                    velocity.y = wallJumpClimb.y;
+                }
+                else if (directionalInput.x == 0)
+                {
+                    velocity.x = -wallDirX * wallJumpOff.x;
+                    velocity.y = wallJumpOff.y;
+                }
+                else
+                {
+                    velocity.x = -wallDirX * wallJumpLeap.x;
+                    velocity.y = wallJumpLeap.y;
+                }
+            }
+            //Normal Jump
+            if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding)
+            {
+                if (finder.melee.inAttack)
+                {
+                    if (finder.melee.currentState == MeleeAttacker.phase.Endlag)
+                    {
+                        finder.melee.EndAttack();
+                        finder.melee.CancelBuffer();
+                        if (controller.collisions.slidingDownMaxSlope)
+                        {
+                            if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
+                            {
+                                velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+                                velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+                                jumpPressedThisFrame = true;
+                            }
+                        }
+                        else
+                        {
+                            velocity.y = maxJumpVelocity;
+                            jumpPressedThisFrame = true;
+                        }
+                    }
+                }
+                else
+                {
                     if (controller.collisions.slidingDownMaxSlope)
                     {
                         if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
@@ -240,39 +261,30 @@ public class PlayerMovement : MonoBehaviour
                         jumpPressedThisFrame = true;
                     }
                 }
+
+
             }
-            else
+            //Double Jump
+            if (!controller.collisions.below && framesInAir > 2 && canDoubleJump && !controller.collisions.fallingThroughPlatform && !wallSliding && !inDash && !inDiveKick)
             {
-                if (controller.collisions.slidingDownMaxSlope)
-                {
-                    if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) //Not jumping against max slope
-                    {
-                        velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-                        velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-                        jumpPressedThisFrame = true;
-                    }
-                }
-                else
-                {
-                    velocity.y = maxJumpVelocity;
-                    jumpPressedThisFrame = true;
-                }
+
+                velocity.y = maxJumpVelocity;
+                canDoubleJump = false;
+                doubleJumpPressedThisFrame = true;
+                GameObject airHikeEffect = Instantiate(airHike, transform.position, Quaternion.identity);
+                airHikeEffect.transform.position -= new Vector3(0, 1.8f, 0);
+                airHikeEffect.transform.Rotate(new Vector3(0, 0, -45 * directionalInput.x));
+
             }
-            
-
         }
-        //Double Jump
-        if (!controller.collisions.below && framesInAir > 2 && canDoubleJump && !controller.collisions.fallingThroughPlatform && !wallSliding && !inDash && !inDiveKick)
+        else
         {
+            if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
+            {
 
-            velocity.y = maxJumpVelocity;
-            canDoubleJump = false;
-            doubleJumpPressedThisFrame = true;
-            GameObject airHikeEffect = Instantiate(airHike, transform.position, Quaternion.identity);
-            airHikeEffect.transform.position -= new Vector3(0, 1.8f, 0);
-            airHikeEffect.transform.Rotate(new Vector3(0, 0, -45 * directionalInput.x));
-
+            }
         }
+        
     }
 
     public void OnJumpInputUp()
@@ -330,8 +342,8 @@ public class PlayerMovement : MonoBehaviour
             dashDir = Mathf.Sign(directionalInput.x);
         }
 
-        Invoke("CancelDash", dashTime);
-        Invoke("SetDashCooldown", dashCooldown);
+        Invoke("CancelDash", dashTime / GameManager.Instance.ReturnPlayerSpeed());
+        Invoke("SetDashCooldown", dashCooldown / GameManager.Instance.ReturnPlayerSpeed());
     }
 
     void CancelDash()
@@ -494,12 +506,24 @@ public class PlayerMovement : MonoBehaviour
         inAttackMovement = true;
         attackMovementDirection = dir;
         attackMovementSpeed = sp;
-        attackMovementTime = t;
+        attackMovementTime = t * GameManager.Instance.ReturnPlayerSpeed();
     }
 
     public void StopSpecialAttackMovement()
     {
         inAttackMovement = false;
+    }
+
+    public bool CheckCanJump()
+    {
+        if (finder.melee.inAttack || finder.guard.isGuarding || inDash)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public void SetFinder(PlayerScriptFinder f)

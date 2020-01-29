@@ -25,7 +25,7 @@ public class MeleeHitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        destroyTimer += Time.deltaTime;
+        destroyTimer += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
         if (destroyTimer >= lingerTime)
         {
             DestroyHitbox();

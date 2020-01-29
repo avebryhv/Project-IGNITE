@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerScriptFinder : MonoBehaviour
 {
     public PlayerInput input;
+    public InputAssignment inputAssignment;
     public PlayerMovement movement;
     public Controller2D controller;
     public PlayerSprite sprite;
@@ -50,6 +51,7 @@ public class PlayerScriptFinder : MonoBehaviour
         melee.SetFinder(this);
         stats = FindObjectOfType<PlayerStats>();
         stats.SetFinder(this);
+        inputAssignment = FindObjectOfType<InputAssignment>();
     }
     
 }

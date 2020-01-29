@@ -79,14 +79,14 @@ public class EnemyBaseMovement : MonoBehaviour
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
             if (!inHitStun)
             {
-                velocity.y += gravity * Time.deltaTime;
+                velocity.y += gravity * Time.deltaTime * GameManager.Instance.ReturnEnemySpeed();
             }
             else
             {
 
             }
 
-            controller.Move(velocity * Time.deltaTime, Vector2.zero);
+            controller.Move(velocity * Time.deltaTime * GameManager.Instance.ReturnEnemySpeed(), Vector2.zero);
 
             hitThisFrame = false;
             jumpThisFrame = false;
@@ -106,7 +106,7 @@ public class EnemyBaseMovement : MonoBehaviour
             gameObject.layer = 10;
             knockbackTimeOnGround = 0;
             CancelInvoke("EndHitStun");
-            Invoke("EndHitStun", 0.1f);
+            Invoke("EndHitStun", 0.1f / GameManager.Instance.ReturnEnemySpeed());
 
         }
         //StartCoroutine("FlashSprite");
@@ -132,7 +132,7 @@ public class EnemyBaseMovement : MonoBehaviour
             gameObject.layer = 10;
             knockbackTimeOnGround = 0;
             CancelInvoke("EndHitStun");
-            Invoke("EndHitStun", 0.1f);
+            Invoke("EndHitStun", 0.1f / GameManager.Instance.ReturnEnemySpeed());
 
         }
         //StartCoroutine("FlashSprite");
@@ -157,7 +157,7 @@ public class EnemyBaseMovement : MonoBehaviour
             inHitStun = true;
             gameObject.layer = 10;
             CancelInvoke("EndHitStun");
-            Invoke("EndHitStun", 0.5f);
+            Invoke("EndHitStun", 0.5f / GameManager.Instance.ReturnEnemySpeed());
 
         }
     }

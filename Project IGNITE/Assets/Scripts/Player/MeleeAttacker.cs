@@ -38,6 +38,10 @@ public class MeleeAttacker : MonoBehaviour
     //Helm Splitter Variables
     public bool inHelmSplitter;
 
+    //Pause Combo Variables
+    public float timeSinceLastLightAttackEnded;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +68,8 @@ public class MeleeAttacker : MonoBehaviour
 
         if (!comboTimerPaused)
         {
-            comboCooldownTimer += Time.deltaTime;
+            comboCooldownTimer += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
+            timeSinceLastLightAttackEnded += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             if (comboCooldownTimer >= comboCooldown)
             {
                 comboTimerPaused = true;
@@ -86,7 +91,7 @@ public class MeleeAttacker : MonoBehaviour
                 }
             }
 
-            stingerCounter += Time.deltaTime;
+            stingerCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             if (stingerCounter >= stingerTime)
             {
                 StopStinger();
@@ -95,7 +100,7 @@ public class MeleeAttacker : MonoBehaviour
 
         if (inUpperCut)
         {
-            uppercutCounter += Time.deltaTime;
+            uppercutCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             if (uppercutCounter >= uppercutTime)
             {
                 StopUppercut();
@@ -105,6 +110,7 @@ public class MeleeAttacker : MonoBehaviour
         if (finder.controller.collisions.below)
         {
             airStingerCount = 0;
+
         }
         
     }
@@ -116,10 +122,10 @@ public class MeleeAttacker : MonoBehaviour
             comboTimerPaused = true;
             comboCooldownTimer = 0;
             comboStage++;
-            if (comboStage > 3)
-            {
-                comboStage = 1;
-            }
+            //if (comboStage > 3)
+            //{
+            //    comboStage = 1;
+            //}            
             DecideLightAttack();
         }
         else if (currentState == phase.Endlag || currentState == phase.Active)
@@ -150,7 +156,7 @@ public class MeleeAttacker : MonoBehaviour
 
     void ChargeHeavy()
     {
-        heavyChargeTime += Time.deltaTime;
+        heavyChargeTime += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
     }
 
     void ReleaseHeavy()
@@ -232,10 +238,17 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.airLight1;
                     break;
                 case 2:
-                    currentAttack = attackList.airLight2;
+                    currentAttack = attackList.airLight2;                    
                     break;
                 case 3:
-                    currentAttack = attackList.airLight3;
+                    if (timeSinceLastLightAttackEnded >= 0.1f)
+                    {
+                        currentAttack = attackList.stinger;
+                    }
+                    else
+                    {
+                        currentAttack = attackList.airLight3;
+                    }                    
                     break;
                 default:
                     Debug.Log("Invalid Attack Attempt");
@@ -254,13 +267,30 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.light2;
                     break;
                 case 3:
-                    currentAttack = attackList.light3;
+                    if (timeSinceLastLightAttackEnded >= 0.2f)
+                    {
+                        currentAttack = attackList.lightB1;
+                    }
+                    else
+                    {
+                        currentAttack = attackList.light3;
+                    }                    
+                    break;
+                case 4:
+                    currentAttack = attackList.lightB2;
+                    break;
+                case 5:
+                    currentAttack = attackList.lightB3;
                     break;
                 default:
                     Debug.Log("Invalid Attack Attempt");
                     break;
             }
             AttackStartup();
+        }
+        if (currentAttack.endsCombo)
+        {
+            comboStage = 0;
         }
     }
 
@@ -311,7 +341,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         currentState = phase.Startup;
         inAttack = true;
-        Invoke("CreateHitbox", currentAttack.startUpTime);
+        Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
     }
 
     void CreateHitbox()
@@ -320,13 +350,13 @@ public class MeleeAttacker : MonoBehaviour
         currentHitbox = Instantiate(currentAttack.hitboxObject, transform.position, transform.rotation, transform);
         currentHitbox.transform.localScale = new Vector3(currentHitbox.transform.localScale.x * finder.movement.lastDirection, currentHitbox.transform.localScale.y, currentHitbox.transform.localScale.z);
         currentHitbox.GetComponent<MeleeHitbox>().SetDirection(finder.movement.lastDirection);
-        Invoke("StartEndLag", currentAttack.hitboxLingerTime);
+        Invoke("StartEndLag", currentAttack.hitboxLingerTime / GameManager.Instance.ReturnPlayerSpeed());
     }
 
     void StartEndLag()
     {
         currentState = phase.Endlag;
-        Invoke("EndAttack", currentAttack.endingTime);
+        Invoke("EndAttack", currentAttack.endingTime / GameManager.Instance.ReturnPlayerSpeed());
     }
 
     public void EndAttack()
@@ -335,6 +365,7 @@ public class MeleeAttacker : MonoBehaviour
         inAttack = false;
         finder.movement.EndAirStall();
         comboTimerPaused = false;
+        timeSinceLastLightAttackEnded = 0;
     }
 
     public void CancelBuffer()
@@ -346,7 +377,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         currentState = phase.Startup;
         inAttack = true;
-        Invoke("CreateHitbox", currentAttack.startUpTime);
+        Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
         finder.movement.SetAirStall();
     }
 

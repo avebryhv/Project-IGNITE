@@ -25,11 +25,11 @@ public class GrappleGun : MonoBehaviour
     {
         if (inGrapple)
         {
-            grappleTarget.transform.position = Vector3.Lerp(grappleTarget.transform.position, hookToPoint, 0.1f);
+            grappleTarget.transform.position = Vector3.Lerp(grappleTarget.transform.position, hookToPoint, 0.1f * GameManager.Instance.ReturnPlayerSpeed());
             if (Mathf.Abs(Vector2.Distance(grappleTarget.transform.position, hookToPoint)) < 0.1 && !endingGrapple)
             {
                 endingGrapple = true;
-                Invoke("EndGrapple", 0.2f);
+                Invoke("EndGrapple", 0.2f / GameManager.Instance.ReturnPlayerSpeed());
             }
         }
     }
@@ -63,7 +63,7 @@ public class GrappleGun : MonoBehaviour
                     hookToPoint = new Vector2(transform.position.x + Mathf.Sign(arrowDir.x) * hookToDistanceX, transform.position.y);
                     Debug.Log(hookToPoint);
                     grappleTarget = hit.collider.transform.parent.gameObject;
-                    StartGrapple();
+                    StartGrapple();                    
                 }
             }
         }

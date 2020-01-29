@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -13,12 +14,13 @@ public class PlayerInput : MonoBehaviour
     public List<ControlStickState> leftStickInputList;
     public InputCombo testInput;
 
+    public ButtonControl lightAttackButton;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
-       
+        lightAttackButton = Gamepad.current.buttonWest;
     }
 
     // Update is called once per frame
@@ -45,29 +47,29 @@ public class PlayerInput : MonoBehaviour
         ReadRightStick();
 
         //Jump Inputs
-        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+        if (finder.inputAssignment.jumpButton.wasPressedThisFrame)
         {
             finder.movement.OnJumpInputDown();
         }
 
-        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
+        if (finder.inputAssignment.jumpButton.wasReleasedThisFrame)
         {
             finder.movement.OnJumpInputUp();
         }
 
         //Lock On Inputs
-        if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+        if (finder.inputAssignment.lockOnButton.wasPressedThisFrame)
         {
             finder.movement.OnLockOnDown();
         }
 
-        if (Gamepad.current.rightShoulder.wasReleasedThisFrame)
+        if (finder.inputAssignment.lockOnButton.wasReleasedThisFrame)
         {
             finder.movement.OnLockOnUp();
         }
 
         //Block / Evade Inputs
-        if (Gamepad.current.buttonEast.isPressed)
+        if (finder.inputAssignment.blockButton.isPressed)
         {
             if (finder.movement.lockedOn && Gamepad.current.leftStick.ReadValue().x != 0)
             {
@@ -81,29 +83,30 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Light Attack Inputs
-        if (Gamepad.current.buttonWest.wasPressedThisFrame)
+        if (finder.inputAssignment.lightAttackButton.wasPressedThisFrame)
         {
             finder.melee.LightAttackPressed();
         }
 
+
         //Heavy Attack Inputs
-        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+        if (finder.inputAssignment.heavyAttackButton.wasPressedThisFrame)
         {
             finder.melee.HeavyAttackPressed();
             
         }
 
-        if (Gamepad.current.buttonNorth.wasReleasedThisFrame)
+        if (finder.inputAssignment.heavyAttackButton.wasReleasedThisFrame)
         {
             finder.melee.HeavyAttackReleased();
         }
 
-        if (Gamepad.current.leftTrigger.wasPressedThisFrame)
+        if (finder.inputAssignment.burstButton.wasPressedThisFrame)
         {
             finder.stats.Burst();
         }
 
-        if (Gamepad.current.rightTrigger.wasPressedThisFrame)
+        if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
         {
             finder.grapple.GrappleButtonPressed();
         }

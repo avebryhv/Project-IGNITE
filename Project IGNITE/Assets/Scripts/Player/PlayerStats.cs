@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (!canBurst)
         {
-            burstTimer += Time.deltaTime;
+            burstTimer += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             if (burstTimer >= burstCooldown)
             {
                 canBurst = true;

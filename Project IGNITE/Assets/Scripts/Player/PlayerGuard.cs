@@ -56,7 +56,7 @@ public class PlayerGuard : MonoBehaviour
         {
             OnGuardRelease();
         }
-        timeHeld += Time.deltaTime;
+        timeHeld += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
     }
 
     public void OnGuardRelease()

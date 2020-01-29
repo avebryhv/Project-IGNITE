@@ -61,7 +61,7 @@ public class ComboUI : MonoBehaviour
 
         if (countingKnockback)
         {
-            knockbackCounter += Time.deltaTime;
+            knockbackCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             knockbackText.text = "Combo Time: " + knockbackCounter.ToString("F1");
         }
         

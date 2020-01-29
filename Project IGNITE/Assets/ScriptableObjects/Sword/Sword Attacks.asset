@@ -15,6 +15,9 @@ MonoBehaviour:
   light1: {fileID: 11400000, guid: 205e42141390db448bbf95461978e980, type: 2}
   light2: {fileID: 11400000, guid: cc37fee2c7eb00d419faf04a67ec4371, type: 2}
   light3: {fileID: 11400000, guid: 48a28ec3a4506554fb15de6c63c28bcd, type: 2}
+  lightB1: {fileID: 11400000, guid: cc37fee2c7eb00d419faf04a67ec4371, type: 2}
+  lightB2: {fileID: 11400000, guid: db139d6453a5c8a4e8780584e9e2797b, type: 2}
+  lightB3: {fileID: 11400000, guid: 48a28ec3a4506554fb15de6c63c28bcd, type: 2}
   heavy: {fileID: 11400000, guid: 48a28ec3a4506554fb15de6c63c28bcd, type: 2}
   airLight1: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
   airLight2: {fileID: 11400000, guid: db139d6453a5c8a4e8780584e9e2797b, type: 2}

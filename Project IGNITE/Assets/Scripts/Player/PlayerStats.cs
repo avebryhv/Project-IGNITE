@@ -18,6 +18,12 @@ public class PlayerStats : MonoBehaviour
     float burstTimer;
     bool canBurst;
 
+    //DT Variables
+    public float DTDrainRate;
+    public bool inDT;
+    public float minTimeInDT;
+    float dtTimeCounter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +45,16 @@ public class PlayerStats : MonoBehaviour
             {
                 canBurst = true;
                 burstTimer = 0;
+            }
+        }
+
+        if (inDT)
+        {
+            dtTimeCounter += Time.deltaTime;
+            IncreaseDT(Time.deltaTime * -DTDrainRate);
+            if (dtCharge <= 0)
+            {
+                ExitDT();
             }
         }
     }
@@ -74,6 +90,39 @@ public class PlayerStats : MonoBehaviour
             Invoke("EndAirStall", 0.4f);
         }
         
+    }
+
+    public void DTButtonPressed()
+    {
+        if (inDT)
+        {
+            if (dtTimeCounter >= minTimeInDT)
+            {
+                ExitDT();
+            }
+        }
+        else
+        {
+            if (dtCharge >= 30)
+            {
+                EnterDT();
+            }
+        }
+    }
+
+    void EnterDT()
+    {
+        inDT = true;
+        dtTimeCounter = 0;
+        finder.movement.dtMoveSpeedModifier = 1.2f;
+        finder.sprite.ChangeSpriteColour(Color.red);
+    }
+
+    void ExitDT()
+    {
+        inDT = false;
+        finder.movement.dtMoveSpeedModifier = 1.0f;
+        finder.sprite.ChangeSpriteColour(Color.white);
     }
 
     void EndAirStall()

@@ -21,6 +21,8 @@ public class AttackListObject : ScriptableObject
     public AttackObject airLight2;
     public AttackObject airLight3;
 
+    public AttackObject airPause;
+
     public AttackObject airHeavy;
 
     public AttackObject stinger;

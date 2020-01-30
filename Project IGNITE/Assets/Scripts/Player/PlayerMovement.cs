@@ -84,6 +84,10 @@ public class PlayerMovement : MonoBehaviour
     public float attackMovementSpeed;
     public float attackMovementTime;
 
+    //DT Modifiers
+    public float dtMoveSpeedModifier;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -105,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Player cannot input movement if in an attack or crouching
         float targetVelocityX;
-        targetVelocityX = directionalInput.x * moveSpeed;
+        targetVelocityX = directionalInput.x * moveSpeed * dtMoveSpeedModifier;
 
         if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack) || inAirStall)
         {
@@ -271,6 +275,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = maxJumpVelocity;
                 canDoubleJump = false;
                 doubleJumpPressedThisFrame = true;
+                airStallCount = 0;
                 GameObject airHikeEffect = Instantiate(airHike, transform.position, Quaternion.identity);
                 airHikeEffect.transform.position -= new Vector3(0, 1.8f, 0);
                 airHikeEffect.transform.Rotate(new Vector3(0, 0, -45 * directionalInput.x));
@@ -281,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
             {
-
+                
             }
         }
         

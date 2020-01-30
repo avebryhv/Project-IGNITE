@@ -243,7 +243,8 @@ public class MeleeAttacker : MonoBehaviour
                 case 3:
                     if (timeSinceLastLightAttackEnded >= 0.1f)
                     {
-                        currentAttack = attackList.stinger;
+                        finder.movement.SetSpecialAttackMovement(new Vector2(0,1), 3, 999);
+                        currentAttack = attackList.airPause;
                     }
                     else
                     {
@@ -366,6 +367,7 @@ public class MeleeAttacker : MonoBehaviour
         finder.movement.EndAirStall();
         comboTimerPaused = false;
         timeSinceLastLightAttackEnded = 0;
+        finder.movement.StopSpecialAttackMovement();
     }
 
     public void CancelBuffer()

@@ -126,7 +126,7 @@ public class EnemyBaseMovement : MonoBehaviour
             }
             hitThisFrame = true;
             inKnockback = true;
-            velocity.x = dir.x;
+            velocity.x = dir.x * (Random.Range(0.95f, 1.05f));
             velocity.y = dir.y;
             inHitStun = true;
             gameObject.layer = 10;

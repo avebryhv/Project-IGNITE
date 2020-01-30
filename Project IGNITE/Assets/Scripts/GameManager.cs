@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float gameSpeed;
     public float playerSpeed;
     public float enemySpeed;
+    public bool gamePaused;
 
     public static GameManager Instance { get => instance; set => instance = value; }
 
@@ -45,5 +46,15 @@ public class GameManager : MonoBehaviour
     public float ReturnEnemySpeed()
     {
         return enemySpeed * gameSpeed;
+    }
+
+    public void SetGameSpeed(float newValue)
+    {
+        gameSpeed = newValue;
+    }
+
+    public void SetGamePaused(bool newValue)
+    {
+        gamePaused = newValue;
     }
 }

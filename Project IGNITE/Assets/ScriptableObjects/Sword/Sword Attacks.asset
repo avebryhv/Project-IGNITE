@@ -22,6 +22,7 @@ MonoBehaviour:
   airLight1: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
   airLight2: {fileID: 11400000, guid: db139d6453a5c8a4e8780584e9e2797b, type: 2}
   airLight3: {fileID: 11400000, guid: 5a231a4ca96948f4f8645576aadf7502, type: 2}
+  airPause: {fileID: 11400000, guid: 2026b97c518a10346bf4a0c445425711, type: 2}
   airHeavy: {fileID: 11400000, guid: 5a231a4ca96948f4f8645576aadf7502, type: 2}
   stinger: {fileID: 11400000, guid: e0235656011f18f49ae9914a354ae24a, type: 2}
   uppercut: {fileID: 11400000, guid: 7f3ffaff952f2bd42b257bb092437465, type: 2}

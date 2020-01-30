@@ -28,15 +28,19 @@ public class PlayerInput : MonoBehaviour
     {        
         if (allowPlayerInput)
         {
-            if (Gamepad.all.Count > 0)
+            if (!GameManager.Instance.gamePaused)
             {
-                ReadControllerInputs();
+                if (Gamepad.all.Count > 0)
+                {
+                    ReadControllerInputs();
+                }
+                else
+                {
+                    ReadKeyboardInputs();
+                }
             }
-            else
-            {
-                ReadKeyboardInputs();
-            }        
-            
+
+            ReadPauseInputs();
 
         }
     }
@@ -109,6 +113,21 @@ public class PlayerInput : MonoBehaviour
         if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
         {
             finder.grapple.GrappleButtonPressed();
+        }
+
+        if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
+        {
+            finder.stats.DTButtonPressed();
+        }
+
+        
+    }
+
+    void ReadPauseInputs()
+    {
+        if (Gamepad.current.startButton.wasPressedThisFrame)
+        {
+            FindObjectOfType<PauseMenu>().PauseButtonPressed();
         }
     }
 

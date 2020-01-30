@@ -7,6 +7,7 @@ public class PlayerState : MonoBehaviour
     PlayerScriptFinder finder;
     public enum State { Idle, Walk, Run, Jump, Block, Evade, Knockback};
     public State currentState;
+    public bool canBufferInput;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,11 @@ public class PlayerState : MonoBehaviour
     public void SetFinder(PlayerScriptFinder f)
     {
         finder = f;
+    }
+
+    public void DecideCanBuffer()
+    {
+
     }
 
     public void DecideState()

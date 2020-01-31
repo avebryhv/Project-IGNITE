@@ -17,4 +17,5 @@ MonoBehaviour:
   startUpTime: 0.1
   hitboxLingerTime: 0.15
   endingTime: 0.15
-  animationName: airLight2
+  endsCombo: 0
+  animationName: attackB

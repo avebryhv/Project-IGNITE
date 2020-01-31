@@ -117,7 +117,7 @@ public class MeleeAttacker : MonoBehaviour
 
     public void LightAttackPressed()
     {
-        if (!inAttack)
+        if (finder.state.DecideCanAct())
         {
             comboTimerPaused = true;
             comboCooldownTimer = 0;
@@ -132,13 +132,14 @@ public class MeleeAttacker : MonoBehaviour
         {
             bufferedAttack = true;
             bufferedHeavy = false;
+            finder.movement.CancelJumpBuffer();
         }
         
     }
 
     public void HeavyAttackPressed()
     {
-        if (!inAttack)
+        if (finder.state.DecideCanAct())
         {
             DecideHeavyAttack();
         }
@@ -146,6 +147,7 @@ public class MeleeAttacker : MonoBehaviour
         {
             bufferedHeavy = true;
             bufferedAttack = false;
+            finder.movement.CancelJumpBuffer();
         }
     }
 
@@ -230,7 +232,7 @@ public class MeleeAttacker : MonoBehaviour
 
     void DecideLightAttack()
     {
-        if (finder.movement.framesInAir > 2) //Player is IN AIR
+        if (/*finder.movement.framesInAir > 2*/!finder.controller.collisions.below && !finder.movement.jumpPressedThisFrame) //Player is IN AIR
         {
             switch (comboStage)
             {
@@ -268,7 +270,7 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.light2;
                     break;
                 case 3:
-                    if (timeSinceLastLightAttackEnded >= 0.2f)
+                    if (timeSinceLastLightAttackEnded >= 0.1f)
                     {
                         currentAttack = attackList.lightB1;
                     }
@@ -373,6 +375,7 @@ public class MeleeAttacker : MonoBehaviour
     public void CancelBuffer()
     {
         bufferedAttack = false;
+        bufferedHeavy = false;
     }
 
     void AirAttackStartup()

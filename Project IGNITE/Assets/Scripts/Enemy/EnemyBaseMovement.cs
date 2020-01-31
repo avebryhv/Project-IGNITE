@@ -58,7 +58,7 @@ public class EnemyBaseMovement : MonoBehaviour
                 velocity.x = (-velocity.x * 0.5f);
             }
 
-            if (controller.collisions.below && inKnockback && !hitThisFrame)
+            if (controller.collisions.below && inKnockback && !hitThisFrame && !inHitStun)
             {
                 knockbackTimeOnGround += Time.deltaTime;
                 if (knockbackTimeOnGround > 0.5f)
@@ -106,7 +106,7 @@ public class EnemyBaseMovement : MonoBehaviour
             gameObject.layer = 10;
             knockbackTimeOnGround = 0;
             CancelInvoke("EndHitStun");
-            Invoke("EndHitStun", 0.1f / GameManager.Instance.ReturnEnemySpeed());
+            Invoke("EndHitStun", 0.2f / GameManager.Instance.ReturnEnemySpeed());
 
         }
         //StartCoroutine("FlashSprite");

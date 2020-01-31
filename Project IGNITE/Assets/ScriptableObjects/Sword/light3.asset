@@ -18,4 +18,4 @@ MonoBehaviour:
   hitboxLingerTime: 0.2
   endingTime: 0.3
   endsCombo: 1
-  animationName: light3
+  animationName: attackC

@@ -8,7 +8,7 @@ public class InputAssignment : MonoBehaviour
 {
     public PlayerInput playerInput;
     public enum ButtonAction { Jump, Block, LightAttack, HeavyAttack, LockOn, Grapple, Burst, DT}
-    public enum AssignableButton { NorthFace, EastFace, SouthFace, WestFace, R1, R2, L1, L2}
+    public enum AssignableButton { NorthFace, EastFace, SouthFace, WestFace, R1, R2, L1, L2, L3, R3}
 
     //[Header("Face Buttons")]
     //public ButtonAction northButton;
@@ -66,6 +66,18 @@ public class InputAssignment : MonoBehaviour
         
     }
 
+    public void ReAssignButtons()
+    {
+        AssignJump();
+        AssignBlock();
+        AssignLightAttack();
+        AssignHeavyAttack();
+        AssignDTToggle();
+        AssignBurst();
+        AssignLockOn();
+        AssignGrapple();
+    }
+
     void AssignJump()
     {
         switch (jumpButtonSelection)
@@ -93,6 +105,12 @@ public class InputAssignment : MonoBehaviour
                 break;
             case AssignableButton.L2:
                 jumpButton = Gamepad.current.leftTrigger;
+                break;
+            case AssignableButton.L3:
+                jumpButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                jumpButton = Gamepad.current.rightStickButton;
                 break;
             default:
                 break;
@@ -127,6 +145,12 @@ public class InputAssignment : MonoBehaviour
             case AssignableButton.L2:
                 blockButton = Gamepad.current.leftTrigger;
                 break;
+            case AssignableButton.L3:
+                blockButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                blockButton = Gamepad.current.rightStickButton;
+                break;
             default:
                 break;
         }
@@ -159,6 +183,12 @@ public class InputAssignment : MonoBehaviour
                 break;
             case AssignableButton.L2:
                 lightAttackButton = Gamepad.current.leftTrigger;
+                break;
+            case AssignableButton.L3:
+                lightAttackButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                lightAttackButton = Gamepad.current.rightStickButton;
                 break;
             default:
                 break;
@@ -193,6 +223,12 @@ public class InputAssignment : MonoBehaviour
             case AssignableButton.L2:
                 heavyAttackButton = Gamepad.current.leftTrigger;
                 break;
+            case AssignableButton.L3:
+                heavyAttackButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                heavyAttackButton = Gamepad.current.rightStickButton;
+                break;
             default:
                 break;
         }
@@ -225,6 +261,12 @@ public class InputAssignment : MonoBehaviour
                 break;
             case AssignableButton.L2:
                 toggleDTButton = Gamepad.current.leftTrigger;
+                break;
+            case AssignableButton.L3:
+                toggleDTButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                toggleDTButton = Gamepad.current.rightStickButton;
                 break;
             default:
                 break;
@@ -259,6 +301,12 @@ public class InputAssignment : MonoBehaviour
             case AssignableButton.L2:
                 burstButton = Gamepad.current.leftTrigger;
                 break;
+            case AssignableButton.L3:
+                burstButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                burstButton = Gamepad.current.rightStickButton;
+                break;
             default:
                 break;
         }
@@ -292,6 +340,12 @@ public class InputAssignment : MonoBehaviour
             case AssignableButton.L2:
                 lockOnButton = Gamepad.current.leftTrigger;
                 break;
+            case AssignableButton.L3:
+                lockOnButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                lockOnButton = Gamepad.current.rightStickButton;
+                break;
             default:
                 break;
         }
@@ -324,6 +378,12 @@ public class InputAssignment : MonoBehaviour
                 break;
             case AssignableButton.L2:
                 grappleButton = Gamepad.current.leftTrigger;
+                break;
+            case AssignableButton.L3:
+                grappleButton = Gamepad.current.leftStickButton;
+                break;
+            case AssignableButton.R3:
+                grappleButton = Gamepad.current.rightStickButton;
                 break;
             default:
                 break;

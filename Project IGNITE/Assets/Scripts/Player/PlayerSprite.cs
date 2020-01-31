@@ -74,11 +74,23 @@ public class PlayerSprite : MonoBehaviour
             case PlayerState.State.Evade:
                 SetAnimationTrigger("evade");
                 break;
+            case PlayerState.State.Attack:
+                DecideMeleeAnimation();
+                break;
+            case PlayerState.State.Fall:
+                SetAnimationTrigger("fall");
+                break;
             case PlayerState.State.Knockback:
                 break;
             default:
                 break;
         }
+    }
+
+    void DecideMeleeAnimation()
+    {
+        string anim = finder.melee.currentAttack.animationName;
+        SetAnimationTrigger(anim);
     }
 
     public void SetFinder(PlayerScriptFinder f)

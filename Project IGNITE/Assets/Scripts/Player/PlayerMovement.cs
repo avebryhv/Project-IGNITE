@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     float airEvadeCount;
 
     //Lock On
+    public bool toggleLockOn;
     public bool lockedOn = false;
     public float lockOnSpeedModifier = 0.5f;
 
@@ -110,6 +111,12 @@ public class PlayerMovement : MonoBehaviour
         //Player cannot input movement if in an attack or crouching
         float targetVelocityX;
         targetVelocityX = directionalInput.x * moveSpeed * dtMoveSpeedModifier;
+
+        if (CheckCanJump() && bufferedJump)
+        {
+            bufferedJump = false;
+            OnJumpInputDown();
+        }
 
         if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack) || inAirStall)
         {
@@ -202,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJumpInputDown()
     {
-        if (CheckCanJump())
+        if (finder.state.DecideCanAct())
         {
             //Wall Jump
             if (wallSliding)
@@ -286,7 +293,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
             {
-                
+                bufferedJump = true;
+                finder.melee.CancelBuffer();
             }
         }
         
@@ -303,12 +311,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLockOnDown()
     {
-        lockedOn = true;
+        if (toggleLockOn)
+        {
+            lockedOn = !lockedOn;
+        }
+        else
+        {
+            lockedOn = true;
+        }        
     }
 
     public void OnLockOnUp()
     {
-        lockedOn = false;
+        if (toggleLockOn)
+        {
+            
+        }
+        else
+        {
+            lockedOn = false;
+        }
     }
 
     public void OnDashInput()
@@ -529,6 +551,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return true;
         }
+    }
+
+    public void CancelJumpBuffer()
+    {
+        bufferedJump = false;
     }
 
     public void SetFinder(PlayerScriptFinder f)

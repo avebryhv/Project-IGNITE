@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     PlayerScriptFinder finder;
-    public enum State { Idle, Walk, Run, Jump, Block, Evade, Knockback};
+    public enum State { Idle, Walk, Run, Jump, Fall, Block, Evade, Knockback, Attack};
     public State currentState;
     public bool canBufferInput;
 
@@ -45,16 +45,28 @@ public class PlayerState : MonoBehaviour
 
     }
 
+    public bool DecideCanAct()
+    {
+        if (finder.melee.inAttack || finder.movement.jumpPressedThisFrame || finder.movement.inAttackMovement || finder.movement.inDash || finder.guard.isGuarding || finder.movement.inKnockback)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public void DecideState()
     {
         if (finder.movement.inKnockback)
         {
             SetState(State.Knockback);
         }
-        //else if (/*finder.melee.inAttack*/)
-        //{
-
-        //}
+        else if (finder.melee.inAttack)
+        {
+            SetState(State.Attack);
+        }
         else if (finder.movement.jumpPressedThisFrame)
         {
             SetState(State.Jump);
@@ -74,6 +86,10 @@ public class PlayerState : MonoBehaviour
         else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0)
         {
             SetState(State.Run);
+        }
+        else if (!finder.controller.collisions.below)
+        {
+            SetState(State.Fall);
         }
         else if (finder.controller.collisions.below)
         {

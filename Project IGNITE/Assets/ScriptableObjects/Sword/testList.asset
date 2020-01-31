@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed944f711f4af3043999268c522f0d60, type: 3}
+  m_Name: testList
+  m_EditorClassIdentifier: 
+  light1: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  light2: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  light3: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  lightB1: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  lightB2: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  lightB3: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  heavy: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  airLight1: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  airLight2: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  airLight3: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  airPause: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  airHeavy: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  stinger: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  uppercut: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  helmsplitter: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}
+  helmSplitterGround: {fileID: 11400000, guid: 75d484696eb09194bb93a82142fd8604, type: 2}

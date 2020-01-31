@@ -17,4 +17,5 @@ MonoBehaviour:
   startUpTime: 0.1
   hitboxLingerTime: 0.1
   endingTime: 0.2
-  animationName: light1
+  endsCombo: 0
+  animationName: attackA

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5f613c06b21c841ae8c97c9c07a350, type: 3}
   m_Name: hadouken
   m_EditorClassIdentifier: 
-  stickMovementList: 020000000800000004000000
+  stickMovementList: 040000000000000004000000

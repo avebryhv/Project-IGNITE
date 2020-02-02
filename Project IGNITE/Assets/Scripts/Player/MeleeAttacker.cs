@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeAttacker : MonoBehaviour
 {
     PlayerScriptFinder finder;
+    public bool useAlternateInputs;
     public AttackObject testAttack;
     public AttackListObject attackList;
     public bool inAttack; //If player is currently in attack
@@ -299,44 +300,50 @@ public class MeleeAttacker : MonoBehaviour
 
     void DecideHeavyAttack()
     {
-        if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
+        if (!useAlternateInputs)
         {
-            if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
+            if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
             {
-                //Forward Heavy
-                if (finder.controller.collisions.below) //Grounded
+                if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
                 {
-                    StartStinger();
-                }
-                else //In Air
-                {
-                    if (airStingerCount < 1) //Can only air stinger once in air
+                    //Forward Heavy
+                    if (finder.controller.collisions.below) //Grounded
                     {
-                        airStingerCount++;
                         StartStinger();
                     }
-                    
-                }
-                Debug.Log("Forward");
-            }
-            else
-            {
-                //Back Heavy
-                if (finder.controller.collisions.below) //Grounded
-                {
-                    StartUppercut();
-                }
-                else //In Air
-                {
-                    StartHelmSplitter();
-                }
-                Debug.Log("Back");
+                    else //In Air
+                    {
+                        if (airStingerCount < 1) //Can only air stinger once in air
+                        {
+                            airStingerCount++;
+                            StartStinger();
+                        }
 
+                    }
+                    Debug.Log("Forward");
+                }
+                else
+                {
+                    //Back Heavy
+                    if (finder.controller.collisions.below) //Grounded
+                    {
+                        StartUppercut();
+                    }
+                    else //In Air
+                    {
+                        StartHelmSplitter();
+                    }
+                    Debug.Log("Back");
+
+                }
             }
-        }
+        }        
         else
         {
-            //Charge Attack
+            if (finder.input.CheckStickInputs(finder.input.testInput))
+            {
+                StartStinger();
+            }
         }
     }
 

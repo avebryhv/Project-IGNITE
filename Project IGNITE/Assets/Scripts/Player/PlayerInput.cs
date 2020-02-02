@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
     ControlStickState lastState;
     public List<ControlStickState> leftStickInputList;
     public InputCombo testInput;
+    public float timeSinceLastInput;
 
     public ButtonControl lightAttackButton;
 
@@ -222,13 +223,13 @@ public class PlayerInput : MonoBehaviour
         Vector2 input = Gamepad.current.leftStick.ReadValue();
         finder.movement.SetDirectionalInput(input);
 
-        if (input.x > 0.2) //Right Side of the control stick
+        if (input.x > 0.4) //Right Side of the control stick
         {
-            if (input.y > 0.2)
+            if (input.y > 0.4)
             {
                 leftStickState = ControlStickState.UpRight;
             }
-            else if (input.y < -0.2)
+            else if (input.y < -0.4)
             {
                 leftStickState = ControlStickState.DownRight;
             }
@@ -237,13 +238,13 @@ public class PlayerInput : MonoBehaviour
                 leftStickState = ControlStickState.Right;
             }
         }
-        else if (input.x < -0.2) //Left side of the control stick
+        else if (input.x < -0.4) //Left side of the control stick
         {
-            if (input.y > 0.2)
+            if (input.y > 0.4)
             {
                 leftStickState = ControlStickState.UpLeft;
             }
-            else if (input.y < -0.2)
+            else if (input.y < -0.4)
             {
                 leftStickState = ControlStickState.DownLeft;
             }
@@ -254,11 +255,11 @@ public class PlayerInput : MonoBehaviour
         }
         else //Stick is not horizontally pressed
         {
-            if (input.y > 0.2)
+            if (input.y > 0.4)
             {
                 leftStickState = ControlStickState.Up;
             }
-            else if (input.y < -0.2)
+            else if (input.y < -0.4)
             {
                 leftStickState = ControlStickState.Down;
             }
@@ -283,12 +284,17 @@ public class PlayerInput : MonoBehaviour
         {
             lastState = newState;
             leftStickInputList.Add(lastState);
+            timeSinceLastInput = 0;
             if (leftStickInputList.Count > 5)
             {
                 leftStickInputList.RemoveAt(0);
             }
             
         }
+
+        timeSinceLastInput += Time.deltaTime;
+
+        
     }
 
     public bool CheckStickInputs(InputCombo toTest)

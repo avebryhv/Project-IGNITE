@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.Controls;
 public class PlayerInput : MonoBehaviour
 {
     PlayerScriptFinder finder;
+    public InputStream inputStream;
     public bool allowPlayerInput;
     public enum ControlStickState { Neutral, Up, Down, Left, Right, UpLeft, UpRight, DownLeft, DownRight};
     ControlStickState leftStickState;
@@ -289,6 +290,7 @@ public class PlayerInput : MonoBehaviour
             {
                 leftStickInputList.RemoveAt(0);
             }
+            inputStream.RecieveInput(lastState);
             
         }
 

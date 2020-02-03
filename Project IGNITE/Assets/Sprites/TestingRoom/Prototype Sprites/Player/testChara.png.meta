@@ -1,46 +1,46 @@
 fileFormatVersion: 2
-guid: ce64c5a1bf080f941926aa4e45822b1c
+guid: 0498674f90caef14a9384bf908eb4adc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3365051682667411033
-    second: testCharaNoHand_0
+      213: -5803041327761506784
+    second: testChara_0
   - first:
-      213: 6708121048945439525
-    second: testCharaNoHand_1
+      213: -4479611276447970261
+    second: testChara_1
   - first:
-      213: -1816626240387399141
-    second: testCharaNoHand_2
+      213: 2000513165442165336
+    second: testChara_2
   - first:
-      213: 948208997950767616
-    second: testCharaNoHand_3
+      213: -4484213515261737656
+    second: testChara_3
   - first:
-      213: 4733000090641306510
-    second: testCharaNoHand_4
+      213: -2831408917718971034
+    second: testChara_4
   - first:
-      213: -4206420304424430804
-    second: testCharaNoHand_5
+      213: 3662489870712126104
+    second: testChara_5
   - first:
-      213: -7759223727502481192
-    second: testCharaNoHand_6
+      213: 3634458611308100852
+    second: testChara_6
   - first:
-      213: -4590946672404954401
-    second: testCharaNoHand_7
+      213: 7631627872901779067
+    second: testChara_7
   - first:
-      213: -2499162923629603444
-    second: testCharaNoHand_8
+      213: -333241550439817708
+    second: testChara_8
   - first:
-      213: -3947915984095259010
-    second: testCharaNoHand_9
+      213: -1097106221146347702
+    second: testChara_9
   - first:
-      213: 5487003138072501557
-    second: testCharaNoHand_10
+      213: 5310805053491639392
+    second: testChara_10
   - first:
-      213: -3256216963771689273
-    second: testCharaNoHand_11
+      213: -6711406872964317502
+    second: testChara_11
   - first:
-      213: 3438147506172919648
-    second: testCharaNoHand_12
+      213: -9089221973335404422
+    second: testChara_12
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -121,143 +121,167 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: testCharaNoHand_0
+      name: testChara_0
       rect:
         serializedVersion: 2
         x: 52
         y: 85
         width: 11
         height: 11
-      alignment: 9
-      pivot: {x: 0.5472731, y: 0.13636433}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85abbb1d5a9b1554f9b7db2665613134
-      internalID: -3365051682667411033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testCharaNoHand_1
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 65
-        width: 7
-        height: 17
-      alignment: 9
-      pivot: {x: 0.8584704, y: 0.9378128}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6e071171027014459ede80030b905bd
-      internalID: 6708121048945439525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testCharaNoHand_2
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 61
-        width: 13
-        height: 22
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0f477e7ed72d6141adda99ace822386
-      internalID: -1816626240387399141
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testCharaNoHand_3
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 62
-        width: 7
-        height: 17
-      alignment: 9
-      pivot: {x: 0.1476059, y: 0.94031435}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5867aa9dc828321468a5241e0c11d2a7
-      internalID: 948208997950767616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testCharaNoHand_4
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 49
-        width: 5
-        height: 15
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b5a21a10360f4fe42be9836855529c05
-      internalID: 4733000090641306510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testCharaNoHand_5
-      rect:
-        serializedVersion: 2
-        x: 53
-        y: 51
-        width: 9
-        height: 7
-      alignment: 9
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18ca47f3a93401f48bc9d9e5857dc788
-      internalID: -4206420304424430804
+      spriteID: cdd989bbac7eab845b1b1d421d3e8ae7
+      internalID: -5803041327761506784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_6
+      name: testChara_1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 52
+        width: 3
+        height: 5
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7d5bf6e443ef14469ffdd485d66d69f
+      internalID: -4479611276447970261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testChara_2
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 49
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d717cd9e241c82646991aa9e848a97ab
+      internalID: 2000513165442165336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testChara_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 61
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71235a2ac5f19844d8d272ad95d674cd
+      internalID: -4484213515261737656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testChara_4
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 51
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74032d4cd792de438d0fec9497444dc
+      internalID: -2831408917718971034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testChara_5
       rect:
         serializedVersion: 2
         x: 68
         y: 46
         width: 5
         height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd67ce3b55cacb54a87d9fda13a06566
+      internalID: 3662489870712126104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testChara_6
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 53
+        width: 3
+        height: 5
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,134 +289,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5046552c466139d4aaaf0ba1cabfaaa1
-      internalID: -7759223727502481192
+      spriteID: 7ed914c45efd53348912bc24b6aad2c6
+      internalID: 3634458611308100852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_7
+      name: testChara_7
       rect:
         serializedVersion: 2
         x: 47
         y: 29
         width: 6
         height: 16
-      alignment: 9
-      pivot: {x: 0.81041145, y: 0.9338701}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9be5e9a115beff4cb1653a38f4c8a5e
-      internalID: -4590946672404954401
+      spriteID: 3446c0d9a0737b74796b6557f4367d0e
+      internalID: 7631627872901779067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_8
+      name: testChara_8
       rect:
         serializedVersion: 2
         x: 59
         y: 29
         width: 7
         height: 16
-      alignment: 9
-      pivot: {x: 0.16136988, y: 0.9303427}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c104301f2cc7dd44af3953e4c813c28
-      internalID: -2499162923629603444
+      spriteID: 4cc2117cc09e6a1478fb48ddc8274488
+      internalID: -333241550439817708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_9
+      name: testChara_9
       rect:
         serializedVersion: 2
         x: 48
         y: 10
         width: 5
         height: 15
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fae1994885cb2346a32373879ae3790
-      internalID: -3947915984095259010
+      spriteID: c9b4d8d410e88c14991b46256ff31641
+      internalID: -1097106221146347702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_10
+      name: testChara_10
       rect:
         serializedVersion: 2
         x: 61
         y: 10
         width: 5
         height: 15
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d1ca9166cba8274c9b064301b482309
-      internalID: 5487003138072501557
+      spriteID: e74e3767ae9365d4b95e0a6247f4d1bc
+      internalID: 5310805053491639392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_11
+      name: testChara_11
       rect:
         serializedVersion: 2
         x: 47
         y: 2
         width: 7
         height: 5
-      alignment: 9
-      pivot: {x: 0.13622665, y: 0.799579}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77b9c1d117df9b542be72b898b96efec
-      internalID: -3256216963771689273
+      spriteID: 8a3f1b6a5aa44604ca3247325eba2968
+      internalID: -6711406872964317502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testCharaNoHand_12
+      name: testChara_12
       rect:
         serializedVersion: 2
         x: 60
         y: 2
         width: 7
         height: 5
-      alignment: 9
-      pivot: {x: 0.14692579, y: 0.799579}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0b5e8c168d5c4c48a7c5b63d58aaeb4
-      internalID: 3438147506172919648
+      spriteID: c6e0b4fc25ea4334ebad7f3ff49c2c67
+      internalID: -9089221973335404422
       vertices: []
       indices: 
       edges: []

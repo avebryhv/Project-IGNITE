@@ -1,46 +1,46 @@
 fileFormatVersion: 2
-guid: 0498674f90caef14a9384bf908eb4adc
+guid: ce64c5a1bf080f941926aa4e45822b1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5803041327761506784
-    second: testChara_0
+      213: -3365051682667411033
+    second: testCharaNoHand_0
   - first:
-      213: -4479611276447970261
-    second: testChara_1
+      213: 6708121048945439525
+    second: testCharaNoHand_1
   - first:
-      213: 2000513165442165336
-    second: testChara_2
+      213: -1816626240387399141
+    second: testCharaNoHand_2
   - first:
-      213: -4484213515261737656
-    second: testChara_3
+      213: 948208997950767616
+    second: testCharaNoHand_3
   - first:
-      213: -2831408917718971034
-    second: testChara_4
+      213: 4733000090641306510
+    second: testCharaNoHand_4
   - first:
-      213: 3662489870712126104
-    second: testChara_5
+      213: -4206420304424430804
+    second: testCharaNoHand_5
   - first:
-      213: 3634458611308100852
-    second: testChara_6
+      213: -7759223727502481192
+    second: testCharaNoHand_6
   - first:
-      213: 7631627872901779067
-    second: testChara_7
+      213: -4590946672404954401
+    second: testCharaNoHand_7
   - first:
-      213: -333241550439817708
-    second: testChara_8
+      213: -2499162923629603444
+    second: testCharaNoHand_8
   - first:
-      213: -1097106221146347702
-    second: testChara_9
+      213: -3947915984095259010
+    second: testCharaNoHand_9
   - first:
-      213: 5310805053491639392
-    second: testChara_10
+      213: 5487003138072501557
+    second: testCharaNoHand_10
   - first:
-      213: -6711406872964317502
-    second: testChara_11
+      213: -3256216963771689273
+    second: testCharaNoHand_11
   - first:
-      213: -9089221973335404422
-    second: testChara_12
+      213: 3438147506172919648
+    second: testCharaNoHand_12
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -70,7 +70,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -79,12 +79,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,112 +125,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: testChara_0
+      name: testCharaNoHand_0
       rect:
         serializedVersion: 2
         x: 52
         y: 85
         width: 11
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5436367, y: 0.14000009}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdd989bbac7eab845b1b1d421d3e8ae7
-      internalID: -5803041327761506784
+      spriteID: 19ee40189b1919e4893b54428cf855ce
+      internalID: -3365051682667411033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_1
+      name: testCharaNoHand_1
       rect:
         serializedVersion: 2
-        x: 5
-        y: 52
-        width: 37
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 35
+        y: 65
+        width: 7
+        height: 17
+      alignment: 9
+      pivot: {x: 0.6786624, y: 0.8909616}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7d5bf6e443ef14469ffdd485d66d69f
-      internalID: -4479611276447970261
+      spriteID: 4a9a1027b39822a4ca7dc509f5b09a67
+      internalID: 6708121048945439525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_2
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 49
-        width: 5
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d717cd9e241c82646991aa9e848a97ab
-      internalID: 2000513165442165336
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testChara_3
+      name: testCharaNoHand_2
       rect:
         serializedVersion: 2
         x: 50
         y: 61
         width: 13
         height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49549073, y: 0.03996953}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71235a2ac5f19844d8d272ad95d674cd
-      internalID: -4484213515261737656
+      spriteID: b3b935eaf1d655349a8866dbffbd8be6
+      internalID: -1816626240387399141
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_4
+      name: testCharaNoHand_3
       rect:
         serializedVersion: 2
-        x: 53
-        y: 51
-        width: 9
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 69
+        y: 62
+        width: 7
+        height: 17
+      alignment: 9
+      pivot: {x: 0.18285806, y: 0.924706}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e74032d4cd792de438d0fec9497444dc
-      internalID: -2831408917718971034
+      spriteID: d191cd276b442284c8287c0d3bd1e250
+      internalID: 948208997950767616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_5
+      name: testCharaNoHand_4
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 49
+        width: 5
+        height: 15
+      alignment: 9
+      pivot: {x: 0.49126816, y: 0.83410084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d865019f146d1b489f7b3845c62450e
+      internalID: 4733000090641306510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testCharaNoHand_5
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 51
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae48deb71852eb6409b5a5a7a5dc3108
+      internalID: -4206420304424430804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: testCharaNoHand_6
       rect:
         serializedVersion: 2
         x: 68
@@ -238,161 +259,140 @@ TextureImporter:
         width: 5
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd67ce3b55cacb54a87d9fda13a06566
-      internalID: 3662489870712126104
+      spriteID: b4325638c9ae0de4caa8d29c1a3f1410
+      internalID: -7759223727502481192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_6
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 53
-        width: 34
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ed914c45efd53348912bc24b6aad2c6
-      internalID: 3634458611308100852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: testChara_7
+      name: testCharaNoHand_7
       rect:
         serializedVersion: 2
         x: 47
         y: 29
         width: 6
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3446c0d9a0737b74796b6557f4367d0e
-      internalID: 7631627872901779067
+      spriteID: 2d444d8eb3b15d549b41d890a479d9cc
+      internalID: -4590946672404954401
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_8
+      name: testCharaNoHand_8
       rect:
         serializedVersion: 2
-        x: 59
+        x: 60
         y: 29
-        width: 7
+        width: 6
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cc2117cc09e6a1478fb48ddc8274488
-      internalID: -333241550439817708
+      spriteID: 6f41d14217d0da44c923e5bc63f9cef6
+      internalID: -2499162923629603444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_9
+      name: testCharaNoHand_9
       rect:
         serializedVersion: 2
         x: 48
         y: 10
         width: 5
         height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9b4d8d410e88c14991b46256ff31641
-      internalID: -1097106221146347702
+      spriteID: 1805ce313e69f9d48a18efafbc4dd78d
+      internalID: -3947915984095259010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_10
+      name: testCharaNoHand_10
       rect:
         serializedVersion: 2
         x: 61
         y: 10
         width: 5
         height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e74e3767ae9365d4b95e0a6247f4d1bc
-      internalID: 5310805053491639392
+      spriteID: 5b9a59c7c76827c45aea4a5b1a870e3a
+      internalID: 5487003138072501557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_11
+      name: testCharaNoHand_11
       rect:
         serializedVersion: 2
         x: 47
         y: 2
         width: 7
         height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.13589859, y: 0.8303879}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a3f1b6a5aa44604ca3247325eba2968
-      internalID: -6711406872964317502
+      spriteID: 73794566930526b44a142f555082e7b8
+      internalID: -3256216963771689273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: testChara_12
+      name: testCharaNoHand_12
       rect:
         serializedVersion: 2
         x: 60
         y: 2
         width: 7
         height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.13589914, y: 0.8775862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6e0b4fc25ea4334ebad7f3ff49c2c67
-      internalID: -9089221973335404422
+      spriteID: 432ca27e610d7e8459662c00d96c1cc2
+      internalID: 3438147506172919648
       vertices: []
       indices: 
       edges: []

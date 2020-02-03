@@ -92,6 +92,49 @@ public class InputStream : MonoBehaviour
             currentSprite = aSprite;
             AddImage();
         }
+
+        if (Gamepad.current.buttonEast.wasPressedThisFrame)
+        {
+            currentSprite = bSprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.buttonWest.wasPressedThisFrame)
+        {
+            currentSprite = xSprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+        {
+            currentSprite = ySprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
+        {
+            currentSprite = l1Sprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.leftTrigger.wasPressedThisFrame)
+        {
+            currentSprite = l2Sprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+        {
+            currentSprite = r1Sprite;
+            AddImage();
+        }
+
+        if (Gamepad.current.rightTrigger.wasPressedThisFrame)
+        {
+            currentSprite = r2Sprite;
+            AddImage();
+        }
+
     }
 
     void AddImage()

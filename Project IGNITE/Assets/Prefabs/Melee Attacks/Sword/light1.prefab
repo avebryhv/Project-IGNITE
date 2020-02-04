@@ -39,7 +39,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597450952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -228,6 +228,7 @@ MonoBehaviour:
   comboWeight: 3
   name: l1
   attackType: 0
+  lineFadeDelay: 0
 --- !u!50 &4074124326509093065
 Rigidbody2D:
   serializedVersion: 4

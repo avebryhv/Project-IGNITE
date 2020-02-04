@@ -53,6 +53,6 @@ public class CircleRenderer : MonoBehaviour
                 0
             );
         }
-        line.SetPositions(points);
+        line.SetPositions(points);        
     }
 }

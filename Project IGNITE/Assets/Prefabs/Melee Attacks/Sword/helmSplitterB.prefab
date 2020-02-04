@@ -65,7 +65,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707621093289007825}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 964250159
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7104b90ade35b6749b5c6b982bd9bf91, type: 3}
   m_Color: {r: 0.8666667, g: 0.6709214, b: 0.4039216, a: 1}
@@ -159,6 +159,7 @@ MonoBehaviour:
   comboWeight: 5
   name: hs2
   attackType: 1
+  lineFadeDelay: 0
 --- !u!50 &8849873406600300355
 Rigidbody2D:
   serializedVersion: 4

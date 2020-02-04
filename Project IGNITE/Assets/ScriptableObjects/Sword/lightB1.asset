@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb07ef19e27498c4c89debf065876c4e, type: 3}
-  m_Name: light3
+  m_Name: lightB1
   m_EditorClassIdentifier: 
-  hitboxObject: {fileID: 3239732617500047364, guid: fa603f4f8c34db14b9d95991b482abd0,
+  hitboxObject: {fileID: 8212355893590512386, guid: 0d0dfdecfc80ac94da9d146f31c4373e,
     type: 3}
-  startUpTime: 0.15
-  hitboxLingerTime: 0.2
-  endingTime: 0.3
-  endsCombo: 1
-  animationName: lightGroundA3
+  startUpTime: 0.1
+  hitboxLingerTime: 0.15
+  endingTime: 0.15
+  endsCombo: 0
+  animationName: lightGroundB1

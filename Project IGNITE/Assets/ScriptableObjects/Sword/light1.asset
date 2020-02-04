@@ -18,4 +18,4 @@ MonoBehaviour:
   hitboxLingerTime: 0.1
   endingTime: 0.2
   endsCombo: 0
-  animationName: attackA
+  animationName: lightGroundA1

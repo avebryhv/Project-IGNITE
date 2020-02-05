@@ -52,6 +52,7 @@ MonoBehaviour:
   comboWeight: 3
   name: l3
   attackType: 0
+  lineFadeDelay: 0
 --- !u!50 &6914502063346548511
 Rigidbody2D:
   serializedVersion: 4
@@ -198,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4458548964695302391
 Transform:
   m_ObjectHideFlags: 0

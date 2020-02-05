@@ -57,4 +57,16 @@ public class GameManager : MonoBehaviour
     {
         gamePaused = newValue;
     }
+
+    public void DoHitLag()
+    {
+        Time.timeScale = 0.1f;
+        CancelInvoke();
+        Invoke("EndHitLag", 0.01f);
+    }
+
+    void EndHitLag()
+    {
+        Time.timeScale = 1f;
+    }
 }

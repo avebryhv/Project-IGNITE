@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1599535797488611017
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   comboWeight: 3
   name: l2
   attackType: 0
+  lineFadeDelay: 0
 --- !u!50 &474412969887033153
 Rigidbody2D:
   serializedVersion: 4

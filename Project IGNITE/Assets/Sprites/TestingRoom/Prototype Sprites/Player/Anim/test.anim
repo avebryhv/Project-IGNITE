@@ -139,7 +139,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.1
-        value: {x: 0, y: 0, z: -90.41901}
+        value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -288,7 +288,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.1
-        value: {x: 0.012, y: -0.193, z: 0}
+        value: {x: 0.153, y: 0.004, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -412,7 +412,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.1
-        value: 0.32717484
+        value: 0.44319898
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1118,7 +1118,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.1
-        value: 0.012
+        value: 0.153
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1146,7 +1146,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.1
-        value: -0.193
+        value: 0.004
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1258,7 +1258,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.1
-        value: -90.41901
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1286,7 +1286,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.1
-        value: 0.32717484
+        value: 0.44319898
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1823,8 +1823,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
+    attribute: m_LocalEulerAngles.z
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1834,7 +1834,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1843,8 +1843,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
+    attribute: m_LocalEulerAngles.x
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1974,7 +1974,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1984,7 +1984,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1994,7 +1994,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand
+    path: Big Crustus/waist/chest/rightArm/rightForeArm/rightHand/Line
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

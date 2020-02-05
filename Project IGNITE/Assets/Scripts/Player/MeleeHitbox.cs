@@ -55,6 +55,7 @@ public class MeleeHitbox : MonoBehaviour
                 hitList.Add(other.gameObject);
                 other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
+                GameManager.Instance.DoHitLag();
             }
             
         }

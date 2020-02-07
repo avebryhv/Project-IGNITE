@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb07ef19e27498c4c89debf065876c4e, type: 3}
   m_Name: airLight3
   m_EditorClassIdentifier: 
-  hitboxObject: {fileID: 6324711128878957746, guid: 70f71cedf77f9a1429143262ea2e517a,
+  hitboxObject: {fileID: 7100975440823134190, guid: 70f71cedf77f9a1429143262ea2e517a,
     type: 3}
   startUpTime: 0.15
   hitboxLingerTime: 0.2
   endingTime: 0.3
   endsCombo: 1
-  animationName: attackC
+  animationName: lightAirA3

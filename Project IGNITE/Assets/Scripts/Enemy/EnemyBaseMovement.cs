@@ -128,6 +128,7 @@ public class EnemyBaseMovement : MonoBehaviour
             inKnockback = true;
             velocity.x = dir.x * (Random.Range(0.95f, 1.05f));
             velocity.y = dir.y;
+            GetComponentInChildren<EnemySprite>().SetDirection(-Mathf.Sign(dir.x));
             inHitStun = true;
             gameObject.layer = 10;
             knockbackTimeOnGround = 0;

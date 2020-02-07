@@ -80,7 +80,7 @@ public class MeleeAttacker : MonoBehaviour
 
         if (inStinger)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(finder.movement.lastDirection, 0), 2.0f, testMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(finder.movement.lastDirection, 0), 2.0f, testMask);         
             Debug.DrawRay(transform.position, new Vector2(finder.movement.lastDirection * 2, 0), Color.red);
             if (hit.collider != null)
             {

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public float playerSpeed;
     public float enemySpeed;
     public bool gamePaused;
+    public PlayerScriptFinder finder;
 
     public static GameManager Instance { get => instance; set => instance = value; }
 
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
-    }
+    }    
 
     // Update is called once per frame
     void Update()
@@ -55,18 +56,23 @@ public class GameManager : MonoBehaviour
 
     public void SetGamePaused(bool newValue)
     {
-        gamePaused = newValue;
+        gamePaused = newValue;        
     }
 
     public void DoHitLag()
     {
-        //Time.timeScale = 0.1f;
-        //CancelInvoke();
-        //Invoke("EndHitLag", 0.01f);
+        Time.timeScale = 0.1f;
+        CancelInvoke();
+        Invoke("EndHitLag", 0.005f);
     }
 
     void EndHitLag()
     {
         Time.timeScale = 1f;
+    }
+
+    public void SetFinder(PlayerScriptFinder f)
+    {
+        finder = f;
     }
 }

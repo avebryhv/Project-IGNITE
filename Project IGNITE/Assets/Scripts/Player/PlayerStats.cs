@@ -114,14 +114,16 @@ public class PlayerStats : MonoBehaviour
     {
         inDT = true;
         dtTimeCounter = 0;
-        finder.movement.dtMoveSpeedModifier = 1.2f;
-        finder.sprite.ChangeSpriteColour(Color.red);
+        //finder.movement.dtMoveSpeedModifier = 1.2f;
+        GameManager.Instance.playerSpeed = 1.2f;
+        finder.sprite.ChangeSpriteColour(Color.red);        
     }
 
     void ExitDT()
     {
         inDT = false;
-        finder.movement.dtMoveSpeedModifier = 1.0f;
+        //finder.movement.dtMoveSpeedModifier = 1.0f;
+        GameManager.Instance.playerSpeed = 1f;
         finder.sprite.ChangeSpriteColour(Color.white);
     }
 

@@ -15,6 +15,10 @@ public class PlayerInput : MonoBehaviour
     public List<ControlStickState> leftStickInputList;
     public InputCombo testInput;
     public float timeSinceLastInput;
+    
+
+    public float deadZone;
+    public bool usingDeadZone;
 
     public ButtonControl lightAttackButton;
 
@@ -45,7 +49,7 @@ public class PlayerInput : MonoBehaviour
             ReadPauseInputs();
 
         }
-    }
+    } 
 
     void ReadControllerInputs()
     {
@@ -222,6 +226,17 @@ public class PlayerInput : MonoBehaviour
     void ReadControlStick()
     {
         Vector2 input = Gamepad.current.leftStick.ReadValue();
+        if (usingDeadZone)
+        {
+            if (Mathf.Abs(input.x) <= deadZone)
+            {
+                input.x = 0;
+            }
+            if (Mathf.Abs(input.y) <= deadZone)
+            {
+                input.y = 0;
+            }
+        }
         finder.movement.SetDirectionalInput(input);
 
         if (input.x > 0.4) //Right Side of the control stick

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2487566750515794440}
-  m_LocalRotation: {x: -0.9708857, y: -0.18915898, z: -0.13485457, w: -0.058430996}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: 0.0013799042, y: -0.14374511, z: -0.009499518, w: 0.9895682}
+  m_LocalPosition: {x: -0.169, y: 0.035, z: 0.88}
   m_LocalScale: {x: 0.37, y: 0.76, z: 1}
   m_Children: []
   m_Father: {fileID: 6912254918409105397}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -183.58, y: -16.53, z: -22.57}
+  m_LocalEulerAnglesHint: {x: 0, y: -16.53, z: -1.1}
 --- !u!120 &5125551081586148915
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -46,6 +46,7 @@ LineRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -98,7 +99,7 @@ LineRenderer:
   - {x: 0.117813215, y: -0.93258786, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.74604577
+    widthMultiplier: 1.3309113
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -116,8 +117,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0.12941177, g: 0.6784314, b: 0.8078432, a: 1}
+      key1: {r: 0.09411766, g: 0.8745099, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -132,7 +133,7 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 64880
+      atime0: 64957
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -313,6 +314,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

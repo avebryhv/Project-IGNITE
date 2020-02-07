@@ -116,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
         {
             bufferedJump = false;
             OnJumpInputDown();
+            if (!finder.inputAssignment.jumpButton.isPressed)
+            {
+                OnJumpInputUp();
+            }
         }
 
         if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack) || inAirStall)

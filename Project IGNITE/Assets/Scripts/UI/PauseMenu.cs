@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     public bool isPaused;
+    bool unPausedThisFrame;
     public Canvas pauseMenuCanvas;
     public Selectable resumeButton;
     public EventSystem eventSystem;
@@ -28,6 +29,15 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void LateUpdate()
+    {
+        if (unPausedThisFrame)
+        {
+            unPausedThisFrame = false;
+            GameManager.Instance.finder.input.allowPlayerInput = true;
+        }
     }
 
     public void PauseButtonPressed()
@@ -54,12 +64,14 @@ public class PauseMenu : MonoBehaviour
         pauseMenuCanvas.enabled = true;
         baseMenuPanel.SetActive(true);
         Time.timeScale = 0;
+        GameManager.Instance.finder.input.allowPlayerInput = false;
         resumeButton.Select();
     }
 
     void HidePauseMenu()
     {
         isPaused = false;
+        unPausedThisFrame = true;
         GameManager.Instance.SetGamePaused(false);
         pauseMenuCanvas.enabled = false;
         optionsPanel.SetActive(false);

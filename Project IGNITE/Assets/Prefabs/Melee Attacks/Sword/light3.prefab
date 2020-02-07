@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.048472792, y: -0.18605387}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4406617, y: 1.3721077}
   m_EdgeRadius: 0
 --- !u!212 &8128434002015548952
 SpriteRenderer:
@@ -147,6 +147,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -207,13 +208,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528606109883810628}
-  m_LocalRotation: {x: 0.9564375, y: 0.03938389, z: 0.065859325, w: 0.28167155}
+  m_LocalRotation: {x: 0.156728, y: 0.07253151, z: -0.07948625, w: -0.9817624}
   m_LocalPosition: {x: -0.51, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.16, z: 1}
   m_Children: []
   m_Father: {fileID: 3239732618870071948}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -327.75, y: 169.91, z: -187.64}
+  m_LocalEulerAnglesHint: {x: -522.77, y: 169.91, z: -169.21}
 --- !u!120 &5139947390018963110
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -228,6 +229,7 @@ LineRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -276,9 +278,14 @@ LineRenderer:
   - {x: 0.55251807, y: -0.76047605, z: 0}
   - {x: 0.45284835, y: -0.8237283, z: 0}
   - {x: 0.34603694, y: -0.87398994, z: 0}
+  - {x: 0.23376851, y: -0.91046816, z: 0}
+  - {x: 0.117813215, y: -0.93258786, z: 0}
+  - {x: -0.00000008217741, y: -0.94, z: 0}
+  - {x: -0.11781336, y: -0.9325878, z: 0}
+  - {x: -0.23376866, y: -0.9104681, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 1.8368292
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -291,6 +298,24 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5057763
+        value: 0.55102277
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -344,5 +369,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segments: 50
-  arcFraction: 0.478
+  arcFraction: 0.568
   radius: 0.94

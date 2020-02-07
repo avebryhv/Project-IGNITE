@@ -23,7 +23,7 @@ public class PlayerScriptFinder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.SetFinder(this);
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class PlayerScriptFinder : MonoBehaviour
 
     void FindScripts()
     {
+        
         input = FindObjectOfType<PlayerInput>();
         input.SetFinder(this);
         movement = FindObjectOfType<PlayerMovement>();

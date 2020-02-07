@@ -57,6 +57,11 @@ public class PlayerState : MonoBehaviour
         }
     }
 
+    public void ResetStateForAttack()
+    {
+        currentState = State.Idle;
+    }
+
     public void DecideState()
     {
         if (finder.movement.inKnockback)

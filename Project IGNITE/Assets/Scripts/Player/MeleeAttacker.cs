@@ -126,7 +126,7 @@ public class MeleeAttacker : MonoBehaviour
             //if (comboStage > 3)
             //{
             //    comboStage = 1;
-            //}            
+            //}
             DecideLightAttack();
         }
         else if (currentState == phase.Endlag || currentState == phase.Active)
@@ -170,6 +170,7 @@ public class MeleeAttacker : MonoBehaviour
     void StartStinger()
     {
         inAttack = true;
+        currentAttack = attackList.stingerRush;
         Vector2 dir = new Vector2(finder.movement.lastDirection, 0);
         finder.movement.SetSpecialAttackMovement(dir, 25, 999);
         inStinger = true;
@@ -180,6 +181,8 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (finder.controller.collisions.below)
         {
+            finder.state.ResetStateForAttack();
+
             inStinger = false;
             currentAttack = attackList.stinger;
             finder.movement.StopSpecialAttackMovement();
@@ -187,6 +190,8 @@ public class MeleeAttacker : MonoBehaviour
         }
         else
         {
+            finder.state.ResetStateForAttack();
+
             inStinger = false;
             currentAttack = attackList.stinger;
             finder.movement.StopSpecialAttackMovement();
@@ -350,6 +355,7 @@ public class MeleeAttacker : MonoBehaviour
     void AttackStartup()
     {
         currentState = phase.Startup;
+        finder.state.ResetStateForAttack();
         inAttack = true;
         Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
     }

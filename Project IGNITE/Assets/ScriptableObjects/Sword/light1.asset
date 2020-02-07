@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb07ef19e27498c4c89debf065876c4e, type: 3}
   m_Name: light1
   m_EditorClassIdentifier: 
-  hitboxObject: {fileID: 5443404056581498834, guid: 392cbca336313104498f82a7465768c3,
+  hitboxObject: {fileID: 1883332871343084686, guid: 392cbca336313104498f82a7465768c3,
     type: 3}
   startUpTime: 0.1
   hitboxLingerTime: 0.1

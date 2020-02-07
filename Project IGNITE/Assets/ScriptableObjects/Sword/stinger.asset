@@ -18,4 +18,4 @@ MonoBehaviour:
   hitboxLingerTime: 0.2
   endingTime: 0.5
   endsCombo: 1
-  animationName: attackC
+  animationName: stingerB

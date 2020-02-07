@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
 
     public void DoHitLag()
     {
-        Time.timeScale = 0.1f;
-        CancelInvoke();
-        Invoke("EndHitLag", 0.01f);
+        //Time.timeScale = 0.1f;
+        //CancelInvoke();
+        //Invoke("EndHitLag", 0.01f);
     }
 
     void EndHitLag()

@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb07ef19e27498c4c89debf065876c4e, type: 3}
-  m_Name: helmSplitterA
+  m_Name: stingerA
   m_EditorClassIdentifier: 
-  hitboxObject: {fileID: 6912254918180058493, guid: a2af2ab68364967449b2f171e1266b68,
-    type: 3}
+  hitboxObject: {fileID: 0}
   startUpTime: 0
-  hitboxLingerTime: 0.5
-  endingTime: 0.1
+  hitboxLingerTime: 0
+  endingTime: 0
   endsCombo: 0
-  animationName: helmSplitter
+  animationName: stingerA

@@ -48,8 +48,8 @@ public class PlayerSprite : MonoBehaviour
     }
 
     public void SetAnimationTrigger(string name)
-    {
-        animator.Play(name);
+    {        
+        animator.Play(name, 0, 0);
     }
 
     public void OnStateChanged(PlayerState.State newState)
@@ -91,6 +91,7 @@ public class PlayerSprite : MonoBehaviour
     {
         string anim = finder.melee.currentAttack.animationName;
         SetAnimationTrigger(anim);
+        Debug.Log(anim);
     }
 
     public void SetFinder(PlayerScriptFinder f)

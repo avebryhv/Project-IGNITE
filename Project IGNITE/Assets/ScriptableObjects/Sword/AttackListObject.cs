@@ -25,6 +25,7 @@ public class AttackListObject : ScriptableObject
 
     public AttackObject airHeavy;
 
+    public AttackObject stingerRush;
     public AttackObject stinger;
     public AttackObject uppercut;
     public AttackObject helmsplitter;

@@ -23,6 +23,7 @@ public class MeleeHitbox : MonoBehaviour
     {
         hitList = new List<GameObject>();
         line = GetComponentInChildren<LineRenderer>();
+        //SetInitialLine();
     }
 
     // Update is called once per frame
@@ -51,7 +52,7 @@ public class MeleeHitbox : MonoBehaviour
         {
             if (!hitList.Contains(other.gameObject)) //Check if enemy has already been hit
             {
-                Debug.Log("Hit Enemy Hurtbox");
+                //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
                 other.GetComponentInParent<EnemyBaseMovement>().TakeKnockback(knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
@@ -73,6 +74,18 @@ public class MeleeHitbox : MonoBehaviour
         GradientAlphaKey[] alpha = gr.alphaKeys;
         alpha[0].time -= (Time.deltaTime / (lingerTime - lineFadeDelay));
         alpha[1].time -= (Time.deltaTime / (lingerTime - lineFadeDelay));
+        alpha[0].time = Mathf.Clamp(alpha[0].time, 0, 1);
+        alpha[1].time = Mathf.Clamp(alpha[1].time, 0, 1);
+        gr.SetKeys(gr.colorKeys, alpha);
+        line.colorGradient = gr;
+    }
+
+    void SetInitialLine()
+    {
+        Gradient gr = line.colorGradient;
+        GradientAlphaKey[] alpha = gr.alphaKeys;
+        alpha[0].time = 0.0f;
+        alpha[1].time = 0.01f;
         alpha[0].time = Mathf.Clamp(alpha[0].time, 0, 1);
         alpha[1].time = Mathf.Clamp(alpha[1].time, 0, 1);
         gr.SetKeys(gr.colorKeys, alpha);

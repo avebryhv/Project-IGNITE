@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb07ef19e27498c4c89debf065876c4e, type: 3}
+  m_Name: EnemyTestAttack
+  m_EditorClassIdentifier: 
+  hitboxObject: {fileID: 1883332871343084686, guid: de77326f789191d46a12f4ca831debc2,
+    type: 3}
+  startUpTime: 1
+  hitboxLingerTime: 0.2
+  endingTime: 0.3
+  endsCombo: 1
+  animationName: attack

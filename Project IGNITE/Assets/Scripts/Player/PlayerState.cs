@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     PlayerScriptFinder finder;
-    public enum State { Idle, Walk, Run, Jump, Fall, Block, Evade, Knockback, Attack};
+    public enum State { Idle, Walk, Run, Jump, Fall, Block, Evade, Knockback, Attack, Parry};
     public State currentState;
     public bool canBufferInput;
 
@@ -79,6 +79,10 @@ public class PlayerState : MonoBehaviour
         else if (finder.movement.inDash)
         {
             SetState(State.Evade);
+        }
+        else if (finder.guard.inParry)
+        {
+            SetState(State.Parry);
         }
         else if (finder.guard.isGuarding)
         {

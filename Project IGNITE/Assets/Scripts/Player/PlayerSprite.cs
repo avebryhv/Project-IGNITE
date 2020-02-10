@@ -68,6 +68,9 @@ public class PlayerSprite : MonoBehaviour
             case PlayerState.State.Jump:
                 SetAnimationTrigger("jump");
                 break;
+            case PlayerState.State.Parry:
+                SetAnimationTrigger("parry");
+                break;
             case PlayerState.State.Block:
                 SetAnimationTrigger("block");
                 break;
@@ -97,5 +100,16 @@ public class PlayerSprite : MonoBehaviour
     public void SetFinder(PlayerScriptFinder f)
     {
         finder = f;
+    }
+
+    public void FlashColour(Color col, float time)
+    {
+        ChangeSpriteColour(col);
+        Invoke("ResetSpriteColour", time);
+    }
+
+    void ResetSpriteColour()
+    {
+        ChangeSpriteColour(Color.white);
     }
 }

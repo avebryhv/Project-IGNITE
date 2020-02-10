@@ -10,12 +10,13 @@ public class EnemyBaseMovement : MonoBehaviour
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
 
-    float moveSpeed = 6;
+    public float moveSpeed = 6;
     float gravity = -20;
     float jumpVelocity = 8;
     public Vector3 velocity;
     float velocityXSmoothing;
     public bool jumpThisFrame;
+    public float lastDirection;
 
     public bool inKnockback = false;
     public bool canTakeKnockBack = true;
@@ -29,7 +30,13 @@ public class EnemyBaseMovement : MonoBehaviour
     bool inGrapple;
 
     Controller2D controller;
-    SpriteRenderer sprite;
+    EnemySprite sprite;
+    PlayerMovement player;
+    EnemyBaseMelee melee;
+
+    public enum Mode { None, Attack}
+    public Mode currentMode;
+    public float attackRange;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +44,9 @@ public class EnemyBaseMovement : MonoBehaviour
         controller = GetComponent<Controller2D>();
         //enemyHealth = GetComponent<EnemyHealth>();
         //enemyBehaviour = GetComponent<EnemyBehaviour>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponentInChildren<EnemySprite>();
+        player = FindObjectOfType<PlayerMovement>();
+        melee = GetComponentInChildren<EnemyBaseMelee>();
 
         gravity = -(2 * jumpHeight / Mathf.Pow(timetoJumpApex, 2));
         jumpVelocity = Mathf.Abs(gravity) * timetoJumpApex;
@@ -69,6 +78,34 @@ public class EnemyBaseMovement : MonoBehaviour
                 //StartCoroutine("StartIFrames"); //Handles IFrames
                 //StartCoroutine("FlashSpriteIFrames");
             }
+
+            if (currentMode == Mode.Attack)
+            {
+                if (!inKnockback && !inHitStun && controller.collisions.below && !hitThisFrame && !melee.inAttack)
+                {
+                    float xDifference = player.transform.position.x - transform.position.x;
+                    if (lastDirection != Mathf.Sign(xDifference))
+                    {
+                        lastDirection = Mathf.Sign(xDifference);
+                        sprite.TurnSprite();
+                    }
+
+                    if (Mathf.Abs(xDifference) <= attackRange)
+                    {
+                        melee.TriggerAttack();
+                    }
+                    else
+                    {
+                        velocity.x = moveSpeed * lastDirection;
+                    }
+                    
+
+                    
+
+                }
+            }
+
+            
 
 
             float targetVelocityX;
@@ -124,11 +161,11 @@ public class EnemyBaseMovement : MonoBehaviour
             {
                 canWallBounce = false;
             }
+            melee.CancelAttacks();
             hitThisFrame = true;
             inKnockback = true;
             velocity.x = dir.x * (Random.Range(0.95f, 1.05f));
-            velocity.y = dir.y;
-            GetComponentInChildren<EnemySprite>().SetDirection(-Mathf.Sign(dir.x));
+            velocity.y = dir.y;            
             inHitStun = true;
             gameObject.layer = 10;
             knockbackTimeOnGround = 0;
@@ -178,31 +215,5 @@ public class EnemyBaseMovement : MonoBehaviour
         inGrapple = false;
     }
 
-    //IEnumerator StartIFrames()
-    //{
-    //    //enemyHealth.canTakeDamage = false;
-    //    //yield return new WaitForSeconds(enemyBehaviour.invTime);
-    //    //enemyHealth.canTakeDamage = true;
-    //}
-
-    //IEnumerator FlashSpriteIFrames()
-    //{
-    //    do
-    //    {
-    //        sprite.color = Color.red;
-    //        yield return new WaitForSeconds(.1f);
-    //        sprite.color = Color.white;
-    //        yield return new WaitForSeconds(.1f);
-    //    } while (enemyHealth.canTakeDamage == false);
-    //}
-
-    //IEnumerator FlashSprite()
-    //{
-
-    //    sprite.color = Color.red;
-    //    yield return new WaitForSeconds(.1f);
-    //    sprite.color = Color.white;
-    //    yield return new WaitForSeconds(.1f);
-
-    //}
+    
 }

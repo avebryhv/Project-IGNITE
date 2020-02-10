@@ -118,6 +118,11 @@ public class MeleeAttacker : MonoBehaviour
 
     public void LightAttackPressed()
     {
+        if (finder.guard.inParry)
+        {
+            finder.guard.ExitParry();
+        }
+       
         if (finder.state.DecideCanAct())
         {
             comboTimerPaused = true;
@@ -136,20 +141,32 @@ public class MeleeAttacker : MonoBehaviour
             finder.movement.CancelJumpBuffer();
         }
         
+        
+        
     }
 
     public void HeavyAttackPressed()
     {
-        if (finder.state.DecideCanAct())
+        if (finder.guard.inParry) //Attack to cancel a parry
         {
-            DecideHeavyAttack();
+            currentAttack = attackList.parryPunch;
+            finder.guard.ExitParry();
+            AttackStartup();
         }
-        else if (currentState == phase.Endlag || currentState == phase.Active)
+        else
         {
-            bufferedHeavy = true;
-            bufferedAttack = false;
-            finder.movement.CancelJumpBuffer();
+            if (finder.state.DecideCanAct())
+            {
+                DecideHeavyAttack();
+            }
+            else if (currentState == phase.Endlag || currentState == phase.Active)
+            {
+                bufferedHeavy = true;
+                bufferedAttack = false;
+                finder.movement.CancelJumpBuffer();
+            }
         }
+        
     }
 
     public void HeavyAttackReleased()

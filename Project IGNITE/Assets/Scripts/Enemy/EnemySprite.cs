@@ -5,17 +5,21 @@ using UnityEngine;
 public class EnemySprite : MonoBehaviour
 {
     EnemyBaseMovement baseMovement;
+    public EnemyBaseMelee melee;
     Animator anim;
     SpriteRenderer[] spriteRendererList;
     public GameObject spriteHolder;
+    string currentAnim;
+    string lastAnim;
     
     // Start is called before the first frame update
     void Start()
     {
         baseMovement = GetComponentInParent<EnemyBaseMovement>();
         anim = GetComponent<Animator>();
+        //melee = getc
         spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
-        ChangeSpriteColour(Color.red);
+        //ChangeSpriteColour(Color.red);
     }
 
     // Update is called once per frame
@@ -28,12 +32,27 @@ public class EnemySprite : MonoBehaviour
     {
         if (baseMovement.inKnockback)
         {
-            anim.Play("knockback", 0, 0);
+            currentAnim = "knockback";
+        }
+        else if (melee.inAttack)
+        {
+            currentAnim = "attack";
         }
         else
         {
-            anim.Play("idle", 0, 0);
+            currentAnim = "idle";
         }
+
+        if (currentAnim != lastAnim)
+        {
+            lastAnim = currentAnim;
+            PlayAnimation(currentAnim);
+        }
+    }
+
+    void PlayAnimation(string toPlay)
+    {
+        anim.Play(toPlay, 0, 0);
     }
 
     public void ChangeSpriteColour(Color col)
@@ -42,6 +61,23 @@ public class EnemySprite : MonoBehaviour
         {
             spr.color = col;
         }
+    }
+
+    public void FlashColour(Color col, float time)
+    {
+        ChangeSpriteColour(col);
+        Invoke("ResetSpriteColour", time);
+    }
+
+    void ResetSpriteColour()
+    {
+        ChangeSpriteColour(Color.white);
+    }
+
+    public void TurnSprite()
+    {
+        //spriteRenderer.flipX = !spriteRenderer.flipX;
+        spriteHolder.transform.localScale = new Vector3(spriteHolder.transform.localScale.x * -1, spriteHolder.transform.localScale.y, spriteHolder.transform.localScale.z);
     }
 
     public void SetDirection(float dir)

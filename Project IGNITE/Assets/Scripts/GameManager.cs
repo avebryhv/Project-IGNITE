@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0.1f;
         CancelInvoke();
-        Invoke("EndHitLag", 0.005f);
+        Invoke("EndHitLag", 0.01f);
     }
 
     void EndHitLag()

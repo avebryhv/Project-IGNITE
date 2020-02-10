@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeHitbox : MonoBehaviour
+public class EnemyMeleeHitbox : MonoBehaviour
 {
     LineRenderer line;
     public int damage;
@@ -11,9 +11,7 @@ public class MeleeHitbox : MonoBehaviour
     public Vector2 knockbackDirection;
     public float knockbackStrength;
     float direction;
-    public float comboWeight; //How much landing this move will contribute to the combo meter
-    public string name; //Name of attack
-    public enum type { Light, Heavy, Special};
+    public enum type { Light, Heavy, Special };
     public type attackType;
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
     public float lineFadeDelay;
@@ -34,7 +32,7 @@ public class MeleeHitbox : MonoBehaviour
         {
             FadeLine();
         }
-        
+
         if (destroyTimer >= lingerTime)
         {
             DestroyHitbox();
@@ -48,18 +46,18 @@ public class MeleeHitbox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "EnemyHurtbox")
+        if (other.tag == "PlayerHurtbox")
         {
             if (!hitList.Contains(other.gameObject)) //Check if enemy has already been hit
             {
                 //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
-                other.GetComponentInParent<EnemyBaseHealth>().TakeDamage(damage, knockbackDirection * knockbackStrength, attackType);
-                FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
+                //FindObjectOfType<PlayerHealth>().OnHit(damage, knockbackDirection * knockbackStrength, attackType);
+                FindObjectOfType<PlayerHealth>().OnHit(this);
                 GameManager.Instance.DoHitLag();
-                
+
             }
-            
+
         }
     }
 

@@ -205,10 +205,15 @@ public class PlayerMovement : MonoBehaviour
     void ChangeDirection(float dir)
     {
         //Check conditions that would disallow player from changing direction
-        if (!inKnockback && !inDiveKick && !finder.melee.inAttack)
+        if (!inKnockback && !inDiveKick && !finder.melee.inAttack && !finder.guard.isGuarding)
         {
             lastDirection = dir;
         }
+    }
+
+    public void ForceChangeDirection(float dir)
+    {
+        lastDirection = dir;
     }
 
     public void OnJumpInputDown()

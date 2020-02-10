@@ -31,5 +31,7 @@ public class AttackListObject : ScriptableObject
     public AttackObject helmsplitter;
     public AttackObject helmSplitterGround;
 
+    public AttackObject parryPunch;
+
     
 }

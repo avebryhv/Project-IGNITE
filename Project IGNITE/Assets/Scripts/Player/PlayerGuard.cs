@@ -10,6 +10,12 @@ public class PlayerGuard : MonoBehaviour
     public float parryTiming;
     public float guardDuration;
     public bool isGuarding;
+    public bool inParry;
+    public float inParryTime;
+    float parryTimer;
+
+    public Color parryColour;
+    public Color guardColour;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,14 @@ public class PlayerGuard : MonoBehaviour
         {
             OnGuardHold();
         }
+        else if (inParry)
+        {
+            InParry();
+        }
+        else
+        {
+            finder.sprite.ChangeSpriteColour(Color.white);
+        }
     }
 
     public void InputGuardHeld()
@@ -33,7 +47,7 @@ public class PlayerGuard : MonoBehaviour
 
     public void OnGuardPress()
     {
-        if (!finder.movement.inDash)
+        if (!finder.movement.inDash && !isGuarding)
         {
             isGuarding = true;
             timeHeld = 0;
@@ -45,11 +59,11 @@ public class PlayerGuard : MonoBehaviour
     {
         if (timeHeld <= parryTiming)
         {
-            finder.sprite.ChangeSpriteColour(Color.blue);
+            finder.sprite.ChangeSpriteColour(parryColour);
         }
         else
         {
-            finder.sprite.ChangeSpriteColour(Color.white);
+            finder.sprite.ChangeSpriteColour(guardColour);
         }
 
         if (timeHeld >= guardDuration)
@@ -59,10 +73,60 @@ public class PlayerGuard : MonoBehaviour
         timeHeld += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
     }
 
+    public void InParry()
+    {
+        if (parryTimer >= inParryTime)
+        {
+            ExitParry();
+        }
+
+        parryTimer += Time.deltaTime;
+    }
+
+    public void ExitParry()
+    {
+        inParry = false;
+        isGuarding = false;
+        FindObjectOfType<InputPrompt>().HidePrompt();
+        finder.sprite.ChangeSpriteColour(Color.white);
+    }
+
     public void OnGuardRelease()
     {
         timeHeld = 0;
         isGuarding = false;
+    }
+
+    public void OnBlockAttack(int damage, Vector2 knockback, EnemyMeleeHitbox.type type, Vector2 position)
+    {
+        float xDifference = position.x - transform.position.x;
+        Debug.Log(Mathf.Sign(xDifference));
+        if (Mathf.Sign(xDifference) != finder.movement.lastDirection)
+        {
+            finder.movement.ForceChangeDirection(Mathf.Sign(xDifference));
+        }
+        if (timeHeld <= parryTiming) //On Parry
+        {
+            Debug.Log("SICK PARRY");
+            isGuarding = false;
+            inParry = true;
+            parryTimer = 0;
+            GameManager.Instance.DoHitLag();
+            FindObjectOfType<InputPrompt>().ShowPrompt();
+        }
+        else //Normally blocked
+        {
+            if (finder.stats.dtCharge >= damage)
+            {
+                finder.stats.IncreaseDT(-damage);
+                Debug.Log("Normal Block");
+            }
+            else //Guard Broken
+            {
+                finder.health.TakeDamage(damage, knockback, type); //Forces the player to take the damage
+            }
+            
+        }
     }
 
     public void SetFinder(PlayerScriptFinder f)

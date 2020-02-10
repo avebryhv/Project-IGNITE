@@ -29,3 +29,4 @@ MonoBehaviour:
   uppercut: {fileID: 11400000, guid: 7f3ffaff952f2bd42b257bb092437465, type: 2}
   helmsplitter: {fileID: 11400000, guid: 03f4329f6b3c69f44971aa77cb70def0, type: 2}
   helmSplitterGround: {fileID: 11400000, guid: 265984c64fccc2742b4604b220c2c22f, type: 2}
+  parryPunch: {fileID: 11400000, guid: ff5d581b8a1f8434581f353b310b6f6f, type: 2}

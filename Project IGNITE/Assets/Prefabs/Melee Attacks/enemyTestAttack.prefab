@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   lingerTime: 0.2
-  knockbackDirection: {x: 5, y: 5}
+  knockbackDirection: {x: 5, y: 1}
   knockbackStrength: 5
   attackType: 0
   lineFadeDelay: 0

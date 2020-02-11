@@ -80,8 +80,8 @@ public class MeleeAttacker : MonoBehaviour
 
         if (inStinger)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(finder.movement.lastDirection, 0), 2.0f, testMask);         
-            Debug.DrawRay(transform.position, new Vector2(finder.movement.lastDirection * 2, 0), Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(finder.movement.lastDirection, 0), 3.0f, testMask);         
+            Debug.DrawRay(transform.position, new Vector2(finder.movement.lastDirection * 3, 0), Color.red);
             if (hit.collider != null)
             {
                 Debug.Log("Hit Object: " + hit.collider.gameObject.name);
@@ -326,7 +326,12 @@ public class MeleeAttacker : MonoBehaviour
         {
             if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
             {
-                if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
+                if (finder.input.CheckStickInputs(finder.input.inputComboList.powerGLeft) || finder.input.CheckStickInputs(finder.input.inputComboList.powerGRight))
+                {
+                    currentAttack = attackList.halfCircleDown;
+                    AttackStartup();
+                }
+                else if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
                 {
                     //Forward Heavy
                     if (finder.controller.collisions.below) //Grounded
@@ -359,14 +364,9 @@ public class MeleeAttacker : MonoBehaviour
 
                 }
             }
+            
         }        
-        else
-        {
-            if (finder.input.CheckStickInputs(finder.input.testInput))
-            {
-                StartStinger();
-            }
-        }
+        
     }
 
     void AttackStartup()

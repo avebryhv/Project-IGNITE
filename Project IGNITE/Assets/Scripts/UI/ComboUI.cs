@@ -74,6 +74,23 @@ public class ComboUI : MonoBehaviour
         stats.IncreaseDT(amount / ReturnAmountInList(name) / 3);
     }
 
+    public void AddComboScore(float amount, string name, bool addsToList)
+    {
+        if (addsToList)
+        {
+            AddToList(name);
+            comboBuildup += (amount / ReturnAmountInList(name));
+            stats.IncreaseDT(amount / ReturnAmountInList(name) / 3);
+        }
+        else
+        {
+            comboBuildup += (amount);
+            stats.IncreaseDT(amount / 3);
+        }
+        
+        
+    }
+
     void AddToList(string toAdd)
     {
         previousAttackList.Add(toAdd);

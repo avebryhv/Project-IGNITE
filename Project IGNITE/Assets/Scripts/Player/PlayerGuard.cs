@@ -36,7 +36,7 @@ public class PlayerGuard : MonoBehaviour
         }
         else
         {
-            finder.sprite.ChangeSpriteColour(Color.white);
+            //finder.sprite.ChangeSpriteColour(Color.white);
         }
     }
 
@@ -95,6 +95,7 @@ public class PlayerGuard : MonoBehaviour
     {
         timeHeld = 0;
         isGuarding = false;
+        finder.sprite.ChangeSpriteColour(Color.white);
     }
 
     public void OnBlockAttack(int damage, Vector2 knockback, EnemyMeleeHitbox.type type, Vector2 position)
@@ -113,6 +114,7 @@ public class PlayerGuard : MonoBehaviour
             parryTimer = 0;
             GameManager.Instance.DoHitLag();
             FindObjectOfType<InputPrompt>().ShowPrompt();
+            finder.sprite.ChangeSpriteColour(Color.white);
         }
         else //Normally blocked
         {

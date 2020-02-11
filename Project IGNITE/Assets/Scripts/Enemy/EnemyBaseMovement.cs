@@ -193,6 +193,7 @@ public class EnemyBaseMovement : MonoBehaviour
             velocity.x = 0;
             velocity.y = 0;
             inHitStun = true;
+            melee.CancelAttacks();
             gameObject.layer = 10;
             CancelInvoke("EndHitStun");
             Invoke("EndHitStun", 0.5f / GameManager.Instance.ReturnEnemySpeed());

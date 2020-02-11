@@ -30,3 +30,4 @@ MonoBehaviour:
   helmsplitter: {fileID: 11400000, guid: 03f4329f6b3c69f44971aa77cb70def0, type: 2}
   helmSplitterGround: {fileID: 11400000, guid: 265984c64fccc2742b4604b220c2c22f, type: 2}
   parryPunch: {fileID: 11400000, guid: ff5d581b8a1f8434581f353b310b6f6f, type: 2}
+  halfCircleDown: {fileID: 11400000, guid: e2e73cf0ac8dcbb4288d014224fca830, type: 2}

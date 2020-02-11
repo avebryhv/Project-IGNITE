@@ -44,19 +44,32 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnHit(EnemyMeleeHitbox hitbox)
     {
-        if (finder.guard.isGuarding)
+        if (canTakeDamage)
         {
-            finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
+            if (finder.guard.isGuarding)
+            {
+                finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
+            }
+            else
+            {
+                Debug.Log("Hit By Enemy for " + hitbox.damage);
+                TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType);
+            }
         }
-        else
+        else if (finder.movement.inDash) //Dodging attack as a result of evading
         {
-            Debug.Log("Hit By Enemy for " + hitbox.damage);
+            FindObjectOfType<ComboUI>().AddComboScore(hitbox.damage, name, false);
         }
+        
     }
 
     public void TakeDamage(int damage, Vector2 knockback, EnemyMeleeHitbox.type type)
     {
-
+        finder.movement.TakeKnockback(knockback);
+        finder.melee.CancelAttacks();
+        finder.sprite.FlashColour(Color.red, 0.1f);
+        currentHealth -= damage;
+        ui.SetHealthValue(currentHealth, maxHealth);
     }
 
     public void SetFinder(PlayerScriptFinder f)

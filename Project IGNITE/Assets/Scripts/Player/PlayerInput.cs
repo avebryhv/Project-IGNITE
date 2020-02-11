@@ -13,8 +13,10 @@ public class PlayerInput : MonoBehaviour
     ControlStickState leftStickState;
     ControlStickState lastState;
     public List<ControlStickState> leftStickInputList;
-    public InputCombo testInput;
+    public InputComboList inputComboList;
     public float timeSinceLastInput;
+    public float inputDecayTime;
+    float decayCounter;
     
 
     public float deadZone;
@@ -46,9 +48,11 @@ public class PlayerInput : MonoBehaviour
                 }
             }
 
-            ReadPauseInputs();
+            
 
         }
+        StickInputDecay();
+        ReadPauseInputs();
     } 
 
     void ReadControllerInputs()
@@ -301,7 +305,7 @@ public class PlayerInput : MonoBehaviour
             lastState = newState;
             leftStickInputList.Add(lastState);
             timeSinceLastInput = 0;
-            if (leftStickInputList.Count > 5)
+            if (leftStickInputList.Count > 10)
             {
                 leftStickInputList.RemoveAt(0);
             }
@@ -316,18 +320,48 @@ public class PlayerInput : MonoBehaviour
 
     public bool CheckStickInputs(InputCombo toTest)
     {
-        bool tempBool = true;
-        int listStartPoint = (5 - toTest.stickMovementList.Length);
-
-        for (int i = 0; i < toTest.stickMovementList.Length; i++)
+        if (leftStickInputList.Count >= toTest.stickMovementList.Length)
         {
-            if (toTest.stickMovementList[i] != leftStickInputList[i + listStartPoint])
+            bool tempBool = true;
+            int listStartPoint = (leftStickInputList.Count - toTest.stickMovementList.Length);
+
+            for (int i = 0; i < toTest.stickMovementList.Length; i++)
             {
-                tempBool = false;
+                if (toTest.stickMovementList[i] != leftStickInputList[i + listStartPoint])
+                {
+                    tempBool = false;
+                }
+            }
+
+            if (tempBool)
+            {
+                leftStickInputList.Clear();
+            }
+
+            return tempBool;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
+    void StickInputDecay()
+    {
+        if (leftStickInputList.Count > 0)
+        {
+            decayCounter += Time.deltaTime;
+            if (decayCounter >= inputDecayTime)
+            {
+                leftStickInputList.RemoveAt(0);
+                decayCounter = 0;
             }
         }
-
-        return tempBool;
+        else
+        {
+            decayCounter = 0;
+        }
     }
 
     public void SetFinder(PlayerScriptFinder f)

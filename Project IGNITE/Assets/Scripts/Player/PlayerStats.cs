@@ -23,6 +23,7 @@ public class PlayerStats : MonoBehaviour
     public bool inDT;
     public float minTimeInDT;
     float dtTimeCounter;
+    public bool unlimitedDT;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,11 @@ public class PlayerStats : MonoBehaviour
             {
                 ExitDT();
             }
+        }
+
+        if (unlimitedDT)
+        {
+            IncreaseDT(10);
         }
     }
 

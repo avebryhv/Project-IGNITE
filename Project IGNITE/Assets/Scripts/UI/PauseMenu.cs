@@ -16,12 +16,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionsPanel;
     public Selectable optionsFirstSelection;
 
+    public GameObject trainingPanel;
+    public Selectable trainingFirstSelection;
+
     // Start is called before the first frame update
     void Start()
     {
         pauseMenuCanvas.enabled = false;
         baseMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        trainingPanel.SetActive(false);
         GameManager.Instance.SetGamePaused(false);
     }
 
@@ -75,6 +79,7 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.SetGamePaused(false);
         pauseMenuCanvas.enabled = false;
         optionsPanel.SetActive(false);
+        trainingPanel.SetActive(false);
         Time.timeScale = 1;
         eventSystem.SetSelectedGameObject(null);
     }
@@ -95,8 +100,34 @@ public class PauseMenu : MonoBehaviour
         resumeButton.Select();
     }
 
+    public void ShowTraining()
+    {
+        baseMenuPanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+        trainingPanel.SetActive(true);
+        trainingFirstSelection.Select();
+    }
+
+    public void CloseTraining()
+    {
+        baseMenuPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(null);
+        trainingPanel.SetActive(false);
+        resumeButton.Select();
+    }
+
     public void ToggleLockOnToggle()
     {
         FindObjectOfType<PlayerMovement>().toggleLockOn = !FindObjectOfType<PlayerMovement>().toggleLockOn;
+    }
+
+    public void ToggleUnlimitedDT()
+    {
+        FindObjectOfType<PlayerStats>().unlimitedDT = !FindObjectOfType<PlayerStats>().unlimitedDT;
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 }

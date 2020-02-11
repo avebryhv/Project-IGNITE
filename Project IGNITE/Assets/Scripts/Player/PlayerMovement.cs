@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashTime;
     public float dashCooldown;
     float airEvadeCount;
+    public GameObject ghostPrefab;
 
     //Lock On
     public bool toggleLockOn;
@@ -168,6 +169,11 @@ public class PlayerMovement : MonoBehaviour
         if (finder.melee.inAttack && inAttackMovement)
         {
             velocity = attackMovementDirection * attackMovementSpeed;
+        }
+
+        if (inDash)
+        {
+            Instantiate(ghostPrefab, transform.position, transform.rotation);
         }
 
         OnLanding();
@@ -367,6 +373,7 @@ public class PlayerMovement : MonoBehaviour
         inDash = true;
         canDash = false;
         inDiveKick = false;
+        finder.health.canTakeDamage = false;        
         //playerHealth.canTakeDamage = false;
         //meleeController.canAttack = false;
         if (directionalInput.x == 0)
@@ -385,6 +392,7 @@ public class PlayerMovement : MonoBehaviour
     void CancelDash()
     {
         inDash = false;
+        finder.health.canTakeDamage = true;
         //playerHealth.canTakeDamage = true;
         //meleeController.canAttack = true;
     }

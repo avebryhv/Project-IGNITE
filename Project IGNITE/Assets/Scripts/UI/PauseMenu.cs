@@ -19,6 +19,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject trainingPanel;
     public Selectable trainingFirstSelection;
 
+    public GameObject moveListPanel;
+    public Selectable moveListFirstSelection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
         trainingPanel.SetActive(false);
+        moveListPanel.SetActive(false);
         GameManager.Instance.SetGamePaused(false);
     }
 
@@ -61,7 +65,7 @@ public class PauseMenu : MonoBehaviour
         HidePauseMenu();
     }
 
-    void ShowPauseMenu()
+    public void ShowPauseMenu()
     {
         isPaused = true;
         GameManager.Instance.SetGamePaused(true);
@@ -72,7 +76,7 @@ public class PauseMenu : MonoBehaviour
         resumeButton.Select();
     }
 
-    void HidePauseMenu()
+    public void HidePauseMenu()
     {
         isPaused = false;
         unPausedThisFrame = true;
@@ -80,6 +84,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuCanvas.enabled = false;
         optionsPanel.SetActive(false);
         trainingPanel.SetActive(false);
+        moveListPanel.SetActive(false);
         Time.timeScale = 1;
         eventSystem.SetSelectedGameObject(null);
     }
@@ -113,6 +118,25 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
         trainingPanel.SetActive(false);
+        resumeButton.Select();
+    }
+
+    public void ShowMoveList()
+    {
+        baseMenuPanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+        moveListPanel.SetActive(true);
+        if (moveListFirstSelection != null)
+        {
+            moveListFirstSelection.Select();
+        }
+    }
+
+    public void CloseMoveList()
+    {
+        baseMenuPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(null);
+        moveListPanel.SetActive(false);
         resumeButton.Select();
     }
 

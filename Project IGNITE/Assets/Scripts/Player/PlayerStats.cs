@@ -122,6 +122,7 @@ public class PlayerStats : MonoBehaviour
         dtTimeCounter = 0;
         //finder.movement.dtMoveSpeedModifier = 1.2f;
         GameManager.Instance.playerSpeed = 1.2f;
+        //finder.sprite.animator.speed = 0.2f;
         finder.sprite.ChangeSpriteColour(Color.yellow);        
     }
 

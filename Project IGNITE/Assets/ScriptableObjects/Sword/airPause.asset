@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxObject: {fileID: 4828991719808237519, guid: 715afb81525ae6247a83a525de43fe7f,
     type: 3}
-  startUpTime: 0
+  startUpTime: 0.1
   hitboxLingerTime: 0.2
   endingTime: 0.2
   endsCombo: 1
-  animationName: attackC
+  animationName: lightAirB

@@ -110,6 +110,11 @@ public class PlayerInput : MonoBehaviour
             
         }
 
+        if (finder.inputAssignment.heavyAttackButton.isPressed)
+        {
+            finder.melee.HeavyAttackHeld();
+        }
+
         if (finder.inputAssignment.heavyAttackButton.wasReleasedThisFrame)
         {
             finder.melee.HeavyAttackReleased();

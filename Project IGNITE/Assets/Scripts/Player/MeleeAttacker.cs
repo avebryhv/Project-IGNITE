@@ -22,6 +22,7 @@ public class MeleeAttacker : MonoBehaviour
 
     public float heavyChargeTime;
     public bool chargingHeavy;
+    public GameObject swordBeam;
 
     //Stinger Variables
     public float stingerRange;
@@ -108,6 +109,15 @@ public class MeleeAttacker : MonoBehaviour
             }
         }
 
+        if (chargingHeavy)
+        {
+            heavyChargeTime += Time.deltaTime;
+            if (heavyChargeTime > 2)
+            {
+                HeavyAttackReleased();
+            }
+        }
+
         if (finder.controller.collisions.below)
         {
             airStingerCount = 0;
@@ -169,9 +179,34 @@ public class MeleeAttacker : MonoBehaviour
         
     }
 
+    public void HeavyAttackHeld()
+    {
+        if (finder.state.DecideCanAct() && !(finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true))
+        {
+            inAttack = true;
+            chargingHeavy = true;
+        }
+    }
+
     public void HeavyAttackReleased()
     {
-
+        if (chargingHeavy)
+        {
+            if (heavyChargeTime >= 2)
+            {
+                currentAttack = attackList.heavyCharged;
+                GameObject beam = Instantiate(swordBeam, transform.position, transform.rotation);
+                beam.GetComponent<SwordBeam>().SetDirection(finder.movement.lastDirection);
+            }
+            else
+            {
+                currentAttack = attackList.heavy;
+            }
+            chargingHeavy = false;
+            heavyChargeTime = 0;
+            AttackStartup();
+        }
+        
     }
 
     void ChargeHeavy()
@@ -432,6 +467,8 @@ public class MeleeAttacker : MonoBehaviour
         inStinger = false;
         stingerCounter = 0;
         comboStage = 0;
+        chargingHeavy = false;
+        heavyChargeTime = 0;
         finder.movement.StopSpecialAttackMovement();
     }
 

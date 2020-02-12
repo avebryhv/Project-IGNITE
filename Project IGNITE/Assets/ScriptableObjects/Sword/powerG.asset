@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxObject: {fileID: 7819695119630889797, guid: 9f4a02a00452ac14bb641bdb2efad98a,
     type: 3}
-  startUpTime: 0.5
+  startUpTime: 0.51
   hitboxLingerTime: 1
   endingTime: 0.2
   endsCombo: 1

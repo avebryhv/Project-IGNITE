@@ -84,6 +84,7 @@ public class PlayerSprite : MonoBehaviour
                 SetAnimationTrigger("fall");
                 break;
             case PlayerState.State.Knockback:
+                SetAnimationTrigger("knockback");
                 break;
             default:
                 break;
@@ -92,7 +93,16 @@ public class PlayerSprite : MonoBehaviour
 
     void DecideMeleeAnimation()
     {
-        string anim = finder.melee.currentAttack.animationName;
+        string anim;
+        if (finder.melee.chargingHeavy)
+        {
+            anim = "chargingHeavy";
+        }
+        else
+        {
+            anim = finder.melee.currentAttack.animationName;
+        }
+        
         SetAnimationTrigger(anim);
         Debug.Log(anim);
     }

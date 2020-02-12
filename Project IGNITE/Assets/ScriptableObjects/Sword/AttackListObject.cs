@@ -16,6 +16,7 @@ public class AttackListObject : ScriptableObject
     public AttackObject lightB3;
 
     public AttackObject heavy;
+    public AttackObject heavyCharged;
 
     public AttackObject airLight1;
     public AttackObject airLight2;

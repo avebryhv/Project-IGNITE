@@ -350,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDashInput()
     {
-        if (!inDash && canDash && !finder.guard.isGuarding)
+        if (!inDash && canDash && !finder.guard.isGuarding && !finder.melee.inAttack)
         {
             if (controller.collisions.below)
             {

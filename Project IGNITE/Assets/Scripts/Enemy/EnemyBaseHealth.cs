@@ -28,9 +28,13 @@ public class EnemyBaseHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            currentHealth -= damage;
+            //currentHealth -= damage;
             movement.TakeKnockback(knockback, type);
             sprite.FlashColour(Color.red, 0.1f);
+            if (currentHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

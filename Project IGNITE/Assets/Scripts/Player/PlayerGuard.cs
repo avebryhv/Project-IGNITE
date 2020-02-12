@@ -47,7 +47,7 @@ public class PlayerGuard : MonoBehaviour
 
     public void OnGuardPress()
     {
-        if (!finder.movement.inDash && !isGuarding)
+        if (!finder.movement.inDash && !isGuarding && !finder.melee.inAttack && !finder.movement.inKnockback)
         {
             isGuarding = true;
             timeHeld = 0;

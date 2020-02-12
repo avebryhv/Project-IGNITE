@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5dadc3c205868b4ba2609154dada2fb, type: 3}
+  m_Name: AirComboA
+  m_EditorClassIdentifier: 
+  name: Air Combo A
+  image: {fileID: 21300000, guid: 781e8bbc1e230174eb8a9fc5ec605e1f, type: 3}
+  description: Default Description

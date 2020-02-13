@@ -220,6 +220,8 @@ MonoBehaviour:
   name: hs1
   attackType: 0
   lineFadeDelay: 0
+  hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
+    type: 3}
 --- !u!50 &3237431048761406054
 Rigidbody2D:
   serializedVersion: 4

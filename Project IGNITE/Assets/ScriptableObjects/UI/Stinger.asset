@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stinger
   m_EditorClassIdentifier: 
   name: Stinger
-  image: {fileID: 21300000, guid: 31fdffc96029bcd469738d8ccf5bd6d4, type: 3}
+  image: {fileID: 21300000, guid: 3d579d3138f13c5449ed9d689ca47f95, type: 3}
   description: Default Description

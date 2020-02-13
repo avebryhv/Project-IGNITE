@@ -18,6 +18,8 @@ public class MeleeHitbox : MonoBehaviour
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
     public float lineFadeDelay;
 
+    public GameObject hitEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,9 @@ public class MeleeHitbox : MonoBehaviour
                 other.GetComponentInParent<EnemyBaseHealth>().TakeDamage(damage, knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
                 GameManager.Instance.DoHitLag();
+                Vector2 pos = other.transform.position;
+                pos += new Vector2(Random.Range(-0.2f,0.2f), Random.Range(-1, 2));
+                Instantiate(hitEffect, pos, transform.rotation);
                 
             }
             

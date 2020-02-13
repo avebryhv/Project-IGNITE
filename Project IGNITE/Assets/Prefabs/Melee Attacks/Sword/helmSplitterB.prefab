@@ -72,6 +72,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -160,6 +161,8 @@ MonoBehaviour:
   name: hs2
   attackType: 1
   lineFadeDelay: 0
+  hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
+    type: 3}
 --- !u!50 &8849873406600300355
 Rigidbody2D:
   serializedVersion: 4

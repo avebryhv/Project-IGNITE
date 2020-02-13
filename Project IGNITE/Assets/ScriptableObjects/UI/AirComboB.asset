@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AirComboB
   m_EditorClassIdentifier: 
   name: Air Combo B
-  image: {fileID: 21300000, guid: 3e3ccb41812ffd049aa3d12723610d82, type: 3}
+  image: {fileID: 21300000, guid: 6f1f86f1cc4852f4c90444cb80b28621, type: 3}
   description: Default Description

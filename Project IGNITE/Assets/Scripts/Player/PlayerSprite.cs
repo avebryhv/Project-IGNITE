@@ -104,7 +104,7 @@ public class PlayerSprite : MonoBehaviour
         }
         
         SetAnimationTrigger(anim);
-        Debug.Log(anim);
+        //Debug.Log(anim);
     }
 
     public void SetFinder(PlayerScriptFinder f)

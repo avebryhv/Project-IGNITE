@@ -27,6 +27,7 @@ public class UIMoveList : MonoBehaviour
         buttonList[0].Select();
         
         layoutGroup.transform.Translate(new Vector3(0, -99999, 0));
+        Debug.Log(layoutGroup.GetComponent<RectTransform>().rect.width);
         
     }
 

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PowerG
   m_EditorClassIdentifier: 
   name: Power Geyser
-  image: {fileID: 21300000, guid: 9ed727a6aca735e41a9c834c893f0f21, type: 3}
+  image: {fileID: 21300000, guid: 3e21e9a6190cf994fa36e78125f816c1, type: 3}
   description: Default Description

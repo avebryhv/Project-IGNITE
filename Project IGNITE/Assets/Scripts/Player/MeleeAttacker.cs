@@ -221,6 +221,7 @@ public class MeleeAttacker : MonoBehaviour
 
     void StartStinger()
     {
+        finder.state.ResetStateForAttack();
         inAttack = true;
         currentAttack = attackList.stingerRush;
         Vector2 dir = new Vector2(finder.movement.lastDirection, 0);

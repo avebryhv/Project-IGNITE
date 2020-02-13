@@ -94,7 +94,7 @@ public class UIMoveList : MonoBehaviour
         }
         else
         {
-            yPos = 0 - (50 * (midPoint - index));
+            yPos = 0 - (50 * (midPoint - index + 1));
         }
 
         Debug.Log("current index " + index);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class MainMenu : MonoBehaviour
         introAnim.Play("spaceShot", 0, 0);
         inIntro = true;
     }
+
+    public void TrainingRoom()
+    {
+        SceneManager.LoadScene("TestingRoom");
+    }
+
+
 }
 
 

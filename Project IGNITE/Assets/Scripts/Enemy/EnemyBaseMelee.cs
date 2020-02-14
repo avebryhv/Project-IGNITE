@@ -11,6 +11,7 @@ public class EnemyBaseMelee : MonoBehaviour
     public GameObject currentHitbox;
 
     public EnemyBaseMovement movement;
+    public ParticleSystem eyeFlashParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class EnemyBaseMelee : MonoBehaviour
         currentState = phase.Startup;
         //finder.state.ResetStateForAttack();
         inAttack = true;
+        Invoke("EyeFlash", (currentAttack.startUpTime - 0.2f));
         Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
     }
 
@@ -74,7 +76,12 @@ public class EnemyBaseMelee : MonoBehaviour
         currentState = phase.None;        
         if (currentHitbox != null)
         {
-            currentHitbox.GetComponent<MeleeHitbox>().DestroyHitbox();
+            currentHitbox.GetComponent<EnemyMeleeHitbox>().DestroyHitbox();
         }
+    }
+
+    void EyeFlash()
+    {
+        eyeFlashParticle.Play();
     }
 }

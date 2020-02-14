@@ -149,6 +149,7 @@ public class MeleeAttacker : MonoBehaviour
             bufferedAttack = true;
             bufferedHeavy = false;
             finder.movement.CancelJumpBuffer();
+            finder.guard.CancelBuffer();
         }
         
         
@@ -174,6 +175,7 @@ public class MeleeAttacker : MonoBehaviour
                 bufferedHeavy = true;
                 bufferedAttack = false;
                 finder.movement.CancelJumpBuffer();
+                finder.guard.CancelBuffer();
             }
         }
         
@@ -447,6 +449,7 @@ public class MeleeAttacker : MonoBehaviour
     void AirAttackStartup()
     {
         currentState = phase.Startup;
+        finder.state.ResetStateForAttack();
         inAttack = true;
         Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
         finder.movement.SetAirStall();

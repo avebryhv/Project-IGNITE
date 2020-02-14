@@ -310,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 bufferedJump = true;
                 finder.melee.CancelBuffer();
+                finder.guard.CancelBuffer();
             }
         }
         

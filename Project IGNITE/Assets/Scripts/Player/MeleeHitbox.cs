@@ -20,12 +20,20 @@ public class MeleeHitbox : MonoBehaviour
 
     public GameObject hitEffect;
 
+    //Hit Sounds
+    //public List<AudioClip> hitSoundList;
+
     // Start is called before the first frame update
     void Start()
     {
         hitList = new List<GameObject>();
         line = GetComponentInChildren<LineRenderer>();
-        SetInitialLine();
+        if (line != null)
+        {
+            SetInitialLine();
+        }
+        PlaySwingSound();        
+        
     }
 
     // Update is called once per frame
@@ -62,7 +70,7 @@ public class MeleeHitbox : MonoBehaviour
                 Vector2 pos = other.transform.position;
                 pos += new Vector2(Random.Range(-0.2f,0.2f), Random.Range(-1, 2));
                 Instantiate(hitEffect, pos, transform.rotation);
-                
+                PlayRandomHitSound();   
             }
             
         }
@@ -96,5 +104,21 @@ public class MeleeHitbox : MonoBehaviour
         alpha[1].time = Mathf.Clamp(alpha[1].time, 0, 1);
         gr.SetKeys(gr.colorKeys, alpha);
         line.colorGradient = gr;
+    }
+
+    void PlaySwingSound()
+    {
+        //int toPlay = Random.Range(1, 4);
+        //string path = "SFX/Player/Sword Swing/swing0" + toPlay;
+        AudioClip aud = Resources.Load<AudioClip>("SFX/Player/Sword Swing/swing01");
+        AudioManager.Instance.PlaySFX(aud, 1f);
+    }
+
+    void PlayRandomHitSound()
+    {
+        int toPlay = Random.Range(1, 10);
+        string path = "SFX/Player/Sword Hit Sounds/0" + toPlay;
+        AudioClip aud = Resources.Load<AudioClip>(path);
+        AudioManager.Instance.PlaySFX(aud, 0.3f);
     }
 }

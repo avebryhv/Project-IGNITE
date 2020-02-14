@@ -14,7 +14,7 @@ public class EnemyMeleeHitbox : MonoBehaviour
     public enum type { Light, Heavy, Special };
     public type attackType;
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
-    public float lineFadeDelay;
+    public float lineFadeDelay;    
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +54,7 @@ public class EnemyMeleeHitbox : MonoBehaviour
                 hitList.Add(other.gameObject);
                 //FindObjectOfType<PlayerHealth>().OnHit(damage, knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<PlayerHealth>().OnHit(this);
+                FindObjectOfType<ComboUI>().ReduceComboScore(damage);
                 GameManager.Instance.DoHitLag();
 
             }

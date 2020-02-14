@@ -7,6 +7,7 @@ using TMPro;
 public class ComboUI : MonoBehaviour
 {
     public Image comboBar;
+    public TextMeshProUGUI comboText;
     public float comboBuildup;
     public float maxComboBuildup;
     public List<string> previousAttackList;
@@ -36,6 +37,7 @@ public class ComboUI : MonoBehaviour
             comboBuildup -= Time.deltaTime * 2;
         }
         comboBuildup = Mathf.Clamp(comboBuildup, 0, maxComboBuildup);
+        CalculateLetter();
 
 
         if (testEnemyMovement.inKnockback)
@@ -91,6 +93,11 @@ public class ComboUI : MonoBehaviour
         
     }
 
+    public void ReduceComboScore(float amount)
+    {
+        comboBuildup -= amount;
+    }
+
     void AddToList(string toAdd)
     {
         previousAttackList.Add(toAdd);
@@ -111,5 +118,40 @@ public class ComboUI : MonoBehaviour
             }
         }
         return num;
+    }
+
+    void CalculateLetter()
+    {
+        float percentage = comboBuildup / maxComboBuildup;
+        string newLetter = "";
+        if (percentage >= 0.95)
+        {
+            newLetter = "SSS";
+        }
+        else if (percentage >= 0.80)
+        {
+            newLetter = "SS";
+        }
+        else if (percentage >= 0.65)
+        {
+            newLetter = "S";
+        }
+        else if (percentage >= 0.5)
+        {
+            newLetter = "A";
+        }
+        else if (percentage >= 0.4)
+        {
+            newLetter = "B";
+        }
+        else if (percentage >= 0.3)
+        {
+            newLetter = "C";
+        }
+        else if (percentage >= 0.2)
+        {
+            newLetter = "D";
+        }
+        comboText.text = newLetter;
     }
 }

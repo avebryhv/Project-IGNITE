@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public float playerSpeed;
     public float enemySpeed;
     public bool gamePaused;
-    public PlayerScriptFinder finder;
+    public PlayerScriptFinder finder;    
 
     public static GameManager Instance { get => instance; set => instance = value; }
 

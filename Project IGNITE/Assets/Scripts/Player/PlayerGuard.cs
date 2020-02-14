@@ -13,6 +13,7 @@ public class PlayerGuard : MonoBehaviour
     public bool inParry;
     public float inParryTime;
     float parryTimer;
+    public bool bufferedBlock;
 
     public Color parryColour;
     public Color guardColour;
@@ -26,6 +27,11 @@ public class PlayerGuard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bufferedBlock && finder.state.DecideCanAct())
+        {
+            bufferedBlock = false;
+            OnGuardPress();
+        }
         if (isGuarding)
         {
             OnGuardHold();
@@ -51,6 +57,15 @@ public class PlayerGuard : MonoBehaviour
         {
             isGuarding = true;
             timeHeld = 0;
+        }
+        else
+        {
+            if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
+            {
+                bufferedBlock = true;
+                finder.melee.CancelBuffer();
+                finder.movement.CancelJumpBuffer();
+            }
         }
         
     }
@@ -129,6 +144,11 @@ public class PlayerGuard : MonoBehaviour
             }
             
         }
+    }
+
+    public void CancelBuffer()
+    {
+        bufferedBlock = false;
     }
 
     public void SetFinder(PlayerScriptFinder f)

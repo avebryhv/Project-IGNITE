@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
     void ReadControllerInputs()
     {
         ReadControlStick();
-        ReadRightStick();
+        //ReadRightStick();
 
         //Jump Inputs
         if (finder.inputAssignment.jumpButton.wasPressedThisFrame)
@@ -83,7 +83,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Block / Evade Inputs
-        if (finder.inputAssignment.blockButton.isPressed)
+        if (finder.inputAssignment.blockButton.wasPressedThisFrame)
         {
             if (finder.movement.lockedOn && Gamepad.current.leftStick.ReadValue().x != 0)
             {

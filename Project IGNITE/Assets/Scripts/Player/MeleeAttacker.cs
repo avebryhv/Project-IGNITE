@@ -183,10 +183,19 @@ public class MeleeAttacker : MonoBehaviour
 
     public void HeavyAttackHeld()
     {
-        if (finder.state.DecideCanAct() && !(finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) && finder.controller.collisions.below)
+        if (finder.state.DecideCanAct() && !(finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true))
         {
-            inAttack = true;
-            chargingHeavy = true;
+            if (finder.controller.collisions.below)
+            {
+                inAttack = true;
+                chargingHeavy = true;
+            }
+            else
+            {
+                currentAttack = attackList.airHeavy;
+                AttackStartup();
+            }
+            
         }
     }
 
@@ -402,14 +411,14 @@ public class MeleeAttacker : MonoBehaviour
 
                 }
             }
-            else
-            {
-                if (!finder.controller.collisions.below) //Grounded
-                {
-                    currentAttack = attackList.airHeavy;
-                    AttackStartup();
-                }                
-            }
+            //else
+            //{
+            //    if (!finder.controller.collisions.below) //Grounded
+            //    {
+            //        currentAttack = attackList.airHeavy;
+            //        AttackStartup();
+            //    }                
+            //}
             
         }        
         

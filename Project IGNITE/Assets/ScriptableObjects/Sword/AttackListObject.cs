@@ -15,17 +15,21 @@ public class AttackListObject : ScriptableObject
     public AttackObject lightB2;
     public AttackObject lightB3;
 
+    [Header("Heavy Attacks")]
     public AttackObject heavy;
     public AttackObject heavyCharged;
 
+    [Header("Light Air Combo A")]
     public AttackObject airLight1;
     public AttackObject airLight2;
     public AttackObject airLight3;
 
+    [Header("Other Air Attacks")]
     public AttackObject airPause;
 
     public AttackObject airHeavy;
 
+    [Header("Direction Moves")]
     public AttackObject stingerRush;
     public AttackObject stinger;
     public AttackObject uppercut;

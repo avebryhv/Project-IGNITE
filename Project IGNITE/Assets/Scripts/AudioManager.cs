@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
 
     public AudioSource sfxPlayer;
+    public AudioSource bgmPlayer;
+
+    public AudioClip defaultBGM;
+    public bool playBGMOnStart;
 
 
     public static AudioManager Instance { get => instance; set => instance = value; }
@@ -28,7 +32,10 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (playBGMOnStart)
+        {
+            PlayBGM(defaultBGM);
+        }
     }
 
     // Update is called once per frame
@@ -45,5 +52,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip, float volume)
     {
         sfxPlayer.PlayOneShot(clip, volume);
+    }
+
+    public void PlayBGM(AudioClip clip)
+    {
+        bgmPlayer.clip = clip;
+        bgmPlayer.Play();
     }
 }

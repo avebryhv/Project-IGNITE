@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public bool inIntro;
     public Animator introAnim;
+    public bool readyToPressStart;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +19,18 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Gamepad.current.startButton.wasPressedThisFrame && !inIntro)
+        if (Gamepad.current.startButton.wasPressedThisFrame)
         {
-            SkipIntro();
+            if (!inIntro)
+            {
+                SkipIntro();
+            }
+
+            if (readyToPressStart)
+            {
+                TrainingRoom();
+            }
+            
         }
     }
 

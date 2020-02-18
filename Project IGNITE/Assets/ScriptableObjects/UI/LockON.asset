@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Lock On
   image: {fileID: 21300000, guid: 21e19016bae49994b88372da4644af48, type: 3}
   description: Default Description
+  video: {fileID: 32900000, guid: e0763826e78413a439e442f94debbf8d, type: 3}

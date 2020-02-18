@@ -120,20 +120,20 @@ public class PlayerInput : MonoBehaviour
             finder.melee.HeavyAttackReleased();
         }
 
-        if (finder.inputAssignment.burstButton.wasPressedThisFrame)
-        {
-            finder.stats.Burst();
-        }
+        //if (finder.inputAssignment.burstButton.wasPressedThisFrame)
+        //{
+        //    finder.stats.Burst();
+        //}
 
-        if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
-        {
-            finder.grapple.GrappleButtonPressed();
-        }
+        //if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
+        //{
+        //    finder.grapple.GrappleButtonPressed();
+        //}
 
-        if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
-        {
-            finder.stats.DTButtonPressed();
-        }
+        //if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
+        //{
+        //    finder.stats.DTButtonPressed();
+        //}
 
         
     }

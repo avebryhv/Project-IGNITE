@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     bool inAirStall;
     public bool bufferedJump;
 
+    public bool canWallJump;
+
     public bool inKnockback = false;
     bool hitThisFrame = false;
     Vector2 knockbackVelocity;
@@ -131,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         //Sets x velocity: all moves that change x velocity come after this
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
-        if (!inKnockback)
+        if (!inKnockback && canWallJump)
         {
             HandleWallSliding();
         }

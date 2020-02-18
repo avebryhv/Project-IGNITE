@@ -69,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
         finder.melee.CancelAttacks();
         finder.sprite.FlashColour(Color.red, 0.1f);
         currentHealth -= damage;
+        FindObjectOfType<ComboUI>().ReduceComboScore(damage);
         ui.SetHealthValue(currentHealth, maxHealth);
     }
 

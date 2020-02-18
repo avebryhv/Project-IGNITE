@@ -6,8 +6,8 @@ public class EnemyBaseHealth : MonoBehaviour
 {
     EnemyBaseMovement movement;
     EnemySprite sprite;
-    public float maxHealth;
-    public float currentHealth;
+    public int maxHealth;
+    public int currentHealth;
     public bool canTakeDamage;
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,7 @@ public class EnemyBaseHealth : MonoBehaviour
             //currentHealth -= damage;
             movement.TakeKnockback(knockback, type);
             sprite.FlashColour(Color.red, 0.1f);
+            FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
                 Destroy(gameObject);

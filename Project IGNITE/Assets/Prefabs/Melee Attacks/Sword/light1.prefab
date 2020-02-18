@@ -55,16 +55,6 @@ MonoBehaviour:
   lineFadeDelay: 0
   hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
     type: 3}
-  hitSoundList:
-  - {fileID: 8300000, guid: 12c98337d904c5c4c83e5d151c7e2eb8, type: 3}
-  - {fileID: 8300000, guid: 345c9e30cad46dc44b184530dfebf928, type: 3}
-  - {fileID: 8300000, guid: 474234d4c17c42a4d947b2b4ad791de5, type: 3}
-  - {fileID: 8300000, guid: 2a065b1d032cbee4fb79baf14d135149, type: 3}
-  - {fileID: 8300000, guid: 388afd38acf516c4ab8abc8ce88e8524, type: 3}
-  - {fileID: 8300000, guid: a7b2539c44355a349aa3a5925782effa, type: 3}
-  - {fileID: 8300000, guid: 722d46998288ed043bc06da098703c2d, type: 3}
-  - {fileID: 8300000, guid: 00773d77c3dc81a4381034c1a6e6e84f, type: 3}
-  - {fileID: 8300000, guid: c84d537df6258cc47adda99212ef5165, type: 3}
 --- !u!50 &7575644048020951957
 Rigidbody2D:
   serializedVersion: 4
@@ -132,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11846745, y: 0.0292418}
+  m_Offset: {x: -0.11846745, y: 0.22112533}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -143,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2369345, y: 1.0584836}
+  m_Size: {x: 1.2369345, y: 1.4422505}
   m_EdgeRadius: 0
 --- !u!212 &5051588846739348114
 SpriteRenderer:

@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Helm Splitter
   image: {fileID: 21300000, guid: 5ed926d48eed43743912ce1ae7e7a62a, type: 3}
   description: Default Description
+  video: {fileID: 32900000, guid: 3578af728129b474a9734e77bb8840ce, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 
 public class UIMoveList : MonoBehaviour
@@ -17,6 +18,7 @@ public class UIMoveList : MonoBehaviour
     int selectedIndex;
     int lastSelectedIndex;
     public Image displayImage;
+    public VideoPlayer videoPlayer;
 
     private void Start()
     {
@@ -101,6 +103,7 @@ public class UIMoveList : MonoBehaviour
         //layoutGroup.transform.position = new Vector2(layoutGroup.transform.position.x, yPos);
         layoutGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(layoutGroup.GetComponent<RectTransform>().anchoredPosition.x, yPos);
         displayImage.sprite = items[index].image;
+        videoPlayer.clip = items[index].video;
     }
 
     

@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Power Geyser
   image: {fileID: 21300000, guid: 3e21e9a6190cf994fa36e78125f816c1, type: 3}
   description: Default Description
+  video: {fileID: 32900000, guid: 07d0f75b6f774084c9c6b4a6febbeda3, type: 3}

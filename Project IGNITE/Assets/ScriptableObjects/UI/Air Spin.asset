@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5dadc3c205868b4ba2609154dada2fb, type: 3}
-  m_Name: Stinger
+  m_Name: Air Spin
   m_EditorClassIdentifier: 
-  name: Stinger
-  image: {fileID: 21300000, guid: 3d579d3138f13c5449ed9d689ca47f95, type: 3}
+  name: Air Spin
+  image: {fileID: 21300000, guid: 2e7d69800a180694b821a77c815ad10d, type: 3}
   description: Default Description
-  video: {fileID: 32900000, guid: 07d0f75b6f774084c9c6b4a6febbeda3, type: 3}
+  video: {fileID: 32900000, guid: 1f0dd97387cbedd43a24fff7dd58f701, type: 3}

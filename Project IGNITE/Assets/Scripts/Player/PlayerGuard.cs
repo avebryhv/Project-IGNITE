@@ -130,6 +130,9 @@ public class PlayerGuard : MonoBehaviour
             GameManager.Instance.DoHitLag();
             FindObjectOfType<InputPrompt>().ShowPrompt();
             finder.sprite.ChangeSpriteColour(Color.white);
+            string path = "SFX/Player/parry";
+            AudioClip aud = Resources.Load<AudioClip>(path);
+            AudioManager.Instance.PlaySFX(aud, 0.3f);
         }
         else //Normally blocked
         {

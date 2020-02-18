@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Uppercut
   image: {fileID: 21300000, guid: 5ed926d48eed43743912ce1ae7e7a62a, type: 3}
   description: Default Description
+  video: {fileID: 32900000, guid: 88f238109efa13f4abf81448d813dc56, type: 3}

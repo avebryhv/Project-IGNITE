@@ -53,8 +53,7 @@ public class EnemyMeleeHitbox : MonoBehaviour
                 //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
                 //FindObjectOfType<PlayerHealth>().OnHit(damage, knockbackDirection * knockbackStrength, attackType);
-                FindObjectOfType<PlayerHealth>().OnHit(this);
-                FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+                FindObjectOfType<PlayerHealth>().OnHit(this);                
                 GameManager.Instance.DoHitLag();
 
             }

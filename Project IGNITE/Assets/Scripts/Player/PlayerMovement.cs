@@ -248,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //Normal Jump
-            if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding)
+            if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding && !controller.collisions.fallingThroughPlatform)
             {
                 if (finder.melee.inAttack)
                 {

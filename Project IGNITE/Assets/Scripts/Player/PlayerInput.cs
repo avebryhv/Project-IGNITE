@@ -63,7 +63,9 @@ public class PlayerInput : MonoBehaviour
         //Jump Inputs
         if (finder.inputAssignment.jumpButton.wasPressedThisFrame)
         {
+            finder.controller.jumpPressed = true;
             finder.movement.OnJumpInputDown();
+            
         }
 
         if (finder.inputAssignment.jumpButton.wasReleasedThisFrame)

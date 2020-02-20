@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class Controller2D : RaycastController
@@ -15,6 +16,7 @@ public class Controller2D : RaycastController
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
+    public bool jumpPressed;
 
     // Start is called before the first frame update
     public override void Start()
@@ -29,6 +31,11 @@ public class Controller2D : RaycastController
 
 
 
+    }
+
+    private void LateUpdate()
+    {
+        jumpPressed = false;
     }
 
     public void Move(Vector2 moveAmount, bool standingOnPlatform)
@@ -105,7 +112,7 @@ public class Controller2D : RaycastController
                     {
                         continue;
                     }
-                    if (playerInput.y == -1 && Input.GetButtonDown("Jump"))
+                    if (playerInput.y <= -0.9f && Gamepad.current.buttonSouth.wasPressedThisFrame)
                     {
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform", .1f); //Time until player stops falling through

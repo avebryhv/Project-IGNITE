@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerStatsUI : MonoBehaviour
 {
     public Image healthbar;
+    public Image healthBarLerp;
     public Image dtBar;
 
     // Start is called before the first frame update
@@ -18,7 +19,7 @@ public class PlayerStatsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        healthBarLerp.fillAmount = Mathf.Lerp(healthBarLerp.fillAmount, healthbar.fillAmount, Time.deltaTime);
     }
 
     public void SetHealthValue(int current, int max)

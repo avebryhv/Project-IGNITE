@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public bool isPaused;
     bool unPausedThisFrame;
+    bool submenuOpen;
     public Canvas pauseMenuCanvas;
     public Selectable resumeButton;
     public EventSystem eventSystem;
@@ -36,7 +38,13 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (pauseMenuCanvas.enabled && submenuOpen)
+        {
+            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+            {
+                HideSubmenus();
+            }
+        }
     }
 
     private void LateUpdate()
@@ -85,6 +93,7 @@ public class PauseMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         trainingPanel.SetActive(false);
         moveListPanel.SetActive(false);
+        submenuOpen = false;
         Time.timeScale = 1;
         eventSystem.SetSelectedGameObject(null);
     }
@@ -94,6 +103,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         optionsPanel.SetActive(true);
+        submenuOpen = true;
         optionsFirstSelection.Select();
     }
 
@@ -102,6 +112,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
         optionsPanel.SetActive(false);
+        submenuOpen = false;
         resumeButton.Select();
     }
 
@@ -110,6 +121,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         trainingPanel.SetActive(true);
+        submenuOpen = true;
         trainingFirstSelection.Select();
     }
 
@@ -118,6 +130,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
         trainingPanel.SetActive(false);
+        submenuOpen = false;
         resumeButton.Select();
     }
 
@@ -126,6 +139,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         moveListPanel.SetActive(true);
+        submenuOpen = true;
         if (moveListFirstSelection != null)
         {
             moveListFirstSelection.Select();
@@ -137,7 +151,15 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
         moveListPanel.SetActive(false);
+        submenuOpen = false;
         resumeButton.Select();
+    }
+
+    public void HideSubmenus()
+    {
+        CloseMoveList();
+        CloseOptions();
+        CloseTraining();
     }
 
     public void ToggleLockOnToggle()

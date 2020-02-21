@@ -73,6 +73,12 @@ public class PlayerHealth : MonoBehaviour
         ui.SetHealthValue(currentHealth, maxHealth);
     }
 
+    public void IncreaseHealth(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    }
+
     public void SetFinder(PlayerScriptFinder f)
     {
         finder = f;

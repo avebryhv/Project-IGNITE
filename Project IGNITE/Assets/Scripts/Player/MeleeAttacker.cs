@@ -10,6 +10,7 @@ public class MeleeAttacker : MonoBehaviour
     public AttackListObject attackList;
     public bool inAttack; //If player is currently in attack
     public int comboStage;
+    public int airComboStage;
     public AttackObject currentAttack;
     public bool bufferedAttack;
     public bool bufferedHeavy;
@@ -49,6 +50,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         inAttack = false;
         comboStage = 0;
+        airComboStage = 0;
         chargingHeavy = false;
         inStinger = false;
     }
@@ -76,6 +78,7 @@ public class MeleeAttacker : MonoBehaviour
             {
                 comboTimerPaused = true;
                 comboStage = 0;
+                airComboStage = 0;
             }
         }
 
@@ -138,6 +141,7 @@ public class MeleeAttacker : MonoBehaviour
             comboTimerPaused = true;
             comboCooldownTimer = 0;
             comboStage++;
+            airComboStage++;
             //if (comboStage > 3)
             //{
             //    comboStage = 1;
@@ -304,7 +308,8 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (/*finder.movement.framesInAir > 2*/!finder.controller.collisions.below && !finder.movement.jumpPressedThisFrame) //Player is IN AIR
         {
-            switch (comboStage)
+            comboStage = 0;
+            switch (airComboStage)
             {
                 case 1:
                     currentAttack = attackList.airLight1;
@@ -331,6 +336,7 @@ public class MeleeAttacker : MonoBehaviour
         }
         else //Player is ON GROUND
         {
+            airComboStage = 0;
             switch (comboStage)
             {
                 case 1:
@@ -364,6 +370,7 @@ public class MeleeAttacker : MonoBehaviour
         if (currentAttack.endsCombo)
         {
             comboStage = 0;
+            airComboStage = 0;
         }
     }
 
@@ -488,6 +495,7 @@ public class MeleeAttacker : MonoBehaviour
         inStinger = false;
         stingerCounter = 0;
         comboStage = 0;
+        airComboStage = 0;
         chargingHeavy = false;
         heavyChargeTime = 0;
         finder.movement.StopSpecialAttackMovement();

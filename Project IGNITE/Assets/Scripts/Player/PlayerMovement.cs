@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
             //float velocityMod = tempV * (((airStallCount - 3) * 0.1f));
             //velocityMod = Mathf.Clamp(velocityMod, 0, 1);
             //velocity.y = velocityMod;
-            int count = (airStallCount - 3);
+            int count = (airStallCount/* - 3*/);
             count = Mathf.Clamp(count, 0, 10);
             float velocityModifier = count * 0.1f;
             velocity.y = velocity.y * velocityModifier;
@@ -206,6 +206,10 @@ public class PlayerMovement : MonoBehaviour
         if (input.x != 0 && !lockedOn)
         {
             ChangeDirection(Mathf.Sign(input.x));
+            if (finder.guard.inParry)
+            {
+                finder.guard.ExitParry();
+            }
         }
         
     }
@@ -250,6 +254,10 @@ public class PlayerMovement : MonoBehaviour
             //Normal Jump
             if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding && !controller.collisions.fallingThroughPlatform)
             {
+                if (finder.guard.inParry)
+                {
+                    finder.guard.ExitParry();
+                }
                 if (finder.melee.inAttack)
                 {
                     if (finder.melee.currentState == MeleeAttacker.phase.Endlag)

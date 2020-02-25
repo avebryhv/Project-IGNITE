@@ -44625,7 +44625,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.2
+  m_fontSize: 26.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -52004,6 +52004,7 @@ GameObject:
   - component: {fileID: 993824284}
   - component: {fileID: 993824283}
   - component: {fileID: 993824285}
+  - component: {fileID: 993824286}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -52078,6 +52079,21 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 23889724}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &993824286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993824282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 1
 --- !u!1 &996438457
 GameObject:
   m_ObjectHideFlags: 0
@@ -53595,7 +53611,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.8
+  m_fontSize: 33.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -55618,7 +55634,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.2
+  m_fontSize: 26.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -70277,7 +70293,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -92570,6 +92586,7 @@ GameObject:
   - component: {fileID: 1796598860}
   - component: {fileID: 1796598861}
   - component: {fileID: 1796598862}
+  - component: {fileID: 1796598863}
   m_Layer: 0
   m_Name: Stats
   m_TagString: Untagged
@@ -92627,9 +92644,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6b7375ce814cb419bad9798db2bc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impulse: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   canTakeDamage: 1
+--- !u!114 &1796598863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796598859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 935e1dc414a7c154e83a01a1f265dc4c, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.05
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
 --- !u!1 &1805468576
 GameObject:
   m_ObjectHideFlags: 0
@@ -99918,6 +99977,7 @@ MonoBehaviour:
   healthBarLerp: {fileID: 1024515564}
   dtBar: {fileID: 1344199010}
   dronesBar: {fileID: 1963788483}
+  dronesText: {fileID: 1441655190}
 --- !u!1 &1950582192
 GameObject:
   m_ObjectHideFlags: 0
@@ -116155,7 +116215,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 52.9
+  m_fontSize: 44.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -116925,7 +116985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103942913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.030000953, y: -0.9200001, z: -10}
+  m_LocalPosition: {x: -0.029999046, y: -0.9200001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

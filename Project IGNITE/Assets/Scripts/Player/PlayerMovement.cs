@@ -389,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
         //meleeController.canAttack = false;
         if (directionalInput.x == 0)
         {
-            dashDir = lastDirection;
+            dashDir = lastDirection * -1;
         }
         else
         {

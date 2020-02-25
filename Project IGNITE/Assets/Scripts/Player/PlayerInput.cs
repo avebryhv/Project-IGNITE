@@ -127,10 +127,11 @@ public class PlayerInput : MonoBehaviour
         //    finder.stats.Burst();
         //}
 
-        //if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
-        //{
-        //    finder.grapple.GrappleButtonPressed();
-        //}
+        if (finder.inputAssignment.grappleButton.wasPressedThisFrame)
+        {
+            //finder.grapple.GrappleButtonPressed();
+            finder.movement.OnDashInput();
+        }
 
         //if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
         //{

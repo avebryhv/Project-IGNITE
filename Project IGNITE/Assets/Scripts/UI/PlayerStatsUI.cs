@@ -10,6 +10,7 @@ public class PlayerStatsUI : MonoBehaviour
     public Image healthBarLerp;
     public Image dtBar;
     public Image dronesBar;
+    public TextMeshProUGUI dronesText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,13 @@ public class PlayerStatsUI : MonoBehaviour
     void Update()
     {
         healthBarLerp.fillAmount = Mathf.Lerp(healthBarLerp.fillAmount, healthbar.fillAmount, Time.deltaTime);
+        if (dronesBar.fillAmount == 1)
+        {
+            Color droneColour = dronesBar.color;
+            droneColour.a -= Time.deltaTime / 2;
+            dronesBar.color = droneColour;
+            dronesText.color = droneColour;
+        }
     }
 
     public void SetHealthValue(int current, int max)
@@ -36,5 +44,9 @@ public class PlayerStatsUI : MonoBehaviour
     public void SetDronesValue(float current, float max)
     {
         dronesBar.fillAmount = current / max;
+        Color droneColour = dronesBar.color;
+        droneColour.a = 1;
+        dronesBar.color = droneColour;
+        dronesText.color = droneColour;
     }
 }

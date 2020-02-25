@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerHealth : MonoBehaviour
 {
     PlayerScriptFinder finder;
     PlayerStatsUI ui;
+    public CinemachineImpulseSource impulse;
     public int maxHealth;
     public int currentHealth;
     public bool canTakeDamage;
@@ -15,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ui = FindObjectOfType<PlayerStatsUI>();
         UpdateHealth(maxHealth);
+        impulse = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -79,6 +82,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         FindObjectOfType<ComboUI>().ReduceComboScore(damage);
         ui.SetHealthValue(currentHealth, maxHealth);
+        impulse.GenerateImpulse();
     }
 
     public void IncreaseHealth(int amount)

@@ -124,6 +124,7 @@ public class PlayerGuard : MonoBehaviour
         if (timeHeld <= parryTiming) //On Parry
         {
             Debug.Log("SICK PARRY");
+            finder.messages.CreateMessage("PARRY", Color.blue, 1f);
             isGuarding = false;
             inParry = true;
             parryTimer = 0;

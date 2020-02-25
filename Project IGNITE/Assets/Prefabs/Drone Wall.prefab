@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8246085104182691118}
   - component: {fileID: 8246085104182691119}
   - component: {fileID: 8246085104182691117}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Drone Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

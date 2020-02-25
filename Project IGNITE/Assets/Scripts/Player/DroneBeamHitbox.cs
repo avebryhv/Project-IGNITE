@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneBladeHitbox : MonoBehaviour
+public class DroneBeamHitbox : MonoBehaviour
 {
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
     public GameObject hitEffect;
@@ -12,8 +12,8 @@ public class DroneBladeHitbox : MonoBehaviour
     public float knockbackStrength;
     public float comboWeight;
 
-    public float hitRate;
-    float hitTimer;
+    public float lingerTime;
+    float lingerCounter;
 
 
     // Start is called before the first frame update
@@ -25,15 +25,14 @@ public class DroneBladeHitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hitTimer += Time.deltaTime;
-        if (hitTimer >= hitRate)
+        lingerCounter += Time.deltaTime;
+        if (lingerCounter >= lingerTime)
         {
-            hitList.Clear();
-            hitTimer = 0;
+            Destroy(transform.parent.gameObject);
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "EnemyHurtbox")
         {
@@ -42,7 +41,7 @@ public class DroneBladeHitbox : MonoBehaviour
                 //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
                 other.GetComponentInParent<EnemyBaseHealth>().TakeDamage(damage, knockbackDirection * knockbackStrength, MeleeHitbox.type.Light);
-                FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name, false);
+                FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
                 //GameManager.Instance.DoHitLag();
                 Vector2 pos = other.transform.position;
                 pos += new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-1, 2));

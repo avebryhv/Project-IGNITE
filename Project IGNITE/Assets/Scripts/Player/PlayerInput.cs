@@ -133,10 +133,10 @@ public class PlayerInput : MonoBehaviour
             finder.movement.OnDashInput();
         }
 
-        //if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
-        //{
-        //    finder.stats.DTButtonPressed();
-        //}
+        if (finder.inputAssignment.toggleDTButton.wasPressedThisFrame)
+        {
+            finder.stats.DTButtonPressed();
+        }
 
         //D-Pad Inputs
         if (Gamepad.current.dpad.up.wasPressedThisFrame)

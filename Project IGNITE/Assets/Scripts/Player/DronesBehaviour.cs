@@ -8,6 +8,7 @@ public class DronesBehaviour : MonoBehaviour
     public GameObject drone1;
     public GameObject drone2;
     public GameObject beamSpawnPoint;
+    public GameObject beamSpawnPoint2;
     public enum State { Idle, Recharge, Blade, Wall, Barrier, Beam}
     public State currentState;
     public Animator anim;
@@ -37,6 +38,9 @@ public class DronesBehaviour : MonoBehaviour
             if (cooldownCounter >= cooldownTime)
             {
                 finder.messages.CreateMessage("Drones Ready", Color.green, 1f);
+                string path = "SFX/Player/droneReady";
+                AudioClip aud = Resources.Load<AudioClip>(path);
+                AudioManager.Instance.PlaySFX(aud, 0.3f);
                 ChangeState(State.Idle);
             }
         }
@@ -98,6 +102,8 @@ public class DronesBehaviour : MonoBehaviour
                 float dir2 = transform.localScale.x;
                 GameObject beamObj = Instantiate(beamPrefab, beamSpawnPoint.transform.position, transform.rotation);
                 beamObj.transform.localScale = new Vector3(dir2, beamObj.transform.localScale.y, beamObj.transform.localScale.z);
+                GameObject beamObj2 = Instantiate(beamPrefab, beamSpawnPoint2.transform.position, transform.rotation);
+                beamObj2.transform.localScale = new Vector3(dir2, beamObj2.transform.localScale.y, beamObj2.transform.localScale.z);
                 Invoke("StartRecharge", 0.25f);
                 break;
             default:

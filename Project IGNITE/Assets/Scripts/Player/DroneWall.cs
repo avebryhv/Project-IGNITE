@@ -13,8 +13,8 @@ public class DroneWall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        line.SetPosition(0, droneA.transform.localPosition);
-        line.SetPosition(1, droneB.transform.localPosition);
+        //line.SetPosition(0, droneA.transform.localPosition);
+        //line.SetPosition(1, droneB.transform.localPosition);
     }
 
     // Update is called once per frame

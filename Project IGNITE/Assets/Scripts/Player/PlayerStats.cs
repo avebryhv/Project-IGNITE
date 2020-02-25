@@ -123,7 +123,7 @@ public class PlayerStats : MonoBehaviour
         //finder.movement.dtMoveSpeedModifier = 1.2f;
         GameManager.Instance.playerSpeed = 1.2f;
         //finder.sprite.animator.speed = 0.2f;
-        finder.sprite.ChangeSpriteColour(Color.yellow);        
+        finder.sprite.SetDTSprites();      
     }
 
     void ExitDT()
@@ -131,7 +131,7 @@ public class PlayerStats : MonoBehaviour
         inDT = false;
         //finder.movement.dtMoveSpeedModifier = 1.0f;
         GameManager.Instance.playerSpeed = 1f;
-        finder.sprite.ChangeSpriteColour(Color.white);
+        finder.sprite.SetNormalSprites();
     }
 
     void EndAirStall()

@@ -11,6 +11,8 @@ public class PlayerSprite : MonoBehaviour
     public GameObject dronesHolder;
     SpriteRenderer[] spriteRendererList;
     public Animator animator;
+    DTSpriteToggler[] dtSpriteList;
+    public ParticleSystem DTParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class PlayerSprite : MonoBehaviour
         canTurnSprite = true;
         lastDirection = 1;
         spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
+        dtSpriteList = GetComponentsInChildren<DTSpriteToggler>();
     }
 
     // Update is called once per frame
@@ -47,6 +50,24 @@ public class PlayerSprite : MonoBehaviour
         {
             spr.color = col;
         }
+    }
+
+    public void SetDTSprites()
+    {
+        for (int i = 0; i < dtSpriteList.Length; i++)
+        {
+            dtSpriteList[i].SetDTSprite();
+        }
+        DTParticles.Play();
+    }
+
+    public void SetNormalSprites()
+    {
+        for (int i = 0; i < dtSpriteList.Length; i++)
+        {
+            dtSpriteList[i].SetNormalSprite();
+        }
+        DTParticles.Stop();
     }
 
     public void SetAnimationTrigger(string name)

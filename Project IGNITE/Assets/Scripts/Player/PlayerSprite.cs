@@ -8,6 +8,7 @@ public class PlayerSprite : MonoBehaviour
     float lastDirection;
     bool canTurnSprite;
     public GameObject spriteHolder;
+    public GameObject dronesHolder;
     SpriteRenderer[] spriteRendererList;
     public Animator animator;
 
@@ -37,6 +38,7 @@ public class PlayerSprite : MonoBehaviour
     {
         //spriteRenderer.flipX = !spriteRenderer.flipX;
         spriteHolder.transform.localScale = new Vector3(spriteHolder.transform.localScale.x * -1, spriteHolder.transform.localScale.y, spriteHolder.transform.localScale.z);
+        dronesHolder.transform.localScale = new Vector3(dronesHolder.transform.localScale.x * -1, dronesHolder.transform.localScale.y, dronesHolder.transform.localScale.z);
     }
 
     public void ChangeSpriteColour(Color col)

@@ -137,7 +137,28 @@ public class PlayerInput : MonoBehaviour
         //    finder.stats.DTButtonPressed();
         //}
 
-        
+        //D-Pad Inputs
+        if (Gamepad.current.dpad.up.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Blade);
+        }
+
+        if (Gamepad.current.dpad.left.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Beam);
+        }
+
+        if (Gamepad.current.dpad.down.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Barrier);
+        }
+
+        if (Gamepad.current.dpad.right.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Wall);
+        }
+
+
     }
 
     void ReadPauseInputs()

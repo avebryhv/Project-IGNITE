@@ -9,6 +9,7 @@ public class PlayerStatsUI : MonoBehaviour
     public Image healthbar;
     public Image healthBarLerp;
     public Image dtBar;
+    public Image dronesBar;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +31,10 @@ public class PlayerStatsUI : MonoBehaviour
     public void SetDTValue(float current, float max)
     {
         dtBar.fillAmount = current / max;
+    }
+
+    public void SetDronesValue(float current, float max)
+    {
+        dronesBar.fillAmount = current / max;
     }
 }

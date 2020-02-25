@@ -15,6 +15,7 @@ public class PlayerScriptFinder : MonoBehaviour
     public MeleeAttacker melee;
     public PlayerStats stats;
     public PlayerHealth health;
+    public DronesBehaviour drones;
 
     void Awake()
     {
@@ -56,6 +57,8 @@ public class PlayerScriptFinder : MonoBehaviour
         health = FindObjectOfType<PlayerHealth>();
         health.SetFinder(this);
         inputAssignment = FindObjectOfType<InputAssignment>();
+        drones = FindObjectOfType<DronesBehaviour>();
+        drones.SetFinder(this);
     }
     
 }

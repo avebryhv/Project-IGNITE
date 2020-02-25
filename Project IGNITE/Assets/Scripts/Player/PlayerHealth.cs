@@ -46,15 +46,23 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            if (finder.guard.isGuarding)
+            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
             {
-                finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
+                finder.drones.BreakGuard();
             }
             else
             {
-                Debug.Log("Hit By Enemy for " + hitbox.damage);
-                TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType);
+                if (finder.guard.isGuarding)
+                {
+                    finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
+                }
+                else
+                {
+                    Debug.Log("Hit By Enemy for " + hitbox.damage);
+                    TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType);
+                }
             }
+            
         }
         else if (finder.movement.inDash) //Dodging attack as a result of evading
         {

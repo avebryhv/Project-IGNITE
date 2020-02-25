@@ -153,14 +153,15 @@ public class EnemyBaseMovement : MonoBehaviour
     {
         if (canTakeKnockBack)
         {
-            if (type == MeleeHitbox.type.Heavy)
-            {
-                canWallBounce = true;
-            }
-            else
-            {
-                canWallBounce = false;
-            }
+            //if (type == MeleeHitbox.type.Heavy)
+            //{
+            //    canWallBounce = true;
+            //}
+            //else
+            //{
+            //    canWallBounce = false;
+            //}
+            canWallBounce = true;
             melee.CancelAttacks();
             hitThisFrame = true;
             inKnockback = true;

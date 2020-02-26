@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     //public PlayerHealth playerHealth;
 
     Vector2 directionalInput;
-    bool wallSliding;
+    public bool wallSliding;
     int wallDirX;
 
     public bool jumpPressedThisFrame;
@@ -217,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
     void ChangeDirection(float dir)
     {
         //Check conditions that would disallow player from changing direction
-        if (!inKnockback && !inDiveKick && !finder.melee.inAttack && !finder.guard.isGuarding)
+        if (!inKnockback && !inDiveKick && !finder.melee.inAttack && !finder.guard.isGuarding && !wallSliding)
         {
             lastDirection = dir;
         }
@@ -461,10 +461,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //Wall Sliding
         wallDirX = (controller.collisions.left) ? -1 : 1;
+        
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
-
+            lastDirection = -wallDirX;
             if (velocity.y < -wallSlideSpeedMax)
             {
                 velocity.y = -wallSlideSpeedMax;

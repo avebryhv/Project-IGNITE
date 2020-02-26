@@ -28,6 +28,7 @@ public class AttackListObject : ScriptableObject
     public AttackObject airPause;
 
     public AttackObject airHeavy;
+    public AttackObject wallSlideLight;
 
     [Header("Direction Moves")]
     public AttackObject stingerRush;

@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
     float dtTimeCounter;
     public bool unlimitedDT;
     float dtHealthGainTimer;
+    public ParticleSystem burstParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,7 @@ public class PlayerStats : MonoBehaviour
         if (canBurst && dtCharge >= 10)
         {
             GameObject burst = Instantiate(burstPrefab, transform.position, transform.rotation, transform);
+            burstParticles.Play();
             IncreaseDT(-10);
             finder.melee.CancelAttacks();
             if (!finder.controller.collisions.below)

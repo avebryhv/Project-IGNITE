@@ -306,7 +306,12 @@ public class MeleeAttacker : MonoBehaviour
 
     void DecideLightAttack()
     {
-        if (/*finder.movement.framesInAir > 2*/!finder.controller.collisions.below && !finder.movement.jumpPressedThisFrame) //Player is IN AIR
+        if (finder.movement.wallSliding)
+        {
+            currentAttack = attackList.wallSlideLight;
+            AttackStartup();
+        }
+        else if (/*finder.movement.framesInAir > 2*/!finder.controller.collisions.below && !finder.movement.jumpPressedThisFrame) //Player is IN AIR
         {
             comboStage = 0;
             switch (airComboStage)
@@ -378,7 +383,11 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (!useAlternateInputs)
         {
-            if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
+            if (finder.movement.wallSliding)
+            {
+                StartHelmSplitter();
+            }
+            else if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
             {
                 if (finder.input.CheckStickInputs(finder.input.inputComboList.powerGLeft) || finder.input.CheckStickInputs(finder.input.inputComboList.powerGRight))
                 {

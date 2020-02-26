@@ -25,6 +25,7 @@ MonoBehaviour:
   airLight3: {fileID: 11400000, guid: 5a231a4ca96948f4f8645576aadf7502, type: 2}
   airPause: {fileID: 11400000, guid: 2026b97c518a10346bf4a0c445425711, type: 2}
   airHeavy: {fileID: 11400000, guid: 3064542e93f7d6c498327bd6a4918360, type: 2}
+  wallSlideLight: {fileID: 11400000, guid: bfcf96f042a17724aa0e5417b205fbbf, type: 2}
   stingerRush: {fileID: 11400000, guid: d46d960243526154bbe733c3a7e80a3c, type: 2}
   stinger: {fileID: 11400000, guid: e0235656011f18f49ae9914a354ae24a, type: 2}
   uppercut: {fileID: 11400000, guid: 7f3ffaff952f2bd42b257bb092437465, type: 2}

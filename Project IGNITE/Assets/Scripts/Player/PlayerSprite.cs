@@ -102,6 +102,9 @@ public class PlayerSprite : MonoBehaviour
             case PlayerState.State.Block:
                 SetAnimationTrigger("block");
                 break;
+            case PlayerState.State.WallSlide:
+                SetAnimationTrigger("wallSlide");
+                break;
             case PlayerState.State.Evade:
                 SetAnimationTrigger("evade");
                 break;

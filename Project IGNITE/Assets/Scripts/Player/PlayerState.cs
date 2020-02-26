@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     PlayerScriptFinder finder;
-    public enum State { Idle, Walk, Run, Jump, Fall, Block, Evade, Knockback, Attack, Parry};
+    public enum State { Idle, Walk, Run, Jump, WallSlide, Fall, Block, Evade, Knockback, Attack, Parry};
     public State currentState;
     public bool canBufferInput;
 
@@ -87,6 +87,10 @@ public class PlayerState : MonoBehaviour
         else if (finder.guard.isGuarding)
         {
             SetState(State.Block);
+        }
+        else if (finder.movement.wallSliding)
+        {
+            SetState(State.WallSlide);
         }
         else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0 && finder.movement.lockedOn)
         {

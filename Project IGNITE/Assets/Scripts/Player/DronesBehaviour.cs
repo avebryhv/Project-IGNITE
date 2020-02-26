@@ -33,7 +33,7 @@ public class DronesBehaviour : MonoBehaviour
     {
         if (currentState == State.Recharge)
         {
-            cooldownCounter += Time.deltaTime;
+            cooldownCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
             ui.SetDronesValue(cooldownCounter, cooldownTime);
             if (cooldownCounter >= cooldownTime)
             {

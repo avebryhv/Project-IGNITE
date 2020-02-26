@@ -76,19 +76,31 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockback, EnemyMeleeHitbox.type type)
     {
-        finder.movement.TakeKnockback(knockback);
-        finder.melee.CancelAttacks();
-        finder.sprite.FlashColour(Color.red, 0.1f);
-        currentHealth -= damage;
-        FindObjectOfType<ComboUI>().ReduceComboScore(damage);
-        ui.SetHealthValue(currentHealth, maxHealth);
-        impulse.GenerateImpulse();
+        if (finder.stats.inDT)
+        {
+            finder.sprite.FlashColour(Color.red, 0.1f);
+            currentHealth -= Mathf.RoundToInt(damage / 2);
+            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            ui.SetHealthValue(currentHealth, maxHealth);
+        }
+        else
+        {
+            finder.movement.TakeKnockback(knockback);
+            finder.melee.CancelAttacks();
+            finder.sprite.FlashColour(Color.red, 0.1f);
+            currentHealth -= damage;
+            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            ui.SetHealthValue(currentHealth, maxHealth);
+            impulse.GenerateImpulse();
+        }
+        
     }
 
     public void IncreaseHealth(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        ui.SetHealthValue(currentHealth, maxHealth);
     }
 
     public void SetFinder(PlayerScriptFinder f)

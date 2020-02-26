@@ -137,15 +137,15 @@ public class PlayerGuard : MonoBehaviour
         }
         else //Normally blocked
         {
-            if (finder.stats.dtCharge >= damage)
-            {
-                finder.stats.IncreaseDT(-damage);
-                Debug.Log("Normal Block");
-            }
-            else //Guard Broken
-            {
-                finder.health.TakeDamage(damage, knockback, type); //Forces the player to take the damage
-            }
+            //if (finder.stats.dtCharge >= damage)
+            //{
+            //    finder.stats.IncreaseDT(-damage);
+            //    Debug.Log("Normal Block");
+            //}
+            //else //Guard Broken
+            //{
+            //    finder.health.TakeDamage(damage, knockback, type); //Forces the player to take the damage
+            //}
             
         }
     }

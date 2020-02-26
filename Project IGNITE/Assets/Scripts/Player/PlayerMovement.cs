@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         //Sets y velocity: all moves that change y velocity come after this
-        velocity.y += gravity * Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
+        velocity.y += gravity * Time.deltaTime/* * GameManager.Instance.ReturnPlayerSpeed()*/;
 
         if (!inKnockback)
         {

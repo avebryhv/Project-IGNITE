@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     public float minTimeInDT;
     float dtTimeCounter;
     public bool unlimitedDT;
+    float dtHealthGainTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,14 @@ public class PlayerStats : MonoBehaviour
         {
             dtTimeCounter += Time.deltaTime;
             IncreaseDT(Time.deltaTime * -DTDrainRate);
+
+            dtHealthGainTimer += Time.deltaTime;
+            if (dtHealthGainTimer > 0.5f)
+            {
+                finder.health.IncreaseHealth(1);
+                dtHealthGainTimer = 0;
+            }
+
             if (dtCharge <= 0)
             {
                 ExitDT();

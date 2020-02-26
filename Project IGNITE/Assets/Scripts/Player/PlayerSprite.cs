@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerSprite : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerSprite : MonoBehaviour
     public Animator animator;
     DTSpriteToggler[] dtSpriteList;
     public ParticleSystem DTParticles;
+    public Light2D visorLight;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class PlayerSprite : MonoBehaviour
         lastDirection = 1;
         spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
         dtSpriteList = GetComponentsInChildren<DTSpriteToggler>();
+        visorLight.color = Color.blue;
     }
 
     // Update is called once per frame
@@ -59,6 +62,7 @@ public class PlayerSprite : MonoBehaviour
             dtSpriteList[i].SetDTSprite();
         }
         DTParticles.Play();
+        visorLight.color = Color.red;
     }
 
     public void SetNormalSprites()
@@ -68,6 +72,7 @@ public class PlayerSprite : MonoBehaviour
             dtSpriteList[i].SetNormalSprite();
         }
         DTParticles.Stop();
+        visorLight.color = Color.blue;
     }
 
     public void SetAnimationTrigger(string name)

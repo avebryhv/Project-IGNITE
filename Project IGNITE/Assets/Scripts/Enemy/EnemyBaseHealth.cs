@@ -6,9 +6,11 @@ public class EnemyBaseHealth : MonoBehaviour
 {
     EnemyBaseMovement movement;
     EnemySprite sprite;
+    public GameObject sliceEffect;
     public int maxHealth;
     public int currentHealth;
     public bool canTakeDamage;
+    public bool trainingEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +30,16 @@ public class EnemyBaseHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            //currentHealth -= damage;
+            if (!trainingEnemy)
+            {
+                currentHealth -= damage;
+            }
             movement.TakeKnockback(knockback, type);
             sprite.FlashColour(Color.red, 0.1f);
             FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
+                Instantiate(sliceEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }

@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         //Sets x velocity: all moves that change x velocity come after this
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
-        if (!inKnockback && canWallJump)
+        if (!inKnockback && canWallJump && !inAttackMovement)
         {
             HandleWallSliding();
         }
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
             //float velocityMod = tempV * (((airStallCount - 3) * 0.1f));
             //velocityMod = Mathf.Clamp(velocityMod, 0, 1);
             //velocity.y = velocityMod;
-            int count = (airStallCount/* - 3*/);
+            int count = (airStallCount - 3);
             count = Mathf.Clamp(count, 0, 10);
             float velocityModifier = count * 0.1f;
             velocity.y = velocity.y * velocityModifier;
@@ -464,7 +464,11 @@ public class PlayerMovement : MonoBehaviour
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
-            lastDirection = -wallDirX;
+            if (!finder.melee.inAttack)
+            {
+                lastDirection = -wallDirX;
+            }
+            
             if (velocity.y < -wallSlideSpeedMax)
             {
                 velocity.y = -wallSlideSpeedMax;

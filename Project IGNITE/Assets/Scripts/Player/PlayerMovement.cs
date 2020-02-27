@@ -235,10 +235,10 @@ public class PlayerMovement : MonoBehaviour
             //Wall Jump
             if (wallSliding)
             {
-                if (wallDirX == directionalInput.x)
+                if (directionalInput.x != 0 && wallDirX == Mathf.Sign(directionalInput.x))
                 {
-                    velocity.x = -wallDirX * wallJumpClimb.x;
-                    velocity.y = wallJumpClimb.y;
+                    //velocity.x = -wallDirX * wallJumpClimb.x;
+                    //velocity.y = wallJumpClimb.y;
                 }
                 else if (directionalInput.x == 0)
                 {
@@ -250,9 +250,8 @@ public class PlayerMovement : MonoBehaviour
                     velocity.x = -wallDirX * wallJumpLeap.x;
                     velocity.y = wallJumpLeap.y;
                 }
-            }
-            //Normal Jump
-            if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding && !controller.collisions.fallingThroughPlatform)
+            }            
+            else if ((controller.collisions.below || framesInAir <= 2) && !finder.guard.isGuarding && !controller.collisions.fallingThroughPlatform) //Normal Jump
             {
                 if (finder.guard.inParry)
                 {

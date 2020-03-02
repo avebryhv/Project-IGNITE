@@ -41,7 +41,7 @@ public class EnemyBaseMelee : MonoBehaviour
         //finder.state.ResetStateForAttack();
         inAttack = true;
         Invoke("EyeFlash", (currentAttack.startUpTime - 0.2f));
-        Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
+        Invoke("CreateHitbox", currentAttack.startUpTime);
     }
 
     void CreateHitbox()
@@ -50,13 +50,13 @@ public class EnemyBaseMelee : MonoBehaviour
         currentHitbox = Instantiate(currentAttack.hitboxObject, transform.position, transform.rotation, transform);
         currentHitbox.transform.localScale = new Vector3(currentHitbox.transform.localScale.x * movement.lastDirection, currentHitbox.transform.localScale.y, currentHitbox.transform.localScale.z);
         currentHitbox.GetComponent<EnemyMeleeHitbox>().SetDirection(movement.lastDirection);
-        Invoke("StartEndLag", currentAttack.hitboxLingerTime / GameManager.Instance.ReturnPlayerSpeed());
+        Invoke("StartEndLag", currentAttack.hitboxLingerTime);
     }
 
     void StartEndLag()
     {
         currentState = phase.Endlag;
-        Invoke("EndAttack", currentAttack.endingTime / GameManager.Instance.ReturnPlayerSpeed());
+        Invoke("EndAttack", currentAttack.endingTime);
     }
 
     public void EndAttack()

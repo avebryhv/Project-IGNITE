@@ -6,7 +6,7 @@ using TMPro;
 public class TrainingEnemySettings : MonoBehaviour
 {
     TMP_Dropdown dropdown;
-    public EnemyBaseMovement trainingEnemy;
+    public EnemyBaseBehaviour trainingEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +24,10 @@ public class TrainingEnemySettings : MonoBehaviour
         switch (dropdown.value)
         {
             case 0:
-                trainingEnemy.currentMode = EnemyBaseMovement.Mode.None;
+                trainingEnemy.currentMode = EnemyBaseBehaviour.Mode.None;
                 break;
             case 1:
-                trainingEnemy.currentMode = EnemyBaseMovement.Mode.Attack;
+                trainingEnemy.currentMode = EnemyBaseBehaviour.Mode.Attack;
                 break;
             default:
                 break;

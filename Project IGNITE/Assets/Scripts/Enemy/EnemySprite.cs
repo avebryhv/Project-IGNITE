@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySprite : MonoBehaviour
 {
     EnemyBaseMovement baseMovement;
+    public EnemyBaseBehaviour behaviour;
     public EnemyBaseMelee melee;
     Animator anim;
     SpriteRenderer[] spriteRendererList;
@@ -25,22 +26,42 @@ public class EnemySprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckState();
+        //CheckState();
     }
 
-    void CheckState()
+    public void CheckState()
     {
-        if (baseMovement.inKnockback)
+        //if (baseMovement.inKnockback)
+        //{
+        //    currentAnim = "knockback";
+        //}
+        //else if (melee.inAttack)
+        //{
+        //    currentAnim = "attack";
+        //}
+        //else
+        //{
+        //    currentAnim = "idle";
+        //}
+
+        switch (behaviour.currentState)
         {
-            currentAnim = "knockback";
-        }
-        else if (melee.inAttack)
-        {
-            currentAnim = "attack";
-        }
-        else
-        {
-            currentAnim = "idle";
+            case EnemyBaseBehaviour.State.Idle:
+                currentAnim = "idle";
+                break;
+            case EnemyBaseBehaviour.State.Knockback:
+                currentAnim = "knockback";
+                break;
+            case EnemyBaseBehaviour.State.Attack:
+                currentAnim = "attack";
+                break;
+            case EnemyBaseBehaviour.State.Moving:
+                currentAnim = "idle";
+                break;
+            case EnemyBaseBehaviour.State.Jump:
+                break;
+            default:
+                break;
         }
 
         if (currentAnim != lastAnim)
@@ -61,6 +82,11 @@ public class EnemySprite : MonoBehaviour
         {
             spr.color = col;
         }
+    }
+
+    public void ResetState()
+    {
+
     }
 
     public void FlashColour(Color col, float time)

@@ -37,7 +37,7 @@ public class DronesBehaviour : MonoBehaviour
             ui.SetDronesValue(cooldownCounter, cooldownTime);
             if (cooldownCounter >= cooldownTime)
             {
-                finder.messages.CreateMessage("Drones Ready", Color.green, 1f);
+                finder.messages.CreateMinorMessage("Drones Ready", Color.green, 1f);
                 string path = "SFX/Player/droneReady";
                 AudioClip aud = Resources.Load<AudioClip>(path);
                 AudioManager.Instance.PlaySFX(aud, 0.3f);
@@ -59,6 +59,19 @@ public class DronesBehaviour : MonoBehaviour
         if (currentState == State.Idle)
         {
             ChangeState(newState);
+        }
+        else if (currentState == State.Wall && newState == State.Wall)
+        {
+            StartRecharge();
+            Destroy(FindObjectOfType<DroneWall>().gameObject);
+        }
+        else if (currentState == State.Blade && newState == State.Blade)
+        {
+            StartRecharge();
+        }
+        else if (currentState == State.Barrier && newState == State.Barrier)
+        {
+            StartRecharge();
         }
     }
 
@@ -113,6 +126,7 @@ public class DronesBehaviour : MonoBehaviour
 
     void StartRecharge()
     {
+        CancelInvoke();
         ChangeState(State.Recharge);
         cooldownCounter = 0;
     }

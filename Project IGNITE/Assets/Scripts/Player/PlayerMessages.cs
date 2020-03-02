@@ -6,39 +6,55 @@ using UnityEngine.UI;
 
 public class PlayerMessages : MonoBehaviour
 {
-    public TextMeshProUGUI messageText;
-    bool showingMessage;
+    public TextMeshProUGUI minorText;
+    bool showingMinorMessage;
 
-    float lingerTime;
-    float lingerCounter;
+    public TextMeshProUGUI majorText;
+    bool showingMajorMessage;
+
+    float minorLingerTime;
+    float minorLingerCounter;
+
+    float majorLingerTime;
+    float majorLingerCounter;
 
     // Start is called before the first frame update
     void Start()
     {
-        messageText.enabled = false;
+        minorText.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (showingMessage)
+        if (showingMinorMessage)
         {
-            lingerCounter += Time.deltaTime;
-            if (lingerCounter >= lingerTime)
+            minorLingerCounter += Time.deltaTime;
+            if (minorLingerCounter >= minorLingerTime)
             {
-                messageText.enabled = false;
-                showingMessage = false;
+                minorText.enabled = false;
+                showingMinorMessage = false;
             }
         }
     }
 
-    public void CreateMessage(string text, Color col, float duration)
+    public void CreateMinorMessage(string text, Color col, float duration)
     {
-        messageText.enabled = true;
-        showingMessage = true;
-        messageText.text = text;
-        messageText.color = col;
-        lingerCounter = 0;
-        lingerTime = duration;
+        minorText.enabled = true;
+        showingMinorMessage = true;
+        minorText.text = text;
+        minorText.color = col;
+        minorLingerCounter = 0;
+        minorLingerTime = duration;
+    }
+
+    public void CreateMajorMessage(string text, Color col, float duration)
+    {
+        majorText.enabled = true;
+        showingMinorMessage = true;
+        minorText.text = text;
+        minorText.color = col;
+        minorLingerCounter = 0;
+        minorLingerTime = duration;
     }
 }

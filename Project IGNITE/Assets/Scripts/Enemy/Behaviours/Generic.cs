@@ -41,7 +41,7 @@ public class Generic : EnemyBaseBehaviour
                     sprite.TurnSprite();
                 }
 
-                if (Mathf.Abs(xDifference) >= gunRange)
+                if (Mathf.Abs(xDifference) >= gunRange && CheckOnScreen())
                 {
                     gunTimer -= Time.deltaTime;
                     if (gunTimer <= 0)
@@ -55,7 +55,7 @@ public class Generic : EnemyBaseBehaviour
 
 
 
-                if (Mathf.Abs(xDifference) <= meleeRange)
+                if (Mathf.Abs(xDifference) <= meleeRange && CheckOnScreen())
                 {
                     sprite.currentAttackAnimName = "attack";
                     melee.TriggerAttack();

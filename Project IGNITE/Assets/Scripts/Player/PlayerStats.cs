@@ -101,10 +101,11 @@ public class PlayerStats : MonoBehaviour
             }
             finder.melee.inAttack = true;
             finder.melee.currentState = MeleeAttacker.phase.Endlag;
-            finder.movement.canDoubleJump = true;
+            //finder.movement.canDoubleJump = true;
+            finder.movement.ResetDash();
             burstTimer = 0;
             canBurst = false;
-            Invoke("EndAirStall", 0.4f);
+            Invoke("EndAirStall", 0.2f);
         }
         
     }

@@ -16,6 +16,7 @@ public class EnemyBaseBehaviour : MonoBehaviour
     public enum Mode { None, Attack }
     public Mode currentMode;
     public float attackRange;
+    public bool isOnScreen;
 
     public Vector2 velocity;
 
@@ -102,5 +103,18 @@ public class EnemyBaseBehaviour : MonoBehaviour
     void SendVelocity()
     {
         movement.RecieveVelocityFromBehaviour();
+    }
+
+    public bool CheckOnScreen()
+    {
+        Vector2 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        if ((screenPoint.x >= 0 && screenPoint.x <= 1) && (screenPoint.y >= 0 && screenPoint.y <= 1))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -115,7 +115,7 @@ public class MeleeAttacker : MonoBehaviour
         if (chargingHeavy)
         {
             heavyChargeTime += Time.deltaTime;
-            if (heavyChargeTime > 2)
+            if (heavyChargeTime > 1)
             {
                 HeavyAttackReleased();
             }
@@ -207,7 +207,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         if (chargingHeavy)
         {
-            if (heavyChargeTime >= 2)
+            if (heavyChargeTime >= 1)
             {
                 currentAttack = attackList.heavyCharged;
                 GameObject beam = Instantiate(swordBeam, transform.position, transform.rotation);
@@ -286,6 +286,7 @@ public class MeleeAttacker : MonoBehaviour
 
     void StartHelmSplitter()
     {
+        finder.state.ResetStateForAttack();
         currentAttack = attackList.helmsplitter;
         Vector2 dir = new Vector2(0, -1);
         finder.movement.SetSpecialAttackMovement(dir, 40, 999);
@@ -295,6 +296,7 @@ public class MeleeAttacker : MonoBehaviour
 
     public void EndHelmSplitter()
     {
+        finder.state.ResetStateForAttack();
         inHelmSplitter = false;
         CancelInvoke();
         inAttack = false;
@@ -466,6 +468,7 @@ public class MeleeAttacker : MonoBehaviour
     public void EndAttack()
     {
         currentState = phase.None;
+        finder.state.ResetStateForAttack();
         inAttack = false;
         finder.movement.EndAirStall();
         comboTimerPaused = false;

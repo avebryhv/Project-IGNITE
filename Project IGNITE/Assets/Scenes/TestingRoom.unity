@@ -1641,7 +1641,7 @@ MonoBehaviour:
   maxJumpHeight: 4
   minJumpHeight: 1
   timetoJumpApex: 0.4
-  moveSpeed: 8
+  moveSpeed: 10
   wallSlideSpeedMax: 3
   wallJumpClimb: {x: 30, y: 20}
   wallJumpOff: {x: 30, y: 20}
@@ -1657,6 +1657,7 @@ MonoBehaviour:
   crouching: 0
   framesInAir: 0
   bufferedJump: 0
+  bufferedEvade: 0
   canWallJump: 1
   inKnockback: 0
   currentTile: {fileID: 0}
@@ -1667,7 +1668,7 @@ MonoBehaviour:
   canDiveKick: 0
   diveKickCooldown: 0
   inDash: 0
-  dashSpeed: 15
+  dashSpeed: 16
   dashTime: 0.2
   dashCooldown: 1
   ghostPrefab: {fileID: 5285391893948811919, guid: 21549b9ac6e2c2a4693519761b2c841e,
@@ -27046,6 +27047,7 @@ MonoBehaviour:
   player: {fileID: 100666866}
   currentMode: 1
   attackRange: 4
+  isOnScreen: 0
   velocity: {x: 0, y: 0}
   canJump: 1
   currentState: 0

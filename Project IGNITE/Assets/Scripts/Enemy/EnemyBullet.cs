@@ -31,6 +31,11 @@ public class EnemyBullet : MonoBehaviour
             GameManager.Instance.DoHitLag();
             Destroy(gameObject);
         }
+
+        if (other.gameObject.layer == 8)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetDirection(float x)

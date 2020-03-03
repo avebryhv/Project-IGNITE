@@ -15,7 +15,7 @@ MonoBehaviour:
   hitboxObject: {fileID: 6912254918180058493, guid: a2af2ab68364967449b2f171e1266b68,
     type: 3}
   startUpTime: 0
-  hitboxLingerTime: 0.5
+  hitboxLingerTime: 2
   endingTime: 0.1
   endsCombo: 0
   animationName: helmSplitter

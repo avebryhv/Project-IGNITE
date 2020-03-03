@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     int airStallCount; //Counts the number of times the player has performed actions that stall them in midair
     bool inAirStall;
     public bool bufferedJump;
+    public bool bufferedEvade;
 
     public bool canWallJump;
 
@@ -123,6 +124,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 OnJumpInputUp();
             }
+        }
+
+        if (!inDash && canDash && !finder.guard.isGuarding && !finder.melee.inAttack && bufferedEvade)
+        {
+            bufferedEvade = false;
+            OnDashInput();
         }
 
         if (crouching || inKnockback || finder.guard.isGuarding || (finder.melee.inAttack) || inAirStall)
@@ -318,6 +325,7 @@ public class PlayerMovement : MonoBehaviour
             if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
             {
                 bufferedJump = true;
+                bufferedEvade = false;
                 finder.melee.CancelBuffer();
                 finder.guard.CancelBuffer();
             }
@@ -376,6 +384,16 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+        else
+        {
+            if (finder.melee.currentState == MeleeAttacker.phase.Active || finder.melee.currentState == MeleeAttacker.phase.Endlag)
+            {
+                bufferedEvade = true;
+                bufferedJump = false;
+                finder.melee.CancelBuffer();
+                finder.guard.CancelBuffer();
+            }
+        }
     }
 
     void Evade()
@@ -407,9 +425,17 @@ public class PlayerMovement : MonoBehaviour
         //meleeController.canAttack = true;
     }
 
-    void SetDashCooldown()
+    public void SetDashCooldown()
     {
+        CancelInvoke("SetDashCooldown");
         canDash = true;
+    }
+
+    public void ResetDash()
+    {
+        CancelInvoke("SetDashCooldown");
+        canDash = true;
+        airEvadeCount = 0;
     }
 
     void HandleDash()
@@ -588,6 +614,7 @@ public class PlayerMovement : MonoBehaviour
     public void CancelJumpBuffer()
     {
         bufferedJump = false;
+        bufferedEvade = false;
     }
 
     public void SetFinder(PlayerScriptFinder f)

@@ -946,6 +946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54501429}
   - component: {fileID: 54501430}
+  - component: {fileID: 54501431}
   m_Layer: 0
   m_Name: leftHand
   m_TagString: Untagged
@@ -1018,6 +1019,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &54501431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54501428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2fa0f6e2fbfbf46b123eafadd29d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviour: {fileID: 946197766}
+  baseBullet: {fileID: 4270625520379652546, guid: 3470e17f7a382d44184ff107b9177b1e,
+    type: 3}
+  shootNow: 0
+  animLength: 0.6
+  inShot: 0
 --- !u!1 &74489700
 GameObject:
   m_ObjectHideFlags: 0
@@ -7957,6 +7976,7 @@ MonoBehaviour:
   behaviour: {fileID: 946197766}
   melee: {fileID: 1251503961}
   spriteHolder: {fileID: 290302712}
+  currentAttackAnimName: 
 --- !u!1 &170062341
 GameObject:
   m_ObjectHideFlags: 0
@@ -18354,7 +18374,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -27022,12 +27042,19 @@ MonoBehaviour:
   melee: {fileID: 1251503961}
   health: {fileID: 946197761}
   sprite: {fileID: 164516120}
+  gun: {fileID: 54501431}
   player: {fileID: 100666866}
   currentMode: 1
   attackRange: 4
   velocity: {x: 0, y: 0}
   canJump: 1
   currentState: 0
+  meleeCooldown: 0
+  meleeRange: 4
+  gunCooldown: 3
+  gunRange: 4
+  gunPoint: {fileID: 54501428}
+  gunArm: {fileID: 554145648}
 --- !u!1 &960523255
 GameObject:
   m_ObjectHideFlags: 0
@@ -33777,7 +33804,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 27.95
+  m_fontSize: 33.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -35729,7 +35756,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 22.5
+  m_fontSize: 26.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -67464,7 +67491,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702272761}
-  m_LocalRotation: {x: -0, y: -0, z: -0.22213568, w: 0.9750158}
+  m_LocalRotation: {x: -0, y: -0, z: 0.023019245, w: 0.99973506}
   m_LocalPosition: {x: 0.01171684, y: 0.5861263, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -67472,7 +67499,7 @@ Transform:
   - {fileID: 1990558975}
   m_Father: {fileID: 1819749809}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -25.669}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.638}
 --- !u!212 &1702272763
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -67625,7 +67652,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -87259,7 +87286,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36.55
+  m_fontSize: 44.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

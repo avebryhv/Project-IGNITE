@@ -150,6 +150,43 @@ public class PlayerGuard : MonoBehaviour
         }
     }
 
+    public void OnBlockAttack(int damage, Vector2 knockback, Vector2 position)
+    {
+        float xDifference = position.x - transform.position.x;
+        Debug.Log(Mathf.Sign(xDifference));
+        if (Mathf.Sign(xDifference) != finder.movement.lastDirection)
+        {
+            finder.movement.ForceChangeDirection(Mathf.Sign(xDifference));
+        }
+        if (timeHeld <= parryTiming) //On Parry
+        {
+            Debug.Log("SICK PARRY");
+            finder.messages.CreateMinorMessage("PARRY", Color.blue, 1f);
+            isGuarding = false;
+            inParry = true;
+            parryTimer = 0;
+            GameManager.Instance.DoHitLag();
+            FindObjectOfType<InputPrompt>().ShowPrompt();
+            finder.sprite.ChangeSpriteColour(Color.white);
+            string path = "SFX/Player/parry";
+            AudioClip aud = Resources.Load<AudioClip>(path);
+            AudioManager.Instance.PlaySFX(aud, 0.3f);
+        }
+        else //Normally blocked
+        {
+            //if (finder.stats.dtCharge >= damage)
+            //{
+            //    finder.stats.IncreaseDT(-damage);
+            //    Debug.Log("Normal Block");
+            //}
+            //else //Guard Broken
+            //{
+            //    finder.health.TakeDamage(damage, knockback, type); //Forces the player to take the damage
+            //}
+
+        }
+    }
+
     public void CancelBuffer()
     {
         bufferedBlock = false;

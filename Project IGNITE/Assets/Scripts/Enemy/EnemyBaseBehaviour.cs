@@ -8,6 +8,8 @@ public class EnemyBaseBehaviour : MonoBehaviour
     public EnemyBaseMelee melee;
     public EnemyBaseHealth health;
     public EnemySprite sprite;
+    public EnemyBaseGun gun;
+    
 
     public PlayerMovement player;
 
@@ -22,11 +24,8 @@ public class EnemyBaseBehaviour : MonoBehaviour
     public enum State { Idle, Knockback, Attack, Moving, Jump}
     public State currentState;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = FindObjectOfType<PlayerMovement>();
-    }
+    
+    
 
     // Update is called once per frame
     void Update()

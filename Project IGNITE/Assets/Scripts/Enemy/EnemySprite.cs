@@ -12,6 +12,7 @@ public class EnemySprite : MonoBehaviour
     public GameObject spriteHolder;
     string currentAnim;
     string lastAnim;
+    public string currentAttackAnimName;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class EnemySprite : MonoBehaviour
                 currentAnim = "knockback";
                 break;
             case EnemyBaseBehaviour.State.Attack:
-                currentAnim = "attack";
+                currentAnim = currentAttackAnimName;
                 break;
             case EnemyBaseBehaviour.State.Moving:
                 currentAnim = "idle";

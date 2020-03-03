@@ -74,6 +74,35 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
+    public void OnHit(EnemyBullet hitbox)
+    {
+        if (canTakeDamage)
+        {
+            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
+            {
+                finder.drones.BreakGuard();
+            }
+            else
+            {
+                if (finder.guard.isGuarding)
+                {
+                    finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.transform.position);
+                }
+                else
+                {
+                    Debug.Log("Hit By Enemy for " + hitbox.damage);
+                    TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength);
+                }
+            }
+
+        }
+        else if (finder.movement.inDash) //Dodging attack as a result of evading
+        {
+            FindObjectOfType<ComboUI>().AddComboScore(hitbox.damage, name, false);
+        }
+
+    }
+
     public void TakeDamage(int damage, Vector2 knockback, EnemyMeleeHitbox.type type)
     {
         if (finder.stats.inDT)
@@ -94,6 +123,28 @@ public class PlayerHealth : MonoBehaviour
             impulse.GenerateImpulse();
         }
         
+    }
+
+    public void TakeDamage(int damage, Vector2 knockback)
+    {
+        if (finder.stats.inDT)
+        {
+            finder.sprite.FlashColour(Color.red, 0.1f);
+            currentHealth -= Mathf.RoundToInt(damage / 2);
+            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            ui.SetHealthValue(currentHealth, maxHealth);
+        }
+        else
+        {
+            finder.movement.TakeKnockback(knockback);
+            finder.melee.CancelAttacks();
+            finder.sprite.FlashColour(Color.red, 0.1f);
+            currentHealth -= damage;
+            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            ui.SetHealthValue(currentHealth, maxHealth);
+            impulse.GenerateImpulse();
+        }
+
     }
 
     public void IncreaseHealth(int amount)

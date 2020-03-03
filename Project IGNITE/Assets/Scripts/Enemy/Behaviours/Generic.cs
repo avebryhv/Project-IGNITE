@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Generic : EnemyBaseBehaviour
 {
-    
+    public float meleeCooldown;
+    public float meleeRange;
+
+    public float gunCooldown;
+    float gunTimer;
+    public float gunRange;
+    public GameObject gunPoint;
+    public GameObject gunArm;
+
+    void Start()
+    {
+        player = FindObjectOfType<PlayerMovement>();
+        gunTimer = gunCooldown;
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,10 +41,23 @@ public class Generic : EnemyBaseBehaviour
                     sprite.TurnSprite();
                 }
 
-
-
-                if (Mathf.Abs(xDifference) <= attackRange)
+                if (Mathf.Abs(xDifference) >= gunRange)
                 {
+                    gunTimer -= Time.deltaTime;
+                    if (gunTimer <= 0)
+                    {
+                        sprite.currentAttackAnimName = "shoot";
+                        gun.TriggerShot(0.25f);
+                        gunTimer = gunCooldown;
+                    }
+                }
+                
+
+
+
+                if (Mathf.Abs(xDifference) <= meleeRange)
+                {
+                    sprite.currentAttackAnimName = "attack";
                     melee.TriggerAttack();
                 }
                 else

@@ -34,7 +34,7 @@ public class EnemyBaseGun : MonoBehaviour
         behaviour.melee.inAttack = false;
     }
 
-    void Shoot()
+    public virtual void Shoot()
     {
         GameObject currentBullet = Instantiate(baseBullet, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(behaviour.player.transform.position.x - behaviour.transform.position.x));

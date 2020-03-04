@@ -468,7 +468,6 @@ public class MeleeAttacker : MonoBehaviour
     public void EndAttack()
     {
         currentState = phase.None;
-        finder.state.ResetStateForAttack();
         inAttack = false;
         finder.movement.EndAirStall();
         comboTimerPaused = false;
@@ -485,7 +484,7 @@ public class MeleeAttacker : MonoBehaviour
     void AirAttackStartup()
     {
         currentState = phase.Startup;
-        finder.state.ResetStateForAttack();
+        //finder.state.ResetStateForAttack();
         inAttack = true;
         Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
         finder.movement.SetAirStall();

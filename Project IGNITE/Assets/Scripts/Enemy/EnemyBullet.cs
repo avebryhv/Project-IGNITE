@@ -9,6 +9,7 @@ public class EnemyBullet : MonoBehaviour
     public int damage;
     public Vector2 knockbackDirection;
     public float knockbackStrength;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         Vector2 dir = new Vector2(movementDirection.x * xDirection, movementDirection.y);
-        transform.Translate(dir * Time.deltaTime);
+        transform.Translate(dir * Time.deltaTime * speed);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,5 +43,11 @@ public class EnemyBullet : MonoBehaviour
     {
         xDirection = x;
 
+    }
+
+    public void SetMovementDirection(Vector2 dir)
+    {
+        movementDirection = dir;
+        xDirection = 1;
     }
 }

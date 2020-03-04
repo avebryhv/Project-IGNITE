@@ -17,6 +17,7 @@ public class EnemyBaseMovement : MonoBehaviour
     float velocityXSmoothing;
     public bool jumpThisFrame;
     public float lastDirection;
+    public bool isFlying;
 
     public bool inKnockback = false;
     public bool canTakeKnockBack = true;
@@ -58,7 +59,7 @@ public class EnemyBaseMovement : MonoBehaviour
     {
         if (!inGrapple)
         {
-            if ((controller.collisions.above || controller.collisions.below) && !inKnockback && !jumpThisFrame)
+            if ((controller.collisions.above || controller.collisions.below) && !inKnockback && !jumpThisFrame && !isFlying)
             {
                 velocity.y = 0; //Sets y velocity to 0 if touching floor and no other effects in place
             }
@@ -80,9 +81,20 @@ public class EnemyBaseMovement : MonoBehaviour
                 //StartCoroutine("FlashSpriteIFrames");
             }
 
-            if (!inKnockback && !hitThisFrame && !inHitStun && !melee.inAttack)
+            if (!inKnockback && !hitThisFrame && !inHitStun)
             {
-                RecieveVelocityFromBehaviour();
+                if (isFlying)
+                {
+                    RecieveVelocityFromBehaviour();
+                }
+                else
+                {
+                    if (!melee.inAttack)
+                    {
+                        RecieveVelocityFromBehaviour();
+                    }
+                }
+                
             }
             
             
@@ -96,7 +108,15 @@ public class EnemyBaseMovement : MonoBehaviour
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
             if (!inHitStun)
             {
-                velocity.y += gravity * Time.deltaTime;
+                if (!isFlying)
+                {
+                    velocity.y += gravity * Time.deltaTime;
+                }
+                else if (inKnockback)
+                {
+                    velocity.y += gravity * Time.deltaTime;
+                }
+                
             }
             else
             {
@@ -201,6 +221,10 @@ public class EnemyBaseMovement : MonoBehaviour
     public void RecieveVelocityFromBehaviour()
     {
         velocity.x = behaviour.velocity.x;
+        if (isFlying)
+        {
+            velocity.y = behaviour.velocity.y;
+        }
     }
 
     public void Jump()

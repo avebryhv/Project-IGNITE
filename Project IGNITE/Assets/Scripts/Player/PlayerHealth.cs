@@ -154,6 +154,17 @@ public class PlayerHealth : MonoBehaviour
         ui.SetHealthValue(currentHealth, maxHealth);
     }
 
+    public void StartIFrames(float time)
+    {
+        canTakeDamage = false;
+        Invoke("EndIFrames", time);
+    }
+
+    void EndIFrames()
+    {
+        canTakeDamage = true;
+    }
+
     public void SetFinder(PlayerScriptFinder f)
     {
         finder = f;

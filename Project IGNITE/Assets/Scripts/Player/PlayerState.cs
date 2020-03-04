@@ -59,7 +59,7 @@ public class PlayerState : MonoBehaviour
 
     public void ResetStateForAttack()
     {
-        currentState = State.Idle;
+        SetState(State.Idle);
     }
 
     public void DecideState()

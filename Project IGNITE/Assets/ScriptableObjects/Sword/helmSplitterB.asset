@@ -16,6 +16,6 @@ MonoBehaviour:
     type: 3}
   startUpTime: 0
   hitboxLingerTime: 0.2
-  endingTime: 0
+  endingTime: 0.1
   endsCombo: 1
   animationName: helmSplitterB

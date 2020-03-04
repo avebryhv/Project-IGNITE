@@ -127,6 +127,7 @@ public class PlayerGuard : MonoBehaviour
             finder.messages.CreateMinorMessage("PARRY", Color.blue, 1f);
             isGuarding = false;
             inParry = true;
+            finder.health.StartIFrames(0.5f);
             parryTimer = 0;
             GameManager.Instance.DoHitLag();
             FindObjectOfType<InputPrompt>().ShowPrompt();

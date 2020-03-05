@@ -22,6 +22,7 @@ public class EnemyBullet : MonoBehaviour
     {
         Vector2 dir = new Vector2(movementDirection.x * xDirection, movementDirection.y);
         transform.Translate(dir * Time.deltaTime * speed);
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -49,5 +50,10 @@ public class EnemyBullet : MonoBehaviour
     {
         movementDirection = dir;
         xDirection = 1;
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
 }

@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: 1984592046885035494
     second: enemyDrone_3
+  - first:
+      213: -8187587528766693621
+    second: enemyDrone_4
+  - first:
+      213: 4789234604232368213
+    second: enemyDrone_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -163,7 +169,7 @@ TextureImporter:
         width: 40
         height: 90
       alignment: 9
-      pivot: {x: 0.5000002, y: 0.812608}
+      pivot: {x: 0.5, y: 0.81}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,6 +206,27 @@ TextureImporter:
       name: enemyDrone_3
       rect:
         serializedVersion: 2
+        x: 43
+        y: 83
+        width: 45
+        height: 17
+      alignment: 9
+      pivot: {x: 0.18775177, y: 0.5000005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6edd5aaa3ffaa8b10800000000000000
+      internalID: 1984592046885035494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemyDrone_4
+      rect:
+        serializedVersion: 2
         x: 48
         y: 107
         width: 25
@@ -211,8 +238,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6edd5aaa3ffaa8b10800000000000000
-      internalID: 1984592046885035494
+      spriteID: b0f5174b588df5e80800000000000000
+      internalID: -8187587528766693621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemyDrone_5
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 43
+        width: 40
+        height: 90
+      alignment: 9
+      pivot: {x: 0.5, y: 0.81}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55067438f77c67240800000000000000
+      internalID: 4789234604232368213
       vertices: []
       indices: 
       edges: []

@@ -9,6 +9,7 @@ public class FlyingDrone : EnemyBaseBehaviour
     public float gunRange;
     public GameObject gunPoint;
     public GameObject gunArm;
+    public ParticleSystem thrusterParticles;
 
 
 
@@ -53,9 +54,9 @@ public class FlyingDrone : EnemyBaseBehaviour
 
                 if (yDifference > -3)
                 {
-                    velocity.y = movement.moveSpeed;
+                    velocity.y = movement.moveSpeed; // Move up if player gets too close from below
                 }
-                else if (yDifference > -7)
+                else if (yDifference < -4) //Move down if not close enough
                 {
                     velocity.y = -movement.moveSpeed;
                 }
@@ -63,10 +64,7 @@ public class FlyingDrone : EnemyBaseBehaviour
                 {
                     velocity.y = 0;
                 }
-                //else if (yDifference < )
-                //{
-
-                //}
+                
 
                 if (Mathf.Abs(xDifference) <= 3)
                 {
@@ -81,18 +79,26 @@ public class FlyingDrone : EnemyBaseBehaviour
                     velocity.x = 0;
                 }
 
-                //velocity.x = movement.moveSpeed * movement.lastDirection;
 
-                //if (yDifference >= 2 && canJump && movement.controller.collisions.below && !melee.inAttack)
-                //{
-                //    movement.Jump();
-                //}
+                //Rotate Gun
+                Vector2 dir = new Vector2(xDifference * movement.lastDirection, yDifference * movement.lastDirection);
+                var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                gunArm.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                if ((movement.controller.collisions.left && xDifference < 0) || (movement.controller.collisions.right && xDifference > 0))
+                //Play Particles
+                if (!thrusterParticles.isPlaying)
                 {
-                    movement.Jump();
+                    thrusterParticles.Play();
                 }
 
+
+            }
+            else
+            {
+                if (thrusterParticles.isPlaying)
+                {
+                    thrusterParticles.Stop();
+                }
             }
         }
         else

@@ -75,6 +75,11 @@ public class MeleeHitbox : MonoBehaviour
             }
             
         }
+
+        if (other.tag == "EnemyBullet")
+        {
+            Destroy(other.gameObject);
+        }
     }
 
     public void SetDirection(float dir)

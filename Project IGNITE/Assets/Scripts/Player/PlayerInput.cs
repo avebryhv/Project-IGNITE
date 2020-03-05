@@ -338,7 +338,11 @@ public class PlayerInput : MonoBehaviour
             {
                 leftStickInputList.RemoveAt(0);
             }
-            inputStream.RecieveInput(lastState);
+            if (inputStream != null)
+            {
+                inputStream.RecieveInput(lastState);
+            }
+            
             
         }
 

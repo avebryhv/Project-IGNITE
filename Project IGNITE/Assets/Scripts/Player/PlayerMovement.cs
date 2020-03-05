@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inDash = false;
     bool canDash = true;
     float dashDir;
+    Vector2 dashVector;
     public float dashSpeed;
     public float dashTime;
     public float dashCooldown;
@@ -314,9 +315,9 @@ public class PlayerMovement : MonoBehaviour
                 canDoubleJump = false;
                 doubleJumpPressedThisFrame = true;
                 airStallCount = 0;
-                GameObject airHikeEffect = Instantiate(airHike, transform.position, Quaternion.identity);
-                airHikeEffect.transform.position -= new Vector3(0, 1.8f, 0);
-                airHikeEffect.transform.Rotate(new Vector3(0, 0, -45 * directionalInput.x));
+                //GameObject airHikeEffect = Instantiate(airHike, transform.position, Quaternion.identity);
+                //airHikeEffect.transform.position -= new Vector3(0, 1.8f, 0);
+                //airHikeEffect.transform.Rotate(new Vector3(0, 0, -45 * directionalInput.x));
 
             }
         }
@@ -411,6 +412,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             dashDir = Mathf.Sign(directionalInput.x);
+
+            dashVector = new Vector2();
+            dashVector.x = dashDir;
+            dashVector.y = directionalInput.y;
         }
 
         Invoke("CancelDash", dashTime / GameManager.Instance.ReturnPlayerSpeed());
@@ -442,8 +447,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inDash)
         {
-            velocity.x = dashDir * dashSpeed;
-            velocity.y = 0;
+            //velocity.x = dashDir * dashSpeed;
+            //velocity.y = 0;
+            velocity = dashVector * dashSpeed;
         }
     }
 
@@ -615,6 +621,18 @@ public class PlayerMovement : MonoBehaviour
     {
         bufferedJump = false;
         bufferedEvade = false;
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyContactDamage")
+        {
+            if (finder.health.canTakeDamage)
+            {
+                finder.health.TakeDamage(5, new Vector2(5 * -lastDirection, 5));
+            }
+            
+        }
     }
 
     public void SetFinder(PlayerScriptFinder f)

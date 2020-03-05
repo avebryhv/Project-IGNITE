@@ -8,6 +8,9 @@ public class ComboUI : MonoBehaviour
 {
     public Image comboBar;
     public TextMeshProUGUI comboText;
+    public TextMeshProUGUI comboTitle;
+    public Image panelBG;
+    public Image comboBarBG;
     public float comboBuildup;
     public float maxComboBuildup;
     public List<string> previousAttackList;
@@ -16,6 +19,7 @@ public class ComboUI : MonoBehaviour
     public EnemyBaseMovement testEnemyMovement;
     public TextMeshProUGUI knockbackText;
     public TextMeshProUGUI highestText;
+    public bool trainingMode;
     bool countingKnockback;
     float knockbackCounter;
     float highestKnockback;
@@ -39,33 +43,45 @@ public class ComboUI : MonoBehaviour
         comboBuildup = Mathf.Clamp(comboBuildup, 0, maxComboBuildup);
         CalculateLetter();
 
-
-        if (testEnemyMovement.inKnockback)
+        if (trainingMode)
         {
-            if (!countingKnockback)
+            if (testEnemyMovement.inKnockback)
             {
-                countingKnockback = true;
+                if (!countingKnockback)
+                {
+                    countingKnockback = true;
+                }
             }
+            else
+            {
+                if (countingKnockback)
+                {
+                    countingKnockback = false;
+                    if (knockbackCounter > highestKnockback)
+                    {
+                        highestKnockback = knockbackCounter;
+                        highestText.text = "Longest: " + highestKnockback.ToString("F1");
+                    }
+                    knockbackCounter = 0;
+                }
+            }
+
+            if (countingKnockback)
+            {
+                knockbackCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
+                knockbackText.text = "Combo Time: " + knockbackCounter.ToString("F1");
+            }
+        }
+
+        if (comboBuildup <= 0)
+        {
+            Fade();
         }
         else
         {
-            if (countingKnockback)
-            {
-                countingKnockback = false;
-                if (knockbackCounter > highestKnockback)
-                {
-                    highestKnockback = knockbackCounter;
-                    highestText.text = "Longest: " + highestKnockback.ToString("F1");
-                }
-                knockbackCounter = 0;
-            }
+            Show();
         }
-
-        if (countingKnockback)
-        {
-            knockbackCounter += Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed();
-            knockbackText.text = "Combo Time: " + knockbackCounter.ToString("F1");
-        }
+        
         
     }
 
@@ -153,5 +169,28 @@ public class ComboUI : MonoBehaviour
             newLetter = "D";
         }
         comboText.text = newLetter;
+    }
+
+    void Fade()
+    {
+        Color col = comboBar.color;
+        Color bgCol = new Color(0.5f, 0.5f, 0.5f, comboBar.color.a);
+        col.a -= Time.deltaTime;
+        comboBar.color = col;
+        comboBarBG.color = bgCol;
+        panelBG.color = col;
+        comboTitle.color = col;
+
+    }
+
+    void Show()
+    {
+        Color col = new Color(1,1,1,1);
+        Color bgCol = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+        col.a -= Time.deltaTime;
+        comboBar.color = col;
+        comboBarBG.color = bgCol;
+        panelBG.color = col;
+        comboTitle.color = col;
     }
 }

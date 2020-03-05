@@ -11,6 +11,7 @@ public class EnemyBaseMovement : MonoBehaviour
     float accelerationTimeGrounded = .1f;
 
     public float moveSpeed = 6;
+    float defaultMoveSpeed;
     float gravity = -20;
     float jumpVelocity = 8;
     public Vector3 velocity;
@@ -52,6 +53,7 @@ public class EnemyBaseMovement : MonoBehaviour
 
         gravity = -(2 * jumpHeight / Mathf.Pow(timetoJumpApex, 2));
         jumpVelocity = Mathf.Abs(gravity) * timetoJumpApex;
+        defaultMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class EnemyBaseMovement : MonoBehaviour
             if ((controller.collisions.above || controller.collisions.below) && !inKnockback && !jumpThisFrame && !isFlying)
             {
                 velocity.y = 0; //Sets y velocity to 0 if touching floor and no other effects in place
+                moveSpeed = defaultMoveSpeed;
             }
 
             if (inKnockback && canWallBounce && (controller.collisions.left || controller.collisions.right))
@@ -187,7 +190,7 @@ public class EnemyBaseMovement : MonoBehaviour
 
     public void HitByCancel()
     {
-        if (canTakeKnockBack)
+        if (canTakeKnockBack && !behaviour.health.armoured)
         {
             hitThisFrame = true;
             inKnockback = true;
@@ -233,5 +236,14 @@ public class EnemyBaseMovement : MonoBehaviour
         jumpThisFrame = true;
     }
 
-    
+    public void Jump(float xSpeed)
+    {
+        moveSpeed = xSpeed;
+        velocity.y = jumpVelocity;
+        
+        jumpThisFrame = true;
+        
+    }
+
+
 }

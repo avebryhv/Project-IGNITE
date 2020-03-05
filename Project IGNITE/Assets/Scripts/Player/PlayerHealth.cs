@@ -121,6 +121,7 @@ public class PlayerHealth : MonoBehaviour
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();
+            StartIFrames(1);
         }
         
     }
@@ -143,6 +144,7 @@ public class PlayerHealth : MonoBehaviour
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();
+            StartIFrames(1);
         }
 
     }
@@ -162,6 +164,7 @@ public class PlayerHealth : MonoBehaviour
 
     void EndIFrames()
     {
+        CancelInvoke("EndIFrames");
         canTakeDamage = true;
     }
 

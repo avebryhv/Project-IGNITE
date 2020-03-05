@@ -11,6 +11,7 @@ public class EnemyBaseHealth : MonoBehaviour
     public int currentHealth;
     public bool canTakeDamage;
     public bool trainingEnemy;
+    public bool armoured;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,11 @@ public class EnemyBaseHealth : MonoBehaviour
             {
                 currentHealth -= damage;
             }
-            movement.TakeKnockback(knockback, type);
+            if (!armoured)
+            {
+                movement.TakeKnockback(knockback, type);
+            }
+            
             sprite.FlashColour(Color.red, 0.1f);
             FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)

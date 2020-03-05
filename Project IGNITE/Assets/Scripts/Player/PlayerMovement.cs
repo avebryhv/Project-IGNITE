@@ -405,21 +405,57 @@ public class PlayerMovement : MonoBehaviour
         finder.health.canTakeDamage = false;        
         //playerHealth.canTakeDamage = false;
         //meleeController.canAttack = false;
-        if (directionalInput.x == 0)
-        {
-            dashDir = lastDirection * -1;
-        }
-        else
-        {
-            dashDir = Mathf.Sign(directionalInput.x);
+        //if (directionalInput.x == 0)
+        //{
+        //    dashDir = lastDirection * -1;
+        //}
+        //else
+        //{
+        //    dashDir = Mathf.Sign(directionalInput.x);
 
-            dashVector = new Vector2();
-            dashVector.x = dashDir;
-            dashVector.y = directionalInput.y;
-        }
+        //    //dashVector = new Vector2();
+        //    //dashVector.x = dashDir;
+        //    //dashVector.y = directionalInput.y;
+        //    dashVector = DecideDashDirection();
+        //}
+        dashVector = DecideDashDirection();
 
         Invoke("CancelDash", dashTime / GameManager.Instance.ReturnPlayerSpeed());
         Invoke("SetDashCooldown", dashCooldown / GameManager.Instance.ReturnPlayerSpeed());
+    }
+
+    Vector2 DecideDashDirection()
+    {
+        Vector2 dir = new Vector2();
+        if (controller.collisions.below) //If on floor
+        {
+            if (directionalInput.x == 0 && directionalInput.y == 0)
+            {
+                dir.x = lastDirection * -1;
+                dir.y = 0;
+            }
+            else
+            {
+                dir.x = Mathf.Sign(directionalInput.x);
+                dir.y = 0;
+            }
+        }
+        else
+        {
+            if (directionalInput.x == 0 && directionalInput.y == 0)
+            {
+                dir.x = lastDirection * -1;
+                dir.y = 0;
+            }
+            else
+            {
+                dir = directionalInput;
+            }
+        }
+        dir.Normalize();
+
+        return dir;
+        
     }
 
     void CancelDash()

@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -2118806651501094903
     second: enemyDrone_2
+  - first:
+      213: 1984592046885035494
+    second: enemyDrone_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -139,7 +142,7 @@ TextureImporter:
         width: 62
         height: 107
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +163,7 @@ TextureImporter:
         width: 40
         height: 90
       alignment: 9
-      pivot: {x: 0.50558186, y: 0.8185972}
+      pivot: {x: 0.5000002, y: 0.812608}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +184,7 @@ TextureImporter:
         width: 15
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,6 +192,27 @@ TextureImporter:
       bones: []
       spriteID: 908da8d839c7892e0800000000000000
       internalID: -2118806651501094903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemyDrone_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 107
+        width: 25
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6edd5aaa3ffaa8b10800000000000000
+      internalID: 1984592046885035494
       vertices: []
       indices: 
       edges: []

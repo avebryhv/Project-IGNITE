@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBaseHealth : MonoBehaviour
 {
-    EnemyBaseMovement movement;
+    EnemyBaseBehaviour behaviour;
     EnemySprite sprite;
     public GameObject sliceEffect;
     public int maxHealth;
@@ -15,7 +15,7 @@ public class EnemyBaseHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movement = GetComponent<EnemyBaseMovement>();
+        behaviour = GetComponent<EnemyBaseBehaviour>();
         sprite = GetComponentInChildren<EnemySprite>();
         currentHealth = maxHealth;
         canTakeDamage = true;
@@ -29,6 +29,10 @@ public class EnemyBaseHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockback, MeleeHitbox.type type)
     {
+        if (!behaviour.activated)
+        {
+            behaviour.Activate();
+        }
         if (canTakeDamage)
         {
             if (!trainingEnemy)
@@ -37,18 +41,24 @@ public class EnemyBaseHealth : MonoBehaviour
             }
             if (!armoured)
             {
-                movement.TakeKnockback(knockback, type);
+                behaviour.movement.TakeKnockback(knockback, type);
             }
             
             sprite.FlashColour(Color.red, 0.1f);
             FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
-                Instantiate(sliceEffect, transform.position, transform.rotation);
-                Destroy(gameObject);
+                Kill();
             }
         }
     }
 
-    
+    private void Kill()
+    {
+        Instantiate(sliceEffect, transform.position, transform.rotation);
+        CombatManager.Instance.RemoveActiveEnemy(behaviour);
+        Destroy(gameObject);
+    }
+
+
 }

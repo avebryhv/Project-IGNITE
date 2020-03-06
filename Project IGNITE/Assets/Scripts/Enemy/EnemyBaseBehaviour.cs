@@ -17,6 +17,7 @@ public class EnemyBaseBehaviour : MonoBehaviour
     public Mode currentMode;
     public float attackRange;
     public bool isOnScreen;
+    public bool activated;
 
     public Vector2 velocity;
 
@@ -116,5 +117,17 @@ public class EnemyBaseBehaviour : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Activate()
+    {
+        activated = true;
+        CombatManager.Instance.AddActiveEnemy(this);
+    }
+
+    public void Deactivate()
+    {
+        activated = false;
+        CombatManager.Instance.RemoveActiveEnemy(this);
     }
 }

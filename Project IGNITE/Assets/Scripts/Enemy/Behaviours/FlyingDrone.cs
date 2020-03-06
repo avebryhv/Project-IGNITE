@@ -22,8 +22,12 @@ public class FlyingDrone : EnemyBaseBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckState();
-        Actions();
+        if (activated)
+        {
+            CheckState();
+            Actions();
+        }
+        
     }
 
     public override void Actions()

@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -308,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
             //Double Jump
-            if (!controller.collisions.below && framesInAir > 2 && canDoubleJump && !controller.collisions.fallingThroughPlatform && !wallSliding && !inDash && !inDiveKick)
+            if (!controller.collisions.below && framesInAir > 2 && canDoubleJump && !controller.collisions.fallingThroughPlatform && !wallSliding && !inDash && !inDiveKick && finder.unlocks.doubleJump)
             {
 
                 velocity.y = maxJumpVelocity;
@@ -377,7 +378,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (airEvadeCount < 1)
+                if (airEvadeCount < 1 && finder.unlocks.airDash)
                 {
                     airEvadeCount++;
                     Evade();
@@ -440,7 +441,7 @@ public class PlayerMovement : MonoBehaviour
                 dir.y = 0;
             }
         }
-        else
+        else if (finder.unlocks.airDash)
         {
             if (directionalInput.x == 0 && directionalInput.y == 0)
             {
@@ -449,7 +450,16 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                dir = directionalInput;
+                if (finder.unlocks.directionDash)
+                {
+                    dir = directionalInput;
+                }
+                else
+                {
+                    dir.x = Mathf.Sign(directionalInput.x);
+                    dir.y = 0;
+                }
+                
             }
         }
         dir.Normalize();
@@ -669,7 +679,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-    }
+    }    
 
     public void SetFinder(PlayerScriptFinder f)
     {

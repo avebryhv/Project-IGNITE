@@ -168,6 +168,12 @@ public class PlayerHealth : MonoBehaviour
         canTakeDamage = true;
     }
 
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        UpdateHealth(maxHealth);
+    }
+
     public void SetFinder(PlayerScriptFinder f)
     {
         finder = f;

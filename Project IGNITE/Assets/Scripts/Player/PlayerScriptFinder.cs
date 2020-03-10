@@ -17,6 +17,7 @@ public class PlayerScriptFinder : MonoBehaviour
     public PlayerHealth health;
     public DronesBehaviour drones;
     public PlayerMessages messages;
+    public PlayerUnlocks unlocks;
 
     void Awake()
     {
@@ -61,6 +62,7 @@ public class PlayerScriptFinder : MonoBehaviour
         drones = FindObjectOfType<DronesBehaviour>();
         drones.SetFinder(this);
         messages = FindObjectOfType<PlayerMessages>();
+        unlocks = FindObjectOfType<PlayerUnlocks>();
     }
     
 }

@@ -325,7 +325,7 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.airLight2;                    
                     break;
                 case 3:
-                    if (timeSinceLastLightAttackEnded >= 0.1f)
+                    if (timeSinceLastLightAttackEnded >= 0.1f && finder.unlocks.airComboB)
                     {
                         finder.movement.SetSpecialAttackMovement(new Vector2(0,1), 3, 999);
                         currentAttack = attackList.airPause;
@@ -353,7 +353,7 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.light2;
                     break;
                 case 3:
-                    if (timeSinceLastLightAttackEnded >= 0.1f)
+                    if (timeSinceLastLightAttackEnded >= 0.1f && finder.unlocks.lightComboB)
                     {
                         currentAttack = attackList.lightB1;
                     }
@@ -396,7 +396,7 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.halfCircleDown;
                     AttackStartup();
                 }
-                else if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x))
+                else if (finder.movement.lastDirection == Mathf.Sign(finder.controller.playerInput.x) && finder.unlocks.stinger)
                 {
                     //Forward Heavy
                     if (finder.controller.collisions.below) //Grounded
@@ -417,7 +417,7 @@ public class MeleeAttacker : MonoBehaviour
                 else
                 {
                     //Back Heavy
-                    if (finder.controller.collisions.below) //Grounded
+                    if (finder.controller.collisions.below && finder.unlocks.uppercut) //Grounded
                     {
                         StartUppercut();
                     }

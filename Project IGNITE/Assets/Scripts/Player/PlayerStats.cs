@@ -89,7 +89,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Burst()
     {
-        if (canBurst && dtCharge >= 10)
+        if (canBurst && dtCharge >= 10 && finder.unlocks.burst)
         {
             GameObject burst = Instantiate(burstPrefab, transform.position, transform.rotation, transform);
             burstParticles.Play();

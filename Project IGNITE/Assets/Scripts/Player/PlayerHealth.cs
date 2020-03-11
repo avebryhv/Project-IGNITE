@@ -123,7 +123,13 @@ public class PlayerHealth : MonoBehaviour
             impulse.GenerateImpulse();
             StartIFrames(1);
         }
-        
+        if (currentHealth <= 0)
+        {
+            finder.state.SetDeathState();
+            finder.input.allowPlayerInput = false;
+            CombatManager.Instance.DeactivateAll();
+            FindObjectOfType<DeathScreen>().ShowScreen();
+        }
     }
 
     public void TakeDamage(int damage, Vector2 knockback)
@@ -145,6 +151,11 @@ public class PlayerHealth : MonoBehaviour
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();
             StartIFrames(1);
+        }
+
+        if (currentHealth <= 0)
+        {
+            finder.state.SetDeathState();
         }
 
     }
@@ -171,6 +182,12 @@ public class PlayerHealth : MonoBehaviour
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;
+        UpdateHealth(maxHealth);
+    }
+
+    public void LoadMaxHealth(int amount)
+    {
+        maxHealth = amount;
         UpdateHealth(maxHealth);
     }
 

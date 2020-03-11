@@ -75,6 +75,17 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void DeactivateAll()
+    {
+        for (int i = 0; i < activeEnemies.Count; i++)
+        {
+            if (activeEnemies[i] == null)
+            {
+                activeEnemies[i].Deactivate();
+            }
+        }
+    }
+
     public int ActiveEnemyCount()
     {
         return activeEnemies.Count;

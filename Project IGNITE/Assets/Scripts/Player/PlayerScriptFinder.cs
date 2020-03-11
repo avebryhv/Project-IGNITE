@@ -63,6 +63,7 @@ public class PlayerScriptFinder : MonoBehaviour
         drones.SetFinder(this);
         messages = FindObjectOfType<PlayerMessages>();
         unlocks = FindObjectOfType<PlayerUnlocks>();
+        unlocks.SetFinder(this);
     }
     
 }

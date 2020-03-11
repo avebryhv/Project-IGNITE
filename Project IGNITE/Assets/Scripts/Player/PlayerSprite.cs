@@ -117,6 +117,9 @@ public class PlayerSprite : MonoBehaviour
             case PlayerState.State.Knockback:
                 SetAnimationTrigger("knockback");
                 break;
+            case PlayerState.State.Dead:
+                SetAnimationTrigger("death");
+                break;
             default:
                 break;
         }

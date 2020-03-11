@@ -12,6 +12,9 @@ public class UnlocksUI : MonoBehaviour
     public TextMeshProUGUI currencyText;
     public Selectable firstSelectable;
 
+    public int healthUpCost;
+    public int DTUpCost;
+
 
     //Cost Texts
     [Header("Cost Texts")]
@@ -21,6 +24,10 @@ public class UnlocksUI : MonoBehaviour
     public TextMeshProUGUI doubleJumpCost;
     public TextMeshProUGUI airDashCost;
     public TextMeshProUGUI directionDashCost;
+    public TextMeshProUGUI healthUpCostText;
+    public TextMeshProUGUI dtUpCostText;
+    public TextMeshProUGUI healthUpButtonText;
+    public TextMeshProUGUI dtUpButtonText;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +48,13 @@ public class UnlocksUI : MonoBehaviour
         UpdateCurrency();
         UpdateCosts();
         firstSelectable.Select();
+        unlocks.StorePosition();
     }
 
     public void CloseMenu()
     {
         gameObject.SetActive(false);
+        
     }
 
     public void UnlockStinger()
@@ -114,6 +123,28 @@ public class UnlocksUI : MonoBehaviour
         }
     }
 
+    public void PurchaseHealthUp()
+    {
+        if (unlocks.healthUps < 5 && unlocks.currentAmount >= healthUpCost)
+        {
+            unlocks.PurchaseHealthUp();
+            unlocks.SubtractCurrency(healthUpCost);
+            UpdateCurrency();
+            UpdateCosts();
+        }
+    }
+
+    public void PurchaseDTUp()
+    {
+        if (unlocks.DTUps < 5 && unlocks.currentAmount >= DTUpCost)
+        {
+            unlocks.PurchaseDTUp();
+            unlocks.SubtractCurrency(DTUpCost);
+            UpdateCurrency();
+            UpdateCosts();
+        }
+    }
+
     public void UpdateCurrency()
     {
         currencyText.text = unlocks.currentAmount.ToString();
@@ -149,6 +180,25 @@ public class UnlocksUI : MonoBehaviour
         if (unlocks.directionDash)
         {
             directionDashCost.text = "---";
+        }
+
+        healthUpCost = Mathf.RoundToInt(Mathf.Pow((unlocks.healthUps + 1),2) * 500);
+        DTUpCost = Mathf.RoundToInt(Mathf.Pow((unlocks.DTUps + 1), 2) * 750);
+        healthUpCostText.text = healthUpCost.ToString();
+        dtUpCostText.text = DTUpCost.ToString();
+        healthUpButtonText.text = "Increased Health (" + (unlocks.healthUps + 1) + "/5)";
+        dtUpButtonText.text = "Increased DT (" + (unlocks.DTUps + 1) + "/5)";
+
+        if (unlocks.healthUps >= 5)
+        {
+            healthUpCostText.text = "---";
+            healthUpButtonText.text = "Max Health Upgrades Purchased";
+        }
+
+        if (unlocks.DTUps >= 5)
+        {
+            dtUpCostText.text = "---";
+            dtUpButtonText.text = "Max DT Upgrades Purchased";
         }
 
     }

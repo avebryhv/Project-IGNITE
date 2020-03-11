@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour
     {
         ui = FindObjectOfType<PlayerStatsUI>();
         health = maxHealth;
-        dtCharge = 90;
+        dtCharge = dtMax;
         ui.SetHealthValue(health, maxHealth);
         ui.SetDTValue(dtCharge, dtMax);
         canBurst = true;
@@ -84,6 +84,20 @@ public class PlayerStats : MonoBehaviour
     {
         dtCharge += amount;
         dtCharge = Mathf.Clamp(dtCharge, 0, dtMax);
+        ui.SetDTValue(dtCharge, dtMax);
+    }
+
+    public void IncreaseMaxDT(float amount)
+    {
+        dtMax += amount;
+        dtCharge = dtMax;
+        ui.SetDTValue(dtCharge, dtMax);
+    }
+
+    public void LoadMaxDT(float amount)
+    {
+        dtMax = amount;
+        dtCharge = amount;
         ui.SetDTValue(dtCharge, dtMax);
     }
 

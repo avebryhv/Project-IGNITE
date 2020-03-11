@@ -15,19 +15,11 @@ public class TrainingRoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetLevel();
-        }
-
         if (Gamepad.current.selectButton.wasPressedThisFrame)
         {
-            ResetLevel();
+            LevelManager.Instance.ReloadLevel();
         }
     }
 
-    public void ResetLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 }

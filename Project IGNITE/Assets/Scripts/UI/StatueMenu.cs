@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class StatueMenu : MonoBehaviour
 {
     public Canvas menu;
     UnlocksUI unlocksUI;
+    public EventSystem eventSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -35,5 +37,6 @@ public class StatueMenu : MonoBehaviour
         GameManager.Instance.SetGamePaused(false);
         Time.timeScale = 1;
         GameManager.Instance.finder.input.allowPlayerInput = true;
+        eventSystem.SetSelectedGameObject(null);
     }
 }

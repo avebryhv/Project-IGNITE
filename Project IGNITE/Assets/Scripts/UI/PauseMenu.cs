@@ -81,6 +81,7 @@ public class PauseMenu : MonoBehaviour
         baseMenuPanel.SetActive(true);
         Time.timeScale = 0;
         GameManager.Instance.finder.input.allowPlayerInput = false;
+        LevelManager.Instance.PauseRecordingTime();
         resumeButton.Select();
     }
 
@@ -96,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         submenuOpen = false;
         Time.timeScale = 1;
         eventSystem.SetSelectedGameObject(null);
+        LevelManager.Instance.ResumeRecordingTime();
     }
 
     public void ShowOptions()

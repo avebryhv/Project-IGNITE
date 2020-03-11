@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     PlayerScriptFinder finder;
-    public enum State { Idle, Walk, Run, Jump, WallSlide, Fall, Block, Evade, Knockback, Attack, Parry};
+    public enum State { Idle, Walk, Run, Jump, WallSlide, Fall, Block, Evade, Knockback, Attack, Parry, Dead};
     public State currentState;
     public bool canBufferInput;
 
@@ -64,53 +64,62 @@ public class PlayerState : MonoBehaviour
 
     public void DecideState()
     {
-        if (finder.movement.inKnockback)
+        if (currentState != State.Dead)
         {
-            SetState(State.Knockback);
+            if (finder.movement.inKnockback)
+            {
+                SetState(State.Knockback);
+            }
+            else if (finder.melee.inAttack)
+            {
+                SetState(State.Attack);
+            }
+            else if (finder.movement.jumpPressedThisFrame)
+            {
+                SetState(State.Jump);
+            }
+            else if (finder.movement.inDash)
+            {
+                SetState(State.Evade);
+            }
+            else if (finder.guard.inParry)
+            {
+                SetState(State.Parry);
+            }
+            else if (finder.guard.isGuarding)
+            {
+                SetState(State.Block);
+            }
+            else if (finder.movement.wallSliding)
+            {
+                SetState(State.WallSlide);
+            }
+            else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0 && finder.movement.lockedOn)
+            {
+                SetState(State.Walk);
+            }
+            else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0)
+            {
+                SetState(State.Run);
+            }
+            else if (!finder.controller.collisions.below)
+            {
+                SetState(State.Fall);
+            }
+            else if (finder.controller.collisions.below)
+            {
+                SetState(State.Idle);
+            }
+            else
+            {
+                SetState(currentState);
+            }
         }
-        else if (finder.melee.inAttack)
-        {
-            SetState(State.Attack);
-        }
-        else if (finder.movement.jumpPressedThisFrame)
-        {
-            SetState(State.Jump);
-        }
-        else if (finder.movement.inDash)
-        {
-            SetState(State.Evade);
-        }
-        else if (finder.guard.inParry)
-        {
-            SetState(State.Parry);
-        }
-        else if (finder.guard.isGuarding)
-        {
-            SetState(State.Block);
-        }
-        else if (finder.movement.wallSliding)
-        {
-            SetState(State.WallSlide);
-        }
-        else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0 && finder.movement.lockedOn)
-        {
-            SetState(State.Walk);
-        }
-        else if (finder.controller.collisions.below && finder.controller.playerInput.x != 0)
-        {
-            SetState(State.Run);
-        }
-        else if (!finder.controller.collisions.below)
-        {
-            SetState(State.Fall);
-        }
-        else if (finder.controller.collisions.below)
-        {
-            SetState(State.Idle);
-        }
-        else
-        {
-            SetState(currentState);
-        }
+        
+    }
+
+    public void SetDeathState()
+    {
+        SetState(State.Dead);
     }
 }

@@ -59,7 +59,16 @@ public class PlayerState : MonoBehaviour
 
     public void ResetStateForAttack()
     {
-        SetState(State.Idle);
+        if (finder.controller.collisions.below)
+        {
+            SetState(State.Idle);
+        }
+        else
+        {
+            SetState(State.Fall);
+        }
+        
+        //currentState = State.Idle;
     }
 
     public void DecideState()

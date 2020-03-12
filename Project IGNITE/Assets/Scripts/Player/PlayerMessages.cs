@@ -36,6 +36,16 @@ public class PlayerMessages : MonoBehaviour
                 showingMinorMessage = false;
             }
         }
+
+        if (showingMajorMessage)
+        {
+            majorLingerCounter += Time.deltaTime;
+            if (majorLingerCounter >= majorLingerTime)
+            {
+                majorText.enabled = false;
+                showingMajorMessage = false;
+            }
+        }
     }
 
     public void CreateMinorMessage(string text, Color col, float duration)
@@ -51,10 +61,10 @@ public class PlayerMessages : MonoBehaviour
     public void CreateMajorMessage(string text, Color col, float duration)
     {
         majorText.enabled = true;
-        showingMinorMessage = true;
-        minorText.text = text;
-        minorText.color = col;
-        minorLingerCounter = 0;
-        minorLingerTime = duration;
+        showingMajorMessage = true;
+        majorText.text = text;
+        majorText.color = col;
+        majorLingerCounter = 0;
+        majorLingerTime = duration;
     }
 }

@@ -45,10 +45,10 @@ public class PlayerUnlocks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveUnlocks();
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    SaveUnlocks();
+        //}
     }
 
 
@@ -56,6 +56,7 @@ public class PlayerUnlocks : MonoBehaviour
     {
         currentAmount += amount;
         currencyUI.UpdateCurrencyUI(currentAmount);
+        currencyUI.ShowNewCurrency(amount);
     }
 
     public void SubtractCurrency(int amount)
@@ -112,7 +113,21 @@ public class PlayerUnlocks : MonoBehaviour
         file.Close();
 
         Debug.Log("Unlocks Saved");
+        finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
         
+    }
+
+    public void SaveUnlocksWithCheckpoint()
+    {
+        StorePosition();
+        Save save = CreateSaveObject();
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + filePath);
+        formatter.Serialize(file, save);
+        file.Close();
+        
+        Debug.Log("Unlocks Saved");
+        finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
     }
 
     public void LoadUnlocks()

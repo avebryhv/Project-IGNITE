@@ -13,6 +13,7 @@ public class EnemyBaseHealth : MonoBehaviour
     public bool trainingEnemy;
     public bool armoured;
     public int currencyRewarded;
+    public GameObject currencyParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class EnemyBaseHealth : MonoBehaviour
     {
         Instantiate(sliceEffect, transform.position, transform.rotation);
         CombatManager.Instance.RemoveActiveEnemy(behaviour);
+        Instantiate(currencyParticles, transform.position, transform.rotation);
         FindObjectOfType<PlayerUnlocks>().AddCurrency(currencyRewarded);
         Destroy(gameObject);
     }

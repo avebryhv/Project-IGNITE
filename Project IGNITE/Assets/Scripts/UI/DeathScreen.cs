@@ -28,12 +28,12 @@ public class DeathScreen : MonoBehaviour
 
     public void Continue()
     {
-
+        LevelManager.Instance.ReloadLevelWithCheckpoint();
     }
 
     public void Restart()
     {
-
+        LevelManager.Instance.ReloadLevel();
     }
 
     public void Quit()

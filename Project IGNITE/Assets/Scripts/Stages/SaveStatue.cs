@@ -9,10 +9,13 @@ public class SaveStatue : MonoBehaviour
     public bool playerInFront;
     public StatueMenu menu;
     public Image interactImage;
+    float timeSinceHit;
+    bool canCheckPointSave;
     // Start is called before the first frame update
     void Start()
     {
         menu = FindObjectOfType<StatueMenu>();
+        canCheckPointSave = true;
     }
 
     // Update is called once per frame
@@ -29,10 +32,19 @@ public class SaveStatue : MonoBehaviour
         }
         else
         {
-            interactImage.enabled = false; ;
+            interactImage.enabled = false;
 
         }
 
+        if (!canCheckPointSave)
+        {
+            timeSinceHit += Time.deltaTime;
+            if (timeSinceHit >= 10)
+            {
+                canCheckPointSave = true;
+                timeSinceHit = 0;
+            }
+        }
 
     }
 
@@ -46,6 +58,10 @@ public class SaveStatue : MonoBehaviour
         if (collision.tag == "PlayerHurtbox")
         {
             playerInFront = true;
+            if (canCheckPointSave)
+            {
+                CheckPointSave();
+            }
         }
     }
 
@@ -63,5 +79,11 @@ public class SaveStatue : MonoBehaviour
         Time.timeScale = 0;
         GameManager.Instance.finder.input.allowPlayerInput = false;
         menu.OpenMenu();
+    }
+
+    public void CheckPointSave()
+    {
+        FindObjectOfType<PlayerUnlocks>().SaveUnlocksWithCheckpoint();
+        canCheckPointSave = false;
     }
 }

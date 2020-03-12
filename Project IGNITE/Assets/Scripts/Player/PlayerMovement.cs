@@ -189,7 +189,14 @@ public class PlayerMovement : MonoBehaviour
 
         OnLanding();
 
+        if (finder.state.currentState == PlayerState.State.Dead)
+        {
+            velocity.x = 0;
+        }
+
         CheckKnockback();
+
+
         //Moves player: all moves that affect movement come before this
         controller.Move(velocity * Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed(), directionalInput);
 

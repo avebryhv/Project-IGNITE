@@ -209,12 +209,14 @@ public class MeleeAttacker : MonoBehaviour
         {
             if (heavyChargeTime >= 1)
             {
+                finder.state.ResetStateForAttack();
                 currentAttack = attackList.heavyCharged;
                 GameObject beam = Instantiate(swordBeam, transform.position, transform.rotation);
                 beam.GetComponent<SwordBeam>().SetDirection(finder.movement.lastDirection);
             }
             else
             {
+                finder.state.ResetStateForAttack();
                 currentAttack = attackList.heavy;
             }
             chargingHeavy = false;
@@ -445,7 +447,7 @@ public class MeleeAttacker : MonoBehaviour
     void AttackStartup()
     {
         currentState = phase.Startup;
-        finder.state.ResetStateForAttack();
+        //finder.state.ResetStateForAttack();
         inAttack = true;
         Invoke("CreateHitbox", currentAttack.startUpTime / GameManager.Instance.ReturnPlayerSpeed());
     }
@@ -467,12 +469,14 @@ public class MeleeAttacker : MonoBehaviour
 
     public void EndAttack()
     {
+        
         currentState = phase.None;
         inAttack = false;
         finder.movement.EndAirStall();
         comboTimerPaused = false;
         timeSinceLastLightAttackEnded = 0;
         finder.movement.StopSpecialAttackMovement();
+        finder.state.ResetStateForAttack();
     }
 
     public void CancelBuffer()

@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public bool canTakeDamage;
+    bool isDead;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         ui = FindObjectOfType<PlayerStatsUI>();
         UpdateHealth(maxHealth);
         impulse = GetComponent<CinemachineImpulseSource>();
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -123,12 +125,9 @@ public class PlayerHealth : MonoBehaviour
             impulse.GenerateImpulse();
             StartIFrames(1);
         }
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
-            finder.state.SetDeathState();
-            finder.input.allowPlayerInput = false;
-            CombatManager.Instance.DeactivateAll();
-            FindObjectOfType<DeathScreen>().ShowScreen();
+            Die();
         }
     }
 
@@ -153,11 +152,20 @@ public class PlayerHealth : MonoBehaviour
             StartIFrames(1);
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
-            finder.state.SetDeathState();
+            Die();
         }
 
+    }
+
+    void Die()
+    {
+        finder.state.SetDeathState();
+        finder.input.allowPlayerInput = false;
+        CombatManager.Instance.DeactivateAll();
+        FindObjectOfType<DeathScreen>().ShowScreen();
+        isDead = true;
     }
 
     public void IncreaseHealth(int amount)

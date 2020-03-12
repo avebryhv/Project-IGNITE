@@ -44,12 +44,14 @@ public class Room : MonoBehaviour
     {
         entryDoor.SetActive(true);
         exitDoor.SetActive(true);
+        AudioManager.Instance.FadeIntoBGM2();
     }
 
     void UnlockRoom()
     {
         entryDoor.SetActive(false);
         exitDoor.SetActive(false);
+        AudioManager.Instance.FadeIntoBGM1();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

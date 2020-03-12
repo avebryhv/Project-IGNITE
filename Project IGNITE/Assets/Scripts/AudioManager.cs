@@ -8,9 +8,14 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource sfxPlayer;
     public AudioSource bgmPlayer;
+    public AudioSource bgmPlayer2;
+    bool fadingInto1;
+    bool fadingInto2;
 
     public AudioClip defaultBGM;
     public bool playBGMOnStart;
+
+    public float maxBGMVolume;
 
 
     public static AudioManager Instance { get => instance; set => instance = value; }
@@ -41,7 +46,29 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (fadingInto1)
+        {
+            bgmPlayer.volume += Time.deltaTime;
+            bgmPlayer2.volume -= Time.deltaTime;
+            bgmPlayer.volume = Mathf.Clamp(bgmPlayer.volume, 0, maxBGMVolume);
+
+            if (bgmPlayer2.volume <= 0)
+            {
+                fadingInto1 = false;
+            }
+        }
+
+        if (fadingInto2)
+        {
+            bgmPlayer.volume -= Time.deltaTime;
+            bgmPlayer2.volume += Time.deltaTime;
+            bgmPlayer2.volume = Mathf.Clamp(bgmPlayer2.volume, 0, maxBGMVolume);
+
+            if (bgmPlayer.volume <= 0)
+            {
+                fadingInto2 = false;
+            }
+        }
     }
 
     public void PlaySFX(AudioClip clip)
@@ -58,5 +85,19 @@ public class AudioManager : MonoBehaviour
     {
         bgmPlayer.clip = clip;
         bgmPlayer.Play();
+    }
+
+    public void FadeIntoBGM1()
+    {
+        fadingInto1 = true;
+        fadingInto2 = false;
+        
+    }
+
+    public void FadeIntoBGM2()
+    {
+        fadingInto2 = true;
+        fadingInto1 = false;
+        bgmPlayer2.Play();
     }
 }

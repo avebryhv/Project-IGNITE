@@ -56,16 +56,18 @@ public class Room : MonoBehaviour
     {
         if (collision.tag == "PlayerHurtbox")
         {
-            roomEnabled = true;
+            
             for (int i = 0; i < roomEnemies.Count; i++)
             {
                 roomEnemies[i].Activate();
             }
 
-            if (enemyLocked)
+            if (enemyLocked && !roomEnabled)
             {
                 LockRoom();
             }
+
+            roomEnabled = true;
         }
         
     }

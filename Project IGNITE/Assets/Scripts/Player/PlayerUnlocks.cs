@@ -113,7 +113,7 @@ public class PlayerUnlocks : MonoBehaviour
         file.Close();
 
         Debug.Log("Unlocks Saved");
-        finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
+        //finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
         
     }
 
@@ -126,7 +126,7 @@ public class PlayerUnlocks : MonoBehaviour
         formatter.Serialize(file, save);
         file.Close();
         
-        Debug.Log("Unlocks Saved");
+        Debug.Log("Unlocks Saved With Checkpoint");
         finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
     }
 

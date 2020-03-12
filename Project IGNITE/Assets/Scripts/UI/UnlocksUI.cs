@@ -54,7 +54,7 @@ public class UnlocksUI : MonoBehaviour
     public void CloseMenu()
     {
         gameObject.SetActive(false);
-        
+        unlocks.SaveUnlocksWithCheckpoint();   
     }
 
     public void UnlockStinger()

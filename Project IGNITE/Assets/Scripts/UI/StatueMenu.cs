@@ -14,7 +14,7 @@ public class StatueMenu : MonoBehaviour
     void Start()
     {
         unlocksUI = FindObjectOfType<UnlocksUI>();
-        unlocksUI.CloseMenu();
+        //unlocksUI.CloseMenu();
         menu.enabled = false;
     }
 
@@ -38,5 +38,6 @@ public class StatueMenu : MonoBehaviour
         Time.timeScale = 1;
         GameManager.Instance.finder.input.allowPlayerInput = true;
         eventSystem.SetSelectedGameObject(null);
+        unlocksUI.CloseMenu();
     }
 }

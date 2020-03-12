@@ -111,6 +111,7 @@ public class PlayerHealth : MonoBehaviour
         {
             finder.sprite.FlashColour(Color.red, 0.1f);
             currentHealth -= Mathf.RoundToInt(damage / 2);
+            LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
         }
@@ -120,6 +121,7 @@ public class PlayerHealth : MonoBehaviour
             finder.melee.CancelAttacks();
             finder.sprite.FlashColour(Color.red, 0.1f);
             currentHealth -= damage;
+            LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();
@@ -137,6 +139,7 @@ public class PlayerHealth : MonoBehaviour
         {
             finder.sprite.FlashColour(Color.red, 0.1f);
             currentHealth -= Mathf.RoundToInt(damage / 2);
+            LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
         }
@@ -146,6 +149,7 @@ public class PlayerHealth : MonoBehaviour
             finder.melee.CancelAttacks();
             finder.sprite.FlashColour(Color.red, 0.1f);
             currentHealth -= damage;
+            LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();

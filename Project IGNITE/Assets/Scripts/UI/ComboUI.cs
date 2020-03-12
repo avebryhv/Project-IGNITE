@@ -90,6 +90,7 @@ public class ComboUI : MonoBehaviour
         AddToList(name);
         comboBuildup += (amount / ReturnAmountInList(name));
         stats.IncreaseDT(amount / ReturnAmountInList(name) / 3);
+        LevelManager.Instance.AddComboScore(amount);
     }
 
     public void AddComboScore(float amount, string name, bool addsToList)
@@ -98,11 +99,13 @@ public class ComboUI : MonoBehaviour
         {
             AddToList(name);
             comboBuildup += (amount / ReturnAmountInList(name));
+            LevelManager.Instance.AddComboScore(amount / ReturnAmountInList(name));
             stats.IncreaseDT(amount / ReturnAmountInList(name) / 3);
         }
         else
         {
             comboBuildup += (amount);
+            LevelManager.Instance.AddComboScore(amount);
             stats.IncreaseDT(amount / 3);
         }
         

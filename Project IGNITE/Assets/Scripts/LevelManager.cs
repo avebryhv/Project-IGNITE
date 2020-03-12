@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public bool countingTime;
     public float timeSpentInLevel;
     public bool usingCheckPoint;
+    public float totalComboScore;
+    public float totalDamage;
 
     public static LevelManager Instance { get => instance; set => instance = value; }
 
@@ -61,5 +63,30 @@ public class LevelManager : MonoBehaviour
     {
         usingCheckPoint = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ResetLevelStats()
+    {
+        timeSpentInLevel = 0;
+        totalComboScore = 0;
+        totalDamage = 0;
+    }
+
+    public void AddDamage(int amount)
+    {
+        totalDamage += amount;
+    }
+
+    public void AddComboScore(float amount)
+    {
+        totalComboScore += amount;
+    }
+
+    public void EndLevel()
+    {
+        GameManager.Instance.SetGamePaused(true);
+        Time.timeScale = 0;
+        GameManager.Instance.finder.input.allowPlayerInput = false;
+        FindObjectOfType<EndLevelUI>().ShowEndingScores();
     }
 }

@@ -21,6 +21,11 @@ public class Save
     public int healthUps;
     public int DTUps;
 
+    public int foundHealthUps;
+    public bool foundHealth1;
+    public bool foundHealth2;
+    public int foundDTUps;
+
 
     [Header("Currency Variables")]
     public int currentAmount;

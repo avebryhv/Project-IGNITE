@@ -96,6 +96,7 @@ public class PlayerStats : MonoBehaviour
 
     public void LoadMaxDT(float amount)
     {
+        ui = FindObjectOfType<PlayerStatsUI>();
         dtMax = amount;
         dtCharge = amount;
         ui.SetDTValue(dtCharge, dtMax);

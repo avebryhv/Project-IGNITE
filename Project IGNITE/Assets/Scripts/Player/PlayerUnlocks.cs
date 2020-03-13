@@ -23,6 +23,11 @@ public class PlayerUnlocks : MonoBehaviour
     public int healthUps;
     public int DTUps;
 
+    public int foundHealthUps;
+    public bool foundHealth1;
+    public bool foundHealth2;
+    public int foundDTUps;
+
 
     [Header("Currency Variables")]
     public int currentAmount;
@@ -83,6 +88,24 @@ public class PlayerUnlocks : MonoBehaviour
         finder.stats.IncreaseMaxDT(10);
     }
 
+    public void FindHealthUp(int index)
+    {
+        foundHealthUps++;
+        finder.messages.CreateMajorMessage("Max Health Increased", Color.green, 2.0f);
+        finder.health.IncreaseMaxHealth(10);
+        switch (index)
+        {
+            case 1:
+                foundHealth1 = true;
+                break;
+            case 2:
+                foundHealth2 = true;
+                break;
+            default:
+                break;
+        }
+    }
+
     private Save CreateSaveObject()
     {
         Save save = new Save();
@@ -97,6 +120,10 @@ public class PlayerUnlocks : MonoBehaviour
 
         save.healthUps = healthUps;
         save.DTUps = DTUps;
+        save.foundHealthUps = foundHealthUps;
+        save.foundHealth1 = foundHealth1;
+        save.foundHealth2 = foundHealth2;
+        save.foundDTUps = foundDTUps;
         save.currentAmount = currentAmount;
         save.checkPointPositionX = checkpointPosition.x;
         save.checkPointPositionY = checkpointPosition.y;
@@ -150,11 +177,15 @@ public class PlayerUnlocks : MonoBehaviour
 
             healthUps = save.healthUps;
             DTUps = save.DTUps;
+            foundHealthUps = save.foundHealthUps;
+            foundHealth1 = save.foundHealth1;
+            foundHealth2 = save.foundHealth2;
+            foundDTUps = save.foundDTUps;
             currentAmount = save.currentAmount;
             checkpointPosition.x = save.checkPointPositionX;
             checkpointPosition.y = save.checkPointPositionY;
             currencyUI.UpdateCurrencyUI(currentAmount);
-            finder.health.LoadMaxHealth(100 + healthUps * 10);
+            finder.health.LoadMaxHealth(100 + healthUps * 10 + foundHealthUps * 10);
             finder.stats.LoadMaxDT(50 + healthUps * 10);
 
             if (LevelManager.Instance.usingCheckPoint)

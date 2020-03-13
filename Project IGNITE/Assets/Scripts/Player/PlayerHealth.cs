@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHealth(int newHealth)
     {
+        ui = FindObjectOfType<PlayerStatsUI>();
         currentHealth = newHealth;
         ui.SetHealthValue(currentHealth, maxHealth);
     }

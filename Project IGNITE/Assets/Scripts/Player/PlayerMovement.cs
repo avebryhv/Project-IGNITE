@@ -146,7 +146,9 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleWallSliding();
         }
+
         
+
         //Sets y velocity: all moves that change y velocity come after this
         velocity.y += gravity * Time.deltaTime/* * GameManager.Instance.ReturnPlayerSpeed()*/;
 
@@ -427,6 +429,7 @@ public class PlayerMovement : MonoBehaviour
         //    dashVector = DecideDashDirection();
         //}
         dashVector = DecideDashDirection();
+        
 
         Invoke("CancelDash", dashTime / GameManager.Instance.ReturnPlayerSpeed());
         Invoke("SetDashCooldown", dashCooldown / GameManager.Instance.ReturnPlayerSpeed());
@@ -479,6 +482,10 @@ public class PlayerMovement : MonoBehaviour
     {
         inDash = false;
         finder.health.canTakeDamage = true;
+        if (!controller.collisions.below)
+        {
+            velocity.y = dashVector.y * moveSpeed;
+        }
         //playerHealth.canTakeDamage = true;
         //meleeController.canAttack = true;
     }

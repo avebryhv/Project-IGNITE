@@ -12,7 +12,7 @@ public class PlayerState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetState(State.Idle);
     }
 
     // Update is called once per frame

@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         ui = FindObjectOfType<PlayerStatsUI>();
-        UpdateHealth(maxHealth);
+        //UpdateHealth(maxHealth);
         impulse = GetComponent<CinemachineImpulseSource>();
         isDead = false;
     }

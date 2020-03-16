@@ -24,6 +24,7 @@ public class PlayerSprite : MonoBehaviour
         spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
         dtSpriteList = GetComponentsInChildren<DTSpriteToggler>();
         visorLight.color = Color.blue;
+        SetAnimationTrigger("idle");
     }
 
     // Update is called once per frame
@@ -106,7 +107,7 @@ public class PlayerSprite : MonoBehaviour
                 SetAnimationTrigger("wallSlide");
                 break;
             case PlayerState.State.Evade:
-                SetAnimationTrigger("evade");
+                SetAnimationTrigger("dashForward");
                 break;
             case PlayerState.State.Attack:
                 DecideMeleeAnimation();

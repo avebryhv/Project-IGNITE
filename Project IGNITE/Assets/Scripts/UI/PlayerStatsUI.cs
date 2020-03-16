@@ -28,6 +28,7 @@ public class PlayerStatsUI : MonoBehaviour
     void Update()
     {
         healthBarLerp.fillAmount = Mathf.Lerp(healthBarLerp.fillAmount, healthbar.fillAmount, Time.deltaTime);
+        secondHealthLerp.fillAmount = Mathf.Lerp(secondHealthLerp.fillAmount, secondHealthBar.fillAmount, Time.deltaTime);
         if (dronesBar.fillAmount == 1)
         {
             Color droneColour = dronesBar.color;

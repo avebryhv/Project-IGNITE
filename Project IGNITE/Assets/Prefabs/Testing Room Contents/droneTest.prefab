@@ -561,7 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliceEffect: {fileID: 1100474356707296631, guid: 201974d812524364c8d9f6f297638b8e,
     type: 3}
-  maxHealth: 50
+  maxHealth: 25
   currentHealth: 0
   canTakeDamage: 1
   trainingEnemy: 0

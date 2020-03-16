@@ -253,6 +253,12 @@ public class PlayerMovement : MonoBehaviour
             //Wall Jump
             if (wallSliding)
             {
+                airStallCount = 0;
+                airEvadeCount = 0;
+                if (!canDash)
+                {
+                    ResetDash();
+                }
                 if (directionalInput.x != 0 && wallDirX == Mathf.Sign(directionalInput.x))
                 {
                     //velocity.x = -wallDirX * wallJumpClimb.x;
@@ -274,6 +280,10 @@ public class PlayerMovement : MonoBehaviour
                 if (finder.guard.inParry)
                 {
                     finder.guard.ExitParry();
+                }
+                if (!canDash)
+                {
+                    SetDashCooldown();
                 }
                 if (finder.melee.inAttack)
                 {
@@ -412,7 +422,7 @@ public class PlayerMovement : MonoBehaviour
         inDash = true;
         canDash = false;
         inDiveKick = false;
-        finder.health.canTakeDamage = false;        
+        //finder.health.canTakeDamage = false;        
         //playerHealth.canTakeDamage = false;
         //meleeController.canAttack = false;
         //if (directionalInput.x == 0)
@@ -481,7 +491,7 @@ public class PlayerMovement : MonoBehaviour
     void CancelDash()
     {
         inDash = false;
-        finder.health.canTakeDamage = true;
+        //finder.health.canTakeDamage = true;
         if (!controller.collisions.below)
         {
             velocity.y = dashVector.y * moveSpeed;
@@ -556,6 +566,15 @@ public class PlayerMovement : MonoBehaviour
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
+            if (!inDash)
+            {
+                airEvadeCount = 0;
+            }
+            
+            if (!canDash)
+            {
+                ResetDash();
+            }
             if (!finder.melee.inAttack)
             {
                 lastDirection = -wallDirX;
@@ -624,6 +643,10 @@ public class PlayerMovement : MonoBehaviour
         inKnockback = true;
         knockbackVelocity = dir;
         controller.ignoreDirectionChange = true;
+        if (inDash)
+        {
+            CancelDash();
+        }
         //meleeController.canAttack = false;
     }
 

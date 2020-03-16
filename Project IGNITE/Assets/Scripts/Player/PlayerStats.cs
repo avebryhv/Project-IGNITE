@@ -33,7 +33,7 @@ public class PlayerStats : MonoBehaviour
         ui = FindObjectOfType<PlayerStatsUI>();
         health = maxHealth;
         dtCharge = dtMax;
-        ui.SetHealthValue(health, maxHealth);
+        //ui.SetHealthValue(health, maxHealth);
         ui.SetDTValue(dtCharge, dtMax);
         canBurst = true;
     }

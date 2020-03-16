@@ -9,8 +9,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfxPlayer;
     public AudioSource bgmPlayer;
     public AudioSource bgmPlayer2;
-    bool fadingInto1;
-    bool fadingInto2;
+    public bool fadingInto1;
+    public bool fadingInto2;
 
     public AudioClip defaultBGM;
     public bool playBGMOnStart;

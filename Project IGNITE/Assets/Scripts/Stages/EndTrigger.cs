@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour
 {
+    public UsabilityData dataSending;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,10 @@ public class EndTrigger : MonoBehaviour
         if (collision.tag == "PlayerHurtbox")
         {
             LevelManager.Instance.EndLevel();
+            if (dataSending != null)
+            {
+                dataSending.StartSending();
+            }
         }
     }
 }

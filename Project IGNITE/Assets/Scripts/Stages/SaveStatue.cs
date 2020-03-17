@@ -11,6 +11,7 @@ public class SaveStatue : MonoBehaviour
     public Image interactImage;
     float timeSinceHit;
     bool canCheckPointSave;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,14 +77,32 @@ public class SaveStatue : MonoBehaviour
     public void OpenSaveStatue()
     {
         GameManager.Instance.SetGamePaused(true);
-        Time.timeScale = 0;
+        
         GameManager.Instance.finder.input.allowPlayerInput = false;
-        menu.OpenMenu();
+        anim.Play("panelDown", 0, 0);
+        Invoke("OpenMenu", 0.5f);
     }
 
     public void CheckPointSave()
     {
         FindObjectOfType<PlayerUnlocks>().SaveUnlocksWithCheckpoint();
         canCheckPointSave = false;
+    }
+
+    public void OpenMenu()
+    {
+        Time.timeScale = 0;
+        menu.OpenMenu(this);
+    }
+
+    public void CloseMenu()
+    {        
+        anim.Play("panelUp", 0, 0);
+        Invoke("ResumePlayer", 0.5f);
+    }
+
+    public void ResumePlayer()
+    {
+        GameManager.Instance.finder.input.allowPlayerInput = true;
     }
 }

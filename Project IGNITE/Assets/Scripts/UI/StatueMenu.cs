@@ -9,6 +9,7 @@ public class StatueMenu : MonoBehaviour
     public Canvas menu;
     UnlocksUI unlocksUI;
     public EventSystem eventSystem;
+    SaveStatue linkedSavePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,9 @@ public class StatueMenu : MonoBehaviour
         
     }
 
-    public void OpenMenu()
+    public void OpenMenu(SaveStatue point)
     {
+        linkedSavePoint = point;
         menu.enabled = true;
         unlocksUI.gameObject.SetActive(true);
         unlocksUI.ShowMenu();
@@ -36,7 +38,7 @@ public class StatueMenu : MonoBehaviour
         menu.enabled = false;
         GameManager.Instance.SetGamePaused(false);
         Time.timeScale = 1;
-        GameManager.Instance.finder.input.allowPlayerInput = true;
+        linkedSavePoint.CloseMenu();
         eventSystem.SetSelectedGameObject(null);
         unlocksUI.CloseMenu();
     }

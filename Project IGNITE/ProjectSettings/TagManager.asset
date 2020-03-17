@@ -52,6 +52,9 @@ TagManager:
   - name: BackWall
     uniqueID: 1896634309
     locked: 0
+  - name: BackObjects
+    uniqueID: 2720943849
+    locked: 0
   - name: Enemy
     uniqueID: 208478841
     locked: 0
@@ -66,6 +69,9 @@ TagManager:
     locked: 0
   - name: Floor
     uniqueID: 2119467171
+    locked: 0
+  - name: ForegroundObject
+    uniqueID: 2135104303
     locked: 0
   - name: UI
     uniqueID: 3540810793

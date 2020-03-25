@@ -194,6 +194,11 @@ public class PlayerUnlocks : MonoBehaviour
             }
             
         }
+        else
+        {
+            finder.health.LoadMaxHealth(100);
+            finder.stats.LoadMaxDT(50);
+        }
     }
 
     public void StorePosition()

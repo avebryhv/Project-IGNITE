@@ -33,7 +33,7 @@ public class DeathScreen : MonoBehaviour
 
     public void Restart()
     {
-        LevelManager.Instance.ReloadLevel();
+        LevelManager.Instance.RestartLevel();
     }
 
     public void Quit()

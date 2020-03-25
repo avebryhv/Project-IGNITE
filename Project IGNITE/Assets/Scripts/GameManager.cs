@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public float playerSpeed;
     public float enemySpeed;
     public bool gamePaused;
+    public bool usingController;
+    int gamepadCount;
     public PlayerScriptFinder finder;    
 
     public static GameManager Instance { get => instance; set => instance = value; }
@@ -30,13 +33,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        CheckGamePads();
     }    
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Gamepad.all.Count != gamepadCount)
+        {
+            CheckGamePads();
+        }
     }
 
     public float ReturnPlayerSpeed()
@@ -70,6 +76,19 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
+
+    void CheckGamePads()
+    {
+        if (Gamepad.all.Count > 0)
+        {
+            usingController = true;
+        }
+        else
+        {
+            usingController = false;
+        }
+        gamepadCount = Gamepad.all.Count;
+    }   
 
     public void SetFinder(PlayerScriptFinder f)
     {

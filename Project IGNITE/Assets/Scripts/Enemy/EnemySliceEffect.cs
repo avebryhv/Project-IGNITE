@@ -135,4 +135,9 @@ public class EnemySliceEffect : MonoBehaviour
         part2Renderer.transform.localPosition = new Vector3(direction.x, direction.y);
 
     }
+
+    public void SetFacingDirection(float dir)
+    {
+        transform.localScale = new Vector3(dir, 1);
+    }
 }

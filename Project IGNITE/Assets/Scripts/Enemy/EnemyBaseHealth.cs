@@ -57,7 +57,8 @@ public class EnemyBaseHealth : MonoBehaviour
 
     private void Kill()
     {
-        Instantiate(sliceEffect, transform.position, transform.rotation);
+        GameObject sliceEff = Instantiate(sliceEffect, transform.position, transform.rotation);
+        sliceEff.GetComponent<EnemySliceEffect>().SetFacingDirection(behaviour.movement.lastDirection);
         CombatManager.Instance.RemoveActiveEnemy(behaviour);
         Instantiate(currencyParticles, transform.position, transform.rotation);
         FindObjectOfType<PlayerUnlocks>().AddCurrency(currencyRewarded);

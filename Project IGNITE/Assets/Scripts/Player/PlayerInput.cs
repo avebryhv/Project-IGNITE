@@ -22,13 +22,13 @@ public class PlayerInput : MonoBehaviour
     public float deadZone;
     public bool usingDeadZone;
 
-    public ButtonControl lightAttackButton;
+    
 
     
     // Start is called before the first frame update
     void Start()
     {
-        lightAttackButton = Gamepad.current.buttonWest;
+        
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (!GameManager.Instance.gamePaused)
             {
-                if (Gamepad.all.Count > 0)
+                if (GameManager.Instance.usingController)
                 {
                     ReadControllerInputs();
                 }
@@ -52,7 +52,8 @@ public class PlayerInput : MonoBehaviour
 
         }
         StickInputDecay();
-        ReadPauseInputs();
+        ReadPauseInput();
+        
     } 
 
     void ReadControllerInputs()
@@ -164,9 +165,17 @@ public class PlayerInput : MonoBehaviour
 
     }
 
-    void ReadPauseInputs()
+    void ReadPauseInput()
     {
-        if (Gamepad.current.startButton.wasPressedThisFrame)
+        if (GameManager.Instance.usingController)
+        {
+            if (Gamepad.current.startButton.wasPressedThisFrame)
+            {
+                FindObjectOfType<PauseMenu>().PauseButtonPressed();
+            }
+        }
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             FindObjectOfType<PauseMenu>().PauseButtonPressed();
         }
@@ -255,6 +264,37 @@ public class PlayerInput : MonoBehaviour
         if (Keyboard.current.xKey.wasReleasedThisFrame)
         {
             finder.melee.HeavyAttackReleased();
+        }
+
+        if (Keyboard.current.vKey.wasPressedThisFrame)
+        {
+            finder.stats.Burst();
+        }        
+
+        if (Keyboard.current.leftCtrlKey.wasPressedThisFrame)
+        {
+            finder.stats.DTButtonPressed();
+        }
+
+        //D-Pad Inputs
+        if (Keyboard.current.aKey.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Blade);
+        }
+
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Beam);
+        }
+
+        if (Keyboard.current.dKey.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Barrier);
+        }
+
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            finder.drones.InputState(DronesBehaviour.State.Wall);
         }
     }
 

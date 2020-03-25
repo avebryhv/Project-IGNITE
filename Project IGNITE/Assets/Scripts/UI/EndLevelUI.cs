@@ -139,4 +139,9 @@ public class EndLevelUI : MonoBehaviour
                 return "-";
         }
     }
+
+    public void MainMenu()
+    {
+        LevelManager.Instance.LoadLevelFromStart("MainMenu");
+    }
 }

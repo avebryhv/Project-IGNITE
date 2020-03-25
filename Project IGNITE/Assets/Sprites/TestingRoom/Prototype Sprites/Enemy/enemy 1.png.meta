@@ -117,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,7 +129,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -164,12 +164,12 @@ TextureImporter:
       name: bki_1
       rect:
         serializedVersion: 2
-        x: 147
-        y: 255
-        width: 40
-        height: 36
+        x: 218
+        y: 258
+        width: 28
+        height: 28
       alignment: 9
-      pivot: {x: 0.67565614, y: 0.13128917}
+      pivot: {x: 0.5404374, y: 0.09342738}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -185,9 +185,9 @@ TextureImporter:
       name: bki_2
       rect:
         serializedVersion: 2
-        x: 90
+        x: 87
         y: 203
-        width: 21
+        width: 24
         height: 51
       alignment: 9
       pivot: {x: 0.7480552, y: 0.887879}
@@ -206,12 +206,12 @@ TextureImporter:
       name: bki_3
       rect:
         serializedVersion: 2
-        x: 155
+        x: 153
         y: 183
-        width: 33
-        height: 69
+        width: 35
+        height: 70
       alignment: 9
-      pivot: {x: 0.592072, y: 0.027521769}
+      pivot: {x: 0.6180337, y: 0.023194885}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -227,10 +227,10 @@ TextureImporter:
       name: bki_4
       rect:
         serializedVersion: 2
-        x: 207
-        y: 186
-        width: 21
-        height: 51
+        x: 260
+        y: 262
+        width: 9
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,7 +253,7 @@ TextureImporter:
         width: 18
         height: 63
       alignment: 9
-      pivot: {x: 0.48401302, y: 0.64631}
+      pivot: {x: 0.50084007, y: 0.64631}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -269,12 +269,12 @@ TextureImporter:
       name: bki_6
       rect:
         serializedVersion: 2
-        x: 97
-        y: 110
-        width: 26
-        height: 70
+        x: 99
+        y: 106
+        width: 24
+        height: 61
       alignment: 9
-      pivot: {x: 0.65564084, y: 0.68499017}
+      pivot: {x: 0.62855655, y: 0.85161155}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

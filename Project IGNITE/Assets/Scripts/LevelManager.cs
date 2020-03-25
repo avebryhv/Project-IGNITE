@@ -53,9 +53,10 @@ public class LevelManager : MonoBehaviour
         countingTime = true;
     }
 
-    public void ReloadLevel()
+    public void RestartLevel()
     {
         usingCheckPoint = false;
+        ResetLevelStats();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -80,6 +81,14 @@ public class LevelManager : MonoBehaviour
     public void AddComboScore(float amount)
     {
         totalComboScore += amount;
+    }
+
+    public void LoadLevelFromStart(string levelName)
+    {
+        ResetLevelStats();
+        usingCheckPoint = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(levelName);
     }
 
     public void EndLevel()

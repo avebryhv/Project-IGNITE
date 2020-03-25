@@ -422,8 +422,8 @@ public class PlayerMovement : MonoBehaviour
         inDash = true;
         canDash = false;
         inDiveKick = false;
-        //finder.health.canTakeDamage = false;        
-        //playerHealth.canTakeDamage = false;
+        finder.health.canTakeDamage = false;        
+        
         //meleeController.canAttack = false;
         //if (directionalInput.x == 0)
         //{
@@ -439,7 +439,9 @@ public class PlayerMovement : MonoBehaviour
         //    dashVector = DecideDashDirection();
         //}
         dashVector = DecideDashDirection();
-        
+        string path = "SFX/Player/dash";
+        AudioClip aud = Resources.Load<AudioClip>(path);
+        AudioManager.Instance.PlaySFX(aud, 0.5f);
 
         Invoke("CancelDash", dashTime / GameManager.Instance.ReturnPlayerSpeed());
         Invoke("SetDashCooldown", dashCooldown / GameManager.Instance.ReturnPlayerSpeed());
@@ -491,7 +493,7 @@ public class PlayerMovement : MonoBehaviour
     void CancelDash()
     {
         inDash = false;
-        //finder.health.canTakeDamage = true;
+        finder.health.canTakeDamage = true;
         if (!controller.collisions.below)
         {
             velocity.y = dashVector.y * moveSpeed;

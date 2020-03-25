@@ -112,12 +112,22 @@ public class Controller2D : RaycastController
                     {
                         continue;
                     }
-                    if (playerInput.y <= -0.9f && Gamepad.current.buttonSouth.wasPressedThisFrame)
+                    if (GameManager.Instance.usingController)
+                    {
+                        if (playerInput.y <= -0.9f && Gamepad.current.buttonSouth.wasPressedThisFrame)
+                        {
+                            collisions.fallingThroughPlatform = true;
+                            Invoke("ResetFallingThroughPlatform", .1f); //Time until player stops falling through
+                            continue;
+                        }
+                    }
+                    if (playerInput.y <= -0.9f && Keyboard.current.spaceKey.wasPressedThisFrame)
                     {
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform", .1f); //Time until player stops falling through
                         continue;
                     }
+
                 }                
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;

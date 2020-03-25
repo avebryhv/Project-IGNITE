@@ -174,6 +174,11 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<PlayerStats>().unlimitedDT = !FindObjectOfType<PlayerStats>().unlimitedDT;
     }
 
+    public void ExitToMenu()
+    {
+        LevelManager.Instance.LoadLevelFromStart("MainMenu");
+    }
+
     public void CloseGame()
     {
 

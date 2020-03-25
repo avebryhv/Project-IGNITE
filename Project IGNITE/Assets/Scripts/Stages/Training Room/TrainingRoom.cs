@@ -17,7 +17,7 @@ public class TrainingRoom : MonoBehaviour
     {
         if (Gamepad.current.selectButton.wasPressedThisFrame)
         {
-            LevelManager.Instance.ReloadLevel();
+            LevelManager.Instance.RestartLevel();
         }
     }
 

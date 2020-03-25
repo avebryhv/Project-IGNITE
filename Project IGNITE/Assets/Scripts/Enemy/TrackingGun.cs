@@ -13,7 +13,7 @@ public class TrackingGun : EnemyBaseGun
         dir.Normalize();
         currentBullet.GetComponent<EnemyBullet>().SetMovementDirection(dir);
         shootNow = false;
-        Invoke("Cancel", animLength);
+        Invoke("Cancel", cooldownAnimLength);
 
     }
 }

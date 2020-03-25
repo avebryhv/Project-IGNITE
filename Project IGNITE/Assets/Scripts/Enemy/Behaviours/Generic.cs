@@ -51,7 +51,7 @@ public class Generic : EnemyBaseBehaviour
                     if (gunTimer <= 0)
                     {
                         sprite.currentAttackAnimName = "shoot";
-                        gun.TriggerShot(0.25f);
+                        gun.TriggerShot(0.4f / 0.6f);
                         gunTimer = gunCooldown;
                     }
                 }

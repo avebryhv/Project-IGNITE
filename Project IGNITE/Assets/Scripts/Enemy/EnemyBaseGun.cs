@@ -7,7 +7,7 @@ public class EnemyBaseGun : MonoBehaviour
     public EnemyBaseBehaviour behaviour;
     public GameObject baseBullet;
     public bool shootNow;
-    public float animLength;
+    public float cooldownAnimLength;
     public bool inShot;
 
     // Start is called before the first frame update
@@ -39,6 +39,6 @@ public class EnemyBaseGun : MonoBehaviour
         GameObject currentBullet = Instantiate(baseBullet, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(behaviour.player.transform.position.x - behaviour.transform.position.x));
         shootNow = false;
-        Invoke("Cancel", animLength);
+        Invoke("Cancel", cooldownAnimLength);
     }
 }

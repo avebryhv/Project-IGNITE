@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         if (Gamepad.all.Count > 0)
         {
             usingController = true;
+            FindObjectOfType<InputAssignment>().ReAssignButtons();
         }
         else
         {

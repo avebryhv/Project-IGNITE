@@ -57,7 +57,7 @@ public class EnemySprite : MonoBehaviour
                 currentAnim = currentAttackAnimName;
                 break;
             case EnemyBaseBehaviour.State.Moving:
-                currentAnim = "idle";
+                currentAnim = "walk";
                 break;
             case EnemyBaseBehaviour.State.Jump:
                 break;

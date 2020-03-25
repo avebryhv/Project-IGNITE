@@ -86,6 +86,10 @@ public class EnemyBaseBehaviour : MonoBehaviour
         {
             SetState(State.Attack);
         }
+        else if (movement.velocity.x != 0)
+        {
+            SetState(State.Moving);
+        }
         else
         {
             SetState(State.Idle);

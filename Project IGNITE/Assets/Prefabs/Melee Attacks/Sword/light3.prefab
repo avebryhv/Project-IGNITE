@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e263ddf15971f4aa8695f71ce25bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 6
   lingerTime: 0.2
   knockbackDirection: {x: 4, y: 1}
   knockbackStrength: 5
@@ -55,7 +55,6 @@ MonoBehaviour:
   lineFadeDelay: 0
   hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
     type: 3}
-  impulse: {fileID: 0}
 --- !u!50 &6914502063346548511
 Rigidbody2D:
   serializedVersion: 4

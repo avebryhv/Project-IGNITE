@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -7502302234203853145
     second: sword_2
+  - first:
+      213: -7573694343354198120
+    second: sword_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -177,6 +180,27 @@ TextureImporter:
       bones: []
       spriteID: 5f30b3f09addc8943a69236122dd28db
       internalID: -7502302234203853145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword_3
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 32
+        width: 82
+        height: 8
+      alignment: 9
+      pivot: {x: 0.9461955, y: 0.49999952}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 897dcf23f15d4e690800000000000000
+      internalID: -7573694343354198120
       vertices: []
       indices: 
       edges: []

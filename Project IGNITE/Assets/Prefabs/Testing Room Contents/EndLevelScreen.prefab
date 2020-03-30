@@ -1176,6 +1176,7 @@ MonoBehaviour:
   damageText: {fileID: 7617921091307174938}
   timeText: {fileID: 7617921090821426864}
   totalText: {fileID: 7617921090704869191}
+  button: {fileID: 2678918369061339760}
 --- !u!1 &7617921090704869190
 GameObject:
   m_ObjectHideFlags: 0

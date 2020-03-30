@@ -86,7 +86,11 @@ public class EnemyBaseBehaviour : MonoBehaviour
         {
             SetState(State.Attack);
         }
-        else if (movement.velocity.x != 0)
+        else if (!movement.isFlying && !movement.controller.collisions.below)
+        {
+            SetState(State.Jump);
+        }
+        else if (Mathf.Abs(movement.velocity.x) >= 0.01)
         {
             SetState(State.Moving);
         }

@@ -126,7 +126,11 @@ public class PlayerHealth : MonoBehaviour
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
             impulse.GenerateImpulse();
-            StartIFrames(1);
+            if (type != EnemyMeleeHitbox.type.ComboMid)
+            {
+                StartIFrames(1);
+            }
+            
         }
         if (currentHealth <= 0 && !isDead)
         {

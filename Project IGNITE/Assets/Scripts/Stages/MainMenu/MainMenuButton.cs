@@ -27,4 +27,9 @@ public class MainMenuButton : MonoBehaviour, ISelectHandler
         textBox.text = highlightText;
         
     }
+
+    public void MouseOver()
+    {
+        GetComponent<Selectable>().Select();
+    }
 }

@@ -15,6 +15,8 @@ public class EndLevelUI : MonoBehaviour
 
     public TextMeshProUGUI totalText;
 
+    public Selectable button;
+
     int styleRank;
     int damageRank;
     int timeRank;
@@ -45,6 +47,7 @@ public class EndLevelUI : MonoBehaviour
         totalText.text = RankingToLetter(total);
 
         canvas.enabled = true;
+        button.Select();
     }
 
     public int CalculateStyle()

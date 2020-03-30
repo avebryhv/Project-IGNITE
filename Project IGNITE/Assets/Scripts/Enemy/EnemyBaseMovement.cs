@@ -25,6 +25,7 @@ public class EnemyBaseMovement : MonoBehaviour
     public bool hitThisFrame = false;
     public bool inHitStun = false;
     float knockbackTimeOnGround;
+    public bool inSpecialMovement = false;
 
     public int wallBounceCount;
     bool canWallBounce;
@@ -38,7 +39,6 @@ public class EnemyBaseMovement : MonoBehaviour
     EnemyBaseBehaviour behaviour;
 
    
-    public float attackRange;
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +124,11 @@ public class EnemyBaseMovement : MonoBehaviour
             else
             {
 
+            }
+
+            if (inSpecialMovement)
+            {
+                RecieveVelocityFromBehaviour();
             }
 
             controller.Move(velocity * Time.deltaTime, Vector2.zero);
@@ -224,7 +229,7 @@ public class EnemyBaseMovement : MonoBehaviour
     public void RecieveVelocityFromBehaviour()
     {
         velocity.x = behaviour.velocity.x;
-        if (isFlying)
+        if (isFlying || inSpecialMovement)
         {
             velocity.y = behaviour.velocity.y;
         }

@@ -11,7 +11,7 @@ public class EnemyMeleeHitbox : MonoBehaviour
     public Vector2 knockbackDirection;
     public float knockbackStrength;
     float direction;
-    public enum type { Light, Heavy, Special };
+    public enum type { Light, Heavy, Special, ComboMid, ComboEnd };
     public type attackType;
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
     public float lineFadeDelay;    

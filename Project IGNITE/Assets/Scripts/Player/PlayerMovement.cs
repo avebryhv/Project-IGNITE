@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     public float dtMoveSpeedModifier;
 
 
-
+    public bool freezeMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -198,6 +198,10 @@ public class PlayerMovement : MonoBehaviour
 
         CheckKnockback();
 
+        if (freezeMovement)
+        {
+            velocity.x = 0;
+        }
 
         //Moves player: all moves that affect movement come before this
         controller.Move(velocity * Time.deltaTime * GameManager.Instance.ReturnPlayerSpeed(), directionalInput);

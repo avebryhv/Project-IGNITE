@@ -60,6 +60,7 @@ public class EnemySprite : MonoBehaviour
                 currentAnim = "walk";
                 break;
             case EnemyBaseBehaviour.State.Jump:
+                currentAnim = "jump";
                 break;
             default:
                 break;

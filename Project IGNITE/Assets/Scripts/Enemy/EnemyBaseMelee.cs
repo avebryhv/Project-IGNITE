@@ -21,10 +21,7 @@ public class EnemyBaseMelee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !inAttack)
-        {
-            AttackStartup();
-        }
+        
     }
 
     public void TriggerAttack()
@@ -35,6 +32,22 @@ public class EnemyBaseMelee : MonoBehaviour
         }
     }
 
+    public void TriggerAttack(AttackObject attack)
+    {
+        if (!inAttack)
+        {
+            currentAttack = attack;
+            AttackStartup();
+        }
+    }
+
+    public void TriggerAttackWithCancel(AttackObject attack)
+    {
+        CancelInvoke();
+        currentAttack = attack;        
+        AttackStartup();
+    }
+
     void AttackStartup()
     {
         currentState = phase.Startup;
@@ -42,6 +55,7 @@ public class EnemyBaseMelee : MonoBehaviour
         inAttack = true;
         Invoke("EyeFlash", (currentAttack.startUpTime - 0.2f));
         Invoke("CreateHitbox", currentAttack.startUpTime);
+        Debug.Log("do attack " + currentAttack.ToString());
     }
 
     void CreateHitbox()

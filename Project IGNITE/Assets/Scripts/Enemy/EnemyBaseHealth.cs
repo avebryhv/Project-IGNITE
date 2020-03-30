@@ -12,8 +12,10 @@ public class EnemyBaseHealth : MonoBehaviour
     public bool canTakeDamage;
     public bool trainingEnemy;
     public bool armoured;
+    public bool armouredKnockback;
     public int currencyRewarded;
     public GameObject currencyParticles;
+    float armourKnockbackHits;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +43,18 @@ public class EnemyBaseHealth : MonoBehaviour
             {
                 currentHealth -= damage;
             }
+
+
             if (!armoured)
             {
                 behaviour.movement.TakeKnockback(knockback, type);
+            }
+            else
+            {
+                if (armouredKnockback)
+                {
+                    behaviour.movement.TakeKnockback(knockback, type);                    
+                }
             }
             
             sprite.FlashColour(Color.red, 0.1f);
@@ -63,6 +74,12 @@ public class EnemyBaseHealth : MonoBehaviour
         Instantiate(currencyParticles, transform.position, transform.rotation);
         FindObjectOfType<PlayerUnlocks>().AddCurrency(currencyRewarded);
         Destroy(gameObject);
+    }
+
+    public void SetArmourKnockback(float time, int hitCount)
+    {
+        armouredKnockback = true;
+        armourKnockbackHits = hitCount;
     }
 
 

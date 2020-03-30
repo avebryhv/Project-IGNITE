@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour
                 StartPressed();
             }
         }
-        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        if (Keyboard.current.anyKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
         {
             StartPressed();
         }

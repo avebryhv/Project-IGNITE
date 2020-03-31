@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Light Combo B
   image: {fileID: 21300000, guid: ee4695b9343044349a39e76ecf171006, type: 3}
   description: Default Description
-  video: {fileID: 32900000, guid: a0da9c093158b474daf69aaeea942e8e, type: 3}
+  video: {fileID: 32900000, guid: 9a3933c73e0926649bdc62f7ec959e35, type: 3}

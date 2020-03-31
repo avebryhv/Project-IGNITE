@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Air Combo B
   image: {fileID: 21300000, guid: 6f1f86f1cc4852f4c90444cb80b28621, type: 3}
   description: Default Description
-  video: {fileID: 32900000, guid: 7fcc9d2bd381ed3488fe1f4bc03ddc7e, type: 3}
+  video: {fileID: 32900000, guid: 6657195cd6fa2d5429c3029b217b465e, type: 3}

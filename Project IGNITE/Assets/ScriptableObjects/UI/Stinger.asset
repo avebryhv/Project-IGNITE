@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Stinger
   image: {fileID: 21300000, guid: 3d579d3138f13c5449ed9d689ca47f95, type: 3}
   description: Default Description
-  video: {fileID: 32900000, guid: 07d0f75b6f774084c9c6b4a6febbeda3, type: 3}
+  video: {fileID: 32900000, guid: 8bf17e73169ad5b4299fe64f30e58380, type: 3}

@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 1984592046885035494, guid: c2b453165b5959b4482c83956519898b,
     type: 3}
@@ -130,7 +130,7 @@ MonoBehaviour:
   baseBullet: {fileID: 4270625520379652546, guid: 3470e17f7a382d44184ff107b9177b1e,
     type: 3}
   shootNow: 0
-  animLength: 0.4
+  cooldownAnimLength: 0
   inShot: 0
 --- !u!1 &5586198290799018830
 GameObject:
@@ -202,7 +202,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 1662814896092949342, guid: c2b453165b5959b4482c83956519898b,
     type: 3}
@@ -333,7 +333,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 4789234604232368213, guid: c2b453165b5959b4482c83956519898b,
     type: 3}
@@ -418,7 +418,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -4845399088412194258, guid: c2b453165b5959b4482c83956519898b,
     type: 3}
@@ -544,9 +544,9 @@ MonoBehaviour:
   canTakeKnockBack: 1
   hitThisFrame: 0
   inHitStun: 0
+  inSpecialMovement: 0
   wallBounceCount: 0
   controller: {fileID: 0}
-  attackRange: 3
 --- !u!114 &5586198291006127242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,13 +559,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a67abc643ee3eb499764cb6df224050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliceEffect: {fileID: 1100474356707296631, guid: 201974d812524364c8d9f6f297638b8e,
+  sliceEffect: {fileID: 1100474356707296631, guid: 82bca6b6d2fc89a41836f389ad8c195d,
     type: 3}
   maxHealth: 25
   currentHealth: 0
   canTakeDamage: 1
   trainingEnemy: 0
   armoured: 0
+  armouredKnockback: 0
   currencyRewarded: 100
   currencyParticles: {fileID: 6329509365377852860, guid: 6cf57cfb99ecff64e87fb63740ddd0a7,
     type: 3}
@@ -5328,7 +5329,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 4
   m_RenderMode: 0
   m_SortMode: 0
@@ -5421,7 +5422,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_Sprite: {fileID: -2118806651501094903, guid: c2b453165b5959b4482c83956519898b,
     type: 3}
@@ -5506,7 +5507,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 208478841
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7104b90ade35b6749b5c6b982bd9bf91, type: 3}
   m_Color: {r: 0.509434, g: 0, b: 0, a: 1}

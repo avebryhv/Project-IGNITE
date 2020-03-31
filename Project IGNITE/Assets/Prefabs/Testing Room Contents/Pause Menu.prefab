@@ -6129,7 +6129,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -439.4}
+  m_SizeDelta: {x: 0, y: -397.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6586038255549353795
 CanvasRenderer:
@@ -7283,7 +7283,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 149.8
+  m_fontSize: 135.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17186,6 +17186,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc4b541a3f9af874d81c9d260156473f, type: 2}
   - {fileID: 11400000, guid: 9166b5d3aed661c4db9718aabe19db60, type: 2}
   - {fileID: 11400000, guid: 05e0cbe157988114aa1726a2c636e9b9, type: 2}
+  - {fileID: 11400000, guid: 47e1ebc61c4aa7241b33c4ab74cad4b6, type: 2}
+  - {fileID: 11400000, guid: 0dca0e6dc6a18a541971a53f92955aff, type: 2}
+  - {fileID: 11400000, guid: a741ac865796c884197ad6562736a271, type: 2}
+  - {fileID: 11400000, guid: a21c73fe532d0a94b9bfb1a227a925f1, type: 2}
   itemPrefab: {fileID: 4530903321816501410, guid: bb08d78a0a51716409c362d74cee6930,
     type: 3}
   displayImage: {fileID: 6586038255284234475}
@@ -18173,7 +18177,7 @@ VideoPlayer:
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
-  m_SkipOnDrop: 0
+  m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0

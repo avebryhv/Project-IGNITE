@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_Follow: {fileID: 100666869}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 6
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -18465,7 +18465,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18489,7 +18489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103942913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.88, y: 4.0800056, z: -10}
+  m_LocalPosition: {x: -2.88, y: 0.080005765, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23422,6 +23422,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2103942915}
+    - target: {fileID: 2411032959174969730, guid: 450da7c4f52eb834da433ba984a5e64e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2411032959174969731, guid: 450da7c4f52eb834da433ba984a5e64e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24258,6 +24263,31 @@ PrefabInstance:
       propertyPath: inputAssignment
       value: 
       objectReference: {fileID: 428073878}
+    - target: {fileID: 6586038255179920999, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255179920999, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255179920999, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255179920999, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255179920999, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6586038255397644682, guid: a76383d08c608b04c83c0f1f346f28ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24372,6 +24402,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pause Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255549353799, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255662533129, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255662533129, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255662533129, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255662533129, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586038255662533129, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6586038255720825876, guid: a76383d08c608b04c83c0f1f346f28ca,
         type: 3}
@@ -24609,6 +24669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: testRival
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937427760582966717, guid: 7730136bc4fd51e40883d2d7d1c32cdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8937427760582966719, guid: 7730136bc4fd51e40883d2d7d1c32cdf,
         type: 3}

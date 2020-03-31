@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Air Spin
   image: {fileID: 21300000, guid: 2e7d69800a180694b821a77c815ad10d, type: 3}
   description: Default Description
-  video: {fileID: 32900000, guid: 1f0dd97387cbedd43a24fff7dd58f701, type: 3}
+  video: {fileID: 32900000, guid: 6b2d68093b3b2e343b06aa72922e15d5, type: 3}

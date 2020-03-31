@@ -45,14 +45,18 @@ public class InputAssignment : MonoBehaviour
 
     private void Awake()
     {
-        AssignJump();
-        AssignBlock();
-        AssignLightAttack();
-        AssignHeavyAttack();
-        AssignDTToggle();
-        AssignBurst();
-        AssignLockOn();
-        AssignGrapple();
+        if (GameManager.Instance.usingController)
+        {
+            AssignJump();
+            AssignBlock();
+            AssignLightAttack();
+            AssignHeavyAttack();
+            AssignDTToggle();
+            AssignBurst();
+            AssignLockOn();
+            AssignGrapple();
+        }
+        
     }
     // Start is called before the first frame update
     void Start()

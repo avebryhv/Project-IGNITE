@@ -92,11 +92,11 @@ public class UIMoveList : MonoBehaviour
 
         if (index > midPoint)
         {
-            yPos = 0 + (50 * (index - midPoint + 1));
+            yPos = 0 + (100 * (index - midPoint));
         }
         else
         {
-            yPos = 0 - (50 * (midPoint - index + 1));
+            yPos = 0 - (100 * (midPoint - index));
         }
 
         Debug.Log("current index " + index);

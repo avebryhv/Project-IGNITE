@@ -346,7 +346,7 @@ MonoBehaviour:
   lingerTime: 0.2
   knockbackDirection: {x: 4, y: 3}
   knockbackStrength: 5
-  comboWeight: 5
+  comboWeight: 6
   name: Air Light 3
   attackType: 0
   lineFadeDelay: 0

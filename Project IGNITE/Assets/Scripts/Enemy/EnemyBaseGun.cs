@@ -41,4 +41,9 @@ public class EnemyBaseGun : MonoBehaviour
         shootNow = false;
         Invoke("Cancel", cooldownAnimLength);
     }
+
+    public void CancelShot()
+    {
+
+    }
 }

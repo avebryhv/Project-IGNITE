@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   styleRanks:
-  - 800
   - 700
   - 600
   - 500
   - 400
   - 300
   - 200
+  - 100
   damageRanks:
   - 0
-  - 10
-  - 20
+  - 15
   - 30
-  - 50
-  - 70
+  - 45
+  - 60
+  - 75
   - 90
   timeRanks:
   - 100

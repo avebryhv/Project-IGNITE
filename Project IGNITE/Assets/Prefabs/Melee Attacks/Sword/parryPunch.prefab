@@ -158,7 +158,7 @@ MonoBehaviour:
   lingerTime: 0.2
   knockbackDirection: {x: 10, y: 2}
   knockbackStrength: 5
-  comboWeight: 15
+  comboWeight: 20
   name: parryPunch
   attackType: 2
   lineFadeDelay: 0

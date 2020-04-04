@@ -25,7 +25,7 @@ public class SaveStatue : MonoBehaviour
         if (playerInFront)
         {
             interactImage.enabled = true;
-            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame || Keyboard.current.xKey.wasPressedThisFrame)
             {
                 OpenSaveStatue();
             }
@@ -59,6 +59,7 @@ public class SaveStatue : MonoBehaviour
         if (collision.tag == "PlayerHurtbox")
         {
             playerInFront = true;
+            FindObjectOfType<PlayerInput>().statueMod = true;
             if (canCheckPointSave)
             {
                 CheckPointSave();
@@ -70,6 +71,7 @@ public class SaveStatue : MonoBehaviour
     {
         if (collision.tag == "PlayerHurtbox")
         {
+            FindObjectOfType<PlayerInput>().statueMod = false;
             playerInFront = false;
         }
     }

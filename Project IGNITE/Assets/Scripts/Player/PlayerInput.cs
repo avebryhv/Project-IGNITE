@@ -21,14 +21,14 @@ public class PlayerInput : MonoBehaviour
 
     public float deadZone;
     public bool usingDeadZone;
-
+    public bool statueMod;
     
 
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        statueMod = false;
     }
 
     // Update is called once per frame
@@ -107,7 +107,7 @@ public class PlayerInput : MonoBehaviour
 
 
         //Heavy Attack Inputs
-        if (finder.inputAssignment.heavyAttackButton.wasPressedThisFrame)
+        if (finder.inputAssignment.heavyAttackButton.wasPressedThisFrame && !statueMod)
         {
             finder.melee.HeavyAttackPressed();
             

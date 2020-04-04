@@ -24,6 +24,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject moveListPanel;
     public Selectable moveListFirstSelection;
 
+    public GameObject helpPanel;
+    public Selectable helpFirstSelection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         trainingPanel.SetActive(false);
         moveListPanel.SetActive(false);
+        helpPanel.SetActive(false);
         submenuOpen = false;
         Time.timeScale = 1;
         eventSystem.SetSelectedGameObject(null);
@@ -157,11 +161,33 @@ public class PauseMenu : MonoBehaviour
         resumeButton.Select();
     }
 
+    public void ShowHelpList()
+    {
+        baseMenuPanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+        helpPanel.SetActive(true);
+        submenuOpen = true;
+        if (moveListFirstSelection != null)
+        {
+            helpFirstSelection.Select();
+        }
+    }
+
+    public void CloseHelpList()
+    {
+        baseMenuPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(null);
+        helpPanel.SetActive(false);
+        submenuOpen = false;
+        resumeButton.Select();
+    }
+
     public void HideSubmenus()
     {
         CloseMoveList();
         CloseOptions();
         CloseTraining();
+        CloseHelpList();
     }
 
     public void ToggleLockOnToggle()

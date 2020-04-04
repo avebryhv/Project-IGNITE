@@ -120,7 +120,7 @@ public class ComboUI : MonoBehaviour
     void AddToList(string toAdd)
     {
         previousAttackList.Add(toAdd);
-        if (previousAttackList.Count > 10)
+        if (previousAttackList.Count > 5)
         {
             previousAttackList.RemoveAt(0);
         }

@@ -170,14 +170,14 @@ public class RivalBehaviour : EnemyBaseBehaviour
                         {
                             StartCoroutine(DoHelmSplitterWithTP());
                             helmSplitterCooldown = 5;
-                            actionCooldown = 0.5f;
+                            actionCooldown = 1f;
                             helmSplitterAltCounter = 0;
                         }
                         else
                         {                            
                             StopCoroutine(phase1Combo());
                             StartCoroutine(phase1Combo());
-                            actionCooldown = 0.7f;
+                            actionCooldown = 1f;
                             helmSplitterAltCounter++;
                         }
                         
@@ -188,13 +188,13 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 {
                     StartCoroutine(DoHelmSplitterWithTP());
                     helmSplitterCooldown = 5;
-                    actionCooldown = 0.5f;
+                    actionCooldown = 1f;
                 }
                 else if (stingerCooldown <= 0)
                 {
                     DoStinger();
                     stingerCooldown = 5;
-                    actionCooldown = 0.5f;
+                    actionCooldown = 1f;
                 }
                 else
                 {

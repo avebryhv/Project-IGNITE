@@ -49,7 +49,7 @@ MonoBehaviour:
   lingerTime: 0.2
   knockbackDirection: {x: 4, y: 1}
   knockbackStrength: 5
-  comboWeight: 3
+  comboWeight: 6
   name: l3
   attackType: 0
   lineFadeDelay: 0

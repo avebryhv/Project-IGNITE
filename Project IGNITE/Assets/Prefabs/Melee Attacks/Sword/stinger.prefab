@@ -306,7 +306,7 @@ MonoBehaviour:
   lingerTime: 0.2
   knockbackDirection: {x: 5, y: 1}
   knockbackStrength: 5
-  comboWeight: 5
+  comboWeight: 7
   name: stinger
   attackType: 1
   lineFadeDelay: 0

@@ -171,6 +171,7 @@ public class EnemyBaseMovement : MonoBehaviour
             //}
             canWallBounce = true;
             melee.CancelAttacks();
+            behaviour.gun.Cancel();
             hitThisFrame = true;
             inKnockback = true;
             velocity.x = dir.x * (Random.Range(0.95f, 1.05f));

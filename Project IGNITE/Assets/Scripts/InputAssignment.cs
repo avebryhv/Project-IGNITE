@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.IO;
 
 public class InputAssignment : MonoBehaviour
 {
@@ -45,8 +48,10 @@ public class InputAssignment : MonoBehaviour
 
     private void Awake()
     {
+        LoadInputs();
         if (GameManager.Instance.usingController)
         {
+            
             AssignJump();
             AssignBlock();
             AssignLightAttack();
@@ -72,6 +77,7 @@ public class InputAssignment : MonoBehaviour
 
     public void ReAssignButtons()
     {
+        SaveInputs();
         AssignJump();
         AssignBlock();
         AssignLightAttack();
@@ -391,6 +397,67 @@ public class InputAssignment : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private SavedInputs CreateSaveObject()
+    {
+        SavedInputs save = new SavedInputs();
+        save.jumpButtonSelection = jumpButtonSelection;
+        save.blockButtonSelection = blockButtonSelection;
+        save.lightAttackButtonSelection = lightAttackButtonSelection;
+        save.heavyAttackButtonSelection = heavyAttackButtonSelection;
+        save.toggleDTButtonSelection = toggleDTButtonSelection;
+        save.burstButtonSelection = burstButtonSelection;
+        save.lockOnButtonSelection = lockOnButtonSelection;
+        save.grappleButtonSelection = grappleButtonSelection;        
+
+        return save;
+    }
+
+    public void SaveInputs()
+    {
+        SavedInputs save = CreateSaveObject();
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/inputs.file");
+        formatter.Serialize(file, save);
+        file.Close();
+
+        Debug.Log("Unlocks Saved");
+        //finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
+
+    }
+
+    public void LoadInputs()
+    {
+        if (File.Exists(Application.persistentDataPath + "/inputs.file"))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/inputs.file", FileMode.Open);
+            SavedInputs save = (SavedInputs)formatter.Deserialize(file);
+            file.Close();
+
+            jumpButtonSelection = save.jumpButtonSelection;
+            blockButtonSelection = save.blockButtonSelection;
+            lightAttackButtonSelection = save.lightAttackButtonSelection;
+            heavyAttackButtonSelection = save.heavyAttackButtonSelection;
+            toggleDTButtonSelection = save.toggleDTButtonSelection;
+            burstButtonSelection = save.burstButtonSelection;
+            lockOnButtonSelection = save.lockOnButtonSelection;
+            grappleButtonSelection = save.grappleButtonSelection;
+            
+
+        }
+        else //Assign default controls
+        {
+            jumpButtonSelection = AssignableButton.SouthFace;
+            blockButtonSelection = AssignableButton.EastFace;
+            lightAttackButtonSelection = AssignableButton.WestFace;
+            heavyAttackButtonSelection = AssignableButton.NorthFace;
+            toggleDTButtonSelection = AssignableButton.L1;
+            burstButtonSelection = AssignableButton.L2;
+            lockOnButtonSelection = AssignableButton.R1;
+            grappleButtonSelection = AssignableButton.R2;
         }
     }
 

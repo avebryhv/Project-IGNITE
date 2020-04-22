@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     public float burstCooldown;
     float burstTimer;
     bool canBurst;
+    public bool inBurst;
 
     //DT Variables
     public float DTDrainRate;
@@ -36,6 +37,7 @@ public class PlayerStats : MonoBehaviour
         //ui.SetHealthValue(health, maxHealth);
         ui.SetDTValue(dtCharge, dtMax);
         canBurst = true;
+        inBurst = false;
     }
 
     // Update is called once per frame
@@ -115,6 +117,7 @@ public class PlayerStats : MonoBehaviour
                 finder.movement.SetAirStall();
             }
             finder.melee.inAttack = true;
+            inBurst = true;
             finder.melee.currentState = MeleeAttacker.phase.Endlag;
             //finder.movement.canDoubleJump = true;
             finder.movement.ResetDash();
@@ -164,6 +167,7 @@ public class PlayerStats : MonoBehaviour
     void EndAirStall()
     {
         finder.melee.inAttack = false;
+        inBurst = false;
         finder.melee.currentState = MeleeAttacker.phase.None;
         finder.movement.EndAirStall();
     }

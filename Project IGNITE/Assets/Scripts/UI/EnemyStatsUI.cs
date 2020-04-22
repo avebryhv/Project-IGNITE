@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyStatsUI : MonoBehaviour
 {
     public Image healthBar;
     public Image overlay;
+    public TextMeshProUGUI text;
 
 
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class EnemyStatsUI : MonoBehaviour
         col.a -= Time.deltaTime;
         healthBar.color = col;
         overlay.color = col;
+        text.color = col;
     }
 
     public void SetHealthBar(int current, int max)
@@ -30,6 +33,7 @@ public class EnemyStatsUI : MonoBehaviour
         col.a = 1f;
         healthBar.color = col;
         overlay.color = col;
+        text.color = col;
         healthBar.fillAmount = (float)current / (float)max;
     }
 }

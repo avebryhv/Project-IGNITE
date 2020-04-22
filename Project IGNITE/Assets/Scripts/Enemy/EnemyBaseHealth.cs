@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBaseHealth : MonoBehaviour
 {
-    EnemyBaseBehaviour behaviour;
-    EnemySprite sprite;
+    public EnemyBaseBehaviour behaviour;
+    public EnemySprite sprite;
     public GameObject sliceEffect;
     public int maxHealth;
     public int currentHealth;
@@ -31,7 +31,7 @@ public class EnemyBaseHealth : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage, Vector2 knockback, MeleeHitbox.type type)
+    public virtual void TakeDamage(int damage, Vector2 knockback, MeleeHitbox.type type)
     {
         if (!behaviour.activated)
         {
@@ -66,7 +66,7 @@ public class EnemyBaseHealth : MonoBehaviour
         }
     }
 
-    private void Kill()
+    public void Kill()
     {
         GameObject sliceEff = Instantiate(sliceEffect, transform.position, transform.rotation);
         sliceEff.GetComponent<EnemySliceEffect>().SetFacingDirection(behaviour.movement.lastDirection);

@@ -118,6 +118,8 @@ public class DronesBehaviour : MonoBehaviour
                 GameObject beamObj2 = Instantiate(beamPrefab, beamSpawnPoint2.transform.position, transform.rotation);
                 beamObj2.transform.localScale = new Vector3(dir2, beamObj2.transform.localScale.y, beamObj2.transform.localScale.z);
                 Invoke("StartRecharge", 0.25f);
+                
+                AudioManager.Instance.PlaySFX("SFX/Player/droneGun", 0.5f);
                 break;
             default:
                 break;

@@ -115,6 +115,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
         }
         else
         {
@@ -125,6 +126,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             impulse.GenerateImpulse();
             if (type != EnemyMeleeHitbox.type.ComboMid)
             {
@@ -147,6 +149,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
         }
         else
         {
@@ -157,6 +160,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             impulse.GenerateImpulse();
             StartIFrames(1);
         }

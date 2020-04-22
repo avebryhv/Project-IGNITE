@@ -30,5 +30,5 @@ public class Save
     [Header("Currency Variables")]
     public int currentAmount;
     public float checkPointPositionX;
-    public float checkPointPositionY;
+    public float checkPointPositionY;    
 }

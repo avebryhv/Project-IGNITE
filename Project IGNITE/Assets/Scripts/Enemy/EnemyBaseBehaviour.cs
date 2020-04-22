@@ -23,7 +23,7 @@ public class EnemyBaseBehaviour : MonoBehaviour
 
     public bool canJump;
 
-    public enum State { Idle, Knockback, Attack, Moving, Jump}
+    public enum State { Idle, Knockback, Attack, Moving, Jump, SpecialKnockback, Evade}
     public State currentState;
 
     
@@ -76,9 +76,13 @@ public class EnemyBaseBehaviour : MonoBehaviour
 
     }
 
-    protected void CheckState()
+    public virtual void CheckState()
     {
-        if (movement.inKnockback)
+        if (movement.inSpecialKnockback)
+        {
+            SetState(State.SpecialKnockback);
+        }
+        else if (movement.inKnockback)
         {
             SetState(State.Knockback);
         }
@@ -100,7 +104,7 @@ public class EnemyBaseBehaviour : MonoBehaviour
         }
     }
 
-    void SetState(State s)
+    public void SetState(State s)
     {
         if (s != currentState)
         {

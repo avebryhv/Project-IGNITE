@@ -129,14 +129,22 @@ public class PlayerSprite : MonoBehaviour
     void DecideMeleeAnimation()
     {
         string anim;
-        if (finder.melee.chargingHeavy)
+        if (finder.stats.inBurst)
         {
-            anim = "chargingHeavy";
+            anim = "burst";
         }
         else
         {
-            anim = finder.melee.currentAttack.animationName;
+            if (finder.melee.chargingHeavy)
+            {
+                anim = "chargingHeavy";
+            }
+            else
+            {
+                anim = finder.melee.currentAttack.animationName;
+            }
         }
+        
         
         SetAnimationTrigger(anim);
         //Debug.Log(anim);

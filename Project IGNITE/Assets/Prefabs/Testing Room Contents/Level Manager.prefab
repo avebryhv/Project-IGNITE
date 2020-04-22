@@ -48,3 +48,5 @@ MonoBehaviour:
   usingCheckPoint: 1
   totalComboScore: 0
   totalDamage: 0
+  loadScreen: {fileID: 8323379885214536250, guid: 1335963d4a673074ba192c40b790cc61,
+    type: 3}

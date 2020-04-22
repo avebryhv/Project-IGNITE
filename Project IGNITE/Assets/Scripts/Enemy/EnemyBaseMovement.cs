@@ -26,6 +26,8 @@ public class EnemyBaseMovement : MonoBehaviour
     public bool inHitStun = false;
     float knockbackTimeOnGround;
     public bool inSpecialMovement = false;
+    public bool inSpecialKnockback = false;
+    public float recoveryTime = 0.5f;
 
     public int wallBounceCount;
     bool canWallBounce;
@@ -75,7 +77,7 @@ public class EnemyBaseMovement : MonoBehaviour
             if (controller.collisions.below && inKnockback && !hitThisFrame && !inHitStun)
             {
                 knockbackTimeOnGround += Time.deltaTime;
-                if (knockbackTimeOnGround > 0.5f)
+                if (knockbackTimeOnGround > recoveryTime)
                 {
                     StopKnockback();
                 }
@@ -186,9 +188,27 @@ public class EnemyBaseMovement : MonoBehaviour
         //StartCoroutine("FlashSprite");
     }
 
+    public void TakeSpecialKnockback(Vector2 dir)
+    {
+        canWallBounce = false;
+        melee.CancelAttacks();
+        behaviour.gun.Cancel();
+        hitThisFrame = true;
+        inKnockback = true;
+        inSpecialKnockback = true;
+        velocity.x = dir.x * (Random.Range(0.95f, 1.05f));
+        velocity.y = dir.y;
+        inHitStun = true;
+        gameObject.layer = 10;
+        knockbackTimeOnGround = 0;
+        CancelInvoke("EndHitStun");
+        Invoke("EndHitStun", 0.1f / GameManager.Instance.ReturnEnemySpeed());
+    }
+
     public void StopKnockback()
     {
         inKnockback = false; //Stops knockback phase once the floor is hit
+        inSpecialKnockback = false;
         gameObject.layer = 9;
         wallBounceCount = 0;
         StopAllCoroutines();

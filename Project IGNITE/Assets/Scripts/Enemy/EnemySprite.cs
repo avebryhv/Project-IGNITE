@@ -10,8 +10,8 @@ public class EnemySprite : MonoBehaviour
     Animator anim;
     SpriteRenderer[] spriteRendererList;
     public GameObject spriteHolder;
-    string currentAnim;
-    string lastAnim;
+    public string currentAnim;
+    public string lastAnim;
     public string currentAttackAnimName;
     
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class EnemySprite : MonoBehaviour
         //CheckState();
     }
 
-    public void CheckState()
+    public virtual void CheckState()
     {
         //if (baseMovement.inKnockback)
         //{
@@ -47,6 +47,9 @@ public class EnemySprite : MonoBehaviour
 
         switch (behaviour.currentState)
         {
+            case EnemyBaseBehaviour.State.SpecialKnockback:
+                currentAnim = "knockback_special";
+                break;
             case EnemyBaseBehaviour.State.Idle:
                 currentAnim = "idle";
                 break;
@@ -73,7 +76,7 @@ public class EnemySprite : MonoBehaviour
         }
     }
 
-    void PlayAnimation(string toPlay)
+    public void PlayAnimation(string toPlay)
     {
         anim.Play(toPlay, 0, 0);
     }
@@ -97,7 +100,7 @@ public class EnemySprite : MonoBehaviour
         Invoke("ResetSpriteColour", time);
     }
 
-    void ResetSpriteColour()
+    public void ResetSpriteColour()
     {
         ChangeSpriteColour(Color.white);
     }

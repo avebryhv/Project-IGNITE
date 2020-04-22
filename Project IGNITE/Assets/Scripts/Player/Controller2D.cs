@@ -45,17 +45,14 @@ public class Controller2D : RaycastController
 
     public void Move(Vector2 moveAmount,Vector2 input, bool standingOnPlatform = false)
     {
-        UpdateRaycastOrigins();
+        UpdateRaycastOrigins(); //Calculate raycast starting point based on the size of actor collider
         collisions.Reset();
-        collisions.moveAmountOld = moveAmount;
-
-        playerInput = input;
-
+        collisions.moveAmountOld = moveAmount; //Stores the intended move distance
+        playerInput = input; //Takes in the player's input for the purpose of falling through platforms
         if (moveAmount.y <= 0 )
         {
-            DescendSlope(ref moveAmount);
+            DescendSlope(ref moveAmount); //Handles slope collisions
         }
-
         if (moveAmount.x != 0)
         {
             //if (!ignoreDirectionChange)
@@ -63,24 +60,20 @@ public class Controller2D : RaycastController
             //    lastDirection = Mathf.Sign(moveAmount.x);
 
             //}
-            collisions.faceDirection = (int)Mathf.Sign(moveAmount.x);
+            collisions.faceDirection = (int)Mathf.Sign(moveAmount.x); //Turns the raycasts towards movement direction
         }
-
-        HorizontalCollisions(ref moveAmount);
-
-        
+        HorizontalCollisions(ref moveAmount); //Handles horizontal collisions       
 
         if (moveAmount.y != 0)
         {
-            VerticalCollisions(ref moveAmount);
+            VerticalCollisions(ref moveAmount); //Handles vertical collisions
         }
-
 
         transform.Translate(moveAmount);
 
         if (standingOnPlatform)
         {
-            collisions.below = true;
+            collisions.below = true; //When standing on a platform, act as if standing on the ground
         }
     }
 

@@ -7,13 +7,13 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public float currentCooldown;
     public float actionCooldown;
     public Collider2D activeRange;
-    
+    public RivalHealth rHealth;
     public float meleeRange;
 
     public Vector2 contactKnockback;
     public float contactDamage;
-    enum Phase { Phase1, Phase2, Phase3};
-    Phase currentPhase;
+    public enum Phase { Phase1, Phase2, Phase3};
+    public Phase currentPhase;
 
     //Action Decision Variables
     public Collider2D tpRange;
@@ -31,6 +31,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
     float stingerTimer;
     bool inStinger;
     public GameObject fadeObject;
+    bool inEvade;
 
 
     // Start is called before the first frame update
@@ -56,7 +57,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public override void Actions()
     {
         base.Actions();
-        if (!movement.inKnockback && !movement.inHitStun && movement.controller.collisions.below && !movement.hitThisFrame && !melee.inAttack)
+        if (!movement.inKnockback && !movement.inHitStun && movement.controller.collisions.below && !movement.hitThisFrame && !melee.inAttack && !inEvade)
         {
             float xDifference = player.transform.position.x - transform.position.x;
             float yDifference = player.transform.position.y - transform.position.y;
@@ -117,9 +118,18 @@ public class RivalBehaviour : EnemyBaseBehaviour
         }
         if (inStinger)
         {
-            velocity.x = 15 * movement.lastDirection;
-            velocity.y = 0;
             stingerTimer -= Time.deltaTime;
+            if (stingerTimer <= 0.3f)
+            {
+                velocity.x = 15 * movement.lastDirection;
+                velocity.y = 0;
+            }
+            else
+            {
+                velocity.x = 0;
+            }
+            
+            
             if (stingerTimer <= 0)
             {
                 sprite.currentAttackAnimName = "stingerB";
@@ -128,7 +138,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 inStinger = false;
                 movement.inSpecialMovement = false;
                 canTurn = true;
+                rHealth.canKnockback = true;
             }
+        }
+        if (inEvade)
+        {
+            velocity.x = -10 * movement.lastDirection;
         }
         
     }
@@ -149,7 +164,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         walking = false;
         switch (currentPhase)
         {
-            case Phase.Phase1:
+            case Phase.Phase1: //-----------------------------------------------------PHASE ONE-----------------------------------------------------
                 if (!initialWalkDone)
                 {
                     actionCooldown = 1f;
@@ -158,54 +173,185 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 }
                 else if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
                 {
-                    if (yD > 3 && uppercutCooldown <= 0)
+                    
+                    if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 2)
                     {
-                        DoUppercut();
-                        actionCooldown = 1f;
-                        uppercutCooldown = 5f;
+                        StartCoroutine(DoHelmSplitterWithTP());
+                        helmSplitterCooldown = 5;
+                        actionCooldown = 0.5f;
+                        helmSplitterAltCounter = 0;
                     }
                     else
-                    {
-                        if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 3)
-                        {
-                            StartCoroutine(DoHelmSplitterWithTP());
-                            helmSplitterCooldown = 5;
-                            actionCooldown = 1f;
-                            helmSplitterAltCounter = 0;
-                        }
-                        else
-                        {                            
-                            StopCoroutine(phase1Combo());
-                            StartCoroutine(phase1Combo());
-                            actionCooldown = 1f;
-                            helmSplitterAltCounter++;
-                        }
-                        
+                    {                            
+                        StopCoroutine(phase1Combo());
+                        StartCoroutine(phase1Combo());
+                        actionCooldown = 0.3f;
+                        helmSplitterAltCounter++;
                     }
+                        
+                    
                     
                 }
                 else if (helmSplitterCooldown <= 0 && CheckOnScreen())
                 {
                     StartCoroutine(DoHelmSplitterWithTP());
                     helmSplitterCooldown = 5;
-                    actionCooldown = 1f;
+                    actionCooldown = 0.5f;
                 }
                 else if (stingerCooldown <= 0)
                 {
                     DoStinger();
                     stingerCooldown = 5;
-                    actionCooldown = 1f;
+                    actionCooldown = 0.5f;
                 }
                 else
                 {
+                    rHealth.ResetKnockback();
                     walking = true;
                 }
 
                 
                 break;
-            case Phase.Phase2:
+            case Phase.Phase2: //-----------------------------------------------------PHASE TWO-----------------------------------------------------
+
+                if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
+                {
+                    if (yD > 3 && uppercutCooldown <= 0)
+                    {
+                        DoUppercut();
+                        actionCooldown = 1f;
+                        uppercutCooldown = 5f;
+                    }
+                    else if (player.finder.melee.inAttack)
+                    {
+                        
+                        StartCoroutine(DoEvade(0.4f));
+                        actionCooldown = 0.3f;                       
+                        
+                    }
+                    else
+                    {
+                        if (Random.Range(0.0f, 1.0f) <= 0.2f)
+                        {
+                            StartCoroutine(DoEvade(0.4f));
+                            actionCooldown = 0.3f;
+                        }
+                        else
+                        {
+                            if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 2)
+                            {
+                                StartCoroutine(DoHelmSplitterWithTP());
+                                helmSplitterCooldown = 5;
+                                actionCooldown = 0.5f;
+                                helmSplitterAltCounter = 0;
+                            }
+                            else
+                            {
+                                StopCoroutine(phase2Combo());
+                                StartCoroutine(phase2Combo());
+                                actionCooldown = 0.3f;
+                                helmSplitterAltCounter++;
+                            }
+                        }
+                        
+
+                    }
+
+                }
+                else if (helmSplitterCooldown <= 0 && CheckOnScreen())
+                {
+                    StartCoroutine(DoHelmSplitterWithTP());
+                    helmSplitterCooldown = 5;
+                    actionCooldown = 0.5f;
+                }
+                else if (stingerCooldown <= 0)
+                {
+                    StartCoroutine(DoStingerCombo());
+                    stingerCooldown = 5;
+                    actionCooldown = 0.5f;
+                }
+                else
+                {
+                    rHealth.ResetKnockback();
+                    walking = true;
+                }
                 break;
-            case Phase.Phase3:
+            case Phase.Phase3: //-----------------------------------------------------PHASE THREE-----------------------------------------------------
+                if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
+                {
+                    if (yD > 3 && uppercutCooldown <= 0)
+                    {
+                        DoUppercut();
+                        actionCooldown = 1f;
+                        uppercutCooldown = 5f;
+                    }
+                    else if (player.finder.melee.inAttack)
+                    {
+                        if (player.finder.melee.inStinger)
+                        {
+                            StartCoroutine(DoEvadeWithStinger());
+                        }
+                        else
+                        {
+                            StartCoroutine(DoEvade(0.4f));
+                            actionCooldown = 0.3f;
+                        }
+
+                    }
+                    else
+                    {
+                        if (Random.Range(0.0f, 1.0f) <= 0.2f)
+                        {
+                            StartCoroutine(DoEvade(0.4f));
+                            actionCooldown = 0.3f;
+                        }
+                        else
+                        {
+                            if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 2)
+                            {
+                                StartCoroutine(DoHelmSplitterWithTP());
+                                helmSplitterCooldown = 5;
+                                actionCooldown = 0.5f;
+                                helmSplitterAltCounter = 0;
+                            }
+                            else
+                            {
+                                StopCoroutine(phase2Combo());
+                                StartCoroutine(phase2Combo());
+                                actionCooldown = 0.3f;
+                                helmSplitterAltCounter++;
+                            }
+                        }
+
+
+                    }
+
+                }
+                else if (helmSplitterCooldown <= 0 && CheckOnScreen())
+                {
+                    if (Random.Range(0.0f, 1.0f) <= 0.5f)
+                    {
+                        StartCoroutine(TripleHelmSplitter());
+                    }
+                    else
+                    {
+                        StartCoroutine(DoHelmSplitterWithTP());
+                        helmSplitterCooldown = 5;
+                        actionCooldown = 0.5f;
+                    }
+                    
+                }
+                else if (stingerCooldown <= 0)
+                {
+                    StartCoroutine(DoStingerCombo());
+                    stingerCooldown = 5;
+                    actionCooldown = 0.5f;
+                }
+                else
+                {
+                    rHealth.ResetKnockback();
+                    walking = true;
+                }
                 break;
             default:
                 break;
@@ -221,6 +367,22 @@ public class RivalBehaviour : EnemyBaseBehaviour
 
     IEnumerator phase1Combo()
     {
+        rHealth.ResetKnockback();        
+        canTurn = false;
+        sprite.currentAttackAnimName = "combohit2";
+        melee.TriggerAttack(attackList[0]);
+        sprite.CheckState();
+        yield return new WaitForSecondsRealtime(0.5f);        
+        sprite.currentAttackAnimName = "combohit3";
+        melee.TriggerAttackWithCancel(attackList[2]);
+        sprite.CheckState();
+        canTurn = true;
+        rHealth.canKnockback = true;
+    }
+
+    IEnumerator phase2Combo()
+    {
+        rHealth.ResetKnockback();
         canTurn = false;
         sprite.currentAttackAnimName = "combohit2";
         melee.TriggerAttack(attackList[0]);
@@ -234,6 +396,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         melee.TriggerAttackWithCancel(attackList[2]);
         sprite.CheckState();
         canTurn = true;
+        rHealth.canKnockback = true;
     }
 
     void Teleport(Vector2 newPos)
@@ -272,6 +435,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         sprite.CheckState();
         inHelmSplitter = true;
         movement.inSpecialMovement = true;
+        rHealth.canKnockback = true;
     }
 
     IEnumerator DoHelmSplitterWithTP()
@@ -296,20 +460,117 @@ public class RivalBehaviour : EnemyBaseBehaviour
         inUppercut = true;
         uppercutTimer = 0.15f;
         movement.inSpecialMovement = true;
+        rHealth.canKnockback = true;
     }
 
     void DoStinger()
     {
+        rHealth.ResetKnockback();
         DecideDirection();
         sprite.currentAttackAnimName = "stingerA";
         melee.inAttack = true;
         movement.inSpecialMovement = true;
-        stingerTimer = 0.3f;
+        stingerTimer = 0.4f;
         inStinger = true;
+        
     }
 
     void Vanish()
     {
         transform.position = new Vector3(-9999, -9999, 0);
+    }
+
+    public void KnockbackEscape()
+    {
+        StartCoroutine(DoHelmSplitterWithTP());
+    }
+
+    public void OnTakeKnockback()
+    {
+        StopAllCoroutines();
+    }
+
+    IEnumerator DoStingerCombo()
+    {
+        DoStinger();
+        yield return new WaitForSeconds(0.45f);
+        DoUppercut();
+        yield return new WaitForSeconds(0.25f);
+        StartCoroutine(DoHelmSplitterWithTP());
+        actionCooldown = 0.8f;
+    }
+
+    IEnumerator DoEvade(float t)
+    {
+        inEvade = true;
+        movement.inSpecialMovement = true;
+
+        yield return new WaitForSecondsRealtime(t);
+
+        inEvade = false;
+        movement.inSpecialMovement = false;
+    }
+
+    IEnumerator DoEvadeWithStinger()
+    {
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSecondsRealtime(0.33f);
+        DoStinger();
+        stingerCooldown = 5;
+        actionCooldown = 0.5f;
+    }
+
+    IEnumerator TripleHelmSplitter()
+    {
+        StartCoroutine(DoHelmSplitterWithTP());
+        yield return new WaitForSecondsRealtime(0.7f);
+        StartCoroutine(DoHelmSplitterWithTP());
+        yield return new WaitForSecondsRealtime(0.7f);
+        StartCoroutine(DoHelmSplitterWithTP());        
+        helmSplitterCooldown = 5;
+        actionCooldown = 0.5f;
+        helmSplitterAltCounter = 0;
+    }
+
+    public void SetPhase2()
+    {
+        currentPhase = Phase.Phase2;
+    }
+
+    public void SetPhase3()
+    {
+        currentPhase = Phase.Phase3;
+    }
+
+    public override void CheckState()
+    {
+        if (movement.inSpecialKnockback)
+        {
+            SetState(State.SpecialKnockback);
+        }
+        else if (inEvade)
+        {
+            SetState(State.Evade);
+        }
+        else if (movement.inKnockback)
+        {
+            SetState(State.Knockback);
+        }
+        else if (melee.inAttack)
+        {
+            SetState(State.Attack);
+        }
+        else if (!movement.isFlying && !movement.controller.collisions.below)
+        {
+            SetState(State.Jump);
+        }
+        else if (Mathf.Abs(movement.velocity.x) >= 0.01)
+        {
+            SetState(State.Moving);
+        }
+        else
+        {
+            SetState(State.Idle);
+        }
     }
 }

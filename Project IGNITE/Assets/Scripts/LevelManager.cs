@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public bool usingCheckPoint;
     public float totalComboScore;
     public float totalDamage;
+    public GameObject loadScreen;
 
     public static LevelManager Instance { get => instance; set => instance = value; }
 
@@ -88,6 +89,7 @@ public class LevelManager : MonoBehaviour
         ResetLevelStats();
         usingCheckPoint = false;
         Time.timeScale = 1;
+        Instantiate(loadScreen);
         SceneManager.LoadScene(levelName);
     }
 

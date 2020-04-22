@@ -40,6 +40,9 @@ public class AudioManager : MonoBehaviour
         if (playBGMOnStart)
         {
             PlayBGM(defaultBGM);
+            bgmPlayer2.Play();
+            bgmPlayer.volume = maxBGMVolume;
+            bgmPlayer2.volume = 0;
         }
     }
 
@@ -81,6 +84,12 @@ public class AudioManager : MonoBehaviour
         sfxPlayer.PlayOneShot(clip, volume);
     }
 
+    public void PlaySFX(string path, float volume)
+    {
+        AudioClip clip = Resources.Load<AudioClip>(path);
+        sfxPlayer.PlayOneShot(clip, volume);
+    }
+
     public void PlayBGM(AudioClip clip)
     {
         bgmPlayer.clip = clip;
@@ -97,7 +106,6 @@ public class AudioManager : MonoBehaviour
     public void FadeIntoBGM2()
     {
         fadingInto2 = true;
-        fadingInto1 = false;
-        bgmPlayer2.Play();
+        fadingInto1 = false;        
     }
 }

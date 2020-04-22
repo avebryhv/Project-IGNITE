@@ -35,6 +35,7 @@ public class PlayerUnlocks : MonoBehaviour
 
     [Header("CheckPoint")]
     public Vector2 checkpointPosition;
+    public bool dataSendingEnabled;
 
     public PlayerScriptFinder finder;
     public string filePath;
@@ -126,7 +127,7 @@ public class PlayerUnlocks : MonoBehaviour
         save.foundDTUps = foundDTUps;
         save.currentAmount = currentAmount;
         save.checkPointPositionX = checkpointPosition.x;
-        save.checkPointPositionY = checkpointPosition.y;
+        save.checkPointPositionY = checkpointPosition.y;        
 
         return save;
     }

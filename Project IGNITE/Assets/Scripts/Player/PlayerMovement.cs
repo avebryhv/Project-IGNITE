@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Controller2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerScriptFinder finder;
+    public PlayerScriptFinder finder;
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timetoJumpApex = .4f;

@@ -32,6 +32,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
     bool inStinger;
     public GameObject fadeObject;
     bool inEvade;
+    public GameObject floorBeamObject;
+    public GameObject beamWaveObject;
+    public GameObject beamWaveMarker;
+    public bool phase2introDone;
+    float beamTimer;
+    bool inSpecialAction;
 
 
     // Start is called before the first frame update
@@ -57,7 +63,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public override void Actions()
     {
         base.Actions();
-        if (!movement.inKnockback && !movement.inHitStun && movement.controller.collisions.below && !movement.hitThisFrame && !melee.inAttack && !inEvade)
+        if (!movement.inKnockback && !movement.inHitStun && movement.controller.collisions.below && !movement.hitThisFrame && !melee.inAttack && !inEvade && !inSpecialAction)
         {
             float xDifference = player.transform.position.x - transform.position.x;
             float yDifference = player.transform.position.y - transform.position.y;
@@ -145,6 +151,16 @@ public class RivalBehaviour : EnemyBaseBehaviour
         {
             velocity.x = -10 * movement.lastDirection;
         }
+
+        if (currentPhase == Phase.Phase3)
+        {
+            beamTimer -= Time.deltaTime;
+            if (beamTimer <= 0)
+            {
+                Instantiate(floorBeamObject, new Vector2(player.transform.position.x, -3.0f), new Quaternion());
+                beamTimer = 5f;
+            }
+        }
         
     }
 
@@ -213,8 +229,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 
                 break;
             case Phase.Phase2: //-----------------------------------------------------PHASE TWO-----------------------------------------------------
-
-                if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
+                if (!phase2introDone)
+                {
+                    phase2introDone = true;
+                    StartCoroutine(DoBeamWave());
+                }
+                else if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
                 {
                     if (yD > 3 && uppercutCooldown <= 0)
                     {
@@ -224,9 +244,18 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     }
                     else if (player.finder.melee.inAttack)
                     {
-                        
-                        StartCoroutine(DoEvade(0.4f));
-                        actionCooldown = 0.3f;                       
+                        if (yD > 3)
+                        {
+                            DoUppercut();
+                            actionCooldown = 0.5f;
+                            uppercutCooldown = 1f;
+                        }
+                        else
+                        {
+                            StartCoroutine(DoEvade(0.4f));
+                            actionCooldown = 0.3f;
+                        }
+                                               
                         
                     }
                     else
@@ -290,11 +319,31 @@ public class RivalBehaviour : EnemyBaseBehaviour
                         if (player.finder.melee.inStinger)
                         {
                             StartCoroutine(DoEvadeWithStinger());
+                            actionCooldown = 0.5f;
+                        }
+                        else if (player.finder.melee.inHelmSplitter)
+                        {
+                            DoUppercut();
+                            actionCooldown = 0.5f;
+                        }
+                        else if (player.finder.melee.inUpperCut)
+                        {
+                            StartCoroutine(DoHelmSplitterWithTP());
+                            actionCooldown = 0.5f;
                         }
                         else
                         {
-                            StartCoroutine(DoEvade(0.4f));
-                            actionCooldown = 0.3f;
+                            if (movement.controller.collisions.left || movement.controller.collisions.right) //If in corner
+                            {
+                                StartCoroutine(DoHelmSplitterWithTP());
+                                actionCooldown = 0.5f;
+                            }
+                            else
+                            {
+                                StartCoroutine(DoEvade(0.4f));
+                                actionCooldown = 0.3f;
+                            }
+                            
                         }
 
                     }
@@ -302,8 +351,10 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     {
                         if (Random.Range(0.0f, 1.0f) <= 0.2f)
                         {
-                            StartCoroutine(DoEvade(0.4f));
-                            actionCooldown = 0.3f;
+                            //StartCoroutine(DoEvade(0.4f));
+                            //actionCooldown = 0.3f;
+                            StartCoroutine(DoBeamWave());
+                            actionCooldown = 1f;
                         }
                         else
                         {
@@ -530,6 +581,25 @@ public class RivalBehaviour : EnemyBaseBehaviour
         helmSplitterCooldown = 5;
         actionCooldown = 0.5f;
         helmSplitterAltCounter = 0;
+    }
+
+    IEnumerator DoBeamWave()
+    {
+        inSpecialAction = true;
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSecondsRealtime(0.33f);
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSecondsRealtime(0.33f);
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSecondsRealtime(0.33f);
+
+        sprite.currentAttackAnimName = "floorBeamWave";
+        melee.inAttack = true;
+        rHealth.ResetKnockback();
+        Instantiate(beamWaveObject, beamWaveMarker.transform);
+        yield return new WaitForSecondsRealtime(2f);
+        melee.inAttack = false;
+        inSpecialAction = false;
     }
 
     public void SetPhase2()

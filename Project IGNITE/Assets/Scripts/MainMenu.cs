@@ -72,6 +72,11 @@ public class MainMenu : MonoBehaviour
         LevelManager.Instance.LoadLevelFromStart("TutorialLevel");
     }
 
+    public void BossLevel()
+    {
+        LevelManager.Instance.LoadLevelFromStart("BossStage");
+    }
+
     public void ShowQuitMenu()
     {
         quitPanel.SetActive(true);

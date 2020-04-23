@@ -9,6 +9,7 @@ public class EnemyStatsUI : MonoBehaviour
     public Image healthBar;
     public Image overlay;
     public TextMeshProUGUI text;
+    public bool bossMode;
 
 
     // Start is called before the first frame update
@@ -20,11 +21,19 @@ public class EnemyStatsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Color col = healthBar.color;
-        col.a -= Time.deltaTime;
-        healthBar.color = col;
-        overlay.color = col;
-        text.color = col;
+        if (!bossMode)
+        {
+            Color col = healthBar.color;
+            col.a -= Time.deltaTime;
+            healthBar.color = col;
+            overlay.color = col;
+            text.color = col;
+        }
+        else
+        {
+
+        }
+        
     }
 
     public void SetHealthBar(int current, int max)

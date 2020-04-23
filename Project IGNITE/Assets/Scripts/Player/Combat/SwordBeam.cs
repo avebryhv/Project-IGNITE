@@ -22,6 +22,16 @@ public class SwordBeam : MonoBehaviour
     {
         Vector2 velocity = new Vector2(currentDirection * moveSpeed, 0);
         transform.Translate(velocity * Time.deltaTime);
+
+        Vector2 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        if ((screenPoint.x >= 0 && screenPoint.x <= 1) && (screenPoint.y >= 0 && screenPoint.y <= 1))
+        {
+            //On Screen
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

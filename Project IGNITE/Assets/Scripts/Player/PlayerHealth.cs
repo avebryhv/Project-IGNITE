@@ -106,6 +106,34 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    public void OnHit(int damage, Vector2 knockbackDir, float knockbackStr, Vector2 hitboxPos)
+    {
+        if (canTakeDamage)
+        {
+            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
+            {
+                finder.drones.BreakGuard();
+            }
+            else
+            {
+                if (finder.guard.isGuarding)
+                {
+                    finder.guard.OnBlockAttack(damage, knockbackDir * knockbackStr, hitboxPos);
+                }
+                else
+                {
+                    //Debug.Log("Hit By Enemy for " + hitbox.damage);
+                    TakeDamage(damage, knockbackDir * knockbackStr);
+                }
+            }
+
+        }
+        else if (finder.movement.inDash) //Dodging attack as a result of evading
+        {
+            FindObjectOfType<ComboUI>().AddComboScore(damage, name, false);
+        }
+    }
+
     public void TakeDamage(int damage, Vector2 knockback, EnemyMeleeHitbox.type type)
     {
         if (finder.stats.inDT)

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcb1e2008f75d24bad0ade76a8abf53, type: 3}
+  m_Name: BossStage
+  m_EditorClassIdentifier: 
+  styleRanks:
+  - 500
+  - 450
+  - 400
+  - 350
+  - 300
+  - 250
+  - 200
+  damageRanks:
+  - 0
+  - 10
+  - 20
+  - 40
+  - 60
+  - 80
+  - 100
+  timeRanks:
+  - 30
+  - 45
+  - 60
+  - 75
+  - 90
+  - 105
+  - 120

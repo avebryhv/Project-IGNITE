@@ -14,6 +14,7 @@ public class ButtonSelectionInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inputAssignment = FindObjectOfType<InputAssignment>();
         dropDown = GetComponent<TMP_Dropdown>();
         ReadCurrentInputSelection();
     }

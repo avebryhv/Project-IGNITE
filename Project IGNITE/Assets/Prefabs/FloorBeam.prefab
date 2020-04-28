@@ -55,6 +55,7 @@ MonoBehaviour:
   knockbackDirection: {x: 3, y: 2}
   knockbackStrength: 5
   lingerTime: 1
+  playsSound: 1
 --- !u!50 &1162128692691440384
 Rigidbody2D:
   serializedVersion: 4

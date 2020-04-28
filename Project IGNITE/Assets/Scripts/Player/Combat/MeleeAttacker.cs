@@ -393,7 +393,7 @@ public class MeleeAttacker : MonoBehaviour
             }
             else if (finder.controller.playerInput.x != 0 && finder.movement.lockedOn == true) //Lock-On Inputs
             {
-                if (finder.input.CheckStickInputs(finder.input.inputComboList.powerGLeft) || finder.input.CheckStickInputs(finder.input.inputComboList.powerGRight))
+                if ((finder.input.CheckStickInputs(finder.input.inputComboList.powerGLeft) || finder.input.CheckStickInputs(finder.input.inputComboList.powerGRight)) && finder.unlocks.powerG)
                 {
                     currentAttack = attackList.halfCircleDown;
                     AttackStartup();

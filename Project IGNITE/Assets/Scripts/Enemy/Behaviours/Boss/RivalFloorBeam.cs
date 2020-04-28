@@ -19,6 +19,7 @@ public class RivalFloorBeam : MonoBehaviour
     float lingerCounter;
 
     bool hasHitPlayer;
+    public bool playsSound;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,10 @@ public class RivalFloorBeam : MonoBehaviour
         warningSprite.enabled = false;
         beamObject.SetActive(true);
         anim.Play("shoot", 0, 0);
+        if (playsSound)
+        {
+            AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/floorLaserBeam", 0.5f);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

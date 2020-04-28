@@ -393,7 +393,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDashInput()
     {
-        if (!inDash && canDash && !finder.guard.isGuarding && !finder.melee.inAttack)
+        if (!inDash && canDash && !finder.guard.isGuarding && !finder.melee.inAttack && !inKnockback)
         {
             if (controller.collisions.below)
             {
@@ -649,6 +649,7 @@ public class PlayerMovement : MonoBehaviour
         inKnockback = true;
         knockbackVelocity = dir;
         controller.ignoreDirectionChange = true;
+        ResetDash();
         if (inDash)
         {
             CancelDash();

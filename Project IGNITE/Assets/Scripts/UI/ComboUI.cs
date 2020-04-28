@@ -23,6 +23,7 @@ public class ComboUI : MonoBehaviour
     bool countingKnockback;
     float knockbackCounter;
     float highestKnockback;
+    public bool comboBarPaused;
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +37,12 @@ public class ComboUI : MonoBehaviour
     {
         float fillPercent = comboBuildup / maxComboBuildup;
         comboBar.fillAmount = fillPercent;
-        if (comboBuildup > 0)
+        if (comboBuildup > 0 && !comboBarPaused)
         {
             comboBuildup -= Time.deltaTime * 2;
         }
         comboBuildup = Mathf.Clamp(comboBuildup, 0, maxComboBuildup);
-        CalculateLetter();
+        //CalculateLetter();
 
         if (trainingMode)
         {
@@ -183,6 +184,7 @@ public class ComboUI : MonoBehaviour
         comboBarBG.color = bgCol;
         panelBG.color = col;
         comboTitle.color = col;
+        comboText.color = col;
 
     }
 
@@ -195,5 +197,18 @@ public class ComboUI : MonoBehaviour
         comboBarBG.color = bgCol;
         panelBG.color = col;
         comboTitle.color = col;
+        comboText.color = col;
+    }
+
+    public void PauseComboBar()
+    {
+        comboText.text = "WAIT!";
+        comboBarPaused = true;
+    }
+
+    public void ResumeComboBar()
+    {
+        comboText.text = "";
+        comboBarPaused = false;
     }
 }

@@ -11,6 +11,7 @@ public class RivalHealth : EnemyBaseHealth
     public RivalBehaviour rivalB;
     public float phase2boundary;
     public float phase3boundary;
+    public bool endLevelOnDeath;
 
 
     public override void TakeDamage(int damage, Vector2 knockback, MeleeHitbox.type type)
@@ -82,6 +83,8 @@ public class RivalHealth : EnemyBaseHealth
             FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
+                FindObjectOfType<PlayerUnlocks>().powerG = true; //Unlocks a move
+                LevelManager.Instance.EndLevelOnBossKill();
                 Kill();
             }
         }
@@ -93,4 +96,6 @@ public class RivalHealth : EnemyBaseHealth
         inJuggle = false;
         knockbackCounter = 0;
     }
+
+    
 }

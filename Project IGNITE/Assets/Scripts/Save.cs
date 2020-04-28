@@ -11,6 +11,7 @@ public class Save
     public bool lightComboB;
     public bool airComboB;
     public bool burst;
+    public bool powerG;
 
     [Header("Movement Unlocks")]
     public bool doubleJump;

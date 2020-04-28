@@ -181,6 +181,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorBeam (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
 --- !u!4 &4318772285821903940 stripped
@@ -255,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorBeam (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
@@ -331,6 +341,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorBeam (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
 --- !u!4 &3069366055374461167 stripped
@@ -405,6 +420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorBeam (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
@@ -481,6 +501,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorBeam (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
 --- !u!4 &4976159125962070401 stripped
@@ -555,6 +580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorBeam (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
@@ -631,6 +661,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorBeam (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}
 --- !u!4 &7526421292790050593 stripped
@@ -705,6 +740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorBeam (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162128692691442943, guid: 0238f881c9f7b2045a6b31ebea0c3a14,
+        type: 3}
+      propertyPath: playsSound
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0238f881c9f7b2045a6b31ebea0c3a14, type: 3}

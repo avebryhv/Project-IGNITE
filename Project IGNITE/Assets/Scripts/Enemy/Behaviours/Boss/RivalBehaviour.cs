@@ -38,6 +38,9 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public bool phase2introDone;
     float beamTimer;
     bool inSpecialAction;
+    int backstepCounter;
+    public ParticleSystem embers;
+    public AudioSource bossMusicPlayer;
 
 
     // Start is called before the first frame update
@@ -140,6 +143,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
             {
                 sprite.currentAttackAnimName = "stingerB";
                 melee.TriggerAttackWithCancel(attackList[4]);
+                AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
                 sprite.CheckState();
                 inStinger = false;
                 movement.inSpecialMovement = false;
@@ -152,7 +156,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
             velocity.x = -10 * movement.lastDirection;
         }
 
-        if (currentPhase == Phase.Phase3)
+        if (currentPhase == Phase.Phase3 && !inSpecialAction)
         {
             beamTimer -= Time.deltaTime;
             if (beamTimer <= 0)
@@ -252,8 +256,19 @@ public class RivalBehaviour : EnemyBaseBehaviour
                         }
                         else
                         {
-                            StartCoroutine(DoEvade(0.4f));
-                            actionCooldown = 0.3f;
+                            if (backstepCounter >= 2)
+                            {
+                                backstepCounter = 0;
+                                DoStingerCombo();
+                                actionCooldown = 0.5f;
+                            }
+                            else
+                            {
+                                StartCoroutine(DoEvade(0.4f));
+                                actionCooldown = 0.3f;
+                                backstepCounter++;
+                            }
+                            
                         }
                                                
                         
@@ -423,10 +438,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
         sprite.currentAttackAnimName = "combohit2";
         melee.TriggerAttack(attackList[0]);
         sprite.CheckState();
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSecondsRealtime(0.5f);        
         sprite.currentAttackAnimName = "combohit3";
         melee.TriggerAttackWithCancel(attackList[2]);
         sprite.CheckState();
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         canTurn = true;
         rHealth.canKnockback = true;
     }
@@ -438,14 +455,17 @@ public class RivalBehaviour : EnemyBaseBehaviour
         sprite.currentAttackAnimName = "combohit2";
         melee.TriggerAttack(attackList[0]);
         sprite.CheckState();
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSecondsRealtime(0.5f);
         sprite.currentAttackAnimName = "combohit1";
         melee.TriggerAttackWithCancel(attackList[1]);
         sprite.CheckState();
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSecondsRealtime(0.35f);
         sprite.currentAttackAnimName = "combohit3";
         melee.TriggerAttackWithCancel(attackList[2]);
         sprite.CheckState();
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         canTurn = true;
         rHealth.canKnockback = true;
     }
@@ -483,6 +503,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         canTurn = false;
         sprite.currentAttackAnimName = "helmSplitter";
         melee.TriggerAttackWithCancel(attackList[3]);
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         sprite.CheckState();
         inHelmSplitter = true;
         movement.inSpecialMovement = true;
@@ -507,6 +528,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         canTurn = false;
         sprite.currentAttackAnimName = "uppercut";
         melee.TriggerAttackWithCancel(attackList[3]);
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         sprite.CheckState();
         inUppercut = true;
         uppercutTimer = 0.15f;
@@ -602,6 +624,34 @@ public class RivalBehaviour : EnemyBaseBehaviour
         inSpecialAction = false;
     }
 
+    IEnumerator Phase3IntroBeams()
+    {
+        inSpecialAction = true;
+        movement.inSpecialMovement = true;
+        rHealth.ResetKnockback();
+        CreateFadeObject();
+        Vanish();
+        FindObjectOfType<ComboUI>().PauseComboBar();
+        yield return new WaitForSecondsRealtime(1f);
+        Instantiate(beamWaveObject, beamWaveMarker.transform);
+        yield return new WaitForSecondsRealtime(1.5f);
+        Instantiate(beamWaveObject, new Vector3(beamWaveMarker.transform.position.x + 2.0f, beamWaveMarker.transform.position.y, beamWaveMarker.transform.position.z), new Quaternion());
+        yield return new WaitForSecondsRealtime(1.5f);
+        Instantiate(beamWaveObject, beamWaveMarker.transform);
+        yield return new WaitForSecondsRealtime(2f);
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate(floorBeamObject, new Vector2(player.transform.position.x, -3.0f), new Quaternion());
+            yield return new WaitForSecondsRealtime(0.25f);
+        }
+        inSpecialAction = false;
+        
+        yield return new WaitForSecondsRealtime(0.5f);
+        FindObjectOfType<ComboUI>().ResumeComboBar();
+        StartCoroutine(DoHelmSplitterWithTP());
+        
+    }
+
     public void SetPhase2()
     {
         currentPhase = Phase.Phase2;
@@ -610,6 +660,9 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public void SetPhase3()
     {
         currentPhase = Phase.Phase3;
+        embers.Play();
+        StartCoroutine(Phase3IntroBeams());
+        bossMusicPlayer.pitch = 1.05f;
     }
 
     public override void CheckState()

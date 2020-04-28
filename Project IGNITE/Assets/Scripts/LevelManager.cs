@@ -98,6 +98,21 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.SetGamePaused(true);
         Time.timeScale = 0;
         GameManager.Instance.finder.input.allowPlayerInput = false;
+        FindObjectOfType<PlayerUnlocks>().SaveUnlocks();
         FindObjectOfType<EndLevelUI>().ShowEndingScores();
+    }
+
+    public void EndLevelOnBossKill()
+    {
+        StartCoroutine(EndLevelWithDelay(2.0f));
+    }
+
+    IEnumerator EndLevelWithDelay(float t)
+    {
+        yield return new WaitForSecondsRealtime(t);
+        GameManager.Instance.finder.input.allowPlayerInput = false;
+        GameManager.Instance.SetGamePaused(true);
+        FindObjectOfType<PlayerMovement>().freezeMovement = true;
+        LevelManager.Instance.EndLevel();
     }
 }

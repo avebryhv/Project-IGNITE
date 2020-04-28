@@ -11,11 +11,15 @@ public class AudioManager : MonoBehaviour
     public AudioSource bgmPlayer2;
     public bool fadingInto1;
     public bool fadingInto2;
+    bool bgm1On;
 
     public AudioClip defaultBGM;
     public bool playBGMOnStart;
 
     public float maxBGMVolume;
+
+    public float bgmVolume;
+    public float sfxVolume;
 
 
     public static AudioManager Instance { get => instance; set => instance = value; }
@@ -37,6 +41,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadAudioSettings();
         if (playBGMOnStart)
         {
             PlayBGM(defaultBGM);
@@ -94,18 +99,79 @@ public class AudioManager : MonoBehaviour
     {
         bgmPlayer.clip = clip;
         bgmPlayer.Play();
+        bgm1On = true;
     }
 
     public void FadeIntoBGM1()
     {
+        bgmPlayer2.volume = maxBGMVolume;
+        bgmPlayer.volume = 0;
         fadingInto1 = true;
         fadingInto2 = false;
-        
+        bgm1On = true;
     }
 
     public void FadeIntoBGM2()
     {
+        bgmPlayer.volume = maxBGMVolume;
+        bgmPlayer2.volume = 0;
         fadingInto2 = true;
-        fadingInto1 = false;        
+        fadingInto1 = false;
+        bgm1On = false;
+    }
+
+    public void SetVolumes(float bgmVol, float sfxVol)
+    {
+        maxBGMVolume = bgmVol;
+        sfxPlayer.volume = sfxVol;        
+    }
+
+    public void SetBGMVolume(float vol)
+    {
+        maxBGMVolume = vol;
+        SaveAudioSettings();
+        if (bgm1On)
+        {
+            bgmPlayer.volume = maxBGMVolume;
+        }
+        else
+        {
+            bgmPlayer2.volume = maxBGMVolume;
+        }
+    }
+
+    public void SetSFXVolume(float vol)
+    {
+        sfxPlayer.volume = vol;
+        SaveAudioSettings();
+    }
+
+    public void LoadAudioSettings()
+    {
+        if (PlayerPrefs.HasKey("BGMVolume"))
+        {
+            maxBGMVolume = PlayerPrefs.GetFloat("BGMVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("BGMVolume", 1.0f);
+            maxBGMVolume = 1.0f;
+        }
+
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            sfxPlayer.volume = PlayerPrefs.GetFloat("SFXVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("SFXVolume", 1.0f);
+            sfxPlayer.volume = 1.0f;
+        }
+    }
+
+    public void SaveAudioSettings()
+    {
+        PlayerPrefs.SetFloat("BGMVolume", maxBGMVolume);
+        PlayerPrefs.SetFloat("SFXVolume", sfxPlayer.volume);
     }
 }

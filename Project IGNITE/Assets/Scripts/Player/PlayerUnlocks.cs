@@ -13,6 +13,7 @@ public class PlayerUnlocks : MonoBehaviour
     public bool lightComboB;
     public bool airComboB;
     public bool burst;
+    public bool powerG;
 
     [Header("Movement Unlocks")]
     public bool doubleJump;
@@ -118,6 +119,7 @@ public class PlayerUnlocks : MonoBehaviour
         save.airDash = airDash;
         save.directionDash = directionDash;
         save.burst = burst;
+        save.powerG = powerG;
 
         save.healthUps = healthUps;
         save.DTUps = DTUps;
@@ -175,6 +177,7 @@ public class PlayerUnlocks : MonoBehaviour
             airDash = save.airDash;
             directionDash = save.directionDash;
             burst = save.burst;
+            powerG = save.powerG;
 
             healthUps = save.healthUps;
             DTUps = save.DTUps;

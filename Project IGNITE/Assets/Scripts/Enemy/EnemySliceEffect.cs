@@ -114,6 +114,7 @@ public class EnemySliceEffect : MonoBehaviour
         SetStartingPositions();
     }
 
+    //Repositions masks to create the cut effect at a set angle
     void AngleMaskPositions()
     {
         part1Mask.transform.position = part1Renderer.transform.position;

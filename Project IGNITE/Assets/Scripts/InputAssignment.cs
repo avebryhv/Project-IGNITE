@@ -49,9 +49,26 @@ public class InputAssignment : MonoBehaviour
     private void Awake()
     {
         LoadInputs();
+        //if (GameManager.Instance.usingController)
+        //{
+            
+        //    AssignJump();
+        //    AssignBlock();
+        //    AssignLightAttack();
+        //    AssignHeavyAttack();
+        //    AssignDTToggle();
+        //    AssignBurst();
+        //    AssignLockOn();
+        //    AssignGrapple();
+        //}
+        
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         if (GameManager.Instance.usingController)
         {
-            
+
             AssignJump();
             AssignBlock();
             AssignLightAttack();
@@ -61,12 +78,6 @@ public class InputAssignment : MonoBehaviour
             AssignLockOn();
             AssignGrapple();
         }
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

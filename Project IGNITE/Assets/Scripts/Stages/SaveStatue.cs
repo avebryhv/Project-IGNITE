@@ -25,10 +25,21 @@ public class SaveStatue : MonoBehaviour
         if (playerInFront)
         {
             interactImage.enabled = true;
-            if (Gamepad.current.buttonNorth.wasPressedThisFrame || Keyboard.current.xKey.wasPressedThisFrame)
+            if (GameManager.Instance.usingController)
             {
-                OpenSaveStatue();
+                if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+                {
+                    OpenSaveStatue();
+                }
             }
+            else
+            {
+                if (Keyboard.current.xKey.wasPressedThisFrame)
+                {
+                    OpenSaveStatue();
+                }
+            }
+            
             
         }
         else

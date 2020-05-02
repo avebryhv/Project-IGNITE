@@ -83,8 +83,12 @@ public class RivalHealth : EnemyBaseHealth
             FindObjectOfType<EnemyStatsUI>().SetHealthBar(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
-                FindObjectOfType<PlayerUnlocks>().powerG = true; //Unlocks a move
-                LevelManager.Instance.EndLevelOnBossKill();
+                if (endLevelOnDeath)
+                {
+                    FindObjectOfType<PlayerUnlocks>().powerG = true; //Unlocks a move
+                    LevelManager.Instance.EndLevelOnBossKill();
+                }
+                
                 Kill();
             }
         }

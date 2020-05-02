@@ -23215,6 +23215,7 @@ GameObject:
   - component: {fileID: 2103942914}
   - component: {fileID: 2103942917}
   - component: {fileID: 2103942919}
+  - component: {fileID: 2103942918}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -23321,6 +23322,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2103942918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103942913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 539ccfd16a3fe2144b3ca94c053f6d4b, type: 2}
 --- !u!114 &2103942919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23343,8 +23361,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -23628,7 +23646,7 @@ PrefabInstance:
     - target: {fileID: 3981073037391905193, guid: 240ffbac18ba4f04bb5cb8dd694aa94e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.209869
+      value: 11.2098675
       objectReference: {fileID: 0}
     - target: {fileID: 3981073038008498932, guid: 240ffbac18ba4f04bb5cb8dd694aa94e,
         type: 3}
@@ -23981,7 +23999,7 @@ PrefabInstance:
     - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
         type: 3}
@@ -23996,22 +24014,27 @@ PrefabInstance:
     - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: -1574023447
-      objectReference: {fileID: 0}
-    - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
-        type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[3]
       value: 208478841
       objectReference: {fileID: 0}
     - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
         type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
       value: 2119467171
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
+        type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: 2135104303
       objectReference: {fileID: 0}
     - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.data[5]
       value: 2135104303
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379590252693288245, guid: adfb513439750864caf99dacefb29003,
+        type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -1574023447
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adfb513439750864caf99dacefb29003, type: 3}

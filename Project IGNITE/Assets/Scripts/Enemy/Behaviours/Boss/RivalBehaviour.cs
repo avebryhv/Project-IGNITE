@@ -194,14 +194,14 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 else if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
                 {
                     
-                    if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 2)
+                    if (helmSplitterCooldown <= 0 && helmSplitterAltCounter >= 2) //After three consecutive melee combos, perform a helm splitter
                     {
                         StartCoroutine(DoHelmSplitterWithTP());
                         helmSplitterCooldown = 5;
                         actionCooldown = 0.5f;
                         helmSplitterAltCounter = 0;
                     }
-                    else
+                    else //Perform a melee combo
                     {                            
                         StopCoroutine(phase1Combo());
                         StartCoroutine(phase1Combo());
@@ -212,19 +212,19 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     
                     
                 }
-                else if (helmSplitterCooldown <= 0 && CheckOnScreen())
+                else if (helmSplitterCooldown <= 0 && CheckOnScreen()) //Perform a helm splitter
                 {
                     StartCoroutine(DoHelmSplitterWithTP());
                     helmSplitterCooldown = 5;
                     actionCooldown = 0.5f;
                 }
-                else if (stingerCooldown <= 0)
+                else if (stingerCooldown <= 0) //Perform a stinger
                 {
                     DoStinger();
                     stingerCooldown = 5;
                     actionCooldown = 0.5f;
                 }
-                else
+                else //Default state: walks towards the player
                 {
                     rHealth.ResetKnockback();
                     walking = true;
@@ -256,7 +256,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
                         }
                         else
                         {
-                            if (backstepCounter >= 2)
+                            if (backstepCounter >= 1)
                             {
                                 backstepCounter = 0;
                                 DoStingerCombo();
@@ -323,17 +323,17 @@ public class RivalBehaviour : EnemyBaseBehaviour
             case Phase.Phase3: //-----------------------------------------------------PHASE THREE-----------------------------------------------------
                 if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
                 {
-                    if (yD > 3 && uppercutCooldown <= 0)
+                    if (yD > 3 && uppercutCooldown <= 0) //If the player is above the boss, do an uppercut
                     {
                         DoUppercut();
                         actionCooldown = 1f;
                         uppercutCooldown = 5f;
                     }
-                    else if (player.finder.melee.inAttack)
+                    else if (player.finder.melee.inAttack) //If the player is performing an attack
                     {
                         if (player.finder.melee.inStinger)
                         {
-                            StartCoroutine(DoEvadeWithStinger());
+                            StartCoroutine(DoEvadeWithStinger()); //Backdash into stinger
                             actionCooldown = 0.5f;
                         }
                         else if (player.finder.melee.inHelmSplitter)
@@ -348,12 +348,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
                         }
                         else
                         {
-                            if (movement.controller.collisions.left || movement.controller.collisions.right) //If in corner
+                            if (movement.controller.collisions.left || movement.controller.collisions.right) //If in corner, escape using helm splitter
                             {
                                 StartCoroutine(DoHelmSplitterWithTP());
                                 actionCooldown = 0.5f;
                             }
-                            else
+                            else //Evade Backwards
                             {
                                 StartCoroutine(DoEvade(0.4f));
                                 actionCooldown = 0.3f;
@@ -439,7 +439,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         melee.TriggerAttack(attackList[0]);
         sprite.CheckState();
         AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
-        yield return new WaitForSecondsRealtime(0.5f);        
+        yield return new WaitForSeconds(0.5f);        
         sprite.currentAttackAnimName = "combohit3";
         melee.TriggerAttackWithCancel(attackList[2]);
         sprite.CheckState();
@@ -456,12 +456,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
         melee.TriggerAttack(attackList[0]);
         sprite.CheckState();
         AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSeconds(0.5f);
         sprite.currentAttackAnimName = "combohit1";
         melee.TriggerAttackWithCancel(attackList[1]);
         sprite.CheckState();
         AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
-        yield return new WaitForSecondsRealtime(0.35f);
+        yield return new WaitForSeconds(0.35f);
         sprite.currentAttackAnimName = "combohit3";
         melee.TriggerAttackWithCancel(attackList[2]);
         sprite.CheckState();
@@ -514,9 +514,9 @@ public class RivalBehaviour : EnemyBaseBehaviour
     {
         CreateFadeObject();
         Vanish();        
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSeconds(0.4f);
         TeleportBehindPlayer(7);
-        yield return new WaitForSecondsRealtime(0.05f);
+        yield return new WaitForSeconds(0.05f);
         DecideDirection();
         DoHelmSplitter();
     }
@@ -578,7 +578,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         inEvade = true;
         movement.inSpecialMovement = true;
 
-        yield return new WaitForSecondsRealtime(t);
+        yield return new WaitForSeconds(t);
 
         inEvade = false;
         movement.inSpecialMovement = false;
@@ -587,7 +587,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
     IEnumerator DoEvadeWithStinger()
     {
         StartCoroutine(DoEvade(0.3f));
-        yield return new WaitForSecondsRealtime(0.33f);
+        yield return new WaitForSeconds(0.33f);
         DoStinger();
         stingerCooldown = 5;
         actionCooldown = 0.5f;
@@ -596,9 +596,9 @@ public class RivalBehaviour : EnemyBaseBehaviour
     IEnumerator TripleHelmSplitter()
     {
         StartCoroutine(DoHelmSplitterWithTP());
-        yield return new WaitForSecondsRealtime(0.7f);
+        yield return new WaitForSeconds(0.7f);
         StartCoroutine(DoHelmSplitterWithTP());
-        yield return new WaitForSecondsRealtime(0.7f);
+        yield return new WaitForSeconds(0.7f);
         StartCoroutine(DoHelmSplitterWithTP());        
         helmSplitterCooldown = 5;
         actionCooldown = 0.5f;
@@ -609,17 +609,17 @@ public class RivalBehaviour : EnemyBaseBehaviour
     {
         inSpecialAction = true;
         StartCoroutine(DoEvade(0.3f));
-        yield return new WaitForSecondsRealtime(0.33f);
+        yield return new WaitForSeconds(0.33f);
         StartCoroutine(DoEvade(0.3f));
-        yield return new WaitForSecondsRealtime(0.33f);
+        yield return new WaitForSeconds(0.33f);
         StartCoroutine(DoEvade(0.3f));
-        yield return new WaitForSecondsRealtime(0.33f);
+        yield return new WaitForSeconds(0.33f);
 
         sprite.currentAttackAnimName = "floorBeamWave";
         melee.inAttack = true;
         rHealth.ResetKnockback();
         Instantiate(beamWaveObject, beamWaveMarker.transform);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSeconds(2f);
         melee.inAttack = false;
         inSpecialAction = false;
     }
@@ -632,21 +632,21 @@ public class RivalBehaviour : EnemyBaseBehaviour
         CreateFadeObject();
         Vanish();
         FindObjectOfType<ComboUI>().PauseComboBar();
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSeconds(1f);
         Instantiate(beamWaveObject, beamWaveMarker.transform);
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(1.5f);
         Instantiate(beamWaveObject, new Vector3(beamWaveMarker.transform.position.x + 2.0f, beamWaveMarker.transform.position.y, beamWaveMarker.transform.position.z), new Quaternion());
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(1.5f);
         Instantiate(beamWaveObject, beamWaveMarker.transform);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSeconds(2f);
         for (int i = 0; i < 10; i++)
         {
             Instantiate(floorBeamObject, new Vector2(player.transform.position.x, -3.0f), new Quaternion());
-            yield return new WaitForSecondsRealtime(0.25f);
+            yield return new WaitForSeconds(0.25f);
         }
         inSpecialAction = false;
         
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSeconds(0.5f);
         FindObjectOfType<ComboUI>().ResumeComboBar();
         StartCoroutine(DoHelmSplitterWithTP());
         

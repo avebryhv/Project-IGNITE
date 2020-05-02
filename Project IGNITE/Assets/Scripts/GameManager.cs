@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void SetGamePaused(bool newValue)
     {
-        gamePaused = newValue;        
+        gamePaused = newValue;
+        InputSystem.ResetHaptics();
     }
 
     public void DoHitLag()
@@ -77,6 +78,44 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.1f;
         CancelInvoke();
         Invoke("EndHitLag", time);
+    }
+
+    public void TriggerRumble(float t)
+    {
+        if (usingController)
+        {
+            StartCoroutine(DoRumble(t));
+        }
+    }
+
+    IEnumerator DoRumble(float time)
+    {
+        if (usingController)
+        {
+            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+            yield return new WaitForSecondsRealtime(time);
+            InputSystem.ResetHaptics();
+        }
+    }
+
+    public void TriggerSmallRumble(float t)
+    {
+        if (usingController)
+        {
+            StartCoroutine(DoSmallRumble(t));
+        }
+    }
+
+    IEnumerator DoSmallRumble(float time)
+    {
+        if (usingController)
+        {
+            Gamepad.current.SetMotorSpeeds(0.1f, 0.25f);
+            yield return new WaitForSecondsRealtime(time);
+            InputSystem.ResetHaptics();
+
+            
+        }
     }
 
     void EndHitLag()

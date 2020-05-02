@@ -71,7 +71,8 @@ public class MeleeHitbox : MonoBehaviour
                 Vector2 pos = other.transform.position;
                 pos += new Vector2(Random.Range(-0.2f,0.2f), Random.Range(-1, 2));
                 Instantiate(hitEffect, pos, transform.rotation);
-                PlayRandomHitSound();                
+                PlayRandomHitSound();
+                GameManager.Instance.TriggerSmallRumble(0.05f);
             }
             
         }

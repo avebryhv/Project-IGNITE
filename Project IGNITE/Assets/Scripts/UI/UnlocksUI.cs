@@ -187,7 +187,7 @@ public class UnlocksUI : MonoBehaviour
         healthUpCostText.text = healthUpCost.ToString();
         dtUpCostText.text = DTUpCost.ToString();
         healthUpButtonText.text = "Increased Health (" + (unlocks.healthUps + 1) + "/5)";
-        dtUpButtonText.text = "Increased DT (" + (unlocks.DTUps + 1) + "/5)";
+        dtUpButtonText.text = "Increased Heat Gauge (" + (unlocks.DTUps + 1) + "/5)";
 
         if (unlocks.healthUps >= 5)
         {
@@ -198,7 +198,7 @@ public class UnlocksUI : MonoBehaviour
         if (unlocks.DTUps >= 5)
         {
             dtUpCostText.text = "---";
-            dtUpButtonText.text = "Max DT Upgrades Purchased";
+            dtUpButtonText.text = "Max Heat Upgrades Purchased";
         }
 
     }

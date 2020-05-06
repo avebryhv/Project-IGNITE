@@ -67,7 +67,8 @@ public class MeleeHitbox : MonoBehaviour
                 other.GetComponentInParent<EnemyBaseHealth>().TakeDamage(damage, knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
                 FindObjectOfType<DronesBehaviour>().ReduceCooldown(1);
-                GameManager.Instance.DoHitLag(0.01f);
+                //GameManager.Instance.DoHitLag(0.01f);
+                GameManager.Instance.TriggerHitLagAlt(0.075f);
                 Vector2 pos = other.transform.position;
                 pos += new Vector2(Random.Range(-0.2f,0.2f), Random.Range(-1, 2));
                 Instantiate(hitEffect, pos, transform.rotation);

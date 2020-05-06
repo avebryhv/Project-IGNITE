@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
     public void RestartLevel()
     {
         usingCheckPoint = false;
+        Time.timeScale = 1;
         ResetLevelStats();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -64,6 +65,7 @@ public class LevelManager : MonoBehaviour
     public void ReloadLevelWithCheckpoint()
     {
         usingCheckPoint = true;
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

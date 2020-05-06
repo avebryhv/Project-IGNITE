@@ -14,6 +14,8 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public float contactDamage;
     public enum Phase { Phase1, Phase2, Phase3};
     public Phase currentPhase;
+    public enum Difficulty { Easy, Medium, Hard};
+    public Difficulty selectedDifficulty;
 
     //Action Decision Variables
     public Collider2D tpRange;
@@ -50,6 +52,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         //gunTimer = gunCooldown;
         currentPhase = Phase.Phase1;
         canTurn = true;
+        
     }
 
     // Update is called once per frame
@@ -156,13 +159,21 @@ public class RivalBehaviour : EnemyBaseBehaviour
             velocity.x = -10 * movement.lastDirection;
         }
 
-        if (currentPhase == Phase.Phase3 && !inSpecialAction)
+        if (currentPhase == Phase.Phase3 && !inSpecialAction && selectedDifficulty != Difficulty.Easy)
         {
             beamTimer -= Time.deltaTime;
             if (beamTimer <= 0)
             {
                 Instantiate(floorBeamObject, new Vector2(player.transform.position.x, -3.0f), new Quaternion());
-                beamTimer = 5f;
+                if (selectedDifficulty == Difficulty.Hard)
+                {
+                    beamTimer = 4f;
+                }
+                else
+                {
+                    beamTimer = 7.5f;
+                }
+                
             }
         }
         
@@ -327,7 +338,15 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     {
                         DoUppercut();
                         actionCooldown = 1f;
-                        uppercutCooldown = 5f;
+                        if (selectedDifficulty == Difficulty.Hard)
+                        {
+                            uppercutCooldown = 1f;
+                        }
+                        else
+                        {
+                            uppercutCooldown = 5f;
+                        }
+                        
                     }
                     else if (player.finder.melee.inAttack) //If the player is performing an attack
                     {
@@ -395,9 +414,10 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 }
                 else if (helmSplitterCooldown <= 0 && CheckOnScreen())
                 {
-                    if (Random.Range(0.0f, 1.0f) <= 0.5f)
+                    if (Random.Range(0.0f, 1.0f) <= 0.5f && selectedDifficulty == Difficulty.Hard)
                     {
                         StartCoroutine(TripleHelmSplitter());
+                        helmSplitterCooldown = 5;
                     }
                     else
                     {
@@ -645,10 +665,28 @@ public class RivalBehaviour : EnemyBaseBehaviour
             yield return new WaitForSeconds(0.25f);
         }
         inSpecialAction = false;
+
+        if (selectedDifficulty == Difficulty.Hard)
+        {
+            yield return new WaitForSeconds(1.0f);
+            for (int i = 2; i < 10; i++)
+            {
+                Instantiate(floorBeamObject, new Vector2(player.transform.position.x + i, -3.0f), new Quaternion());
+                Instantiate(floorBeamObject, new Vector2(player.transform.position.x - i, -3.0f), new Quaternion());
+            }
+            yield return new WaitForSeconds(0.5f);
+            FindObjectOfType<ComboUI>().ResumeComboBar();
+            StartCoroutine(DoHelmSplitterWithTP());
+
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+            FindObjectOfType<ComboUI>().ResumeComboBar();
+            StartCoroutine(DoHelmSplitterWithTP());
+        }
         
-        yield return new WaitForSeconds(0.5f);
-        FindObjectOfType<ComboUI>().ResumeComboBar();
-        StartCoroutine(DoHelmSplitterWithTP());
+        
         
     }
 
@@ -663,6 +701,27 @@ public class RivalBehaviour : EnemyBaseBehaviour
         embers.Play();
         StartCoroutine(Phase3IntroBeams());
         bossMusicPlayer.pitch = 1.05f;
+    }
+
+    public void SetDifficulty(Difficulty d)
+    {
+        switch (d)
+        {
+            case Difficulty.Easy:
+                selectedDifficulty = Difficulty.Easy;                
+                movement.defaultMoveSpeed = 4f;
+                break;
+            case Difficulty.Medium:
+                selectedDifficulty = Difficulty.Medium;
+                movement.defaultMoveSpeed = 4f;
+                break;
+            case Difficulty.Hard:
+                selectedDifficulty = Difficulty.Hard;
+                movement.defaultMoveSpeed = 5f;
+                break;
+            default:
+                break;
+        }
     }
 
     public override void CheckState()

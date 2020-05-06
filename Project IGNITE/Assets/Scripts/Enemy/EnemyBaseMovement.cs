@@ -11,7 +11,7 @@ public class EnemyBaseMovement : MonoBehaviour
     float accelerationTimeGrounded = .1f;
 
     public float moveSpeed = 6;
-    float defaultMoveSpeed;
+    public float defaultMoveSpeed;
     float gravity = -20;
     float jumpVelocity = 8;
     public Vector3 velocity;

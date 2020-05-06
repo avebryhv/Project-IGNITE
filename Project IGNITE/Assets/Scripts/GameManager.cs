@@ -80,6 +80,18 @@ public class GameManager : MonoBehaviour
         Invoke("EndHitLag", time);
     }
 
+    public void TriggerHitLagAlt(float time)
+    {
+        StartCoroutine(DoHitLagAlt(time));
+    }
+
+    IEnumerator DoHitLagAlt(float time)
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(time);
+        Time.timeScale = 1.0f;
+    }
+
     public void TriggerRumble(float t)
     {
         if (usingController)

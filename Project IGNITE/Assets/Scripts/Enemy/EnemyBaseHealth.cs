@@ -82,5 +82,11 @@ public class EnemyBaseHealth : MonoBehaviour
         armourKnockbackHits = hitCount;
     }
 
+    public void SetNewMaxHealth(int amount)
+    {
+        maxHealth = amount;
+        currentHealth = maxHealth;
+    }
+
 
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   name: l1
   attackType: 0
   lineFadeDelay: 0
-  hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
+  hitEffect: {fileID: 6002101780132188691, guid: 9032a84aeae635844bd48eac9d8653ee,
     type: 3}
 --- !u!50 &7575644048020951957
 Rigidbody2D:

@@ -88,10 +88,10 @@ public class MeleeAttacker : MonoBehaviour
             Debug.DrawRay(transform.position, new Vector2(finder.movement.lastDirection * 3, 0), Color.red);
             if (hit.collider != null)
             {
-                Debug.Log("Hit Object: " + hit.collider.gameObject.name);
+                //Debug.Log("Hit Object: " + hit.collider.gameObject.name);
                 if (hit.collider.tag == "EnemyHurtbox")
                 {
-                    Debug.Log("Stinger Hit");
+                    //Debug.Log("Stinger Hit");
                     StopStinger();
                 }
             }
@@ -338,7 +338,7 @@ public class MeleeAttacker : MonoBehaviour
                     }                    
                     break;
                 default:
-                    Debug.Log("Invalid Attack Attempt");
+                    //Debug.Log("Invalid Attack Attempt");
                     break;
             }
             AirAttackStartup();
@@ -371,7 +371,7 @@ public class MeleeAttacker : MonoBehaviour
                     currentAttack = attackList.lightB3;
                     break;
                 default:
-                    Debug.Log("Invalid Attack Attempt");
+                    //Debug.Log("Invalid Attack Attempt");
                     break;
             }
             AttackStartup();
@@ -414,7 +414,7 @@ public class MeleeAttacker : MonoBehaviour
                         }
 
                     }
-                    Debug.Log("Forward");
+                    //Debug.Log("Forward");
                 }
                 else
                 {
@@ -427,7 +427,7 @@ public class MeleeAttacker : MonoBehaviour
                     {
                         StartHelmSplitter();
                     }
-                    Debug.Log("Back");
+                    //Debug.Log("Back");
 
                 }
             }

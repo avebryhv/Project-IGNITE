@@ -78,27 +78,27 @@ public class EnemyBaseBehaviour : MonoBehaviour
 
     public virtual void CheckState()
     {
-        if (movement.inSpecialKnockback)
+        if (movement.inSpecialKnockback) //Triggered when a boss breaks out of a combo or is parried
         {
             SetState(State.SpecialKnockback);
         }
-        else if (movement.inKnockback)
+        else if (movement.inKnockback) //State after getting hit by the player
         {
             SetState(State.Knockback);
         }
-        else if (melee.inAttack)
+        else if (melee.inAttack) //Enemy is in the process of an attack
         {
             SetState(State.Attack);
         }
-        else if (!movement.isFlying && !movement.controller.collisions.below)
+        else if (!movement.isFlying && !movement.controller.collisions.below) //Enemy is in the air, not performing any other action
         {
             SetState(State.Jump);
         }
-        else if (Mathf.Abs(movement.velocity.x) >= 0.01)
+        else if (Mathf.Abs(movement.velocity.x) >= 0.01) //Enemy is moving along the ground
         {
             SetState(State.Moving);
         }
-        else
+        else //Enemy is not performing any actions
         {
             SetState(State.Idle);
         }
@@ -106,10 +106,10 @@ public class EnemyBaseBehaviour : MonoBehaviour
 
     public void SetState(State s)
     {
-        if (s != currentState)
+        if (s != currentState) //Prevents duplicate animation triggers
         {
             currentState = s;
-            sprite.CheckState();
+            sprite.CheckState(); //Set the animation of the enemy based on state
         }
     }
 

@@ -6,6 +6,7 @@ public class MeleeHitbox : MonoBehaviour
 {
     LineRenderer line;
     public int damage;
+    int baseDamage;
     public float lingerTime;
     float destroyTimer;
     public Vector2 knockbackDirection;
@@ -26,6 +27,7 @@ public class MeleeHitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        baseDamage = damage;
         hitList = new List<GameObject>();
         line = GetComponentInChildren<LineRenderer>();
         if (line != null)
@@ -64,14 +66,15 @@ public class MeleeHitbox : MonoBehaviour
             {
                 //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
+                damage = RecalculateDamage();
                 other.GetComponentInParent<EnemyBaseHealth>().TakeDamage(damage, knockbackDirection * knockbackStrength, attackType);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
                 FindObjectOfType<DronesBehaviour>().ReduceCooldown(1);
                 //GameManager.Instance.DoHitLag(0.01f);
-                GameManager.Instance.TriggerHitLagAlt(0.075f);
+                GameManager.Instance.TriggerHitLagAlt(0.1f);
                 Vector2 pos = other.transform.position;
-                pos += new Vector2(Random.Range(-0.2f,0.2f), Random.Range(-1, 2));
-                Instantiate(hitEffect, pos, transform.rotation);
+                pos += new Vector2(Random.Range(-0.1f,0.1f), Random.Range(-0.5f, 0.5f));
+                Instantiate(hitEffect, pos, transform.rotation, other.transform);
                 PlayRandomHitSound();
                 GameManager.Instance.TriggerSmallRumble(0.05f);
             }
@@ -82,6 +85,15 @@ public class MeleeHitbox : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+    }
+
+    int RecalculateDamage()
+    {
+        ComboUI combo = FindObjectOfType<ComboUI>();
+        float percent = combo.comboBuildup / combo.maxComboBuildup;
+        float modifier = 1f + (0.3f * percent);
+        int newDamage = Mathf.RoundToInt((float)baseDamage * modifier);
+        return newDamage;
     }
 
     public void SetDirection(float dir)

@@ -99,7 +99,7 @@ public class UIMoveList : MonoBehaviour
             yPos = 0 - (100 * (midPoint - index));
         }
 
-        Debug.Log("current index " + index);
+        //Debug.Log("current index " + index);
         //layoutGroup.transform.position = new Vector2(layoutGroup.transform.position.x, yPos);
         layoutGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(layoutGroup.GetComponent<RectTransform>().anchoredPosition.x, yPos);
         displayImage.sprite = items[index].image;

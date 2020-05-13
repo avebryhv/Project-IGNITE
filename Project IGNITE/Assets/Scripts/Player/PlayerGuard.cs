@@ -116,14 +116,14 @@ public class PlayerGuard : MonoBehaviour
     public void OnBlockAttack(int damage, Vector2 knockback, EnemyMeleeHitbox.type type, Vector2 position)
     {
         float xDifference = position.x - transform.position.x;
-        Debug.Log(Mathf.Sign(xDifference));
+        //Debug.Log(Mathf.Sign(xDifference));
         if (Mathf.Sign(xDifference) != finder.movement.lastDirection)
         {
             finder.movement.ForceChangeDirection(Mathf.Sign(xDifference));
         }
         if (timeHeld <= parryTiming) //On Parry
         {
-            Debug.Log("SICK PARRY");
+            //Debug.Log("SICK PARRY");
             finder.messages.CreateMinorMessage("PARRY", Color.blue, 1f);
             isGuarding = false;
             inParry = true;
@@ -154,7 +154,7 @@ public class PlayerGuard : MonoBehaviour
     public void OnBlockAttack(int damage, Vector2 knockback, Vector2 position)
     {
         float xDifference = position.x - transform.position.x;
-        Debug.Log(Mathf.Sign(xDifference));
+        //Debug.Log(Mathf.Sign(xDifference));
         if (Mathf.Sign(xDifference) != finder.movement.lastDirection)
         {
             finder.movement.ForceChangeDirection(Mathf.Sign(xDifference)); //Make the player face the direction of incoming damage

@@ -393,9 +393,9 @@ public class PlayerInput : MonoBehaviour
         
     }
 
-    public bool CheckStickInputs(InputCombo toTest)
+    public bool CheckStickInputs(InputCombo toTest) //Checks if a given input combo has been entered
     {
-        if (leftStickInputList.Count >= toTest.stickMovementList.Length)
+        if (leftStickInputList.Count >= toTest.stickMovementList.Length) //Prevents errors if too few inputs have been made
         {
             bool tempBool = true;
             int listStartPoint = (leftStickInputList.Count - toTest.stickMovementList.Length);
@@ -404,13 +404,13 @@ public class PlayerInput : MonoBehaviour
             {
                 if (toTest.stickMovementList[i] != leftStickInputList[i + listStartPoint])
                 {
-                    tempBool = false;
+                    tempBool = false; //If at any point the inputs do not match, the input tested for has not been entered
                 }
             }
 
             if (tempBool)
             {
-                leftStickInputList.Clear();
+                leftStickInputList.Clear(); //If an input combo has been performed, clear the buffer to prevent duplicates
             }
 
             return tempBool;

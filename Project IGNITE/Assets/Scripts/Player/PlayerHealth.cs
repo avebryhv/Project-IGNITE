@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Hit By Enemy for " + hitbox.damage);
+                    //Debug.Log("Hit By Enemy for " + hitbox.damage);
                     TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType);
                 }
             }
@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Hit By Enemy for " + hitbox.damage);
+                    //Debug.Log("Hit By Enemy for " + hitbox.damage);
                     TakeDamage(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength);
                 }
             }
@@ -143,6 +143,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             GameManager.Instance.TriggerRumble(0.1f);
         }
@@ -155,6 +156,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             GameManager.Instance.TriggerRumble(0.1f);
             impulse.GenerateImpulse();
@@ -179,6 +181,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             GameManager.Instance.TriggerRumble(0.1f);
         }
@@ -191,6 +194,7 @@ public class PlayerHealth : MonoBehaviour
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
+            ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
             GameManager.Instance.TriggerRumble(0.1f);
             impulse.GenerateImpulse();

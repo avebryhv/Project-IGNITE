@@ -100,7 +100,7 @@ public class ButtonSelectionInput : MonoBehaviour
 
     public void Test()
     {
-        Debug.Log("chef");
+        
     }
 
     public void OnChanged()
@@ -146,7 +146,7 @@ public class ButtonSelectionInput : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log(selection);
+        //Debug.Log(selection);
     }
 
     void SetSelection()

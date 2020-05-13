@@ -10,6 +10,7 @@ public class BurstHitbox : MonoBehaviour
     public float comboWeight; //How much landing this move will contribute to the combo meter
     public string name; //Name of attack
     List<GameObject> hitList; //Stores enemies that have already been hit, to prevent duplicate collisions
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +39,12 @@ public class BurstHitbox : MonoBehaviour
         {
             if (!hitList.Contains(other.gameObject)) //Check if enemy has already been hit
             {
-                Debug.Log("Hit Enemy Hurtbox");
+                //Debug.Log("Hit Enemy Hurtbox");
                 hitList.Add(other.gameObject);
                 other.GetComponentInParent<EnemyBaseMovement>().HitByCancel();
+                Vector2 pos = other.transform.position;
+                pos += new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.5f, 0.5f));
+                Instantiate(hitEffect, pos, transform.rotation, other.transform);
                 FindObjectOfType<ComboUI>().AddComboScore(comboWeight, name);
             }
         }

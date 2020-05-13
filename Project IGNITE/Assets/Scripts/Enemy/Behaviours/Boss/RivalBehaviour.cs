@@ -543,7 +543,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
 
     void DoUppercut()
     {
-        Debug.Log("do uppercut");
+        //Debug.Log("do uppercut");
         DecideDirection();
         canTurn = false;
         sprite.currentAttackAnimName = "uppercut";
@@ -718,6 +718,9 @@ public class RivalBehaviour : EnemyBaseBehaviour
             case Difficulty.Hard:
                 selectedDifficulty = Difficulty.Hard;
                 movement.defaultMoveSpeed = 5f;
+                rHealth.SetNewMaxHealth(400);
+                rHealth.phase2boundary = 280;
+                rHealth.phase3boundary = 160;
                 break;
             default:
                 break;

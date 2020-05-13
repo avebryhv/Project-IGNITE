@@ -142,7 +142,7 @@ public class PlayerUnlocks : MonoBehaviour
         formatter.Serialize(file, save);
         file.Close();
 
-        Debug.Log("Unlocks Saved");
+        //Debug.Log("Unlocks Saved");
         //finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
         
     }
@@ -156,7 +156,7 @@ public class PlayerUnlocks : MonoBehaviour
         formatter.Serialize(file, save);
         file.Close();
         
-        Debug.Log("Unlocks Saved With Checkpoint");
+        //Debug.Log("Unlocks Saved With Checkpoint");
         finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
     }
 
@@ -208,7 +208,7 @@ public class PlayerUnlocks : MonoBehaviour
     public void StorePosition()
     {
         checkpointPosition = transform.parent.transform.position;
-        Debug.Log(checkpointPosition);
+        //Debug.Log(checkpointPosition);
 
     }
 

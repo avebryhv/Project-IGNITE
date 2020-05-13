@@ -18,10 +18,13 @@ public class PlayerStatsUI : MonoBehaviour
     public Image secondHealthLerp;
     public Image secondHealthBorder;
 
+    Color healthColour;
+    public Color healthFlashColour;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthColour = healthbar.color;
     }
 
     // Update is called once per frame
@@ -67,6 +70,20 @@ public class PlayerStatsUI : MonoBehaviour
             secondHealthBar.fillAmount = 0;
             secondHealthLerp.fillAmount = 0;
         }
+    }
+
+    public void OnHealthDamage()
+    {
+        StartCoroutine(HealthBarFlash());
+    }
+
+    IEnumerator HealthBarFlash()
+    {
+        healthbar.color = healthFlashColour;
+        secondHealthBar.color = healthFlashColour;
+        yield return new WaitForSeconds(0.3f);
+        healthbar.color = healthColour;
+        secondHealthBar.color = healthColour;
     }
 
     public void SetDTValue(float current, float max)

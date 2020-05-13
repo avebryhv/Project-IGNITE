@@ -434,7 +434,7 @@ public class InputAssignment : MonoBehaviour
         formatter.Serialize(file, save);
         file.Close();
 
-        Debug.Log("Unlocks Saved");
+        //Debug.Log("Unlocks Saved");
         //finder.messages.CreateMajorMessage("Checkpoint Reached", Color.blue, 2.0f);
 
     }

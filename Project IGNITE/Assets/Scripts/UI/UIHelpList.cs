@@ -27,7 +27,7 @@ public class UIHelpList : MonoBehaviour
         buttonList[0].Select();
 
         layoutGroup.transform.Translate(new Vector3(0, -99999, 0));
-        Debug.Log(layoutGroup.GetComponent<RectTransform>().rect.width);
+        //Debug.Log(layoutGroup.GetComponent<RectTransform>().rect.width);
 
     }
 
@@ -97,7 +97,7 @@ public class UIHelpList : MonoBehaviour
             yPos = 0 - (50 * (midPoint - index));
         }
 
-        Debug.Log("current index " + index);
+        //Debug.Log("current index " + index);
         //layoutGroup.transform.position = new Vector2(layoutGroup.transform.position.x, yPos);
         layoutGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(layoutGroup.GetComponent<RectTransform>().anchoredPosition.x, yPos);
         title.text = items[index].name;

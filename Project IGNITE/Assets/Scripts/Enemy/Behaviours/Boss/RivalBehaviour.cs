@@ -43,6 +43,8 @@ public class RivalBehaviour : EnemyBaseBehaviour
     int backstepCounter;
     public ParticleSystem embers;
     public AudioSource bossMusicPlayer;
+    public GameObject swordBeam;
+    float swordBeamCooldown;
 
 
     // Start is called before the first frame update
@@ -313,6 +315,12 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     }
 
                 }
+                else if (selectedDifficulty == Difficulty.Hard && swordBeamCooldown <= 0 && CheckOnScreen())
+                {
+                    StartCoroutine(DoSwordBeam());
+                    swordBeamCooldown = 5f;
+                    actionCooldown = 0.2f;
+                }
                 else if (helmSplitterCooldown <= 0 && CheckOnScreen())
                 {
                     StartCoroutine(DoHelmSplitterWithTP());
@@ -412,6 +420,21 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     }
 
                 }
+                else if (swordBeamCooldown <= 0 && CheckOnScreen())
+                {
+                    if (selectedDifficulty == Difficulty.Hard)
+                    {
+                        StartCoroutine(TripleSwordBeam());
+                        swordBeamCooldown = 5f;
+                        actionCooldown = 0.2f;
+                    }
+                    else
+                    {
+                        StartCoroutine(DoSwordBeam());
+                        swordBeamCooldown = 5f;
+                        actionCooldown = 0.2f;
+                    }
+                }
                 else if (helmSplitterCooldown <= 0 && CheckOnScreen())
                 {
                     if (Random.Range(0.0f, 1.0f) <= 0.5f && selectedDifficulty == Difficulty.Hard)
@@ -449,6 +472,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         helmSplitterCooldown -= Time.deltaTime;
         uppercutCooldown -= Time.deltaTime;
         stingerCooldown -= Time.deltaTime;
+        swordBeamCooldown -= Time.deltaTime;
     }
 
     IEnumerator phase1Combo()
@@ -688,6 +712,32 @@ public class RivalBehaviour : EnemyBaseBehaviour
         
         
         
+    }
+
+    IEnumerator DoSwordBeam()
+    {
+        sprite.currentAttackAnimName = "chargeBeam";
+        melee.inAttack = true;
+        rHealth.ResetKnockback();
+        yield return new WaitForSeconds(0.5f);
+        GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.2f);
+        melee.inAttack = false;
+    }
+
+    IEnumerator TripleSwordBeam()
+    {
+        inSpecialAction = true;
+        StopCoroutine(DoSwordBeam());
+        StartCoroutine(DoSwordBeam());
+        yield return new WaitForSeconds(0.6f);
+        StopCoroutine(DoSwordBeam());
+        StartCoroutine(DoSwordBeam());
+        yield return new WaitForSeconds(0.5f);
+        StopCoroutine(DoSwordBeam());
+        StartCoroutine(DoSwordBeam());
+        inSpecialAction = false;
     }
 
     public void SetPhase2()

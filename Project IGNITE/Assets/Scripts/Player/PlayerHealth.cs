@@ -52,15 +52,16 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
+            if (finder.guard.isGuarding)
             {
-                finder.drones.BreakGuard();
+                finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
             }
             else
             {
-                if (finder.guard.isGuarding)
+                
+                if (finder.drones.currentState == DronesBehaviour.State.Barrier)
                 {
-                    finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.attackType, hitbox.transform.position);
+                    finder.drones.BreakGuard();
                 }
                 else
                 {
@@ -81,15 +82,16 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
+            if (finder.guard.isGuarding)
             {
-                finder.drones.BreakGuard();
+                finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.transform.position);
             }
             else
             {
-                if (finder.guard.isGuarding)
+                
+                if (finder.drones.currentState == DronesBehaviour.State.Barrier)
                 {
-                    finder.guard.OnBlockAttack(hitbox.damage, hitbox.knockbackDirection * hitbox.knockbackStrength, hitbox.transform.position);
+                    finder.drones.BreakGuard();
                 }
                 else
                 {
@@ -110,15 +112,16 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            if (finder.drones.currentState == DronesBehaviour.State.Barrier)
+            if (finder.guard.isGuarding)
             {
-                finder.drones.BreakGuard();
+                finder.guard.OnBlockAttack(damage, knockbackDir * knockbackStr, hitboxPos);
             }
             else
             {
-                if (finder.guard.isGuarding)
+                
+                if (finder.drones.currentState == DronesBehaviour.State.Barrier)
                 {
-                    finder.guard.OnBlockAttack(damage, knockbackDir * knockbackStr, hitboxPos);
+                    finder.drones.BreakGuard();
                 }
                 else
                 {
@@ -151,7 +154,7 @@ public class PlayerHealth : MonoBehaviour
         {
             finder.movement.TakeKnockback(knockback);
             finder.melee.CancelAttacks();
-            finder.sprite.FlashColour(Color.red, 0.1f);
+            finder.sprite.FlashColour(Color.red, 0.1f);            
             currentHealth -= damage;
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
@@ -162,6 +165,7 @@ public class PlayerHealth : MonoBehaviour
             impulse.GenerateImpulse();
             if (type != EnemyMeleeHitbox.type.ComboMid)
             {
+                finder.sprite.StartIFrameFlash();
                 StartIFrames(1);
             }
             
@@ -190,6 +194,7 @@ public class PlayerHealth : MonoBehaviour
             finder.movement.TakeKnockback(knockback);
             finder.melee.CancelAttacks();
             finder.sprite.FlashColour(Color.red, 0.1f);
+            finder.sprite.StartIFrameFlash();
             currentHealth -= damage;
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);

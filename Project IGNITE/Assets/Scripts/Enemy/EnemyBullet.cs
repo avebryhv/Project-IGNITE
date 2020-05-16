@@ -10,6 +10,9 @@ public class EnemyBullet : MonoBehaviour
     public Vector2 knockbackDirection;
     public float knockbackStrength;
     public float speed;
+    public bool trackingMovementMethod;
+    public bool flipWithDirection;
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +23,18 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 dir = new Vector2(movementDirection.x * xDirection, movementDirection.y);
-        transform.Translate(dir * Time.deltaTime * speed);
+        //Vector2 dir = new Vector2(movementDirection.x * xDirection, movementDirection.y);
+        
+        if (trackingMovementMethod)
+        {
+            Vector2 dir = new Vector2(movementDirection.x, 0);
+            transform.Translate(dir * Time.deltaTime * speed * Mathf.Sign(movementDirection.x));
+        }
+        else
+        {
+            Vector2 dir = new Vector2(movementDirection.x * xDirection, movementDirection.y);
+            transform.Translate(dir * Time.deltaTime * speed);
+        }
         
     }
 
@@ -31,29 +44,41 @@ public class EnemyBullet : MonoBehaviour
         {
             FindObjectOfType<PlayerHealth>().OnHit(this);
             GameManager.Instance.DoHitLag();
-            Destroy(gameObject);
+            Kill();
         }
 
         if (other.gameObject.layer == 8)
         {
-            Destroy(gameObject);
+            Kill();
         }
     }
 
     public void SetDirection(float x)
     {
         xDirection = x;
-
+        if (flipWithDirection && xDirection < 0)
+        {
+            transform.Rotate(0, 0, 180);
+            xDirection = 1;
+        }
     }
 
     public void SetMovementDirection(Vector2 dir)
     {
         movementDirection = dir;
         xDirection = 1;
+        if (trackingMovementMethod)
+        {
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        
+        
     }
 
     public void Kill()
     {
+        Instantiate(hitEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

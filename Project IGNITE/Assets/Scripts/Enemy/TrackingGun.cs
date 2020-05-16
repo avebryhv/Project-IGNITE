@@ -13,6 +13,7 @@ public class TrackingGun : EnemyBaseGun
         dir.Normalize();
         currentBullet.GetComponent<EnemyBullet>().SetMovementDirection(dir);
         shootNow = false;
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Drone/shoot", 1f);
         Invoke("Cancel", cooldownAnimLength);
 
     }

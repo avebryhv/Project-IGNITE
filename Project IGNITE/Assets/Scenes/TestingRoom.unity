@@ -2785,7 +2785,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.4
+  m_fontSize: 27.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2941,7 +2941,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.55
+  m_fontSize: 27.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8702,7 +8702,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50.8
+  m_fontSize: 49.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24179,7 +24179,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.7
+  m_fontSize: 30.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24564,7 +24564,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.75
+  m_fontSize: 30.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24716,7 +24716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103942913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.880003, y: 0.28639615, z: -10}
+  m_LocalPosition: {x: -2.880002, y: 0.28639615, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -29907,75 +29907,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca803158900352441a0a356ac26dfa86, type: 3}
---- !u!1001 &4150833727604619116
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.4104966
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.669922
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001587153359437516, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6002101780132188691, guid: 9032a84aeae635844bd48eac9d8653ee,
-        type: 3}
-      propertyPath: m_Name
-      value: SwordCutEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9032a84aeae635844bd48eac9d8653ee, type: 3}
 --- !u!1001 &4379590251421334094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29983,6 +29914,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2488927536871532308, guid: adfb513439750864caf99dacefb29003,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4379590251048651684, guid: adfb513439750864caf99dacefb29003,
         type: 3}
       propertyPath: m_Camera
@@ -30067,6 +30003,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379590251730303807, guid: adfb513439750864caf99dacefb29003,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4379590251757983743, guid: adfb513439750864caf99dacefb29003,
         type: 3}

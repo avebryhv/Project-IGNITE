@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         if (usingController)
         {
-            Gamepad.current.SetMotorSpeeds(0.1f, 0.25f);
+            Gamepad.current.SetMotorSpeeds(0.2f, 0.5f);
             yield return new WaitForSecondsRealtime(time);
             InputSystem.ResetHaptics();
 

@@ -39,6 +39,7 @@ public class EnemyBaseGun : MonoBehaviour
         GameObject currentBullet = Instantiate(baseBullet, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(behaviour.player.transform.position.x - behaviour.transform.position.x));
         shootNow = false;
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Drone/shoot", 1f);
         Invoke("Cancel", cooldownAnimLength);
     }
 

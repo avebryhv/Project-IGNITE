@@ -76,14 +76,14 @@ public class MeleeHitbox : MonoBehaviour
                 pos += new Vector2(Random.Range(-0.1f,0.1f), Random.Range(-0.5f, 0.5f));
                 Instantiate(hitEffect, pos, transform.rotation, other.transform);
                 PlayRandomHitSound();
-                GameManager.Instance.TriggerSmallRumble(0.05f);
+                GameManager.Instance.TriggerSmallRumble(0.075f);
             }
             
         }
 
         if (other.tag == "EnemyBullet")
         {
-            Destroy(other.gameObject);
+            other.GetComponent<EnemyBullet>().Kill();
         }
     }
 

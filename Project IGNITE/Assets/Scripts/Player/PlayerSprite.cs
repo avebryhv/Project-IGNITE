@@ -15,6 +15,7 @@ public class PlayerSprite : MonoBehaviour
     DTSpriteToggler[] dtSpriteList;
     public ParticleSystem DTParticles;
     public Light2D visorLight;
+    public GameObject spriteMask;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class PlayerSprite : MonoBehaviour
         dtSpriteList = GetComponentsInChildren<DTSpriteToggler>();
         visorLight.color = Color.blue;
         SetAnimationTrigger("idle");
+        spriteMask.SetActive(false);
     }
 
     // Update is called once per frame
@@ -164,5 +166,22 @@ public class PlayerSprite : MonoBehaviour
     void ResetSpriteColour()
     {
         ChangeSpriteColour(Color.white);
+    }
+
+    public void StartIFrameFlash()
+    {
+        StopCoroutine(FlashSpriteIFrames());
+        StartCoroutine(FlashSpriteIFrames());
+    }
+
+    IEnumerator FlashSpriteIFrames()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            spriteMask.SetActive(true);
+            yield return new WaitForSeconds(0.02f);
+            spriteMask.SetActive(false);
+            yield return new WaitForSeconds(0.08f);
+        }
     }
 }

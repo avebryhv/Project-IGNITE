@@ -18,6 +18,8 @@ public class PlayerGuard : MonoBehaviour
     public Color parryColour;
     public Color guardColour;
 
+    public ParticleSystem guardParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -138,16 +140,9 @@ public class PlayerGuard : MonoBehaviour
         }
         else //Normally blocked
         {
-            //if (finder.stats.dtCharge >= damage)
-            //{
-            //    finder.stats.IncreaseDT(-damage);
-            //    Debug.Log("Normal Block");
-            //}
-            //else //Guard Broken
-            //{
-            //    finder.health.TakeDamage(damage, knockback, type); //Forces the player to take the damage
-            //}
-            
+            guardParticles.Play();
+            AudioManager.Instance.PlaySFX("SFX/Player/block", 0.5f);
+            GameManager.Instance.TriggerSmallRumble(0.1f);
         }
     }
 
@@ -174,6 +169,9 @@ public class PlayerGuard : MonoBehaviour
         }
         else //Normally blocked
         {
+            guardParticles.Play();
+            AudioManager.Instance.PlaySFX("SFX/Player/block", 1f);
+            GameManager.Instance.TriggerSmallRumble(0.1f);
             //if (finder.stats.dtCharge >= damage)
             //{
             //    finder.stats.IncreaseDT(-damage);

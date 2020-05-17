@@ -261,6 +261,11 @@ public class PlayerInput : MonoBehaviour
             finder.melee.HeavyAttackPressed();
         }
 
+        if (Keyboard.current.xKey.isPressed)
+        {
+            finder.melee.HeavyAttackHeld();
+        }
+
         if (Keyboard.current.xKey.wasReleasedThisFrame)
         {
             finder.melee.HeavyAttackReleased();

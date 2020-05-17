@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   lingerTime: 0.1
-  comboWeight: 10
+  comboWeight: 5
   name: Burst
   hitEffect: {fileID: 305600503782899084, guid: 6d32b362a30ebf440aa8dbbfe0f97c57,
     type: 3}

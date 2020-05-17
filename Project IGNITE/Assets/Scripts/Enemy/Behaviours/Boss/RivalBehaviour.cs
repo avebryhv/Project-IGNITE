@@ -45,6 +45,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
     public AudioSource bossMusicPlayer;
     public GameObject swordBeam;
     float swordBeamCooldown;
+    bool phase3firstAttack;
 
 
     // Start is called before the first frame update
@@ -340,7 +341,14 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 }
                 break;
             case Phase.Phase3: //-----------------------------------------------------PHASE THREE-----------------------------------------------------
-                if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
+                if (!phase3firstAttack)
+                {
+                    StartCoroutine(TripleSwordBeamAfterEvade());
+                    swordBeamCooldown = 10f;
+                    phase3firstAttack = true;
+                    actionCooldown = 1f;
+                }
+                else if (CheckOnScreen() && Mathf.Abs(xD) <= 4) //Within melee range
                 {
                     if (yD > 3 && uppercutCooldown <= 0) //If the player is above the boss, do an uppercut
                     {
@@ -689,7 +697,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
             yield return new WaitForSeconds(0.25f);
         }
         inSpecialAction = false;
-
+        sprite.ResetState();
         if (selectedDifficulty == Difficulty.Hard)
         {
             yield return new WaitForSeconds(1.0f);
@@ -728,16 +736,58 @@ public class RivalBehaviour : EnemyBaseBehaviour
 
     IEnumerator TripleSwordBeam()
     {
-        inSpecialAction = true;
-        StopCoroutine(DoSwordBeam());
-        StartCoroutine(DoSwordBeam());
-        yield return new WaitForSeconds(0.6f);
-        StopCoroutine(DoSwordBeam());
-        StartCoroutine(DoSwordBeam());
+        //inSpecialAction = true;
+        //StopCoroutine(DoSwordBeam());
+        //StartCoroutine(DoSwordBeam());
+        //yield return new WaitForSeconds(0.6f);
+        //StopCoroutine(DoSwordBeam());
+        //StartCoroutine(DoSwordBeam());
+        //yield return new WaitForSeconds(0.5f);
+        //StopCoroutine(DoSwordBeam());
+        //StartCoroutine(DoSwordBeam());
+        //inSpecialAction = false;
+        sprite.currentAttackAnimName = "tripleSwordBeam";
+        melee.inAttack = true;
+        rHealth.ResetKnockback();
         yield return new WaitForSeconds(0.5f);
-        StopCoroutine(DoSwordBeam());
-        StartCoroutine(DoSwordBeam());
+        GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.5f);
+        currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.5f);
+        currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.2f);
+        melee.inAttack = false;
+    }
+
+    IEnumerator TripleSwordBeamAfterEvade()
+    {
+        inSpecialAction = true;
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSeconds(0.33f);
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSeconds(0.33f);
+        StartCoroutine(DoEvade(0.3f));
+        yield return new WaitForSeconds(0.33f);
+        
+        
         inSpecialAction = false;
+        sprite.currentAttackAnimName = "tripleSwordBeam";
+        melee.inAttack = true;
+        rHealth.ResetKnockback();
+        yield return new WaitForSeconds(0.5f);
+        GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.5f);
+        currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.5f);
+        currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
+        currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        yield return new WaitForSeconds(0.2f);
+        melee.inAttack = false;
     }
 
     public void SetPhase2()

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e263ddf15971f4aa8695f71ce25bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   lingerTime: 0.2
   knockbackDirection: {x: 10, y: 2}
   knockbackStrength: 5

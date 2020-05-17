@@ -157,7 +157,7 @@ public class PlayerHealth : MonoBehaviour
             finder.sprite.FlashColour(Color.red, 0.1f);            
             currentHealth -= damage;
             LevelManager.Instance.AddDamage(damage);
-            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            FindObjectOfType<ComboUI>().ReduceComboScore(25);
             ui.SetHealthValue(currentHealth, maxHealth);
             ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);
@@ -197,7 +197,7 @@ public class PlayerHealth : MonoBehaviour
             finder.sprite.StartIFrameFlash();
             currentHealth -= damage;
             LevelManager.Instance.AddDamage(damage);
-            FindObjectOfType<ComboUI>().ReduceComboScore(damage);
+            FindObjectOfType<ComboUI>().ReduceComboScore(25);
             ui.SetHealthValue(currentHealth, maxHealth);
             ui.OnHealthDamage();
             AudioManager.Instance.PlaySFX("SFX/Player/playerDamage", 0.5f);

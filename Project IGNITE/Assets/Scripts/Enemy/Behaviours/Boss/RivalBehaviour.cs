@@ -112,6 +112,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
             if (movement.controller.collisions.below)
             {
                 inHelmSplitter = false;
+                melee.inAttack = false;
                 melee.CancelAttacks();
                 movement.inSpecialMovement = false;
                 canTurn = true;
@@ -170,11 +171,11 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 Instantiate(floorBeamObject, new Vector2(player.transform.position.x, -3.0f), new Quaternion());
                 if (selectedDifficulty == Difficulty.Hard)
                 {
-                    beamTimer = 4f;
+                    beamTimer = 6f;
                 }
                 else
                 {
-                    beamTimer = 7.5f;
+                    beamTimer = 10.0f;
                 }
                 
             }
@@ -553,6 +554,8 @@ public class RivalBehaviour : EnemyBaseBehaviour
     void DoHelmSplitter()
     {
         canTurn = false;
+        melee.inAttack = true;
+        sprite.ResetState();
         sprite.currentAttackAnimName = "helmSplitter";
         melee.TriggerAttackWithCancel(attackList[3]);
         AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
@@ -730,6 +733,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
         yield return new WaitForSeconds(0.5f);
         GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.2f);
         melee.inAttack = false;
     }
@@ -752,12 +756,15 @@ public class RivalBehaviour : EnemyBaseBehaviour
         yield return new WaitForSeconds(0.5f);
         GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.5f);
         currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.5f);
         currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.2f);
         melee.inAttack = false;
     }
@@ -780,12 +787,15 @@ public class RivalBehaviour : EnemyBaseBehaviour
         yield return new WaitForSeconds(0.5f);
         GameObject currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.5f);
         currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.5f);
         currentBullet = Instantiate(swordBeam, transform.position, Quaternion.identity);
         currentBullet.GetComponent<EnemyBullet>().SetDirection(Mathf.Sign(player.transform.position.x - transform.position.x));
+        AudioManager.Instance.PlaySFX("SFX/Enemies/Rival/swing01", 2f);
         yield return new WaitForSeconds(0.2f);
         melee.inAttack = false;
     }
@@ -817,7 +827,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
                 break;
             case Difficulty.Hard:
                 selectedDifficulty = Difficulty.Hard;
-                movement.defaultMoveSpeed = 5f;
+                movement.defaultMoveSpeed = 6f;
                 rHealth.SetNewMaxHealth(400);
                 rHealth.phase2boundary = 280;
                 rHealth.phase3boundary = 160;

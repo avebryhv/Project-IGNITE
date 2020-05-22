@@ -25125,6 +25125,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2103942915}
+    - target: {fileID: 3981073036524937103, guid: 240ffbac18ba4f04bb5cb8dd694aa94e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3981073037391905193, guid: 240ffbac18ba4f04bb5cb8dd694aa94e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -26690,6 +26695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697753015288109900, guid: a76383d08c608b04c83c0f1f346f28ca,
+        type: 3}
+      propertyPath: m_text
+      value: Defeat the Boss!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76383d08c608b04c83c0f1f346f28ca, type: 3}

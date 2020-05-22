@@ -142,7 +142,7 @@ public class PlayerHealth : MonoBehaviour
         if (finder.stats.inDT)
         {
             finder.sprite.FlashColour(Color.red, 0.1f);
-            currentHealth -= Mathf.RoundToInt(damage / 2);
+            SubtractHealth(Mathf.RoundToInt(damage / 2));
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
@@ -154,8 +154,8 @@ public class PlayerHealth : MonoBehaviour
         {
             finder.movement.TakeKnockback(knockback);
             finder.melee.CancelAttacks();
-            finder.sprite.FlashColour(Color.red, 0.1f);            
-            currentHealth -= damage;
+            finder.sprite.FlashColour(Color.red, 0.1f);
+            SubtractHealth(damage);
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(25);
             ui.SetHealthValue(currentHealth, maxHealth);
@@ -181,7 +181,7 @@ public class PlayerHealth : MonoBehaviour
         if (finder.stats.inDT)
         {
             finder.sprite.FlashColour(Color.red, 0.1f);
-            currentHealth -= Mathf.RoundToInt(damage / 2);
+            SubtractHealth(Mathf.RoundToInt(damage / 2));
             LevelManager.Instance.AddDamage(damage / 2);
             FindObjectOfType<ComboUI>().ReduceComboScore(damage);
             ui.SetHealthValue(currentHealth, maxHealth);
@@ -195,7 +195,7 @@ public class PlayerHealth : MonoBehaviour
             finder.melee.CancelAttacks();
             finder.sprite.FlashColour(Color.red, 0.1f);
             finder.sprite.StartIFrameFlash();
-            currentHealth -= damage;
+            SubtractHealth(damage);
             LevelManager.Instance.AddDamage(damage);
             FindObjectOfType<ComboUI>().ReduceComboScore(25);
             ui.SetHealthValue(currentHealth, maxHealth);
@@ -212,6 +212,19 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+
+    void SubtractHealth(int amount)
+    {
+        int lastHealth = currentHealth;
+        currentHealth -= amount;
+
+        if (currentHealth <= 30 && lastHealth > 30)
+        {
+            finder.messages.CreateMinorMessage("LOW HEALTH", Color.red, 1f);
+            AudioManager.Instance.PlaySFX("SFX/Player/lowHealth", 1f);
+        }
+    }
+    
 
     void Die()
     {

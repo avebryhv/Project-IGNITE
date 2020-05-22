@@ -141,7 +141,7 @@ public class PlayerGuard : MonoBehaviour
         else //Normally blocked
         {
             guardParticles.Play();
-            AudioManager.Instance.PlaySFX("SFX/Player/block", 0.5f);
+            AudioManager.Instance.PlaySFX("SFX/Player/block", 1f);
             GameManager.Instance.TriggerSmallRumble(0.1f);
         }
     }

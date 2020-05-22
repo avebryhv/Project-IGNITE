@@ -60,12 +60,16 @@ public class EndLevelUI : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.5f);
         styleText.color = colorList[styleRank];
-        yield return new WaitForSecondsRealtime(1f);
-        damageText.color = colorList[styleRank];
-        yield return new WaitForSecondsRealtime(1f);
-        timeText.color = colorList[styleRank];
-        yield return new WaitForSecondsRealtime(1f);
+        AudioManager.Instance.PlaySFX("SFX/endRanking", 1f);
+        yield return new WaitForSecondsRealtime(0.75f);
+        damageText.color = colorList[damageRank];
+        AudioManager.Instance.PlaySFX("SFX/endRanking", 1f);
+        yield return new WaitForSecondsRealtime(0.75f);
+        timeText.color = colorList[timeRank];
+        AudioManager.Instance.PlaySFX("SFX/endRanking", 1f);
+        yield return new WaitForSecondsRealtime(1.5f);
         totalText.color = colorList[totalRank];
+        AudioManager.Instance.PlaySFX("SFX/endRanking", 1.5f);
     }
 
     public int CalculateStyle()

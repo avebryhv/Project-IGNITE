@@ -26,6 +26,7 @@ public class EndTrigger : MonoBehaviour
             GameManager.Instance.SetGamePaused(true);
             FindObjectOfType<PlayerMovement>().freezeMovement = true;
             anim.Play("doorOpen", 0, 0);
+            AudioManager.Instance.PlaySFX("SFX/doorOpen", 1f);
             Invoke("EndLevel", 1.2f);
         }
     }

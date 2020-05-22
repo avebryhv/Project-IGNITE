@@ -93,6 +93,7 @@ public class SaveStatue : MonoBehaviour
         
         GameManager.Instance.finder.input.allowPlayerInput = false;
         anim.Play("panelDown", 0, 0);
+        AudioManager.Instance.PlaySFX("SFX/doorOpen", 1f);
         Invoke("OpenMenu", 0.5f);
     }
 
@@ -111,6 +112,7 @@ public class SaveStatue : MonoBehaviour
     public void CloseMenu()
     {        
         anim.Play("panelUp", 0, 0);
+        AudioManager.Instance.PlaySFX("SFX/doorOpen", 1f);
         Invoke("ResumePlayer", 0.5f);
     }
 

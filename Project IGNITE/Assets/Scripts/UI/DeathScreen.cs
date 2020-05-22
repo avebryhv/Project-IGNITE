@@ -38,6 +38,6 @@ public class DeathScreen : MonoBehaviour
 
     public void Quit()
     {
-
+        LevelManager.Instance.LoadLevelFromStart("MainMenu");
     }
 }

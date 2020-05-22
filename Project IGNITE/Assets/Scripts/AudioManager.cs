@@ -147,7 +147,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void LoadAudioSettings()
-    {
+    {        
         if (PlayerPrefs.HasKey("BGMVolume"))
         {
             maxBGMVolume = PlayerPrefs.GetFloat("BGMVolume");

@@ -220,7 +220,7 @@ public class RivalBehaviour : EnemyBaseBehaviour
                     {                            
                         StopCoroutine(phase1Combo());
                         StartCoroutine(phase1Combo());
-                        actionCooldown = 0.3f;
+                        actionCooldown = 0.5f;
                         helmSplitterAltCounter++;
                     }
                         
